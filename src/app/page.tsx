@@ -12,7 +12,9 @@ export default function Home() {
     <div>
       <Navbar/>
     </div>
-      <div><Carousel/></div>
+      <div className=' bg-light-background dark:bg-dark-background min-h-screen'>
+        <Carousel/>
+      </div>
    </div>
   )
 }

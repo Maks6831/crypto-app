@@ -10,11 +10,20 @@ const config: Config = {
   theme: {
     colors: {
       ...colors,
+      'light-background': '#f3f5f9',
+      'dark-background': '#13121a',
       'purplea' : '#1E1932',
       'purpleb' : '#353570',
       'dark-button-color': '#191925',
       'light-button-color': '#CCCCFA',
-      'light-text-color' : '#424286'
+      'light-text-color' : '#424286',
+      'dark-card': '#191925',
+      'positive': '#01F1E3',
+      'negative': '#FE2264',
+      'card-text-gray': '#D1D1D1',
+      'carousel-button-color-one': '#7878FA',
+      'carousel-button-color-two': '#6161D6',
+
     },
     extend: {
       backgroundImage: {

@@ -1,11 +1,13 @@
 'use client';
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { MarketData } from "../../../../../MarketData";
+
 
 export const fetchData = createAsyncThunk(
     'fetchData',
-    async()=> {
-        const url = 'https://api.coingecko.com/api/v3/coins/list';
+    async(currency : string)=> {
+        const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`;
         const response = await fetch(url);
         const json = await response.json();
         return json;
@@ -31,8 +33,6 @@ const carouselSlice = createSlice({
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
         state.coins = action.payload;
-        console.log(action.payload);
-        
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
