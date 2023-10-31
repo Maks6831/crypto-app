@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector } from '@/app/GlobalRedux/hooks'
 
-export const CarouselCard = ({index, symbol, name, percentageChange, currentPrice, source, carIndex} : {index: number, symbol: string, name: string, percentageChange: number, currentPrice: number, source: string, carIndex: number}) => {
+export const CarouselCard = (
+  {index, symbol, name, percentageChange, currentPrice, source, carIndex} :
+   {index: number, symbol: string, name: string, percentageChange: number, currentPrice: number, source: string, carIndex: number}
+   ) => {
   const {currency} = useAppSelector(state => state.currencyReducer)
   const [displayCurr, setDisplayCurr] = useState('');
   const [color, setColor] = useState('');
@@ -28,8 +31,8 @@ export const CarouselCard = ({index, symbol, name, percentageChange, currentPric
   useEffect(()=>{
     percentageChange > 0 ? setColor('#01F1E3') : setColor('#FE2264');
     index >= carIndex -1  && index < carIndex + 3 ? setDisplay(true) : setDisplay(false);
-
   },[carIndex])
+  
   return (
     <div  className={display ? 'm-1 bg-white w-72 h-20 rounded-md dark:bg-dark-card ': 'hidden'}>
       <div className='flex h-full w-full p-3 '>
