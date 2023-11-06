@@ -100,7 +100,6 @@ export const Topbar = () => {
   return (
     <div className='w-full bg-purpleb text-white  flex justify-center items-center dark:bg-purplea'>
         <div className='flex m-2'>
-            <div>{currency.currency}</div>
             <div className='p-3'>Coins: {activeCoins}</div>
             <div className='p-3'>Exchange: {exhange}</div>
             <div className='p-3'>{marketCap}</div>
