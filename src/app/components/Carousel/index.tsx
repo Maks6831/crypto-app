@@ -21,7 +21,7 @@ const decreaseIndex = () => {
 }
 
 useEffect(()=>{
-  dispatch(fetchData(currency));
+  //dispatch(fetchData(currency));
 },[currency]);
   
   return (
