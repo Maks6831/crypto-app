@@ -12,6 +12,7 @@ export const priceChart = createAsyncThunk(
 )
 
 const initialState = {
+    labels: [],
     prices: [],
     loading: false,
     error: ''
@@ -29,7 +30,10 @@ const priceChartSlice = createSlice({
       })
       .addCase(priceChart.fulfilled, (state, action) => {
         state.loading = false;
-        state.prices = action.payload;
+        console.log(action.payload);
+        const {prices} = action.payload;
+        state.labels = prices.map((arr: [number, number]) => new Date(arr[0]));
+        state.prices = prices.map((arr: [number, number]) => arr[1]);
       })
       .addCase(priceChart.rejected, (state, action) => {
         state.loading = false;
