@@ -15,11 +15,13 @@ export default function Home() {
     </div>
       <div className=' bg-light-background dark:bg-dark-background min-h-screen'>
         <Carousel/>
-        <div className='flex w-full h-full justify-center'>
-          <div className='border-2 w-1/2 h-96'>
-            <Pricegraph/>
+        <div className='flex h-[25rem] justify-center'>
+          <div className=' m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-full flex justify-center items-end'>
+            <Pricegraph isLine={true}/>
           </div>
-          <div className='border-2 w-1/2'>Volume</div>
+          <div className='m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-full flex justify-center items-end'>
+            <Pricegraph isLine={false}/>
+          </div>
         </div>
       </div> 
       <div>

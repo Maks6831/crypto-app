@@ -23,6 +23,8 @@ const config: Config = {
       'card-text-gray': '#D1D1D1',
       'carousel-button-color-one': '#7878FA',
       'carousel-button-color-two': '#6161D6',
+      'light-stroke-color': '#7878FA',
+      'white-color': '#FFFFFF',
 
     },
     extend: {
