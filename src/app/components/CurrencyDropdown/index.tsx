@@ -12,7 +12,7 @@ export const Currencydropdown = () => {
   }
 
   return (
-    <div className='absolute -left-0 top-14 rounded-xl bg-opacity-40 bg-light-button-color flex justify-center  p-1 w-full dark:bg-dark-button-color'>
+    <div className='absolute -left-0 top-14 rounded-xl bg-opacity-40 bg-light-button-color flex justify-center  p-1 w-full z-50 dark:bg-dark-button-color'>
         <ul className=' '>
           <li onClick={()=> changeCurrency('usd')} className='pb-1 p-1 border-b border-gray-900 border-opacity-30'>USD</li>
           <li onClick={()=> changeCurrency('eur')} className='pb-1 p-1 border-b border-gray-900 border-opacity-30'>EUR</li>

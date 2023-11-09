@@ -32,6 +32,9 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
   const dispatch = useAppDispatch();
   const { currency } = useAppSelector(state => state.currencyReducer);
   const { prices, labels, labelsTwo, market_caps } = useAppSelector(state => state.priceChart);
+  const { coin } = useAppSelector(state => state.coinReducer);
+
+
   const data = {
     labels: isLine ? labels : labelsTwo,
     datasets: [
@@ -69,12 +72,8 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
 
   
   useEffect(()=>{
-    dispatch(priceChart({currency, coinId:'bitcoin'}))
-  },[])
-
-
-
-
+    dispatch(priceChart({currency, coinId: coin}))
+  },[coin])
 
   return (
     <div className=' w-full h-72 flex justify-center items-end p-2'>

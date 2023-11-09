@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useAppSelector } from '@/app/GlobalRedux/hooks'
+import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
+import { changeCoin, changeName } from '@/app/GlobalRedux/Features/CurrentCoin/coinSlice'
 
 export const CarouselCard = (
-  {index, symbol, name, percentageChange, currentPrice, source, carIndex} :
-   {index: number, symbol: string, name: string, percentageChange: number, currentPrice: number, source: string, carIndex: number}
+  {index, symbol, name, percentageChange, currentPrice, source, carIndex, coinKey} :
+   {index: number, symbol: string, name: string, percentageChange: number, currentPrice: number, source: string, carIndex: number, coinKey: string}
    ) => {
+    const dispatch = useAppDispatch()
   const {currency} = useAppSelector(state => state.currencyReducer)
   const [displayCurr, setDisplayCurr] = useState('');
   const [color, setColor] = useState('');
   const [display, setDisplay] = useState(false);
+
+  const selectCoin = () => {    
+    dispatch(changeCoin(coinKey));
+    dispatch(changeName(name));
+  }
 
   useEffect(()=>{
     switch(currency){
@@ -28,13 +35,16 @@ export const CarouselCard = (
     
   },[currency])
 
+  
+
   useEffect(()=>{
     percentageChange > 0 ? setColor('#01F1E3') : setColor('#FE2264');
     index >= carIndex -1  && index < carIndex + 3 ? setDisplay(true) : setDisplay(false);
+    
   },[carIndex])
   
   return (
-    <div  className={display ? 'm-1 bg-white w-72 h-20 rounded-md dark:bg-dark-card ': 'hidden'}>
+    <div onClick={selectCoin}  className={display ? 'm-1 bg-white w-72 h-20 rounded-md dark:bg-dark-card cursor-pointer ': 'hidden'}>
       <div className='flex h-full w-full p-3 '>
         <div className='flex items-center justify-center'>
           <Image 

@@ -4,7 +4,7 @@ import counterReducer from './Features/Counter/CounterSlice';
 import carouselReducer from "./Features/Data/dataSlice";
 import currencyReducer from './Features/Currency/Currency';
 import priceChartReducer from './Features/Chartdata/priceSlice';
-
+import coinReducer from './Features/CurrentCoin/coinSlice';
 
 
 export const store= configureStore({
@@ -12,7 +12,8 @@ export const store= configureStore({
         counter : counterReducer,
         carousel: carouselReducer,
         priceChart: priceChartReducer,
-        currencyReducer
+        currencyReducer,
+        coinReducer
     }
 })
 

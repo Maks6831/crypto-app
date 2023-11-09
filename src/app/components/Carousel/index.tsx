@@ -22,6 +22,7 @@ const decreaseIndex = () => {
 
 useEffect(()=>{
   dispatch(fetchData(currency));
+  console.log(coins);
 },[currency]);
   
   return (
@@ -37,13 +38,14 @@ useEffect(()=>{
           coins.map((coin, index)=>(
             <CarouselCard
               index={index}
-              key={coin.id}
+              coinKey={coin.id}
               symbol={coin.symbol}
               name={coin.name}
               percentageChange={coin.price_change_percentage_24h}
               currentPrice={coin.current_price}
               source={coin.image}
               carIndex={carIndex}
+              key={coin.id}
             />
           ))
         }

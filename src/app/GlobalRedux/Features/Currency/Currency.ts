@@ -18,5 +18,4 @@ export const currencySlice = createSlice({
 })
 
 export const { changeCurr } = currencySlice.actions;
-
 export default currencySlice.reducer;
