@@ -6,7 +6,7 @@ import { MarketData } from "../../../../../MarketData";
 export const fetchData = createAsyncThunk(
     'fetchData',
     async(currency : string)=> {
-        const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`;
+        const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
         const json = await response.json();
         return json;

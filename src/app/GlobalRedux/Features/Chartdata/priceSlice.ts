@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const priceChart = createAsyncThunk(
     'priceChart',
     async({currency, coinId}: {currency: string, coinId: string}, thunkAPI) =>{
-        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=180&interval=daily`;
+        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=180&interval=daily&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
         const json = await response.json();
         return json;

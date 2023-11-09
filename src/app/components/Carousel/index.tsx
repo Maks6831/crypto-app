@@ -21,7 +21,7 @@ const decreaseIndex = () => {
 }
 
 useEffect(()=>{
-  //dispatch(fetchData(currency));
+  dispatch(fetchData(currency));
 },[currency]);
   
   return (
@@ -33,7 +33,7 @@ useEffect(()=>{
       </svg>
     </button>
     <div className='w-full flex'>
-        { carIndex &&
+        { carIndex && coins &&
           coins.map((coin, index)=>(
             <CarouselCard
               index={index}

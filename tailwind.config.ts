@@ -25,7 +25,9 @@ const config: Config = {
       'carousel-button-color-two': '#6161D6',
       'light-stroke-color': '#7878FA',
       'white-color': '#FFFFFF',
-
+      'light-text-color-two': '#191932',
+      'light-text-color-three': '#181825',
+      'volume-background': '#1E1932',
     },
     extend: {
       backgroundImage: {

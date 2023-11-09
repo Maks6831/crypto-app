@@ -39,13 +39,13 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
         label: 'Sales',
         borderColor: 'rgb(120, 120, 250)',
         fill: true, 
-        backgroundColor: (context: any) => {
+        backgroundColor: isLine ?  (context: any) => {
           const chart = context.chart;
           const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
-          gradient.addColorStop(1, 'rgba(255, 255, 255, 1)'); // Start with white
-          gradient.addColorStop(0, 'rgba(120, 120, 250, 1)'); // End with borderColor
+          gradient.addColorStop(1, 'rgba(255, 255, 255, 1)'); 
+          gradient.addColorStop(0, 'rgba(120, 120, 250, 1)');
           return gradient;
-        },
+        }: 'rgb(120, 120, 250)' ,
         data: isLine ? prices : market_caps,
         pointRadius: 0
       }
