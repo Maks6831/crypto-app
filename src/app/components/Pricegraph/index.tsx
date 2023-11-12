@@ -3,6 +3,9 @@ import { priceChart } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import React, { useEffect } from 'react'
 import { Chart } from "react-chartjs-2";
+import { useTheme } from 'next-themes';
+
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +18,7 @@ import {
   LineController,
   BarController,
 } from "chart.js";
-import { log } from 'console';
+
 
 ChartJS.register(
   CategoryScale,
@@ -33,6 +36,7 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
   const { currency } = useAppSelector(state => state.currencyReducer);
   const { prices, labels, labelsTwo, market_caps } = useAppSelector(state => state.priceChart);
   const { coin } = useAppSelector(state => state.coinReducer);
+  const { theme, setTheme } = useTheme();
 
 
   const data = {
@@ -42,23 +46,35 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
         label: 'Sales',
         borderColor: 'rgb(120, 120, 250)',
         fill: true, 
-        backgroundColor: isLine ?  (context: any) => {
+        backgroundColor:   (context: any) => {
           const chart = context.chart;
           const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
-          gradient.addColorStop(1, 'rgba(255, 255, 255, 1)'); 
-          gradient.addColorStop(0, 'rgba(120, 120, 250, 1)');
+          theme === 'light' ? gradient.addColorStop(1, 'rgba(255, 255, 255, 1)') : isLine ? gradient.addColorStop(1,'rgba(25, 25, 50, 1)') : gradient.addColorStop(1, 'rgba(30, 25, 50,1)')
+          isLine ? gradient.addColorStop(0, 'rgba(120, 120, 250, 1)') : gradient.addColorStop(0, 'rgba(157, 98, 217, 1)')
+          isLine ? gradient.addColorStop(0.4, 'rgba(120, 120, 250, 0.9)') : gradient.addColorStop(0.4, 'rgba(157, 98, 217, 0.9)')
           return gradient;
-        }: 'rgb(120, 120, 250)' ,
+        } ,
         data: isLine ? prices : market_caps,
         pointRadius: 0
       }
     ],
   };
   const options = {
+    tooltips: {
+      mode: 'index',
+      intersect: false, 
+      callbacks: {
+          label: function(tooltipItem: any, data: any) {
+              return data.labels[tooltipItem.index] + ': ' + tooltipItem.yLabel; // Customize tooltip label content
+          }
+      }
+  },
     scales :{
       x: {
         ticks: {
-          display: false
+          maxTicksLimit: 6,
+          maxRotation: 0,
+          stepSize: isLine ? Math.ceil(labels.length/10) : Math.ceil(labelsTwo.length / 10)
         },
         grid: {
           display: false

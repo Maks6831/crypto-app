@@ -28,6 +28,7 @@ const config: Config = {
       'light-text-color-two': '#191932',
       'light-text-color-three': '#181825',
       'volume-background': '#1E1932',
+      'light-bar-color': '#9D62D9',
     },
     extend: {
       backgroundImage: {

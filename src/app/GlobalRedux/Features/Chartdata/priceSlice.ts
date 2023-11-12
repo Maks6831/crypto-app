@@ -36,9 +36,9 @@ const priceChartSlice = createSlice({
         console.log(action.payload);
         state.coinInfo = action.payload;
         const {prices, market_caps} = action.payload;
-        state.labels = prices.map((arr: [number, number]) => new Date(arr[0]));
+        state.labels = prices.map((arr: [number, number]) =>'0' +(new Date(arr[0])).getMonth());
         state.prices = prices.map((arr: [number, number]) => arr[1]);
-        state.labelsTwo = market_caps.map((arr: [number, number]) => new Date(arr[0]));
+        state.labelsTwo = market_caps.map((arr: [number, number]) => '0' + new Date(arr[0]).getMonth());
         state.market_caps = market_caps.map((arr: [number, number]) => arr[1]);
 
       })
