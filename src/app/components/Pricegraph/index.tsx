@@ -89,7 +89,7 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
   
   useEffect(()=>{
     dispatch(priceChart({currency, coinId: coin}))
-  },[coin])
+  },[coin, currency])
 
   return (
     <div className=' w-full h-72 flex justify-center items-end p-2'>

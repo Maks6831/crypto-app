@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currency : 'usd',
+    symbol: '$'
 }
 
 
@@ -13,6 +14,19 @@ export const currencySlice = createSlice({
     reducers: {
         changeCurr: (state, action) => {
             state.currency = action.payload
+            switch(action.payload){
+                case 'gbp':
+                  state.symbol = '£';
+                break;
+                case 'eur':
+                  state.symbol = '€';
+                break;
+                case 'usd': 
+                    state.symbol = '$';
+                break;
+                default: 
+                    state.symbol = '$';
+              }
         }
     }
 })

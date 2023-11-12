@@ -1,13 +1,11 @@
-'use client';
-import { useAppSelector } from './GlobalRedux/hooks';
 import { Carousel } from './components/Carousel';
+import { CoinInfoContainer } from './components/CoinInfoContainer';
 import { Navbar } from './components/Navbar';
 import { Pricegraph } from './components/Pricegraph';
 import { Topbar } from './components/Topbar';
 import "./globals.css";
 
 export default function Home() {
-  const {coinName} = useAppSelector(state => state.coinReducer);
   return (
    <div>
     <div>
@@ -22,19 +20,11 @@ export default function Home() {
         </div>
         <div className='flex h-[25rem] justify-center m-2'>
           <div className=' m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-[37rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
-            <div className='absolute left-6 top-6'>
-              <div className='font-normal pb-2 mb-3 text-xl leading-6 text-light-text-color-two dark:text-card-text-gray '>{coinName}</div>
-              <div className='font-bold text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white'>$807.243 bln</div>
-              <div className='font-normal text-base text-light-text-color '>september 24, 2023</div>
-            </div>
+            <CoinInfoContainer isPrice={true}/>
             <Pricegraph isLine={true}/>
           </div>
           <div className='m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-[37rem] flex justify-center items-end relative dark:bg-volume-background'>
-            <div className='absolute left-6 top-6 '>
-              <div className='font-normal pb-2 mb-3 text-xl leading-6 text-light-text-color-two dark:text-card-text-gray  '>Volume 24h</div>
-              <div className='font-bold text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white '>$807.243 bln</div>
-              <div className='font-normal text-base text-light-text-color '>september 24, 2023</div>
-            </div>
+            <CoinInfoContainer isPrice={false}/>
             <Pricegraph isLine={false}/>
           </div>
         </div>
