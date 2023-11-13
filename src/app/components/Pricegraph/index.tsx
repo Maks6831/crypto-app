@@ -34,7 +34,7 @@ ChartJS.register(
 export const Pricegraph = ({isLine}: {isLine: boolean}) => {
   const dispatch = useAppDispatch();
   const { currency } = useAppSelector(state => state.currencyReducer);
-  const { prices, labels, labelsTwo, market_caps } = useAppSelector(state => state.priceChart);
+  const { prices, labels, labelsTwo, market_caps, days } = useAppSelector(state => state.priceChart);
   const { coin } = useAppSelector(state => state.coinReducer);
   const { theme, setTheme } = useTheme();
 
@@ -88,8 +88,8 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
 
   
   useEffect(()=>{
-    dispatch(priceChart({currency, coinId: coin}))
-  },[coin, currency])
+    dispatch(priceChart({currency, coinId: coin, days: days}))
+  },[coin, currency, days])
 
   return (
     <div className=' w-full h-72 flex justify-center items-end p-2'>

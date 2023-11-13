@@ -13,8 +13,6 @@ const [carIndex, setCarIndex] = useState(1);
 
 const increaseIndex = () => {
   setCarIndex(carIndex+4);
-  console.log(carIndex);
-  
 }
 const decreaseIndex = () => {
   carIndex !== 1 ? setCarIndex(carIndex-4) : setCarIndex(1);
@@ -22,7 +20,6 @@ const decreaseIndex = () => {
 
 useEffect(()=>{
   dispatch(fetchData(currency));
-  console.log(coins);
 },[currency]);
   
   return (

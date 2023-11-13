@@ -32,7 +32,6 @@ const carouselSlice = createSlice({
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
         state.coins = action.payload;
-        console.log(action.payload);
         
       })
       .addCase(fetchData.rejected, (state, action) => {

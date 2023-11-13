@@ -3,8 +3,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const priceChart = createAsyncThunk(
     'priceChart',
-    async({currency, coinId}: {currency: string, coinId: string}, thunkAPI) =>{
-        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=180&interval=daily&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+    async({currency, coinId, days}: {currency: string, coinId: string, days: string}, thunkAPI) =>{
+        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&interval=daily&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
         const json = await response.json();
         return json;
@@ -12,6 +12,7 @@ export const priceChart = createAsyncThunk(
 )
 
 const initialState = {
+    days: '180',
     market_caps: [],
     coinInfo: [],
     labelsTwo: [],
@@ -24,7 +25,11 @@ const initialState = {
 const priceChartSlice = createSlice({
     name: 'priceChart',
     initialState,
-    reducers: {},
+    reducers: {
+      setDays: (state, action) => {
+        state.days = action.payload;
+      }
+    },
     extraReducers : builder => {
         builder
       .addCase(priceChart.pending, (state, action) => {
@@ -33,7 +38,6 @@ const priceChartSlice = createSlice({
       })
       .addCase(priceChart.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         state.coinInfo = action.payload;
         const {prices, market_caps} = action.payload;
         state.labels = prices.map((arr: [number, number]) =>'0' +(new Date(arr[0])).getMonth());
@@ -50,4 +54,6 @@ const priceChartSlice = createSlice({
    
 })
 
+
+export const { setDays } = priceChartSlice.actions;
 export default priceChartSlice.reducer;
