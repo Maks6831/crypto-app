@@ -45,7 +45,8 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
       {
         label: 'Sales',
         borderColor: 'rgb(120, 120, 250)',
-        fill: true, 
+        fill: true,
+        lineTension: 0.4,
         backgroundColor:   (context: any) => {
           const chart = context.chart;
           const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
