@@ -29,7 +29,9 @@ const config: Config = {
       'light-text-color-three': '#181825',
       'volume-background': '#1E1932',
       'light-bar-color': '#9D62D9',
-    },
+      'timebar-background-color': '#232336',
+      'timebar-text-color':'#A7A7CC',
+      },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
