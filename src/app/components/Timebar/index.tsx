@@ -20,7 +20,7 @@ export const Timebar = () => {
     };
 
   return (
-    <div className=' flex items-center justify-center ml-2 mt-2 w-[28.938rem] h-11 absolute left-24 bg-light-button-color bg-opacity-40 dark:bg-timebar-background-color dark:text-white p-1 rounded-md'>
+    <div className=' flex items-center justify-center ml-2 mt-2 w-[28.938rem] h-11 bg-light-button-color bg-opacity-40 dark:bg-timebar-background-color dark:text-white p-1 rounded-md'>
         <div onClick={()=>{changeTime('1')}}    className={`w-56 cursor-pointer h-full rounded-md flex justify-center items-center text-light-text-color dark:text-timebar-text-color text-center font-weight-normal text-sm ${getClassName('1')}`}><div>1D</div></div>
         <div onClick={()=>{changeTime('7')}}    className={`w-56 cursor-pointer h-full rounded-md flex justify-center items-center text-light-text-color dark:text-timebar-text-color text-center font-weight-normal text-sm ${getClassName('7')}`}><div>7D</div></div>
         <div onClick={()=>{changeTime('14')}}   className={`w-56 cursor-pointer h-full rounded-md flex justify-center items-center text-light-text-color dark:text-timebar-text-color text-center font-weight-normal text-sm ${getClassName('14')}`}><div>14D</div></div>
