@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const priceChart = createAsyncThunk(
     'priceChart',
     async({currency, coinId, days}: {currency: string, coinId: string, days: string}, thunkAPI) =>{
-        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&interval=daily&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
         const json = await response.json();
         return json;
@@ -40,9 +40,9 @@ const priceChartSlice = createSlice({
         state.loading = false;
         state.coinInfo = action.payload;
         const {prices, market_caps} = action.payload;
-        state.labels = prices.map((arr: [number, number]) =>'0' +(new Date(arr[0])).getMonth());
+        state.labels = prices.map((arr: [number, number]) =>arr[0]);
         state.prices = prices.map((arr: [number, number]) => arr[1]);
-        state.labelsTwo = market_caps.map((arr: [number, number]) => '0' + new Date(arr[0]).getMonth());
+        state.labelsTwo = market_caps.map((arr: [number, number]) => arr[0]);
         state.market_caps = market_caps.map((arr: [number, number]) => arr[1]);
 
       })

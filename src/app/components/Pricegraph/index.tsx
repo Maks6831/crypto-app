@@ -4,8 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import React, { useEffect } from 'react'
 import { Chart } from "react-chartjs-2";
 import { useTheme } from 'next-themes';
-
-
+import { labelFormatter } from '@/app/Utils/labelFormatter';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,7 +17,6 @@ import {
   LineController,
   BarController,
 } from "chart.js";
-
 
 ChartJS.register(
   CategoryScale,
@@ -40,10 +38,10 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
 
 
   const data = {
-    labels: isLine ? labels : labelsTwo,
+    labels: isLine ? labelFormatter(labels, days) : labelFormatter(labelsTwo, days),
     datasets: [
       {
-        label: 'Sales',
+        label: isLine ? 'prices': 'market_caps',
         borderColor: 'rgb(120, 120, 250)',
         fill: true,
         lineTension: 0.4,
@@ -69,11 +67,11 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
               return data.labels[tooltipItem.index] + ': ' + tooltipItem.yLabel; // Customize tooltip label content
           }
       }
-  },
+    },
     scales :{
       x: {
         ticks: {
-          maxTicksLimit: 6,
+          maxTicksLimit: 7,
           maxRotation: 0,
           stepSize: isLine ? Math.ceil(labels.length/10) : Math.ceil(labelsTwo.length / 10)
         },
@@ -82,6 +80,7 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
         }
       },
       y: {
+        suggestedMax: isLine ? Math.max(...prices) : Math.max(...market_caps) * 1.3 ,
         display: false
       },
     }
@@ -93,7 +92,7 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
   },[coin, currency, days])
 
   return (
-    <div className=' w-full h-72 flex justify-center items-end p-2'>
+    <div className=' w-full h-64 flex justify-center items-end p-2'>
       <Chart
       type={isLine ? 'line' : 'bar'}
       data={data}
