@@ -9,6 +9,7 @@ export const CarouselCard = (
    ) => {
     const dispatch = useAppDispatch()
   const currency = useAppSelector(state => state.currencyReducer.currency.toUpperCase())
+  const { coin } = useAppSelector(state => state.coinReducer);
   const displayElement =  index >= carIndex -1  && index < carIndex + 3 
   const displayColor =  percentageChange > 0 ? '#01F1E3' : '#FE2264';
 
@@ -16,9 +17,14 @@ export const CarouselCard = (
     dispatch(changeCoin(coinKey));
     dispatch(changeName(name));
   }
+
+  const selectClass = () => {
+    return coin === coinKey ? 'bg-carousel-button-color-two bg-opacity-50 shadow-md shadow-carousel-button-color' :'bg-white dark:bg-dark-card';
+    
+  }
   
   return (
-    <div onClick={selectCoin}  className={displayElement ? 'm-1 bg-white w-72 h-20 rounded-md dark:bg-dark-card cursor-pointer ': 'hidden'}>
+    <div onClick={selectCoin}  className={displayElement ? `m-1  w-72 h-20 rounded-md rd cursor-pointer ${selectClass()}`: 'hidden'}>
       <div className='flex h-full w-full p-3 '>
         <div className='flex items-center justify-center'>
           <Image 
