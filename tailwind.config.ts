@@ -31,6 +31,15 @@ const config: Config = {
       'light-bar-color': '#9D62D9',
       'timebar-background-color': '#232336',
       'timebar-text-color':'#A7A7CC',
+      'dark-orange' : '#C27721',
+      'darker-blue':'#6374C3',
+      'brighter-green' : '#30E0A1',
+      'light-orange':'#F5AC37',
+      'light-yellow':'#F3EB2F',
+      'light-blue': '#638FFE',
+      'light-green' :'#4DEEE5',
+      'dark-red': '#F06142',
+      'new-blue':'#5082CF'
       },
     extend: {
       backgroundImage: {
