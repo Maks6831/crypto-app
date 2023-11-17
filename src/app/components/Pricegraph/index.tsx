@@ -6,6 +6,7 @@ import { Chart } from "react-chartjs-2";
 import { useTheme } from 'next-themes';
 import { labelFormatter } from '@/app/Utils/labelFormatter';
 import {
+  Tooltip,
   Chart as ChartJS,
   CategoryScale,
   BarElement,
@@ -19,6 +20,7 @@ import {
 } from "chart.js";
 
 ChartJS.register(
+  Tooltip,
   CategoryScale,
   BarElement,
   LinearScale,
@@ -31,7 +33,7 @@ ChartJS.register(
 
 export const Pricegraph = ({isLine}: {isLine: boolean}) => {
   const dispatch = useAppDispatch();
-  const { currency } = useAppSelector(state => state.currencyReducer);
+  const { currency, symbol } = useAppSelector(state => state.currencyReducer);
   const { prices, labels, labelsTwo, market_caps, days } = useAppSelector(state => state.priceChart);
   const { coin } = useAppSelector(state => state.coinReducer);
   const { theme, setTheme } = useTheme();
@@ -41,7 +43,7 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
     labels: isLine ? labelFormatter(labels, days) : labelFormatter(labelsTwo, days),
     datasets: [
       {
-        label: isLine ? 'prices': 'market_caps',
+        label: isLine ? 'price': 'market_caps',
         borderColor: 'rgb(120, 120, 250)',
         fill: true,
         lineTension: 0.4,
@@ -63,9 +65,11 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
       mode: 'index',
       intersect: false, 
       callbacks: {
-          label: function(tooltipItem: any, data: any) {
-              return data.labels[tooltipItem.index] + ': ' + tooltipItem.yLabel; // Customize tooltip label content
-          }
+        label: function(tooltipItem: any, data: any) {
+          const currencySymbol = symbol;
+          const value = tooltipItem.yLabel.toFixed(2);
+          return data.labels[tooltipItem.index] + ': ' + currencySymbol + value;
+        }
       }
     },
     scales :{
