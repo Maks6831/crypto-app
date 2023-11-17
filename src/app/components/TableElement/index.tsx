@@ -58,7 +58,7 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
             <div className='text-xs'>{reduxSymbol}{moneyConverter(marketCap, 2)}</div>
           </div>
         <ProgressBar 
-            percentage={(volume24h / marketCap) * 100}
+            percentage={Math.random()* 100}
             color={getColor(number, 'color')}
             size={'w-[13rem] h-2 '}
             backgroundColor={getColor(number, 'none')}
