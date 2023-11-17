@@ -1,4 +1,4 @@
-export const moneyConverter = (value : number | undefined) => {
+export const moneyConverter = (value : number | undefined, decimal : number) => {
     if(!value){
         return '';
     } else {
@@ -8,7 +8,7 @@ export const moneyConverter = (value : number | undefined) => {
             value /=1000;
             index++;
         }
-        const newValue = index === 0 ? `${value.toFixed(2)}`: `${value.toFixed(3)} ${array[index]}`
+        const newValue = index === 0 ? `${value.toFixed(2)}`: `${value.toFixed(decimal)} ${array[index]}`
         return newValue;
     }
 }

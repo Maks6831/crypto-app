@@ -109,6 +109,8 @@ export const Topbar = () => {
                     <ProgressBar 
                         percentage={20} 
                         color={'white'}
+                        size={'w-12 h-2 '}
+                        backgroundColor={'bg-zinc-500'}
                     />
                 </div>
                 <Cryptobar

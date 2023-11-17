@@ -19,6 +19,8 @@ export const Cryptobar = ({currency, percentage, color}: {currency: any, percent
                         <ProgressBar 
                             percentage={percentage}
                             color={color}
+                            size={'w-12 h-2 '}
+                            backgroundColor={'bg-zinc-500'}
                         />
                     </div>
                 </div>  
