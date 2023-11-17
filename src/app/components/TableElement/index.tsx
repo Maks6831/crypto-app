@@ -57,14 +57,25 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
             <div className='text-xs'>{reduxSymbol}{moneyConverter(volume24h, 2)}</div>
             <div className='text-xs'>{reduxSymbol}{moneyConverter(marketCap, 2)}</div>
           </div>
-        <ProgressBar 
+          <ProgressBar 
             percentage={Math.random()* 100}
             color={getColor(number, 'color')}
-            size={'w-[13rem] h-2 '}
+            size={'w-[10rem] h-2 '}
             backgroundColor={getColor(number, 'none')}
-            />
+          />
         </td>
-        <td className='p-5'>{circulating}</td>
+        <td className='p-5'>
+        <div className='flex justify-between'>
+            <div className='text-xs'>{reduxSymbol}{moneyConverter(circulating, 2)}</div>
+            <div className='text-xs'>{reduxSymbol}{moneyConverter(totalSupply, 2)}</div>
+          </div>
+          <ProgressBar 
+            percentage={(circulating/totalSupply) * 100}
+            color={getColor(number, 'color')}
+            size={'w-[10rem] h-2 '}
+            backgroundColor={getColor(number, 'none')}
+          />
+        </td>
         <td className='p-5 rounded-r-xl'>sparkline</td>
     </tr>
   )
