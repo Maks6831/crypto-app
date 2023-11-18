@@ -4,28 +4,12 @@ import Image from 'next/image';
 import { ProgressBar } from '../Progressbar';
 import { moneyConverter } from '@/app/Utils/moneyConverter';
 import { useAppSelector } from '@/app/GlobalRedux/hooks';
+import { TableBar } from '../TableBar';
 
 export const TableElement = ({number, name, image, symbol, price, change1h, change24h, change7d, sparkline, volume24h, marketCap, circulating, totalSupply} 
   : 
   {number:number, name: string, image: string, symbol:string, price:number, change1h:number, change24h:number, change7d:number, sparkline:number[], volume24h:number, marketCap:number, circulating:number, totalSupply:number}) => {
-    const reduxSymbol = useAppSelector(state => state.currencyReducer.symbol);
-    const colorArray = [
-      ['bg-dark-orange', 'text-dark-orange', '#C27721'],
-      ['bg-darker-blue', 'text-darker-blue', '#6374C3'],
-      ['bg-brighter-green','text-brighter-green', '#30E0A1'],
-      ['bg-light-orange', 'text-light-orange', '#F5AC37'],
-      ['bg-light-yellow', 'text-light-yellow', '#F3EB2F'],
-      ['bg-light-blue', 'text-light-blue', '#638FFE'],
-      ['bg-light-green','text-light-green' , '#4DEEE5'],
-      ['bg-dark-red', 'text-dark-red', '#F06142'],
-      ['bg-new-blue', 'text-new-blue', '#5082CF']
-    ];
-
-    const getColor = (index: number, type: string)=> {
-      const arrayLength = colorArray.length;
-      const colorIndex = index % arrayLength;
-      return type === 'color' ? colorArray[colorIndex][2] : type === 'text' ? colorArray[colorIndex][1] : colorArray[colorIndex][0] + ' bg-opacity-50 '; 
-    }    
+   
     const colorChange = (value: number ) => {
       return value > 0 ? '#01F1E3' : '#FE2264';
     }
@@ -52,30 +36,17 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
         <td className='p-5' style={{color: `${colorChange(change1h)}`}}>{change1h.toFixed(2)}%</td>
         <td className='p-5' style={{color: `${colorChange(change24h)}`}}>{change24h.toFixed(2)}%</td>
         <td className='p-5' style={{color: `${colorChange(change7d)}`}}>{change7d.toFixed(2)}%</td>
-        <td className='p-5'>
-          <div className='flex justify-between'>
-            <div className={`text-xs ${getColor(number, 'text')}`}>&#8226;{reduxSymbol}{moneyConverter(volume24h, 2)}</div>
-            <div className='text-xs'>&#8226;{reduxSymbol}{moneyConverter(marketCap, 2)}</div>
-          </div>
-          <ProgressBar 
-            percentage={Math.random()* 100}
-            color={getColor(number, 'color')}
-            size={'w-[10rem] h-2 '}
-            backgroundColor={getColor(number, 'none')}
-          />
-        </td>
-        <td className='p-5'>
-        <div className='flex justify-between'>
-            <div className={`text-xs ${getColor(number, 'text')}`}>&#8226;{reduxSymbol}{moneyConverter(circulating, 2)}</div>
-            <div className='text-xs'>&#8226;{reduxSymbol}{moneyConverter(totalSupply, 2)}</div>
-          </div>
-          <ProgressBar 
-            percentage={(circulating/totalSupply) * 100}
-            color={getColor(number, 'color')}
-            size={'w-[10rem] h-2 '}
-            backgroundColor={getColor(number, 'none')}
-          />
-        </td>
+        <TableBar
+          number={number}
+          numerator={volume24h}
+          denominator={marketCap}
+        />
+        <TableBar
+          number={number}
+          numerator={circulating}
+          denominator={totalSupply}
+        />
+        
         <td className='p-5 rounded-r-xl'>sparkline</td>
     </tr>
   )
