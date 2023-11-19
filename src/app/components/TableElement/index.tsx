@@ -40,11 +40,13 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
           number={number}
           numerator={volume24h}
           denominator={marketCap}
+          change1h={change1h}
         />
         <TableBar
           number={number}
           numerator={circulating}
           denominator={totalSupply}
+          change1h={change1h}
         />
         
         <td className='p-5 rounded-r-xl'>sparkline</td>
