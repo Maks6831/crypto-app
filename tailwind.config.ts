@@ -20,6 +20,8 @@ const config: Config = {
       'dark-card': '#191925',
       'positive': '#01F1E3',
       'negative': '#FE2264',
+      'positive-two': '#00B1A7',
+      'negative-two':'#FE2264',
       'card-text-gray': '#D1D1D1',
       'carousel-button-color-one': '#7878FA',
       'carousel-button-color-two': '#6161D6',

@@ -5,13 +5,15 @@ import { ProgressBar } from '../Progressbar';
 import { moneyConverter } from '@/app/Utils/moneyConverter';
 import { useAppSelector } from '@/app/GlobalRedux/hooks';
 import { TableBar } from '../TableBar';
+import { useTheme } from 'next-themes';
 
 export const TableElement = ({number, name, image, symbol, price, change1h, change24h, change7d, sparkline, volume24h, marketCap, circulating, totalSupply} 
   : 
   {number:number, name: string, image: string, symbol:string, price:number, change1h:number, change24h:number, change7d:number, sparkline:number[], volume24h:number, marketCap:number, circulating:number, totalSupply:number}) => {
-   
+    const { theme } = useTheme();
     const colorChange = (value: number ) => {
-      return value > 0 ? '#01F1E3' : '#FE2264';
+      const positive = theme === 'light' ? '#00B1A7' : '#01F1E3';
+      return value > 0 ? positive : '#FE2264';
     }
 
   return (

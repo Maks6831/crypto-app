@@ -17,8 +17,8 @@ const colorArray = [
     ['bg-light-green','text-light-green' , '#4DEEE5'],
     ['bg-dark-red', 'text-dark-red', '#F06142'],
     ['bg-new-blue', 'text-new-blue', '#5082CF'],
-    ['bg-positive', 'text-positive', '#01F1E3'],
-    ['bg-negative', 'text-negative', '#FE2264']
+    ['bg-positive-two', 'text-positive-two', '#00B1A7'],
+    ['bg-negative-two', 'text-negative-two', '#FE2264']
   ];
 
   const getColor = (index: number, type: string, theme : string | undefined)=> {
