@@ -26,6 +26,11 @@ export const Sparkline = ({sparklineData, change1h, number} : {sparklineData: nu
     const { theme } = useTheme();
 
     const options = {
+        elements: {
+            line: {
+              tension: 0.2,
+            },
+        },
         fill: true,
         responsive: true,
         scales: {
@@ -57,16 +62,16 @@ export const Sparkline = ({sparklineData, change1h, number} : {sparklineData: nu
       };
 
     const data = {
-        labels: sparklineData,
+        labels: sparklineData.filter((element, index)=> index % 3 === 0),
         datasets: [
           {
             fill: true,
+            lineTension: 0.5,
             label: "spark_7Days",
-            data: sparklineData,
+            data: sparklineData.filter((element, index)=> index % 3 === 0),
             borderWidth: 2,
             borderColor: `rgba(${getColor(number, 'graph', theme, change1h)},1)` ,
             borderRadius: 3,
-            tension: 0.4,
             backgroundColor:   (context: any) => {
                 const chart = context.chart;
                 const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
@@ -82,7 +87,7 @@ export const Sparkline = ({sparklineData, change1h, number} : {sparklineData: nu
 
       
   return (
-    <td className='p-2rounded-r-xl w-44 h-20'>
+    <td className='pr-3 rounded-r-xl w-40 h-16'>
         <Chart type='line'data={data} options={options} style={{height:'100%', width: '100%'}}/>
     </td>
   )
