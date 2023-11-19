@@ -8,10 +8,8 @@ export const Timebar = () => {
     const { days } = useAppSelector(state => state.priceChart)
 
     const changeTime = (action: string) => {
-        
         if(days !== action){
             dispatch(setDays(action));
-            console.log(action);
         }
     }
 

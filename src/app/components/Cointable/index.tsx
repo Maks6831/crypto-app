@@ -13,8 +13,7 @@ export const Cointable = () => {
   useEffect(()=>{
     dispatch(tableData(currency));
   },[])
-
-  console.log(coins);
+  
   return (
     <div>
       <table className='w-[81rem] border-separate border-spacing-y-5'>
