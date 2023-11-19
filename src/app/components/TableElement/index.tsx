@@ -6,6 +6,7 @@ import { moneyConverter } from '@/app/Utils/moneyConverter';
 import { useAppSelector } from '@/app/GlobalRedux/hooks';
 import { TableBar } from '../TableBar';
 import { useTheme } from 'next-themes';
+import { Sparkline } from '../Sparkline';
 
 export const TableElement = ({number, name, image, symbol, price, change1h, change24h, change7d, sparkline, volume24h, marketCap, circulating, totalSupply} 
   : 
@@ -50,8 +51,10 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
           denominator={totalSupply}
           change1h={change1h}
         />
-        
-        <td className='p-5 rounded-r-xl'>sparkline</td>
+        <Sparkline
+        sparklineData={sparkline}
+        change1h={change1h}
+        />
     </tr>
   )
 }
