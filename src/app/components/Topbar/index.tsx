@@ -3,7 +3,7 @@ import React, { use, useEffect, useState } from 'react'
 import { ProgressBar } from '../Progressbar';
 import Image from 'next/image';
 import bitcoin from '@/app/images/bitcoin-btc-logo.png';
-import ethereum from '@/app/images/Ethereum.png';
+import ethereum from '@/app/images/ethLogo.png';
 import { Cryptobar } from '../CryptoBar';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { globalData } from '@/app/GlobalRedux/Features/GlobalData/globalSlice';
@@ -26,10 +26,7 @@ export const Topbar = () => {
     useEffect(()=>{
         dispatch(globalData());
     },[])
-    useEffect(()=>{
-        console.log(data);
-    },[data])
-
+    
   return (
     <div className='w-full bg-purpleb text-white  flex justify-center items-center dark:bg-purplea'>
         <div className='flex m-2'>
@@ -40,7 +37,7 @@ export const Topbar = () => {
                 <div>{symbol}{moneyConverter(total_volume[currency], 2)}</div>
                 <div>
                     <ProgressBar 
-                        percentage={(+total_volume / +total_market_cap) * 100} 
+                        percentage={(+total_volume[currency] / +total_market_cap[currency]) * 100} 
                         color={'white'}
                         size={'w-12 h-2 '}
                         backgroundColor={'bg-zinc-500'}
