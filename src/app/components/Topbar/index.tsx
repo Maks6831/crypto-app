@@ -5,109 +5,42 @@ import Image from 'next/image';
 import bitcoin from '@/app/images/bitcoin-btc-logo.png';
 import ethereum from '@/app/images/Ethereum.png';
 import { Cryptobar } from '../CryptoBar';
-import { useAppSelector } from '@/app/GlobalRedux/hooks';
-
-
-export interface Data {
-    data : {
-    active_cryptocurrencies:              number;
-    upcoming_icos:                        number;
-    ongoing_icos:                         number;
-    ended_icos:                           number;
-    markets:                              number;
-    total_market_cap:                     { [key: string]: number };
-    total_volume:                         { [key: string]: number };
-    market_cap_percentage:                { [key: string]: number };
-    market_cap_change_percentage_24h_usd: number;
-    updated_at:                           number;
-    }
-}
-
-const initialData: Data = {
-    data: {
-      active_cryptocurrencies: 0,
-      upcoming_icos: 0,
-      ongoing_icos: 0,
-      ended_icos: 0,
-      markets: 0,
-      total_market_cap: {},
-      total_volume: {},
-      market_cap_percentage: {},
-      market_cap_change_percentage_24h_usd: 0,
-      updated_at: 0
-    }
-  };
-
-
-    
+import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
+import { globalData } from '@/app/GlobalRedux/Features/GlobalData/globalSlice';
+import { moneyConverter } from '@/app/Utils/moneyConverter';
 
 
 export const Topbar = () => {
+    const dispatch = useAppDispatch();
+    const { data } = useAppSelector(state => state.globalReducer);
+    const { currency, symbol } = useAppSelector(state => state.currencyReducer);
+    const {
+        active_cryptocurrencies,
+        total_market_cap,
+        markets,
+        market_cap_percentage,
+        total_volume
+    } = data;
 
-
-    const [activeCoins, setActiveCoins] = useState(0);
-    const [exhange, setExchange] = useState(0);
-    const [marketCap, setMarketCap] = useState('');
-    const [marketVolume, setMarketVolume] = useState('');
-    const [btcPercentage, setBtcPercentage] = useState(0);
-    const [ethPercentage, setEthPercentage] = useState(0);
-    const currency = useAppSelector(state => state.currencyReducer);
-    const [data, setData] = useState<Data>(initialData);
-
-    const convertCurrencies = (newCurrency: string) => {
-        let sign: string = '$';
-        switch(newCurrency) {
-            case 'gbp':
-                sign = '£'
-            break;
-            case 'eur': 
-                sign = '€'
-            break;
-            default: 
-                sign = '$'
-        }
-        const cap = sign+ (+data?.data.total_market_cap[newCurrency]/1000000000000).toFixed(2) + 'T'
-        setMarketCap(cap)
-        const vol = sign + (+data.data.total_volume[newCurrency]/10000000000).toFixed(2) + 'B';
-        setMarketVolume(vol);  
-    }   
-
-
-    const fetchGlobal = async () => {
-        try {
-            const url = 'https://api.coingecko.com/api/v3/global';
-            const response = await fetch(url);
-            const json = await response.json();
-            setData(json);
-        } catch (error){
-            console.log(error);       
-        }
-    }
-    useEffect(()=>{
-        setActiveCoins(data.data.active_cryptocurrencies);
-        setExchange(data.data.markets);
-        convertCurrencies(currency.currency);
-        setBtcPercentage(data.data.market_cap_percentage.btc);
-        setEthPercentage(data.data.market_cap_percentage.eth);
-
-    },[currency, data])
-    
 
     useEffect(()=>{
-        fetchGlobal();
+        dispatch(globalData());
     },[])
+    useEffect(()=>{
+        console.log(data);
+    },[data])
 
   return (
     <div className='w-full bg-purpleb text-white  flex justify-center items-center dark:bg-purplea'>
         <div className='flex m-2'>
-            <div className='p-3'>Coins: {activeCoins}</div>
-            <div className='p-3'>Exchange: {exhange}</div>
-            <div className='p-3'>{marketCap}</div>
+            <div className='p-3'>Coins: {active_cryptocurrencies}</div>
+            <div className='p-3'>Exchange: {markets}</div>
+            <div className='p-3'>{symbol}{moneyConverter(total_market_cap[currency],2)}</div>
             <div className='p-3 flex'>
-                <div>{marketVolume}</div>
+                <div>{symbol}{moneyConverter(total_volume[currency], 2)}</div>
                 <div>
                     <ProgressBar 
-                        percentage={20} 
+                        percentage={(+total_volume / +total_market_cap) * 100} 
                         color={'white'}
                         size={'w-12 h-2 '}
                         backgroundColor={'bg-zinc-500'}
@@ -115,12 +48,12 @@ export const Topbar = () => {
                 </div>
                 <Cryptobar
                     currency={bitcoin}
-                    percentage={btcPercentage}
+                    percentage={market_cap_percentage.btc}
                     color='#F7931A'
                 />
                 <Cryptobar
                     currency={ethereum}
-                    percentage={ethPercentage}
+                    percentage={market_cap_percentage.eth}
                     color='#849DFF'
                 />                
             </div>
