@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { globalData } from '@/app/GlobalRedux/Features/GlobalData/globalSlice';
 import { moneyConverter } from '@/app/Utils/moneyConverter';
 
-
 export const Topbar = () => {
     const dispatch = useAppDispatch();
     const { data } = useAppSelector(state => state.globalReducer);
@@ -21,7 +20,6 @@ export const Topbar = () => {
         market_cap_percentage,
         total_volume
     } = data;
-
 
     useEffect(()=>{
         dispatch(globalData());

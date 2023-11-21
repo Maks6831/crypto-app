@@ -28,8 +28,6 @@ const initialData: Data = {
     updated_at: 0,
 };
 
-
-
 const initialState : {data: Data, loading: boolean, error: string } = {
     data: initialData ,
     loading: false,
