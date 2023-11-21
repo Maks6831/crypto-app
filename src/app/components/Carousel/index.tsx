@@ -3,7 +3,7 @@ import { fetchData } from '@/app/GlobalRedux/Features/Data/dataSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
 import React, { useEffect, useState } from 'react'
 import { CarouselCard } from '../CarouselCard';
-import { MarketData } from '../../../../MarketData';
+import { MarketData } from '../../types/MarketData';
 
 export const Carousel = () => {
 const dispatch = useAppDispatch();
