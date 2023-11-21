@@ -17,10 +17,7 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
       const positive = theme === 'light' ? '#00B1A7' : '#01F1E3';
       return value > 0 ? positive : '#FE2264';
     }
-    useEffect(()=>{
-      console.log(number);
-    },[]);
-
+    
   return (
     <tr className='p-5 bg-white mb-3 gap-4 dark:bg-dark-card cursor-pointer'>
         <td className='p-5 rounded-l-xl'>{number}</td>

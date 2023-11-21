@@ -1,7 +1,7 @@
 'use client';
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TableData } from "../../../../../TableData";
+import { TableData } from "@/app/types/TableData";
 
 export const tableData = createAsyncThunk(
     'tableData',

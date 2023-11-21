@@ -1,9 +1,5 @@
-export interface GlobalTypes {
-    data: Data;
-}
-
 export interface Data {
-    active_cryptocurrencies:              number;
+    active_cryptocurrencies:              number | null;
     upcoming_icos:                        number;
     ongoing_icos:                         number;
     ended_icos:                           number;

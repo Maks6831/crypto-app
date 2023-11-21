@@ -6,6 +6,7 @@ import currencyReducer from './Features/Currency/Currency';
 import priceChartReducer from './Features/Chartdata/priceSlice';
 import coinReducer from './Features/CurrentCoin/coinSlice';
 import tableReducer from './Features/Tabledata/TableSlice';
+import globalReducer from './Features/GlobalData/globalSlice';
 
 
 export const store= configureStore({
@@ -15,7 +16,8 @@ export const store= configureStore({
         priceChart: priceChartReducer,
         currencyReducer,
         coinReducer,
-        tableReducer
+        tableReducer,
+        globalReducer
     }
 })
 
