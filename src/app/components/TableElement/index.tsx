@@ -17,12 +17,16 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
       const positive = theme === 'light' ? '#00B1A7' : '#01F1E3';
       return value > 0 ? positive : '#FE2264';
     }
+<<<<<<< HEAD
 
     const percentFormatter = (value: number) => {
       const fixedNumber = value
       return value > 0 ? <div>&#x25B4; {fixedNumber.toFixed(2)}%</div> : <div>&#x25BE; {Math.abs(fixedNumber).toFixed(2)}%</div>;
     }
 
+=======
+    
+>>>>>>> main
   return (
     <tr className='p-5 bg-white mb-3 gap-4 dark:bg-dark-card cursor-pointer'>
         <td className='p-5 rounded-l-xl'><span className='flex flex-row items-center justify-center'>{number}</span></td>
