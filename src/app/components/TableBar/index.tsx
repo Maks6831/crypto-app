@@ -12,7 +12,7 @@ export const TableBar = ({number, numerator, denominator, change1h}:{number:numb
 
   return (
     <td className='p-5'>
-          <div className='flex ml-1 justify-between w-[10rem]'>
+          <div className='flex ml-1 justify-between w-[10rem] '>
             <div className={`text-xs ${getColor(number, 'text', theme, change1h)}`}>&#8226;{reduxSymbol}{moneyConverter(numerator, 2)}</div>
             <div className='text-xs'>&#8226;{reduxSymbol}{moneyConverter(denominator, 2)}</div>
           </div>

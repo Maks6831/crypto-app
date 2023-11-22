@@ -23,19 +23,21 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
     <tr className='p-5 bg-white mb-3 gap-4 dark:bg-dark-card cursor-pointer'>
         <td className='p-5 rounded-l-xl'><span className='flex flex-row items-center justify-center'>{number}</span></td>
         <td className='p-5 flex flex-row justify-start items-center'>
-         <div className='h-6 w-6 mr-2'>
-            <Image
-              src={image}
-              alt={name}
-              width={24}
-              height={24}
-              style={{
-                  width: '24px',
-                  height: '24px'
-              }}
-            />
-          </div>
-          {name}&nbsp;({symbol})
+          <span className='flex justify-center items-center pt-2 pl-1'>
+            <div className='h-6 w-6 mr-2'>
+               <Image
+                 src={image}
+                 alt={name}
+                 width={24}
+                 height={24}
+                 style={{
+                     width: '24px',
+                     height: '24px'
+                 }}
+               />
+             </div>
+             {name}&nbsp;({symbol.toUpperCase()})
+          </span>
         </td>
         <td className='p-5'><span className='flex flex-row items-center justify-center'>{reduxSymbol}{price.toFixed(2)}</span></td>
         <td className='w-20' style={{color: `${colorChange(change1h)}`}}><span className='flex flex-row justify-center items-center'>{percentFormatter(change1h)}</span></td>
