@@ -16,7 +16,7 @@ export const Cointable = () => {
     const newAmount = +amount + 30;
     const amountStringified = newAmount.toString();
     dispatch(tableData({currency, amount: amountStringified}));
-    dispatch(changeAmount(newAmount));
+    dispatch(changeAmount(amountStringified));
   }
 
   useEffect(()=>{
@@ -57,7 +57,6 @@ export const Cointable = () => {
                 sparkline={coin.sparkline_in_7d.price}
               />
             ))}
-          
         </tbody>
       </table>
       </InfiniteScroll>
