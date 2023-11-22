@@ -28,14 +28,14 @@ export const Cointable = () => {
   },[coins])
   
   return (
-    <div id='scrollableDiv'>
+    <div>
       <InfiniteScroll
             dataLength={dataLength}
             next={onScroll}
             hasMore={true}
             loader={<h4>Loading...</h4>}
           >   
-      <table className='w-[81rem] border-separate border-spacing-y-5'>
+      <table className='w-[83rem] border-separate border-spacing-y-5'>
         <TableHeader/>
         <tbody>
           {coins &&
