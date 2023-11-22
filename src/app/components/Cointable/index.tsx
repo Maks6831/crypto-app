@@ -13,9 +13,7 @@ export const Cointable = () => {
   const [dataLength, setDataLength] = useState(0);
 
   const onScroll = () => {
-    console.log('scrolling!')
     const newAmount = +amount + 30;
-    console.log(newAmount);
     const amountStringified = newAmount.toString();
     dispatch(tableData({currency, amount: amountStringified}));
     dispatch(changeAmount(newAmount));
