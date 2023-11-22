@@ -42,7 +42,7 @@ export const Cointable = () => {
           coins.map((coin, index) => (
               <TableElement
                 key={coin.id}
-                number={index}
+                number={coin.market_cap_rank}
                 name={coin.name}
                 image={coin.image}
                 symbol={coin.symbol}
