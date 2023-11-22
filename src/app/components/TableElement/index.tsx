@@ -37,9 +37,9 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
           {name}&nbsp;({symbol})
         </td>
         <td className='p-5'>{reduxSymbol}{price.toFixed(2)}</td>
-        <td className='p-5' style={{color: `${colorChange(change1h)}`}}>{change1h.toFixed(2)}%</td>
-        <td className='p-5' style={{color: `${colorChange(change24h)}`}}>{change24h.toFixed(2)}%</td>
-        <td className='p-5' style={{color: `${colorChange(change7d)}`}}>{change7d.toFixed(2)}%</td>
+        <td className='p-5' style={{color: `${colorChange(change1h)}`}}>{change1h?.toFixed(2)}%</td>
+        <td className='p-5' style={{color: `${colorChange(change24h)}`}}>{change24h?.toFixed(2)}%</td>
+        <td className='p-5' style={{color: `${colorChange(change7d)}`}}>{change7d?.toFixed(2)}%</td>
         <TableBar
           number={number}
           numerator={volume24h}
