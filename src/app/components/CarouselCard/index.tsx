@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
 import { changeCoin, changeName } from '@/app/GlobalRedux/Features/CurrentCoin/coinSlice'
+import { percentFormatter } from '@/app/Utils/percentFormatter'
 
 export const CarouselCard = (
   {index, symbol, name, percentageChange, currentPrice, source, carIndex, coinKey} :
@@ -37,7 +38,7 @@ export const CarouselCard = (
         <div className='flex flex-col pl-5 '>
           <div className='flex justify-center items-center font-medium text-base'>{name}&nbsp;({symbol.toUpperCase()})</div>
           <div className='flex flex-row-reverse text-sm'>
-            <div className='p-2 font-normal' style={{color: displayColor}}>{percentageChange.toFixed(2)}%</div>
+            <div className='p-2 font-normal' style={{color: displayColor}}>{percentFormatter(percentageChange)}</div>
             <div className='p-2 font-normal text-light-text-color dark:text-card-text-gray '>{currentPrice.toFixed(2)}&nbsp;{currency}</div>
           </div>
         </div>

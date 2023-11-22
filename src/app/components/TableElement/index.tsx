@@ -7,6 +7,7 @@ import { useAppSelector } from '@/app/GlobalRedux/hooks';
 import { TableBar } from '../TableBar';
 import { useTheme } from 'next-themes';
 import { Sparkline } from '../Sparkline';
+import { percentFormatter } from '@/app/Utils/percentFormatter';
 
 export const TableElement = ({number, name, image, symbol, price, change1h, change24h, change7d, sparkline, volume24h, marketCap, circulating, totalSupply} 
   : 
@@ -16,11 +17,6 @@ export const TableElement = ({number, name, image, symbol, price, change1h, chan
     const colorChange = (value: number ) => {
       const positive = theme === 'light' ? '#00B1A7' : '#01F1E3';
       return value > 0 ? positive : '#FE2264';
-    }
-
-    const percentFormatter = (value: number) => {
-      const fixedNumber = value
-      return value > 0 ? <div>&#x25B4; {fixedNumber.toFixed(2)}%</div> : <div>&#x25BE; {Math.abs(fixedNumber).toFixed(2)}%</div>;
     }
 
   return (
