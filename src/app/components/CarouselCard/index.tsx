@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
 import { changeCoin, changeName } from '@/app/GlobalRedux/Features/CurrentCoin/coinSlice'
+import { percentFormatter } from '@/app/Utils/percentFormatter'
+import { useTheme } from 'next-themes'
+import { colorChange } from '@/app/Utils/colorChange'
 
 export const CarouselCard = (
   {index, symbol, name, percentageChange, currentPrice, source, carIndex, coinKey} :
@@ -12,6 +15,7 @@ export const CarouselCard = (
   const { coin } = useAppSelector(state => state.coinReducer);
   const displayElement =  index >= carIndex -1  && index < carIndex + 3 
   const displayColor =  percentageChange > 0 ? '#01F1E3' : '#FE2264';
+  const { theme } = useTheme();
 
   const selectCoin = () => {    
     dispatch(changeCoin(coinKey));
@@ -37,7 +41,7 @@ export const CarouselCard = (
         <div className='flex flex-col pl-5 '>
           <div className='flex justify-center items-center font-medium text-base'>{name}&nbsp;({symbol.toUpperCase()})</div>
           <div className='flex flex-row-reverse text-sm'>
-            <div className='p-2 font-normal' style={{color: displayColor}}>{percentageChange.toFixed(2)}%</div>
+            <div className='p-2 font-normal' style={{color: `${colorChange(percentageChange, theme)}`}}>{percentFormatter(percentageChange)}</div>
             <div className='p-2 font-normal text-light-text-color dark:text-card-text-gray '>{currentPrice.toFixed(2)}&nbsp;{currency}</div>
           </div>
         </div>

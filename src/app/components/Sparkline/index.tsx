@@ -22,7 +22,7 @@ ChartJS.register(
     Filler
   );
 
-export const Sparkline = ({sparklineData, change1h, number} : {sparklineData: number[], change1h:number, number: number}) => {
+export const Sparkline = ({sparklineData, change7d, number} : {sparklineData: number[], change7d:number, number: number}) => {
     const { theme } = useTheme();
 
     const options = {
@@ -70,13 +70,13 @@ export const Sparkline = ({sparklineData, change1h, number} : {sparklineData: nu
             label: "spark_7Days",
             data: sparklineData.filter((element, index)=> index % 3 === 0),
             borderWidth: 2,
-            borderColor: `rgba(${getColor(number, 'graph', theme, change1h)},1)` ,
+            borderColor: `rgba(${getColor(number, 'graph', theme, change7d)},1)` ,
             borderRadius: 3,
             backgroundColor:   (context: any) => {
                 const chart = context.chart;
                 const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
                 theme === 'light' ? gradient.addColorStop(0.7, 'rgba(255, 255, 255, 1)') :   gradient.addColorStop(0.7, 'rgba(30, 25, 50,1)');
-                gradient.addColorStop(0.1, `rgba(${getColor(number, 'graph', theme, change1h)}, 0.6)`); // End with borderColor
+                gradient.addColorStop(0.1, `rgba(${getColor(number, 'graph', theme, change7d)}, 0.6)`); // End with borderColor
                 //gradient.addColorStop(1, 'rgba(255, 255, 255, 1)'); 
                 //gradient.addColorStop(0, `rgba(${getColor(number, 'graph', theme, change1h)}, 0.5)`);
                 return gradient;
