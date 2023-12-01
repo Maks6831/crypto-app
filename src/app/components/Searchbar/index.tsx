@@ -1,6 +1,22 @@
-import React from 'react'
+'use client';
+import { searchData } from '@/app/GlobalRedux/Features/SearchData/searchSlice';
+import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
+import React, { useEffect } from 'react'
 
 export const Searchbar = () => {
+  const dispatch = useAppDispatch();
+  const { data } = useAppSelector(state => state.searchReducer); 
+
+  useEffect(()=>{
+    dispatch(searchData());
+  },[])
+
+  useEffect(()=>{
+    console.log(data);
+  },[data])
+
+
+
   return (
     <div className='relative m-2 w-89'>
         <div className='absolute left-2 top-3 '>
