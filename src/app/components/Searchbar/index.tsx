@@ -11,12 +11,6 @@ export const Searchbar = () => {
     dispatch(searchData());
   },[])
 
-  useEffect(()=>{
-    console.log(data);
-  },[data])
-
-
-
   return (
     <div className='relative m-2 w-89'>
         <div className='absolute left-2 top-3 '>
