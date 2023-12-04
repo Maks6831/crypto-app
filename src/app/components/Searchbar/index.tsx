@@ -1,15 +1,26 @@
 'use client';
+import React, { useEffect, useState } from 'react'
 import { searchData } from '@/app/GlobalRedux/Features/SearchData/searchSlice';
-import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
-import React, { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
+import { SearchItem } from '../SearchItem';
 
 export const Searchbar = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector(state => state.searchReducer); 
+  const { data, loading } = useAppSelector(state => state.searchReducer); 
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
+    setSearchInput(event.target.value);
+  }
+
 
   useEffect(()=>{
     dispatch(searchData());
   },[])
+
+  useEffect(()=>{
+    console.log(loading)
+  },[searchInput])
 
   return (
     <div className='relative m-2 w-89'>
@@ -19,8 +30,17 @@ export const Searchbar = () => {
             </svg>
         </div>
         <label className='h-12 w-89 rounded-xl leading-10'>
-            <input className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40 w-89 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...'/>
+            <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40 w-89 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' onChange={handleChange}/>
         </label>
+        <div className='absolute left-0 top-0'>
+          {searchInput &&  
+          data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
+            <SearchItem
+            key={element.id}
+            name={element.name}
+            />
+          ))}
+        </div>
     </div>
   )
 }

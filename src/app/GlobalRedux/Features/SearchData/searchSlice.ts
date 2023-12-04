@@ -5,12 +5,12 @@ export const searchData = createAsyncThunk(
     'searchData',
     async (thunkApi) => {
         try{
-            const url = 'https://api.coingecko.com/api/v3/coins/list';
+            const url = `https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
             const response = await fetch(url);
             const json = await response.json(); 
             return json;
         } catch (err) {
-            throw new Error('global data error');
+            throw new Error('search data error');
         }
     } 
 )
@@ -32,6 +32,7 @@ const searchSlice = createSlice({
         state.error = "";
       })
       .addCase(searchData.fulfilled, (state, action) => {
+        state.loading = false;
         state.data = action.payload;
       })
       .addCase(searchData.rejected, (state, action) => {
