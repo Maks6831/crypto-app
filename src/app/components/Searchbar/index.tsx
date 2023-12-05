@@ -7,23 +7,25 @@ import { useDebounce } from '@/app/Utils/useDebounce';
 
 export const Searchbar = () => {
   const dispatch = useAppDispatch();
-  const { data, loading } = useAppSelector(state => state.searchReducer); 
+  const { data, loading, error } = useAppSelector(state => state.searchReducer); 
   const [searchInput, setSearchInput] = useState('');
   const [input, setInput] = useState('');
 
-  const debouncedSearch = useDebounce(searchInput, 500);
+  const debouncedSearch = useDebounce(searchInput, 1000);
+  const rightData = !loading && !error && data.length > 0;
+  const displayLoading = loading && !error;
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
     setSearchInput(event.target.value);
   }
 
-  useEffect(()=>{
-      setInput(debouncedSearch);
-  },[debouncedSearch])
 
   useEffect(()=>{
-    dispatch(searchData());
-  },[])
+    dispatch(searchData(debouncedSearch));
+    //console.log(rightData);
+    //console.log(data);
+    //console.log(debouncedSearch);
+  },[debouncedSearch])
 
   return (
     <div className='relative m-2 w-89'>
@@ -33,16 +35,17 @@ export const Searchbar = () => {
             </svg>
         </div>
         <label className='h-12 w-89 rounded-xl leading-10'>
-            <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40 w-89 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
+            <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
-        <div className='absolute left-0 top-0'>
-          {input &&  
+        <div className='absolute left-0 top-14 bg-light-button-color bg-opacity-40 w-full rounded-xl z-50 max-h-24 overflow-x-hidden overflow-y-auto'>
+          {displayLoading && <div>Loading Bro</div>}
+          {rightData && 
           data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
             <SearchItem
             key={element.id}
             name={element.name}
             />
-          ))}
+          ))} 
         </div>
     </div>
   )

@@ -1,21 +1,22 @@
-import { SearchTypes } from "@/app/Utils/searchTypes";
+import { SearchTypes, Coin } from "@/app/types/searchTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const searchData = createAsyncThunk(
     'searchData',
-    async (thunkApi) => {
+    async (query: string, thunkApi) => {
         try{
-            const url = `https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+            const url = `https://api.coingecko.com/api/v3/search?query=${query}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
             const response = await fetch(url);
             const json = await response.json(); 
             return json;
-        } catch (err) {
+        } catch (err: any) {
+            console.error('Search data error:', err.message);
             throw new Error('search data error');
         }
     } 
 )
 
-const initialState : {data: SearchTypes[], loading: boolean, error: string}= {
+const initialState : {data: Coin[], loading: boolean, error: string}= {
     data : [],
     loading: false,
     error : '',
@@ -33,7 +34,9 @@ const searchSlice = createSlice({
       })
       .addCase(searchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        console.log('happening');
+        state.data = action.payload.coins;
+        console.log(action.payload);
       })
       .addCase(searchData.rejected, (state, action) => {
         state.loading = false;
