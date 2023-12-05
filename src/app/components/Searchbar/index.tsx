@@ -12,8 +12,9 @@ export const Searchbar = () => {
   const [input, setInput] = useState('');
 
   const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData = !loading && !error && data.length > 0;
+  const rightData = data && !loading && !error && data.length > 0 && searchInput;
   const displayLoading = loading && !error;
+  const newError = !loading && error;
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
     setSearchInput(event.target.value);
@@ -21,10 +22,9 @@ export const Searchbar = () => {
 
 
   useEffect(()=>{
-    dispatch(searchData(debouncedSearch));
-    //console.log(rightData);
-    //console.log(data);
-    //console.log(debouncedSearch);
+    if(searchInput){
+      dispatch(searchData(debouncedSearch));
+    }
   },[debouncedSearch])
 
   return (
@@ -38,6 +38,7 @@ export const Searchbar = () => {
             <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
         <div className='absolute left-0 top-14 bg-light-button-color bg-opacity-40 w-full rounded-xl z-50 max-h-24 overflow-x-hidden overflow-y-auto'>
+          {newError && <div>Error {error}</div>}
           {displayLoading && <div>Loading Bro</div>}
           {rightData && 
           data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (

@@ -34,9 +34,7 @@ const searchSlice = createSlice({
       })
       .addCase(searchData.fulfilled, (state, action) => {
         state.loading = false;
-        console.log('happening');
         state.data = action.payload.coins;
-        console.log(action.payload);
       })
       .addCase(searchData.rejected, (state, action) => {
         state.loading = false;
