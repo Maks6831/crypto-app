@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { searchData } from '@/app/GlobalRedux/Features/SearchData/searchSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { SearchItem } from '../SearchItem';
@@ -9,7 +9,8 @@ export const Searchbar = () => {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(state => state.searchReducer); 
   const [searchInput, setSearchInput] = useState('');
-  const [input, setInput] = useState('');
+  const [dropDown, setDropDown] = useState(false);
+  const refOne = useRef<HTMLDivElement>(null!);
 
   const debouncedSearch = useDebounce(searchInput, 1000);
   const rightData = data && !loading && !error && data.length > 0 && searchInput;
@@ -17,8 +18,19 @@ export const Searchbar = () => {
   const newError = !loading && error;
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
-    setSearchInput(event.target.value);
+    const { value } = event.target;
+    setSearchInput(value);
+    value !== '' ? setDropDown(true): setDropDown(false);
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!refOne?.current?.contains(event.target)) {
+        setDropDown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+  }, [refOne]);
 
 
   useEffect(()=>{
@@ -38,19 +50,19 @@ export const Searchbar = () => {
             <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
         <div className='absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-50  w-full rounded-xl z-50 '>
-          <div >
+          <div ref={refOne}>
             {newError && <div>Error {error}</div>}
-            {displayLoading && <div>Loading Bro</div>}
-            {rightData && 
+            {displayLoading && dropDown && <div>Loading...</div>}
+            {rightData && dropDown && 
             <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-32 overflow-x-hidden overflow-y-auto m-2'>
-                {data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
-                  <SearchItem
-                    key={element.id}
-                    name={element.name}
-                  />
-                ))}
+              {data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
+                <SearchItem
+                  key={element.id}
+                  name={element.name}
+                />
+              ))}
             </div>}
-          </div> 
+          </div>
         </div>
     </div>
   )
