@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 
-export const SearchItem = ({name}: {name: string}) => {
+export const SearchItem = ({name, opacity}: {name: string, opacity: string}) => {
   return (
-    <div>{name}</div>
+    <div className={`bg-light-button-color ${opacity} rounded-xl`}>{name}</div>
   )
 }

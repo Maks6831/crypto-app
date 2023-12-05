@@ -11,20 +11,36 @@ export const Searchbar = () => {
   const [searchInput, setSearchInput] = useState('');
   const [dropDown, setDropDown] = useState(false);
   const refOne = useRef<HTMLDivElement>(null!);
+  const resultContainer = useRef<HTMLDivElement>(null);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
 
   const debouncedSearch = useDebounce(searchInput, 1000);
   const rightData = data && !loading && !error && data.length > 0 && searchInput;
   const displayLoading = loading && !error;
   const newError = !loading && error;
 
+  const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    const { key } = e;
+    let nextIndexCount = 0;
+    if (key === "ArrowDown"){
+      nextIndexCount = (focusedIndex + 1) % data.length;
+    }
+    if (key === "ArrowUp"){
+      nextIndexCount = (focusedIndex + data.length - 1) % data.length;
+    }
+    setFocusedIndex(nextIndexCount);
+    console.log(focusedIndex);
+
+  }
+
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
     const { value } = event.target;
     setSearchInput(value);
-    value !== '' ? setDropDown(true): setDropDown(false);
+    value !== '' && data.length > 0 ? setDropDown(true): setDropDown(false);
   }
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       if (!refOne?.current?.contains(event.target)) {
         setDropDown(false);
       }
@@ -32,15 +48,20 @@ export const Searchbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
   }, [refOne]);
 
-
   useEffect(()=>{
     if(searchInput){
       dispatch(searchData(debouncedSearch));
     }
   },[debouncedSearch])
 
+  useEffect(()=>{
+    if(resultContainer.current){
+      resultContainer.current.scrollIntoView({block: 'center'});
+    }
+  },[focusedIndex])
+
   return (
-    <div className='relative m-2 w-89'>
+    <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89'>
         <div className='absolute left-2 top-3 '>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
                 <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
@@ -52,14 +73,17 @@ export const Searchbar = () => {
         <div className='absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-50  w-full rounded-xl z-50 '>
           <div ref={refOne}>
             {newError && <div>Error {error}</div>}
-            {displayLoading && dropDown && <div>Loading...</div>}
+            {displayLoading && dropDown && <div className='p-2'>Loading...</div>}
             {rightData && dropDown && 
             <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-32 overflow-x-hidden overflow-y-auto m-2'>
-              {data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
+              {data.map((element, index)=> (
+                <div key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
                   key={element.id}
                   name={element.name}
+                  opacity={index === focusedIndex ? 'bg-opacity-90': 'bg-opacity-0'}
                 />
+                </div>
               ))}
             </div>}
           </div>
