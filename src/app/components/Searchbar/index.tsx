@@ -37,16 +37,20 @@ export const Searchbar = () => {
         <label className='h-12 w-89 rounded-xl leading-10'>
             <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
-        <div className='absolute left-0 top-14 bg-light-button-color bg-opacity-40 w-full rounded-xl z-50 max-h-24 overflow-x-hidden overflow-y-auto'>
-          {newError && <div>Error {error}</div>}
-          {displayLoading && <div>Loading Bro</div>}
-          {rightData && 
-          data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
-            <SearchItem
-            key={element.id}
-            name={element.name}
-            />
-          ))} 
+        <div className='absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-50  w-full rounded-xl z-50 '>
+          <div >
+            {newError && <div>Error {error}</div>}
+            {displayLoading && <div>Loading Bro</div>}
+            {rightData && 
+            <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-32 overflow-x-hidden overflow-y-auto m-2'>
+                {data.filter(bit => bit.name.toLowerCase().includes(searchInput)).map((element)=> (
+                  <SearchItem
+                    key={element.id}
+                    name={element.name}
+                  />
+                ))}
+            </div>}
+          </div> 
         </div>
     </div>
   )
