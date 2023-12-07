@@ -14,10 +14,14 @@ export const Searchbar = () => {
   const resultContainer = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
-  const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData = data && !loading && !error && data.length > 0 && searchInput;
-  const displayLoading = loading && !error;
-  const newError = !loading && error;
+  
+
+  const searchCoin = (e : any) => {
+    const chosenName = e.target.innerText;
+    const chosenObject = data.filter(obj => obj.name === chosenName);
+    console.log(chosenObject)
+
+  }
 
   const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     const { key } = e;
@@ -30,7 +34,6 @@ export const Searchbar = () => {
     }
     setFocusedIndex(nextIndexCount);
     console.log(focusedIndex);
-
   }
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
@@ -38,6 +41,11 @@ export const Searchbar = () => {
     setSearchInput(value);
     value !== '' && data.length > 0 ? setDropDown(true): setDropDown(false);
   }
+
+  const debouncedSearch = useDebounce(searchInput, 1000);
+  const rightData = data && !loading && !error && data.length > 0 && searchInput;
+  const displayLoading = loading && !error;
+  const newError = !loading && error;
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -56,7 +64,7 @@ export const Searchbar = () => {
 
   useEffect(()=>{
     if(resultContainer.current){
-      resultContainer.current.scrollIntoView({block: 'center'});
+      resultContainer.current.scrollIntoView({block: 'nearest'});
     }
   },[focusedIndex])
 
@@ -77,7 +85,7 @@ export const Searchbar = () => {
             {rightData && dropDown && 
             <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-32 overflow-x-hidden overflow-y-auto m-2'>
               {data.map((element, index)=> (
-                <div key={element.id} ref={index === focusedIndex ? resultContainer : null}>
+                <div className=' cursor-pointer ' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
                   key={element.id}
                   name={element.name}
