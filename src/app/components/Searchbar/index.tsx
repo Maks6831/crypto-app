@@ -13,18 +13,28 @@ export const Searchbar = () => {
   const refOne = useRef<HTMLDivElement>(null!);
   const resultContainer = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
+  const [keyPress, setKeyPress] = useState(false);
 
-  
+  const changeIndex: React.MouseEventHandler<HTMLDivElement> = (event) =>{
+    if(!keyPress){
+      const { target } = event;
+    const index = (target as any).dataset.index;
+    console.log(index);
+    setFocusedIndex(index);
+    console.log(data[focusedIndex].name);
+    }
+    setKeyPress(false);
+  }
 
   const searchCoin = (e : any) => {
     const chosenName = e.target.innerText;
     const chosenObject = data.filter(obj => obj.name === chosenName);
     console.log(chosenObject)
-
   }
 
   const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     const { key } = e;
+    setKeyPress(true);
     let nextIndexCount = 0;
     if (key === "ArrowDown"){
       nextIndexCount = (focusedIndex + 1) % data.length;
@@ -85,11 +95,13 @@ export const Searchbar = () => {
             {rightData && dropDown && 
             <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-32 overflow-x-hidden overflow-y-auto m-2'>
               {data.map((element, index)=> (
-                <div className=' cursor-pointer ' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
+                <div className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
                   key={element.id}
                   name={element.name}
                   opacity={index === focusedIndex ? 'bg-opacity-90': 'bg-opacity-0'}
+                  index={index}
+                  changeIndex={changeIndex}
                 />
                 </div>
               ))}
