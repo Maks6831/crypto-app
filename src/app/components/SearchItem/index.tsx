@@ -12,9 +12,9 @@ export const SearchItem = ({name, index, changeIndex, opacity, keyPress}: {name:
   //  ToggleMouse();
   // console.log(index);
   //}
-  const nextOpacity = keyPress ? opacity : 'hover:bg-opacity-90 bg-opacity-0';
+  const nextOpacity = keyPress ? `${opacity} cursor-none` : 'hover:bg-opacity-90 bg-opacity-0 ';
 
   return (
-    <div data-index={index} className={`bg-light-button-color ${nextOpacity} rounded-lg p-2`}>{name}</div>
+    <div data-index={index} className={`bg-light-button-color ${nextOpacity} rounded-lg p-2 `}>{name}</div>
   )
 }

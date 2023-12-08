@@ -90,12 +90,12 @@ console.log(nextIndexCount)
         <label className='h-12 w-89 rounded-xl leading-10'>
             <input  className='h-12 pl-8 w-89  bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
-        <div className='absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-50  w-full rounded-xl z-50 '>
+        <div className='absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-50  w-full rounded-xl z-50 dark:bg-dark-button-color pb-2 pt-2 '>
           <div ref={refOne}>
             {newError && <div>Error {error}</div>}
             {displayLoading && dropDown && <div className='p-2'>Loading...</div>}
             {rightData && dropDown && 
-            <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-40 overflow-x-hidden overflow-y-auto m-1 '>
+            <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
               {data.map((element, index)=> (
                 <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
