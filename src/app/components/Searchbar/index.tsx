@@ -15,14 +15,12 @@ export const Searchbar = () => {
   const resultContainer = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [keyPress, setKeyPress] = useState(false);
-  const [key, setKey ] = useState(0)
 
   const changeIndex = (event: any) =>{
     if(!keyPress){
      const { target } = event;
      const index = (target as any).dataset.index;
      setFocusedIndex(parseInt(index || 0));
-     setKey(key => key + 1);
     }
     setKeyPress(false);
   }

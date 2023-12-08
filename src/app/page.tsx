@@ -10,12 +10,6 @@ import "./globals.css";
 export default function Home() {
   return (
   <div>
-    <div>
-      <Topbar/>
-    </div>
-    <div>
-      <Navbar/>
-    </div>
     <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen'>
       <div className='mb-2'>
         <Carousel/>
