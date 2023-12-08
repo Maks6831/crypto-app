@@ -1,18 +1,20 @@
-import React, { RefObject, useState } from 'react'
+import React, { RefObject, useEffect, useState } from 'react'
 
-export const SearchItem = ({name, opacity, index, changeIndex}: {name: string, opacity: string, index: number, changeIndex: React.MouseEventHandler<HTMLDivElement>| undefined}) => {
+export const SearchItem = ({name, index, changeIndex, opacity, keyPress}: {name: string, index: number, changeIndex: React.MouseEventHandler<HTMLDivElement>|Function, opacity: string, keyPress: boolean}) => {
   const [mouseOn, setMouseOn] = useState(false);
 
-  const ToggleMouse = () => {
-    setMouseOn(!mouseOn);
-  }
+  //const ToggleMouse = () => {
+  //  setMouseOn(!mouseOn);
+  //}
 
-  const changeOpacity = () => { 
-    changeIndex
-    ToggleMouse();
-  }
+  //const changeOpacity = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => { 
+  //  changeIndex(e)
+  //  ToggleMouse();
+  // console.log(index);
+  //}
+  const nextOpacity = keyPress ? opacity : 'hover:bg-opacity-90 bg-opacity-0';
 
   return (
-    <div data-index={index} onMouseEnter={changeOpacity} onMouseLeave={ToggleMouse} className={`bg-light-button-color ${mouseOn ?'bg-opacity-90' : opacity} rounded-xl`}>{name}</div>
+    <div /* data-index={index} onMouseEnter={(e) => changeOpacity(e)} onMouseLeave={ToggleMouse} */ data-index={index} className={`bg-light-button-color ${nextOpacity} rounded-xl`}>{name}</div>
   )
 }

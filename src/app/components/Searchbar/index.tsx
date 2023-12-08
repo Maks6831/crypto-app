@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { SearchItem } from '../SearchItem';
 import { useDebounce } from '@/app/Utils/useDebounce';
 
+
 export const Searchbar = () => {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(state => state.searchReducer); 
@@ -14,36 +15,39 @@ export const Searchbar = () => {
   const resultContainer = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [keyPress, setKeyPress] = useState(false);
+  const [key, setKey ] = useState(0)
 
-  const changeIndex: React.MouseEventHandler<HTMLDivElement> = (event) =>{
+  const changeIndex = (event: any) =>{
     if(!keyPress){
-      const { target } = event;
-    const index = (target as any).dataset.index;
-    console.log(index);
-    setFocusedIndex(index);
-    console.log(data[focusedIndex].name);
+     const { target } = event;
+     const index = (target as any).dataset.index;
+     console.log('from mouse', target)
+     setFocusedIndex(parseInt(index || 0));
+     setKey(key => key + 1);
     }
     setKeyPress(false);
   }
-
+  
   const searchCoin = (e : any) => {
     const chosenName = e.target.innerText;
     const chosenObject = data.filter(obj => obj.name === chosenName);
-    console.log(chosenObject)
   }
 
   const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    console.log('keyDown');
     const { key } = e;
     setKeyPress(true);
-    let nextIndexCount = 0;
+
     if (key === "ArrowDown"){
-      nextIndexCount = (focusedIndex + 1) % data.length;
+      const nextIndexCount = (focusedIndex + 1) % data.length;
+console.log(nextIndexCount)      
+      setFocusedIndex(nextIndexCount);
     }
     if (key === "ArrowUp"){
-      nextIndexCount = (focusedIndex + data.length - 1) % data.length;
+      const nextIndexCount = (focusedIndex + data.length - 1) % data.length;
+      console.log(nextIndexCount)
+      setFocusedIndex(nextIndexCount);
     }
-    setFocusedIndex(nextIndexCount);
-    console.log(focusedIndex);
   }
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
@@ -77,6 +81,7 @@ export const Searchbar = () => {
       resultContainer.current.scrollIntoView({block: 'nearest'});
     }
   },[focusedIndex])
+  console.log(keyPress, focusedIndex);
 
   return (
     <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89'>
@@ -95,12 +100,14 @@ export const Searchbar = () => {
             {rightData && dropDown && 
             <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scrollbar-thumb-rounded-xl max-h-32 overflow-x-hidden overflow-y-auto m-2'>
               {data.map((element, index)=> (
-                <div className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
+                <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer m-1' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
                   key={element.id}
                   name={element.name}
                   opacity={index === focusedIndex ? 'bg-opacity-90': 'bg-opacity-0'}
                   index={index}
+
+                  keyPress={keyPress}
                   changeIndex={changeIndex}
                 />
                 </div>
