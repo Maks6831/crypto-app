@@ -5,8 +5,6 @@ import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { SearchItem } from '../SearchItem';
 import { useDebounce } from '@/app/Utils/useDebounce';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-
 
 export const Searchbar = () => {
   const dispatch = useAppDispatch();
@@ -29,10 +27,8 @@ export const Searchbar = () => {
   }
   
   const searchCoin = () => {
-   
      setDropDown(false);
      router.push(`/coins/${data[focusedIndex].id}`)
-     
   }
 
   const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
@@ -68,7 +64,6 @@ export const Searchbar = () => {
         setDropDown(false);
       }
     };
-    console.log('hello');
     document.addEventListener("mousedown", handleClickOutside);
   }, [refOne]);
 
@@ -87,30 +82,30 @@ export const Searchbar = () => {
   return (
     <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89'>
         <div className='absolute left-2 top-3 '>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
-            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
+              <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
+          </svg>
         </div>
         <label className='h-12 w-89 rounded-xl leading-10'>
             <input  className='h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' onBlur={()=>setSearchInput('')} placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
-            {error && <div className='absolute left-0 top-14'>Error {error}</div>}
-            {loading && <div className='p-2 absolute'>Loading...</div>}
-            {rightData && 
-            <div ref={refOne}  className=' p-1 absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
-              {data.map((element, index)=> (
-                <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={searchCoin} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
-                <SearchItem
-                  key={element.id}
-                  name={element.name}
-                  opacity={index === focusedIndex ? 'bg-opacity-90': 'bg-opacity-0'}
-                  index={index}
-                  keyPress={keyPress}
-                  changeIndex={changeIndex}
-                />
-                </div>
-              ))}
-            </div>}
+        {error && <div className='absolute left-0 top-14'>Error {error}</div>}
+        {loading && <div className='p-2 absolute'>Loading...</div>}
+        {rightData && 
+        <div ref={refOne}  className=' p-1 absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
+          {data.map((element, index)=> (
+            <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={searchCoin} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
+            <SearchItem
+              key={element.id}
+              name={element.name}
+              opacity={index === focusedIndex ? 'bg-opacity-90': 'bg-opacity-0'}
+              index={index}
+              keyPress={keyPress}
+              changeIndex={changeIndex}
+            />
+            </div>
+          ))}
+        </div>}
     </div>
   )
 }
