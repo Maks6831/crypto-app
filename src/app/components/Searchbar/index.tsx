@@ -4,6 +4,8 @@ import { searchData } from '@/app/GlobalRedux/Features/SearchData/searchSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { SearchItem } from '../SearchItem';
 import { useDebounce } from '@/app/Utils/useDebounce';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 export const Searchbar = () => {
@@ -15,6 +17,7 @@ export const Searchbar = () => {
   const resultContainer = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [keyPress, setKeyPress] = useState(false);
+  const router = useRouter();
 
   const changeIndex = (event: any) =>{
     if(!keyPress){
@@ -58,8 +61,6 @@ export const Searchbar = () => {
     const handleClickOutside = (event: any) => {
       if (!refOne?.current?.contains(event.target)) {
         setDropDown(false);
-        console.log('handleClick');
-        console.log(event.target);
       }
     };
     console.log('hello');
@@ -76,12 +77,7 @@ export const Searchbar = () => {
     if(resultContainer.current){
       resultContainer.current.scrollIntoView({block: 'nearest'});
     }
-  },[focusedIndex])
-
-  useEffect(() => {
-    console.log(rightData);
-  }, [rightData])
-  
+  },[focusedIndex])  
 
   return (
     <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89'>
@@ -98,7 +94,7 @@ export const Searchbar = () => {
             {rightData && 
             <div ref={refOne}  className=' p-1 absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
               {data.map((element, index)=> (
-                <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
+                <Link href={`/coins/${element.id}`} data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
                   key={element.id}
                   name={element.name}
@@ -107,7 +103,7 @@ export const Searchbar = () => {
                   keyPress={keyPress}
                   changeIndex={changeIndex}
                 />
-                </div>
+                </Link>
               ))}
             </div>}
     </div>
