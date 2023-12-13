@@ -28,9 +28,11 @@ export const Searchbar = () => {
     setKeyPress(false);
   }
   
-  const searchCoin = (e : any) => {
-    const chosenName = e.target.innerText;
-    const chosenObject = data.filter(obj => obj.name === chosenName);
+  const searchCoin = () => {
+   
+     setDropDown(false);
+     router.push(`/coins/${data[focusedIndex].id}`)
+     
   }
 
   const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
@@ -44,6 +46,9 @@ export const Searchbar = () => {
       const nextIndexCount = (focusedIndex + data.length - 1) % data.length;
       setFocusedIndex(nextIndexCount);
     }
+    if(key === 'Enter'){
+      searchCoin();
+    }
   }
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
@@ -53,7 +58,7 @@ export const Searchbar = () => {
   }
 
   const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData =  !loading && !error && data.length > 0 
+  const rightData =  !loading && !error && data.length > 0 && dropDown;
   const dropDownCheck = dropDown;
   const displayLoading = loading && !error && searchInput !== '';
 
@@ -94,7 +99,7 @@ export const Searchbar = () => {
             {rightData && 
             <div ref={refOne}  className=' p-1 absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
               {data.map((element, index)=> (
-                <Link href={`/coins/${element.id}`} data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
+                <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={searchCoin} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
                   key={element.id}
                   name={element.name}
@@ -103,7 +108,7 @@ export const Searchbar = () => {
                   keyPress={keyPress}
                   changeIndex={changeIndex}
                 />
-                </Link>
+                </div>
               ))}
             </div>}
     </div>
