@@ -33,15 +33,12 @@ export const Searchbar = () => {
   const handleKeyDown : React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     const { key } = e;
     setKeyPress(true);
-
     if (key === "ArrowDown"){
-      const nextIndexCount = (focusedIndex + 1) % data.length;
-console.log(nextIndexCount)      
+      const nextIndexCount = (focusedIndex + 1) % data.length;  
       setFocusedIndex(nextIndexCount);
     }
     if (key === "ArrowUp"){
       const nextIndexCount = (focusedIndex + data.length - 1) % data.length;
-      console.log(nextIndexCount)
       setFocusedIndex(nextIndexCount);
     }
   }
@@ -53,15 +50,19 @@ console.log(nextIndexCount)
   }
 
   const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData = data && !loading && !error && data.length > 0 && searchInput;
-  const dropDownCheck = dropDown && searchInput !== '';
+  const rightData =  !loading && !error && data.length > 0 
+  const dropDownCheck = dropDown;
+  const displayLoading = loading && !error && searchInput !== '';
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (!refOne?.current?.contains(event.target)) {
         setDropDown(false);
+        console.log('handleClick');
+        console.log(event.target);
       }
     };
+    console.log('hello');
     document.addEventListener("mousedown", handleClickOutside);
   }, [refOne]);
 
@@ -77,6 +78,11 @@ console.log(nextIndexCount)
     }
   },[focusedIndex])
 
+  useEffect(() => {
+    console.log(rightData);
+  }, [rightData])
+  
+
   return (
     <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89'>
         <div className='absolute left-2 top-3 '>
@@ -87,11 +93,10 @@ console.log(nextIndexCount)
         <label className='h-12 w-89 rounded-xl leading-10'>
             <input  className='h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100' onBlur={()=>setSearchInput('')} placeholder='Search...' type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
-        {dropDownCheck && <div className='absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color '>
-            {error && <div>Error {error}</div>}
-            {loading && <div className='p-2'>Loading...</div>}
+            {error && <div className='absolute left-0 top-14'>Error {error}</div>}
+            {loading && <div className='p-2 absolute'>Loading...</div>}
             {rightData && 
-            <div className='scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
+            <div ref={refOne}  className=' p-1 absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
               {data.map((element, index)=> (
                 <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={(e)=> searchCoin(e)} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
                 <SearchItem
@@ -99,14 +104,12 @@ console.log(nextIndexCount)
                   name={element.name}
                   opacity={index === focusedIndex ? 'bg-opacity-90': 'bg-opacity-0'}
                   index={index}
-
                   keyPress={keyPress}
                   changeIndex={changeIndex}
                 />
                 </div>
               ))}
             </div>}
-        </div>}
     </div>
   )
 }
