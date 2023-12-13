@@ -3,6 +3,7 @@ import Providers from './providers';
 import { ProvidersTwo } from './GlobalRedux/provider';
 import { Navbar } from './components/Navbar';
 import { Topbar } from './components/Topbar';
+import './globals.css';
 
 
 export const metadata: Metadata = {
@@ -18,7 +19,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        
         <ProvidersTwo>
           <Providers>
             <Topbar/>
