@@ -1,16 +1,18 @@
+import { Buttonswitcher } from './components/Buttonswitcher';
 import { Carousel } from './components/Carousel';
 import { CoinInfoContainer } from './components/CoinInfoContainer';
 import { Cointable } from './components/Cointable';
-import { Navbar } from './components/Navbar';
 import { Pricegraph } from './components/Pricegraph';
 import { Timebar } from './components/Timebar';
-import { Topbar } from './components/Topbar';
 import "./globals.css";
 
 export default function Home() {
   return (
   <div>
     <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen'>
+    <div className=' w-1/2 h-full flex justify-center'>
+      <Buttonswitcher/>
+    </div>
       <div className='mb-2'>
         <Carousel/>
       </div>
