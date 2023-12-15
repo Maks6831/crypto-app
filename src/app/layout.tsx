@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import Providers from './providers';
 import { ProvidersTwo } from './GlobalRedux/provider';
+import { Navbar } from './components/Navbar';
+import { Topbar } from './components/Topbar';
+import './globals.css';
 
 
 export const metadata: Metadata = {
@@ -18,6 +21,8 @@ export default function RootLayout({
       <body>
         <ProvidersTwo>
           <Providers>
+            <Topbar/>
+            <Navbar/>
             {children}
           </Providers>
         </ProvidersTwo>
