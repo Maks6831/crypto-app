@@ -39,7 +39,7 @@ export const Navbar = () => {
 
         <div className='flex flex-column justify-between '>
           <div className='flex items-center justify-center text-light-text-color  dark:text-white'>
-            <Searchbar/>
+            <Searchbar isSearch={true}/>
           </div>
           <div className='flex justify-center items-center text-light-text-color dark:text-white'>
             <Currencyconverter/>

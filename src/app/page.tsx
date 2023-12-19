@@ -7,6 +7,7 @@ import { Cointable } from './components/Cointable';
 import { Pricegraph } from './components/Pricegraph';
 import { Timebar } from './components/Timebar';
 import "./globals.css";
+import { HomeConverter } from './components/HomeConverter';
 
 export default function Home() {
   const [isCoin, setisCoin] = useState(true);
@@ -22,7 +23,8 @@ export default function Home() {
         <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
       </div>
       {isCoin ? 
-        <><div className='mb-2'>
+        <>
+          <div className='mb-2'>
             <Carousel />
           </div><div className='flex h-[25rem] w-full justify-center m-2'>
               <div className=' m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-[37rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
@@ -35,9 +37,12 @@ export default function Home() {
               </div>
             </div><div className='m-4 w-1/2 h-full flex justify-center'>
               <Timebar />
-            </div></>
+            </div>
+        </>
         :
-        <div>Hello</div> 
+        <>
+          <HomeConverter/>
+        </>
         }
         <div className='flex justify-center items-center'>
           <Cointable/>
