@@ -13,10 +13,11 @@ export const HomeConverter = () => {
         <div className=' text-light-text-color text-opacity-80 font-normal text-base dark:text-dark-date-color'>{timeFormatter(date)} {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</div>
       </div>
       <div className='flex justify-center'>
-        {defaultValues.map((element)=> (
+        {defaultValues.map((element, index)=> (
           <ConvertCard 
           defaultValue={element}
           key={element}
+          index={index}
           />
         ))}
       </div>

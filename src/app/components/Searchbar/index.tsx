@@ -99,7 +99,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
           <></>
         }
         <label className='h-12 w-89 rounded-xl leading-10'>
-            <input  className={isSearch ? 'h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none' :'h-12 outline-none w-full'} placeholder={isSearch ? 'Search...': ''} type='text' value={searchInput} onChange={useHandleChange}/>
+            <input  className={isSearch ? 'h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none' :'h-12 outline-none w-full dark:bg-inherit'} placeholder={isSearch ? 'Search...': ''} type='text' value={searchInput} onChange={useHandleChange}/>
         </label>
         {throwError &&  <div className='absolute left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  '>Error {error}</div>}
         {displayLoading && <div className={ `p-2 left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${isSearch ? 'top-14':'top-16'}`}>Loading...</div>}

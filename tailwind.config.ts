@@ -43,7 +43,8 @@ const config: Config = {
       'light-green' :'#4DEEE5',
       'dark-red': '#F06142',
       'new-blue':'#5082CF',
-      'dark-date-color':'#9E9E9E'
+      'dark-date-color':'#9E9E9E',
+      'dark-convert-color':'#FAFBFE'
       },
     extend: {
       backgroundImage: {
