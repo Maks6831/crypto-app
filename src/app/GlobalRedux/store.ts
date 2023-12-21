@@ -8,6 +8,7 @@ import coinReducer from './Features/CurrentCoin/coinSlice';
 import tableReducer from './Features/Tabledata/TableSlice';
 import globalReducer from './Features/GlobalData/globalSlice';
 import searchReducer from './Features/SearchData/searchSlice';
+import converterReducer from './Features/ConverterCoins/ConvertSlice';
 
 
 export const store= configureStore({
@@ -20,6 +21,7 @@ export const store= configureStore({
         tableReducer,
         globalReducer,
         searchReducer,
+        converterReducer
     }
 })
 

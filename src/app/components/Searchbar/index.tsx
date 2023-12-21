@@ -77,7 +77,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   useEffect(()=>{
     if(searchInput){
       dispatch(searchData(debouncedSearch));
-      console.log(data);
+   
     }
   },[debouncedSearch])
 
@@ -86,7 +86,6 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
       resultContainer.current.scrollIntoView({block: 'nearest'});
     }
   },[focusedIndex]) 
-  console.log(data); 
 
   return (
     <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89 flex'>
