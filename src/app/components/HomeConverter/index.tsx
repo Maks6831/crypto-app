@@ -1,13 +1,14 @@
 import { timeFormatter } from '@/app/Utils/timeFormatter'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ConvertCard } from '../ConverterCard';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
-import { changeConverterArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
+import { changeConverterArray, converterData } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 
 export const HomeConverter = () => {
   const date = new Date();
   const [defaultValues, setDefaultValues] = useState(['Bitcoin', 'Ethereum']);
-  const { coins } = useAppSelector(state => state.converterReducer);
+  const { coins, data } = useAppSelector(state => state.converterReducer);
+  const { currency } = useAppSelector(state => state.currencyReducer);
   const dispatch = useAppDispatch();
 
   const switchPair = () => {
@@ -15,7 +16,13 @@ export const HomeConverter = () => {
    dispatch(changeConverterArray(arr));
   }
 
-  console.log(coins);
+  useEffect(()=>{
+    dispatch(converterData({currency, array:coins, days: 23}))
+  },[])
+
+  useEffect(()=>{
+    console.log(data);
+  },[data])
 
   return (
     <div className='m-3 relative'>
