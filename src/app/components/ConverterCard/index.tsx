@@ -14,7 +14,6 @@ export const ConvertCard = ({defaultValue, index}: {defaultValue: string, index 
   const cryptoSymbol = isFirst ? symbols[1] : symbols[0];
   const prices = data.length > 0 && data?.filter(obj => obj.name === defaultValue)[0].data.prices
   const currentPrice = prices && prices[prices.length-1][1];
-  console.log(prices);
   return (
     <div className={`w-[39rem] h-52 bg-white m-5 p-6 rounded-2xl flex flex-col justify-between ${index ? `dark:bg-light-text-color-two`:`dark:bg-purplea`}`}>
     <div className='font-normal text-sm p-2 dark:text-dark-convert-color'>{index? 'You sell' : 'You buy'}</div>

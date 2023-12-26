@@ -5,7 +5,7 @@ export const searchData = createAsyncThunk(
     'searchData',
     async (query: string, thunkApi) => {
         try{
-            const url = `https://api.coingecko.com/api/v3/search?query=${query}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+            const url = `https://api.coingecko.com/api/v3/search?query=${query}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_THREE}`;
             const response = await fetch(url);
             const json = await response.json(); 
             return json;
