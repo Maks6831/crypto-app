@@ -6,6 +6,6 @@ export interface ConverterData {
 
 export interface ConverterObject {
     name : string;
-    time : string;
+    time : number;
     data : ConverterData;
 }

@@ -4,9 +4,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const converterData = createAsyncThunk(
     'converterData',
     async({currency, array, days}: {currency: string, array: string[], days: number}, thunkAPI) =>{
-        const urlOne = `https://api.coingecko.com/api/v3/coins/${array[0]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+        const urlOne = `https://api.coingecko.com/api/v3/coins/${array[0]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
         const responseOne = await fetch(urlOne);
-        const urlTwo = `https://api.coingecko.com/api/v3/coins/${array[1]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+        const urlTwo = `https://api.coingecko.com/api/v3/coins/${array[1]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
         const responseTwo = await fetch(urlTwo);
         const jsonOne : ConverterData = await responseOne.json();
         const jsonTwo : ConverterData = await responseTwo.json();
@@ -19,8 +19,9 @@ export const converterData = createAsyncThunk(
 )
 
 
-const initialState : {coins: string[], loading: boolean, error: string, data: ConverterObject[] }  = {
+const initialState : {coins: string[], symbols: string[], loading: boolean, error: string, data: ConverterObject[] }  = {
     coins: ['bitcoin','ethereum'],
+    symbols: ['BTC', 'ETH'],
     loading: false,
     error: '',
     data: []
