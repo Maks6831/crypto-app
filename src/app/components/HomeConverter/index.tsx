@@ -2,7 +2,7 @@ import { timeFormatter } from '@/app/Utils/timeFormatter'
 import React, { useEffect, useState } from 'react'
 import { ConvertCard } from '../ConverterCard';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
-import { changeConverterArray, converterData } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
+import { converterData, switchArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 
 export const HomeConverter = () => {
   const date = new Date();
@@ -10,19 +10,17 @@ export const HomeConverter = () => {
   const { coins, data } = useAppSelector(state => state.converterReducer);
   const { currency } = useAppSelector(state => state.currencyReducer);
   const dispatch = useAppDispatch();
+  const coinArray = [coins[0].id, coins[1].id];
 
   const switchPair = () => {
    const arr = [coins[1], coins[0]];
-   dispatch(changeConverterArray(arr));
+   dispatch(switchArray([arr, 'coins']));
   }
 
   useEffect(()=>{
-    dispatch(converterData({currency, array:coins, days: 23}))
-  },[])
+    dispatch(converterData({currency, array:coinArray, days: 23}))
+  },[coins, currency]);
 
-  useEffect(()=>{
-    console.log(data);
-  },[data])
 
   return (
     <div className='m-3 relative'>
@@ -39,8 +37,9 @@ export const HomeConverter = () => {
       <div className='flex justify-center'>
         {coins.map((element, index)=> (
           <ConvertCard 
-          defaultValue={element}
-          key={element}
+          defaultValue={element.name}
+          key={element.id}
+          id={element.id}
           index={index}
           />
         ))}

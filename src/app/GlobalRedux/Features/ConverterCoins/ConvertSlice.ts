@@ -1,4 +1,4 @@
-import { ConverterData, ConverterObject } from "@/app/types/ConverterData";
+import { ConverterData, ConverterObject, ConverterTypes } from "@/app/types/ConverterData";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const converterData = createAsyncThunk(
@@ -19,9 +19,20 @@ export const converterData = createAsyncThunk(
 )
 
 
-const initialState : {coins: string[], symbols: string[], loading: boolean, error: string, data: ConverterObject[] }  = {
-    coins: ['bitcoin','ethereum'],
-    symbols: ['BTC', 'ETH'],
+const initialState : {coins: ConverterTypes[], loading: boolean, error: string, data: ConverterObject[] }  = {
+    coins: 
+    [{
+        id:'bitcoin', 
+        name: 'Bitcoin', 
+        symbol:'BTC',
+        thumb:"https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png"
+    },
+    {
+        id:'ethereum', 
+        name: 'Ethereum',
+        symbol: 'ETH',
+        thumb:"https://assets.coingecko.com/coins/images/279/thumb/ethereum.png"
+    }],
     loading: false,
     error: '',
     data: []
@@ -31,8 +42,8 @@ const converterSlice = createSlice({
     name:'converterSlice',
     initialState,
     reducers:{
-        changeConverterArray: (state, action)=> {
-            state.coins = action.payload
+        switchArray: (state, action)=> {
+           state.coins = action.payload[0];
         }
     },
     extraReducers : builder => {
@@ -59,4 +70,4 @@ const converterSlice = createSlice({
 })
 
 export default converterSlice.reducer;
-export const {changeConverterArray} = converterSlice.actions;
+export const {switchArray} = converterSlice.actions;

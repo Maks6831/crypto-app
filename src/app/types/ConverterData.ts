@@ -9,3 +9,10 @@ export interface ConverterObject {
     time : number;
     data : ConverterData;
 }
+
+export interface ConverterTypes {
+    id: string;
+    name : string;
+    symbol : string;
+    thumb: string;
+}

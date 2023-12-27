@@ -6,11 +6,13 @@ import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { SearchItem } from '../SearchItem';
 import { useDebounce } from '@/app/Utils/useDebounce';
 import { useRouter } from 'next/navigation';
+import { changeTwoDArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 
 export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultValue: string}) => {
   const dispatch = useAppDispatch();
-  const { data, loading, error } = useAppSelector(state => state.searchReducer); 
-  const [searchInput, setSearchInput] = useState(defaultValue);
+  const { data, loading, error } = useAppSelector(state => state.searchReducer);
+  const {coins, symbols} = useAppSelector(state => state.converterReducer); 
+  const [searchInput, setSearchInput] = useState<string>(defaultValue);
   const [dropDown, setDropDown] = useState(false);
   const refOne = useRef<HTMLDivElement>(null!);
   const resultContainer = useRef<HTMLDivElement>(null);
@@ -33,7 +35,16 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   }
 
   const setValue = () => {
-    setSearchInput(data[focusedIndex].name)
+    const coin = data[focusedIndex]
+    console.log(data);
+    const index = coins.indexOf(defaultValue);
+    let coinArray = [...coins];
+    coinArray[index] = coin.id;
+    let symbolArray = [...symbols];
+    symbolArray[index] = coin.symbol;
+    dispatch(changeTwoDArray([coinArray, 'coins']));
+    dispatch(changeTwoDArray([symbolArray, 'symbols']))
+    setSearchInput(coin.name);
     setDropDown(false);
   }
 
