@@ -42,8 +42,8 @@ const converterSlice = createSlice({
     name:'converterSlice',
     initialState,
     reducers:{
-        switchArray: (state, action)=> {
-           state.coins = action.payload[0];
+        changeArray: (state, action)=> {
+           state.coins = action.payload;
         }
     },
     extraReducers : builder => {
@@ -70,4 +70,4 @@ const converterSlice = createSlice({
 })
 
 export default converterSlice.reducer;
-export const {switchArray} = converterSlice.actions;
+export const {changeArray} = converterSlice.actions;

@@ -6,12 +6,12 @@ import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { SearchItem } from '../SearchItem';
 import { useDebounce } from '@/app/Utils/useDebounce';
 import { useRouter } from 'next/navigation';
-import { changeTwoDArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
+import { changeArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 
 export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultValue: string}) => {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(state => state.searchReducer);
-  const {coins, symbols} = useAppSelector(state => state.converterReducer); 
+  const {coins } = useAppSelector(state => state.converterReducer); 
   const [searchInput, setSearchInput] = useState<string>(defaultValue);
   const [dropDown, setDropDown] = useState(false);
   const refOne = useRef<HTMLDivElement>(null!);
@@ -19,6 +19,15 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [keyPress, setKeyPress] = useState(false);
   const router = useRouter();
+  const[focus, setFocus] = useState(false);
+
+  const handleFocus = () => {
+    setFocus(true);
+  }
+
+  const handleBlur = () => {
+    setFocus(false);
+  }
 
   const changeIndex = (event: any) =>{
     if(!keyPress){
@@ -37,13 +46,10 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   const setValue = () => {
     const coin = data[focusedIndex]
     console.log(data);
-    const index = coins.indexOf(defaultValue);
+    const index = coins.findIndex(obj => obj.name === defaultValue);
     let coinArray = [...coins];
-    coinArray[index] = coin.id;
-    let symbolArray = [...symbols];
-    symbolArray[index] = coin.symbol;
-    dispatch(changeTwoDArray([coinArray, 'coins']));
-    dispatch(changeTwoDArray([symbolArray, 'symbols']))
+    coinArray[index] = coin;
+    dispatch(changeArray(coinArray))
     setSearchInput(coin.name);
     setDropDown(false);
   }
@@ -73,7 +79,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   const debouncedSearch = useDebounce(searchInput, 1000);
   const rightData =  !loading && !error && data.length > 0 && dropDown;
   const dropDownCheck = dropDown;
-  const displayLoading = loading && searchInput !== '';
+  const displayLoading = loading && focus && searchInput !== '';
   const throwError = error && searchInput !== '';
 
   useEffect(() => {
@@ -99,7 +105,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   },[focusedIndex]) 
 
   return (
-    <div tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89 flex'>
+    <div key={defaultValue} tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89 flex'>
         { isSearch ? 
           <div className='absolute left-2 top-3 '>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
@@ -109,7 +115,14 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
           <></>
         }
         <label className='h-12 w-89 rounded-xl leading-10'>
-            <input  className={isSearch ? 'h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none' :'h-12 outline-none w-full dark:bg-inherit'} placeholder={isSearch ? 'Search...': ''} type='text' value={searchInput} onChange={useHandleChange}/>
+            <input  className={isSearch ? 'h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none' :'h-12 outline-none w-full dark:bg-inherit'}
+             placeholder={isSearch ? 'Search...': ''} 
+             type='text' 
+             value={searchInput} 
+             onChange={useHandleChange} 
+             onFocus={handleFocus}
+             onBlur={handleBlur}
+             />
         </label>
         {throwError &&  <div className='absolute left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  '>Error {error}</div>}
         {displayLoading && <div className={ `p-2 left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${isSearch ? 'top-14':'top-16'}`}>Loading...</div>}

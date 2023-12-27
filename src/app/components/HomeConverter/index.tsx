@@ -2,7 +2,7 @@ import { timeFormatter } from '@/app/Utils/timeFormatter'
 import React, { useEffect, useState } from 'react'
 import { ConvertCard } from '../ConverterCard';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
-import { converterData, switchArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
+import { converterData, changeArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 
 export const HomeConverter = () => {
   const date = new Date();
@@ -14,7 +14,7 @@ export const HomeConverter = () => {
 
   const switchPair = () => {
    const arr = [coins[1], coins[0]];
-   dispatch(switchArray([arr, 'coins']));
+   dispatch(changeArray(arr));
   }
 
   useEffect(()=>{
