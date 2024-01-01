@@ -28,7 +28,13 @@ const priceChartSlice = createSlice({
     reducers: {
       setDays: (state, action) => {
         state.days = action.payload;
-      }
+      },
+      setPrices: (state, action) => {
+        state.prices = action.payload
+      },
+      setLabels: (state, action) => {
+        state.labels = action.payload
+      },
     },
     extraReducers : builder => {
         builder

@@ -61,6 +61,8 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
     ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false, 
     tooltips: {
       mode: 'index',
       intersect: false, 
