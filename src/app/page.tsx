@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Buttonswitcher } from './components/Buttonswitcher';
 import { Carousel } from './components/Carousel';
 import { CoinInfoContainer } from './components/CoinInfoContainer';
@@ -8,13 +8,23 @@ import { Pricegraph } from './components/Pricegraph';
 import { Timebar } from './components/Timebar';
 import "./globals.css";
 import { HomeConverter } from './components/HomeConverter';
+import { useAppDispatch, useAppSelector } from './GlobalRedux/hooks';
+import { priceChart } from './GlobalRedux/Features/Chartdata/priceSlice';
 
 export default function Home() {
   const [isCoin, setisCoin] = useState(true);
+  const { prices, labels, labelsTwo, market_caps, days } = useAppSelector(state => state.priceChart);
+  const { currency, symbol } = useAppSelector(state => state.currencyReducer);
+  const { coin } = useAppSelector(state => state.coinReducer);
+  const dispatch = useAppDispatch();
 
   const setCoin = (value: boolean) => {
     value ? setisCoin(true) : setisCoin(false);
   }
+
+  useEffect(()=>{
+    dispatch(priceChart({currency, coinId: coin, days: days}))
+  },[coin, currency, days])
 
   return (
   <div>
@@ -29,11 +39,11 @@ export default function Home() {
           </div><div className='flex h-[25rem] w-full justify-center m-2'>
               <div className=' m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-[37rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
                 <CoinInfoContainer isPrice={true} />
-                <Pricegraph isLine={true} />
+                <Pricegraph isLine={true} prices={prices} labels={labels} days={days}/>
               </div>
               <div className='m-2 p-6 bg-white-color rounded-xl  h-[25rem] w-[37rem] flex justify-center items-end relative dark:bg-volume-background'>
                 <CoinInfoContainer isPrice={false} />
-                <Pricegraph isLine={false} />
+                <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
               </div>
             </div><div className='m-4 w-1/2 h-full flex justify-center'>
               <Timebar />

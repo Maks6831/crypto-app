@@ -4,11 +4,14 @@ import { ConvertCard } from '../ConverterCard';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { converterData, changeArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 import { Pricegraph } from '../Pricegraph';
+import { setDays, setPrices, setLabels  } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
+import { Timebar } from '../Timebar';
 
 export const HomeConverter = () => {
   const date = new Date();
   const [defaultValues, setDefaultValues] = useState(['Bitcoin', 'Ethereum']);
   const { coins, data } = useAppSelector(state => state.converterReducer);
+  const { days } = useAppSelector(state => state.priceChart);
   const { currency } = useAppSelector(state => state.currencyReducer);
   const dispatch = useAppDispatch();
   const coinArray = [coins[0].id, coins[1].id];
@@ -19,8 +22,10 @@ export const HomeConverter = () => {
   }
 
   useEffect(()=>{
-    dispatch(converterData({currency, array:coinArray, days: 23}))
+    dispatch(converterData({currency, array:coinArray, days: parseInt(days)}))
+
   },[coins, currency]);
+
 
 
   return (
@@ -45,8 +50,12 @@ export const HomeConverter = () => {
           />
         ))}
       </div>
-      <div className='flex justify-center items-center bg-white w-[81rem] h-72'>
+      <div className=' p-3 pr-4 flex justify-center items-center bg-white w-[81rem] h-72 rounded-xl dark:bg-light-text-color-two'>
         <Pricegraph isLine={true} /> 
+        
+      </div>
+      <div className='m-5'>
+        <Timebar/>
       </div>
     </div>
   )
