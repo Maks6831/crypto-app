@@ -55,7 +55,7 @@ export const HomeConverter = () => {
         
       </div>
       <div className='m-5'>
-        <Timebar/>
+        <Timebar days={days}/>
       </div>
     </div>
   )
