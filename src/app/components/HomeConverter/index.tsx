@@ -6,11 +6,12 @@ import { converterData, changeArray } from '@/app/GlobalRedux/Features/Converter
 import { Pricegraph } from '../Pricegraph';
 import { setDays, setPrices, setLabels  } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { Timebar } from '../Timebar';
+import { ConverterObject } from '@/app/types/ConverterData';
 
 export const HomeConverter = () => {
   const date = new Date();
   const [defaultValues, setDefaultValues] = useState(['Bitcoin', 'Ethereum']);
-  const { coins, data } = useAppSelector(state => state.converterReducer);
+  const { coins, data, labels, prices } = useAppSelector(state => state.converterReducer);
   const { days } = useAppSelector(state => state.priceChart);
   const { currency } = useAppSelector(state => state.currencyReducer);
   const dispatch = useAppDispatch();
@@ -25,7 +26,6 @@ export const HomeConverter = () => {
     dispatch(converterData({currency, array:coinArray, days: parseInt(days)}))
 
   },[coins, currency]);
-
 
 
   return (
@@ -51,7 +51,7 @@ export const HomeConverter = () => {
         ))}
       </div>
       <div className=' p-3 pr-4 flex justify-center items-center bg-white w-[81rem] h-72 rounded-xl dark:bg-light-text-color-two'>
-        <Pricegraph isLine={true} /> 
+        <Pricegraph isLine={true} labels={labels} prices={prices} days={days}/> 
         
       </div>
       <div className='m-5'>

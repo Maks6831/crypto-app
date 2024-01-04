@@ -10,8 +10,11 @@ export const converterData = createAsyncThunk(
         const responseTwo = await fetch(urlTwo);
         const jsonOne : ConverterData = await responseOne.json();
         const jsonTwo : ConverterData = await responseTwo.json();
-        const objOne : ConverterObject = {name: array[0], time : days, data : jsonOne};
-        const objTwo : ConverterObject = {name: array[1], time : days, data : jsonTwo};
+        console.log(jsonOne.prices.length);
+        console.log(jsonTwo.prices.length);
+
+        const objOne : ConverterObject = {id: array[0], time : days, data : jsonOne};
+        const objTwo : ConverterObject = {id: array[1], time : days, data : jsonTwo};
         
 
         return {objOne, objTwo};
@@ -19,7 +22,7 @@ export const converterData = createAsyncThunk(
 )
 
 
-const initialState : {coins: ConverterTypes[], loading: boolean, error: string, data: ConverterObject[] }  = {
+const initialState : {coins: ConverterTypes[], loading: boolean, error: string, data: ConverterObject[], labels : number[], prices: number[]}  = {
     coins: 
     [{
         id:'bitcoin', 
@@ -35,7 +38,9 @@ const initialState : {coins: ConverterTypes[], loading: boolean, error: string, 
     }],
     loading: false,
     error: '',
-    data: []
+    data: [],
+    labels:[],
+    prices: [],
 }
 
 const converterSlice = createSlice({
@@ -56,11 +61,20 @@ const converterSlice = createSlice({
         const {objOne, objTwo} = action.payload
         const array = [objOne, objTwo];
         array.forEach(obj=> {
-            const objectIndex = state.data.findIndex(currentObj => currentObj.name === obj.name)
+            const objectIndex = state.data.findIndex(currentObj => currentObj.id === obj.id)
             if(objectIndex === -1){
                 state.data.push(obj);
             }
         })
+        const pricesOne : number[] = objOne.data.prices.map((arr: [number, number]) =>arr[1]);
+        const pricesTwo : number[] = objTwo.data.prices.map((arr: [number, number]) =>arr[1]);
+        const labels = objOne.data.prices.map((arr: [number, number]) =>arr[0]);
+        const prices = pricesOne.reduce((array: number[], priceOne: number, index: number) => {
+        array.push(priceOne / pricesTwo[index]);
+        return array;
+        },[])
+        state.labels = labels;
+        state.prices = prices;
       })
       .addCase(converterData.rejected, (state, action) => {
         state.loading = false;
