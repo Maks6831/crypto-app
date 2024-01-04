@@ -25,7 +25,7 @@ export const HomeConverter = () => {
   useEffect(()=>{
     dispatch(converterData({currency, array:coinArray, days: parseInt(days)}))
 
-  },[coins, currency]);
+  },[coins, currency, days]);
 
 
   return (

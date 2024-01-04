@@ -3,9 +3,8 @@ import { setDays } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks'
 import React from 'react'
 
-export const Timebar = () => {
+export const Timebar = ({days}: {days:string}) => {
     const dispatch = useAppDispatch();
-    const { days } = useAppSelector(state => state.priceChart)
 
     const changeTime = (action: string) => {
         if(days !== action){

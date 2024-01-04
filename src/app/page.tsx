@@ -46,7 +46,7 @@ export default function Home() {
                 <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
               </div>
             </div><div className='m-4 w-1/2 h-full flex justify-center'>
-              <Timebar />
+              <Timebar days={days}/>
             </div>
         </>
         :
