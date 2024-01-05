@@ -1,22 +1,21 @@
+import { useFetch } from "@/app/Utils/useFetch";
 import { ConverterData, ConverterObject, ConverterTypes } from "@/app/types/ConverterData";
+import { GetState } from "@/app/types/GetState";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const converterData = createAsyncThunk(
     'converterData',
-    async({currency, array, days}: {currency: string, array: string[], days: number}, thunkAPI) =>{
+    async({currency, array, days}: {currency: string, array: string[], days: number}, { getState }) =>{
+        const currentState= getState() as GetState;
+        console.log(currentState.converterReducer.data);
         const urlOne = `https://api.coingecko.com/api/v3/coins/${array[0]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
         const responseOne = await fetch(urlOne);
         const urlTwo = `https://api.coingecko.com/api/v3/coins/${array[1]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
         const responseTwo = await fetch(urlTwo);
         const jsonOne : ConverterData = await responseOne.json();
         const jsonTwo : ConverterData = await responseTwo.json();
-        console.log(jsonOne.prices.length);
-        console.log(jsonTwo.prices.length);
-
         const objOne : ConverterObject = {id: array[0], time : days, data : jsonOne};
         const objTwo : ConverterObject = {id: array[1], time : days, data : jsonTwo};
-        
-
         return {objOne, objTwo};
     }
 )
