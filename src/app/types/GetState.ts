@@ -1,4 +1,4 @@
-import { ConverterData } from "./ConverterData"
+import { ConverterData, ConverterObject } from "./ConverterData"
 
 export interface GetState {
     counter: Counter
@@ -306,7 +306,7 @@ export interface GetState {
     coins: Coin3[]
     loading: boolean
     error: string
-    data: ConverterData[]
+    data: ConverterObject[]
     labels: number[]
     prices: number[]
   }
