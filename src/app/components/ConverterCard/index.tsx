@@ -12,9 +12,9 @@ export const ConvertCard = ({defaultValue, index, id}: {defaultValue: string, in
   },[index])
 
   const cryptoSymbol =  isFirst ? coins[0].symbol : coins[1].symbol;
-  const firstPrices = data.length > 0 && data?.find(obj => obj.name === id)?.data.prices ;
+  const firstPrices = data.length > 0 && data?.find(obj => obj.id === id)?.data.prices ;
   const currentPrice = firstPrices && firstPrices.length > 0 && firstPrices[firstPrices.length-1][1];
-  const secondPrices = data.length > 0 && data?.find(obj => obj.name !== id)?.data.prices ;
+  const secondPrices = data.length > 0 && data?.find(obj => obj.id !== id)?.data.prices ;
   const secondPrice = secondPrices && secondPrices.length > 0 && secondPrices[secondPrices.length-1][1];
   const valueforSecondCard = currentPrice && secondPrice && (secondPrice / currentPrice).toFixed(3);
   const convertedValue = isFirst ?  1 : valueforSecondCard;

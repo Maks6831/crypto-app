@@ -27,6 +27,10 @@ export const HomeConverter = () => {
 
   },[coins, currency, days]);
 
+  useEffect(()=>{
+    console.log('prices have changed');
+  },[prices])
+
 
   return (
     <div className='m-3 flex justify-center items-center flex-col'>
@@ -51,12 +55,12 @@ export const HomeConverter = () => {
         ))}
       </div>
       <div className=' p-3 pr-4 flex justify-center items-center bg-white w-[81rem] h-72 rounded-xl dark:bg-light-text-color-two'>
-        <Pricegraph isLine={true} labels={labels} prices={prices} days={days}/> 
+        {prices && <Pricegraph isLine={true} labels={labels} prices={prices} days={days}/>}
         
       </div>
       <div className='m-5'>
         <Timebar days={days}/>
-      </div>
+        </div>
     </div>
   )
 }

@@ -1,22 +1,35 @@
-import { useFetch } from "@/app/Utils/useFetch";
 import { ConverterData, ConverterObject, ConverterTypes } from "@/app/types/ConverterData";
 import { GetState } from "@/app/types/GetState";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const defaultConverterObject: ConverterObject = {
+    id: 'Null', 
+    time: 0,      
+    data: {
+      prices: [],
+      market_caps: [],
+      total_volumes: [],
+    }
+  };
+
 export const converterData = createAsyncThunk(
     'converterData',
     async({currency, array, days}: {currency: string, array: string[], days: number}, { getState }) =>{
-        const currentState= getState() as GetState;
-        console.log(currentState.converterReducer.data);
-        const urlOne = `https://api.coingecko.com/api/v3/coins/${array[0]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
-        const responseOne = await fetch(urlOne);
-        const urlTwo = `https://api.coingecko.com/api/v3/coins/${array[1]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
-        const responseTwo = await fetch(urlTwo);
-        const jsonOne : ConverterData = await responseOne.json();
-        const jsonTwo : ConverterData = await responseTwo.json();
-        const objOne : ConverterObject = {id: array[0], time : days, data : jsonOne};
-        const objTwo : ConverterObject = {id: array[1], time : days, data : jsonTwo};
-        return {objOne, objTwo};
+        console.log('working');
+        const currentState = getState() as GetState;
+        const { data } = currentState.converterReducer;
+        const objectArray: ConverterObject[] = await Promise.all(array.map(async (id, index) => {
+            const objectIndex = data.findIndex(currentObj => currentObj.id === id);
+            if (objectIndex === -1) {
+                const url = `https://api.coingecko.com/api/v3/coins/${array[index]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
+                const response = await fetch(url);
+                const json: ConverterData = await response.json();
+                return { id: array[index], time: days, data: json };
+            } else {
+                return data[objectIndex];
+            }
+        }));
+       return objectArray;
     }
 )
 
@@ -57,18 +70,17 @@ const converterSlice = createSlice({
         state.error = "";
       })
       .addCase(converterData.fulfilled, (state, action) => {
-        const {objOne, objTwo} = action.payload
-        const array = [objOne, objTwo];
+        const array = action.payload
         array.forEach(obj=> {
-            const objectIndex = state.data.findIndex(currentObj => currentObj.id === obj.id)
+            const objectIndex = state.data.findIndex(currentObj => currentObj && currentObj.id === obj.id)
             if(objectIndex === -1){
                 state.data.push(obj);
             }
         })
-        const pricesOne : number[] = objOne.data.prices.map((arr: [number, number]) =>arr[1]);
-        const pricesTwo : number[] = objTwo.data.prices.map((arr: [number, number]) =>arr[1]);
-        const labels = objOne.data.prices.map((arr: [number, number]) =>arr[0]);
-        const prices = pricesOne.reduce((array: number[], priceOne: number, index: number) => {
+        const pricesOne : number[] = array[0]?.data.prices.map((arr: [number, number]) =>arr[1]);
+        const pricesTwo : number[] = array[1]?.data.prices.map((arr: [number, number]) =>arr[1]);
+        const labels = array[0]?.data.prices.map((arr: [number, number]) =>arr[0]);
+        const prices = pricesOne?.reduce((array: number[], priceOne: number, index: number) => {
         array.push(priceOne / pricesTwo[index]);
         return array;
         },[])
