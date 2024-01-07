@@ -113,7 +113,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
           </div> :
           <></>
         }
-        <label className='h-12 w-89 rounded-xl leading-10'>
+        <label className={`h-12 rounded-xl leading-10 ${isSearch ? 'w-89': 'w-96'}`}>
             <input  className={isSearch ? 'h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none' :'h-12 outline-none w-full dark:bg-inherit'}
              placeholder={isSearch ? 'Search...': ''} 
              type='text' 

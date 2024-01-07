@@ -29,8 +29,7 @@ export const HomeConverter = () => {
 
   return (
     <div className='m-3 flex justify-center items-center flex-col'>
-      
-      <div className=' w-1/2 h-14 ml-24'>
+      <div className=' w-full h-14 ml-24 flex flex-col pl-20'>
         <div className=' text-light-text-color font-medium text-xl dark:text-white '>Online Currency Converter</div>
         <div className=' text-light-text-color text-opacity-80 font-normal text-base dark:text-dark-date-color'>{timeFormatter(date)} {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</div>
       </div>
