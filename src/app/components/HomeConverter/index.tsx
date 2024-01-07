@@ -21,7 +21,6 @@ export const HomeConverter = () => {
 
   useEffect(()=>{
     dispatch(converterData({currency, array:coinArray, days: parseInt(days)}))
-
   },[coins, currency, days]);
 
   useEffect(()=>{
@@ -50,9 +49,13 @@ export const HomeConverter = () => {
           />
         ))}
       </div>
-      <div className=' p-3 pr-4 flex justify-center items-center bg-white w-[81rem] h-72 rounded-xl dark:bg-light-text-color-two'>
+      <div className=' relative p-3 pr-4 flex flex-col justify-center items-start bg-white w-[81rem] h-72 rounded-xl dark:bg-light-text-color-two'>
+        <div className='flex absolute top-1 left-5 justify-center items-center '>
+          <div className='m-1 p-1 font-normal dark:text-white text-xl'>{coins[0].name} ({coins[0].symbol})</div>
+          <div className='m-1 p-1 dark:text-dark-date-color '>to</div>
+          <div className='m-1 p-1 font-normal dark:text-white text-xl'>{coins[1].name} ({coins[1].symbol})</div>
+        </div>
         {prices && <Pricegraph isLine={true} labels={labels} prices={prices} days={days}/>}
-        
       </div>
       <div className='m-5'>
         <Timebar days={days}/>
