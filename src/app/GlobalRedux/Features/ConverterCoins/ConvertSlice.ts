@@ -15,20 +15,22 @@ const defaultConverterObject: ConverterObject = {
 export const converterData = createAsyncThunk(
     'converterData',
     async({currency, array, days}: {currency: string, array: string[], days: number}, { getState }) =>{
-        console.log('working');
         const currentState = getState() as GetState;
         const { data } = currentState.converterReducer;
         const objectArray: ConverterObject[] = await Promise.all(array.map(async (id, index) => {
-            const objectIndex = data.findIndex(currentObj => currentObj.id === id);
+            const objectIndex = data.findIndex(currentObj => currentObj.id === id && currentObj.time === days);
+            console.log(objectIndex);
             if (objectIndex === -1) {
                 const url = `https://api.coingecko.com/api/v3/coins/${array[index]}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY_TWO}`;
                 const response = await fetch(url);
                 const json: ConverterData = await response.json();
+                console.log(days);
                 return { id: array[index], time: days, data: json };
             } else {
                 return data[objectIndex];
             }
         }));
+        console.log(objectArray);
        return objectArray;
     }
 )
@@ -71,8 +73,10 @@ const converterSlice = createSlice({
       })
       .addCase(converterData.fulfilled, (state, action) => {
         const array = action.payload
+        const stateData = state.data.map(item => ({ ...item }))
+        console.log(stateData);
         array.forEach(obj=> {
-            const objectIndex = state.data.findIndex(currentObj => currentObj && currentObj.id === obj.id)
+            const objectIndex = stateData.findIndex(currentObj => currentObj.time === obj.time);
             if(objectIndex === -1){
                 state.data.push(obj);
             }
@@ -85,7 +89,7 @@ const converterSlice = createSlice({
         return array;
         },[])
         state.labels = labels;
-        state.prices = prices;
+        state.prices = prices; 
       })
       .addCase(converterData.rejected, (state, action) => {
         state.loading = false;
