@@ -1,17 +1,14 @@
 import { timeFormatter } from '@/app/Utils/timeFormatter'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ConvertCard } from '../ConverterCard';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
 import { converterData, changeArray } from '@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice';
 import { Pricegraph } from '../Pricegraph';
-import { setDays, setPrices, setLabels  } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { Timebar } from '../Timebar';
-import { ConverterObject } from '@/app/types/ConverterData';
 
 export const HomeConverter = () => {
   const date = new Date();
-  const [defaultValues, setDefaultValues] = useState(['Bitcoin', 'Ethereum']);
-  const { coins, data, labels, prices } = useAppSelector(state => state.converterReducer);
+  const { coins, labels, prices } = useAppSelector(state => state.converterReducer);
   const { days } = useAppSelector(state => state.priceChart);
   const { currency } = useAppSelector(state => state.currencyReducer);
   const dispatch = useAppDispatch();
@@ -30,7 +27,6 @@ export const HomeConverter = () => {
   useEffect(()=>{
     console.log('prices have changed');
   },[prices])
-
 
   return (
     <div className='m-3 flex justify-center items-center flex-col'>
