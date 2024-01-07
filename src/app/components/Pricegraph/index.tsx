@@ -5,6 +5,7 @@ import React, { useEffect } from 'react'
 import { Chart } from "react-chartjs-2";
 import { useTheme } from 'next-themes';
 import { labelFormatter } from '@/app/Utils/labelFormatter';
+import { GraphProps } from '@/app/types/GraphProps';
 import {
   Tooltip,
   Chart as ChartJS,
@@ -30,18 +31,6 @@ ChartJS.register(
   LineController,
   BarController
 );
-
-type GraphProps = {
-  days : string
-} & ({
-  isLine: true
-  prices : number[]
-  labels : number[]
-}|{
-  isLine: false
-  labelsTwo: number[]
-  market_caps: number[]
-})
 
 export const Pricegraph = (props : GraphProps) => {
   const dispatch = useAppDispatch();
