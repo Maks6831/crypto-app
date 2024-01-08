@@ -5,6 +5,7 @@ import React, { useEffect } from 'react'
 import { Chart } from "react-chartjs-2";
 import { useTheme } from 'next-themes';
 import { labelFormatter } from '@/app/Utils/labelFormatter';
+import { GraphProps } from '@/app/types/GraphProps';
 import {
   Tooltip,
   Chart as ChartJS,
@@ -31,36 +32,35 @@ ChartJS.register(
   BarController
 );
 
-export const Pricegraph = ({isLine}: {isLine: boolean}) => {
+export const Pricegraph = (props : GraphProps) => {
   const dispatch = useAppDispatch();
-  const { currency, symbol } = useAppSelector(state => state.currencyReducer);
-  const { prices, labels, labelsTwo, market_caps, days } = useAppSelector(state => state.priceChart);
-  const { coin } = useAppSelector(state => state.coinReducer);
+  const { symbol } = useAppSelector(state => state.currencyReducer);
   const { theme, setTheme } = useTheme();
 
-
   const data = {
-    labels: isLine ? labelFormatter(labels, days) : labelFormatter(labelsTwo, days),
+    labels: props.isLine ? labelFormatter(props.labels, props.days) : labelFormatter(props.labelsTwo, props.days),
     datasets: [
       {
-        label: isLine ? 'price': 'market_caps',
+        label: props.isLine ? 'price': 'market_caps',
         borderColor: 'rgb(120, 120, 250)',
         fill: true,
         lineTension: 0.4,
         backgroundColor:   (context: any) => {
           const chart = context.chart;
           const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
-          theme === 'light' ? gradient.addColorStop(1, 'rgba(255, 255, 255, 1)') : isLine ? gradient.addColorStop(1,'rgba(25, 25, 50, 1)') : gradient.addColorStop(1, 'rgba(30, 25, 50,1)')
-          isLine ? gradient.addColorStop(0, 'rgba(120, 120, 250, 1)') : gradient.addColorStop(0, 'rgba(157, 98, 217, 1)')
-          isLine ? gradient.addColorStop(0.4, 'rgba(120, 120, 250, 0.9)') : gradient.addColorStop(0.4, 'rgba(157, 98, 217, 0.9)')
+          theme === 'light' ? gradient.addColorStop(1, 'rgba(255, 255, 255, 1)') : props.isLine ? gradient.addColorStop(1,'rgba(25, 25, 50, 1)') : gradient.addColorStop(1, 'rgba(30, 25, 50,1)')
+          props.isLine ? gradient.addColorStop(0, 'rgba(120, 120, 250, 1)') : gradient.addColorStop(0, 'rgba(157, 98, 217, 1)')
+          props.isLine ? gradient.addColorStop(0.4, 'rgba(120, 120, 250, 0.9)') : gradient.addColorStop(0.4, 'rgba(157, 98, 217, 0.9)')
           return gradient;
         } ,
-        data: isLine ? prices : market_caps,
+        data: props.isLine ? props.prices : props.market_caps,
         pointRadius: 0
       }
     ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false, 
     tooltips: {
       mode: 'index',
       intersect: false, 
@@ -77,28 +77,23 @@ export const Pricegraph = ({isLine}: {isLine: boolean}) => {
         ticks: {
           maxTicksLimit: 7,
           maxRotation: 0,
-          stepSize: isLine ? Math.ceil(labels.length/10) : Math.ceil(labelsTwo.length / 10)
+          stepSize: props.isLine ? Math.ceil(props.labels.length/10) : Math.ceil(props.labelsTwo.length / 10)
         },
         grid: {
           display: false
         }
       },
       y: {
-        suggestedMax: isLine ? Math.max(...prices) : Math.max(...market_caps) * 1.3 ,
+        suggestedMax: props.isLine ? Math.max(...props.prices) : Math.max(...props.market_caps) * 1.3 ,
         display: false
       },
     }
   }
 
-  
-  useEffect(()=>{
-    dispatch(priceChart({currency, coinId: coin, days: days}))
-  },[coin, currency, days])
-
   return (
     <div className=' w-full h-64 flex justify-center items-end p-2'>
       <Chart
-      type={isLine ? 'line' : 'bar'}
+      type={props.isLine ? 'line' : 'bar'}
       data={data}
       options={options}
       style={{width: '100%', height: '100%'}}

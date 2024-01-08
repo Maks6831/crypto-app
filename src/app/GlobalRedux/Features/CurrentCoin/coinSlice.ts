@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { currencySlice } from '../Currency/Currency';
 
 const initialState = {
     coin : 'bitcoin',
