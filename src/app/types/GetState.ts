@@ -85,39 +85,13 @@ export interface GetState {
   }
   
   export interface TableReducer {
-    coins: Coin2[]
+    coins: Coin[]
     amount: string
     loading: boolean
     error: string
   }
   
-  export interface Coin2 {
-    id: string
-    symbol: string
-    name: string
-    image: string
-    current_price: number
-    market_cap: number
-    market_cap_rank: number
-    fully_diluted_valuation: number
-    total_volume: number
-    high_24h: number
-    low_24h: number
-    price_change_24h: number
-    price_change_percentage_24h: number
-    market_cap_change_24h: number
-    market_cap_change_percentage_24h: number
-    circulating_supply: number
-    total_supply: number
-    max_supply?: number
-    ath: number
-    ath_change_percentage: number
-    ath_date: string
-    atl: number
-    atl_change_percentage: number
-    atl_date: string
-    roi?: Roi2
-    last_updated: string
+  export interface Coin2 extends Coin {
     sparkline_in_7d: SparklineIn7d
     price_change_percentage_1h_in_currency: number
     price_change_percentage_24h_in_currency: number
@@ -146,155 +120,18 @@ export interface GetState {
     ongoing_icos: number
     ended_icos: number
     markets: number
-    total_market_cap: TotalMarketCap
-    total_volume: TotalVolume
-    market_cap_percentage: MarketCapPercentage
+    total_market_cap: CurrencyValues
+    total_volume: CurrencyValues
+    market_cap_percentage: CurrencyValues
     market_cap_change_percentage_24h_usd: number
     updated_at: number
   }
   
-  export interface TotalMarketCap {
-    btc: number
-    eth: number
-    ltc: number
-    bch: number
-    bnb: number
-    eos: number
-    xrp: number
-    xlm: number
-    link: number
-    dot: number
-    yfi: number
-    usd: number
-    aed: number
-    ars: number
-    aud: number
-    bdt: number
-    bhd: number
-    bmd: number
-    brl: number
-    cad: number
-    chf: number
-    clp: number
-    cny: number
-    czk: number
-    dkk: number
-    eur: number
-    gbp: number
-    gel: number
-    hkd: number
-    huf: number
-    idr: number
-    ils: number
-    inr: number
-    jpy: number
-    krw: number
-    kwd: number
-    lkr: number
-    mmk: number
-    mxn: number
-    myr: number
-    ngn: number
-    nok: number
-    nzd: number
-    php: number
-    pkr: number
-    pln: number
-    rub: number
-    sar: number
-    sek: number
-    sgd: number
-    thb: number
-    try: number
-    twd: number
-    uah: number
-    vef: number
-    vnd: number
-    zar: number
-    xdr: number
-    xag: number
-    xau: number
-    bits: number
-    sats: number
+  export interface CurrencyValues {
+    [currency: string]: number;
   }
   
-  export interface TotalVolume {
-    btc: number
-    eth: number
-    ltc: number
-    bch: number
-    bnb: number
-    eos: number
-    xrp: number
-    xlm: number
-    link: number
-    dot: number
-    yfi: number
-    usd: number
-    aed: number
-    ars: number
-    aud: number
-    bdt: number
-    bhd: number
-    bmd: number
-    brl: number
-    cad: number
-    chf: number
-    clp: number
-    cny: number
-    czk: number
-    dkk: number
-    eur: number
-    gbp: number
-    gel: number
-    hkd: number
-    huf: number
-    idr: number
-    ils: number
-    inr: number
-    jpy: number
-    krw: number
-    kwd: number
-    lkr: number
-    mmk: number
-    mxn: number
-    myr: number
-    ngn: number
-    nok: number
-    nzd: number
-    php: number
-    pkr: number
-    pln: number
-    rub: number
-    sar: number
-    sek: number
-    sgd: number
-    thb: number
-    try: number
-    twd: number
-    uah: number
-    vef: number
-    vnd: number
-    zar: number
-    xdr: number
-    xag: number
-    xau: number
-    bits: number
-    sats: number
-  }
-  
-  export interface MarketCapPercentage {
-    btc: number
-    eth: number
-    usdt: number
-    bnb: number
-    sol: number
-    xrp: number
-    usdc: number
-    steth: number
-    ada: number
-    avax: number
-  }
+
   
   export interface SearchReducer {
     data: any[]
