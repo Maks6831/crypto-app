@@ -3,12 +3,13 @@ import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 import { Currencyconverter } from '../CurrencyConverter';
 import { Searchbar } from '../Searchbar';
 import { NavbarDropDown } from '../NavBarDropDown';
+import { NavLinks } from '../NavLinks';
 
 
 export const Navbar = () => {
   return (
     <nav className='w-full flex justify-center item-center md:h-20'>
-      <div className=' lg:w-11/12 w-full flex min-h-full justify-between flex-column'>
+      <div className=' lg:w-11/12 w-full flex min-h-full justify-between flex-column mr-2'>
         <div className='hidden md:flex justify-center items-center md:ml-3'>
           <div className='p-2 '>
             <svg xmlns="http://www.w3.org/2000/svg" className='dark:text-white ' height="1.5em" viewBox="0 0 640 512">
@@ -17,26 +18,7 @@ export const Navbar = () => {
           </div>
           <h1 className='font-semibold text-xl'>Crypto App</h1>
         </div>
-        <div className='hidden sm:flex flex-column justify-center items-center'>
-          <div className='sm:p-3 sm:m-3 md:p-0 md:m-0 lg:p-3 flex flex-column lg:m-3'>
-            <div className='m-1'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className='pt-0.5'>Home</div>
-          </div>
-          <div className='p-3 flex flex-column m-3'>
-            <div className='m-1'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path d="M3.196 12.87l-.825.483a.75.75 0 000 1.294l7.25 4.25a.75.75 0 00.758 0l7.25-4.25a.75.75 0 000-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 01-2.276 0L3.196 12.87z" />
-                <path d="M3.196 8.87l-.825.483a.75.75 0 000 1.294l7.25 4.25a.75.75 0 00.758 0l7.25-4.25a.75.75 0 000-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 01-2.276 0L3.196 8.87z" />
-                <path d="M10.38 1.103a.75.75 0 00-.76 0l-7.25 4.25a.75.75 0 000 1.294l7.25 4.25a.75.75 0 00.76 0l7.25-4.25a.75.75 0 000-1.294l-7.25-4.25z" />
-              </svg>
-            </div>
-            <div className='pt-0.5'>Portfolio</div>
-          </div>
-        </div>
+        <NavLinks isDropDown={false}/>
         <div className='flex flex-column justify-end sm:w-full  md:w-1/3 '>
           <div className='flex items-center justify-center text-light-text-color  dark:text-white'>
             <Searchbar isSearch={true} defaultValue=''/>
@@ -44,7 +26,7 @@ export const Navbar = () => {
           <div className='flex justify-center items-center text-light-text-color dark:text-white'>
             <Currencyconverter/>
           </div>
-          <div className='flex justify-center items-center text-light-text-color dark:text-white'>
+          <div className=' justify-center items-center text-light-text-color dark:text-white hidden sm:flex'>
             <ThemeSwitcher height={20} width={20}/>
           </div>
         </div>
