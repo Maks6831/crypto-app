@@ -5,11 +5,10 @@ import React, { useEffect, useState } from 'react';
 export const NavLinks = ({isDropDown, param}: {isDropDown: boolean, param: string}) => {
     const [isHome, setIsHome] = useState(true);
     const pathname = usePathname();
+
     useEffect(()=>{
         pathname.includes('portfolio') ? setIsHome(false): setIsHome(true);
-        
     },[])
-
 
   return (
     <div className={`${isDropDown ? 'flex flex-col': 'hidden sm:flex'} justify-center items-center`}>
