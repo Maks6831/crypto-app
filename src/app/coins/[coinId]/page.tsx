@@ -1,5 +1,5 @@
 'use client';
 
-export default function Page({ params }: { params: {coinId: string}}) {
+export default function CoinPage({ params }: { params: {coinId: string}}) {
     return <div>My Post: {params.coinId}</div>
   }
