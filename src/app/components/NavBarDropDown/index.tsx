@@ -29,7 +29,7 @@ export const NavbarDropDown = () => {
             </svg>
             {dropDown && <div  className='absolute -left-16 top-7 rounded-xl bg-opacity-75 bg-light-button-color flex justify-center  p-1 w-24 z-50 dark:bg-dark-button-color flex-col'>
                 <NavLinks isDropDown={true} />
-                <div className=' border-2 flex justify-center items-center'>
+                <div className=' flex justify-center items-center h-12'>
                     <ThemeSwitcher height={12} width={18}/>
                 </div>
             </div>}

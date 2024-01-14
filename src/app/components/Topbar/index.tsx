@@ -27,7 +27,7 @@ export const Topbar = () => {
     
   return (
     <div className='w-full text-xs font-medium  bg-purpleb text-white  flex justify-center items-center dark:bg-purplea'>
-        <div className='flex  justify-center items-center m-2'>
+        <div className=' w-full  flex justify-between sm:justify-center  items-center m-2'>
             <div className='p-3'>Coins: {active_cryptocurrencies}</div>
             <div className='p-3'>Exchange: {markets}</div>
             <div className='p-3'>{symbol}{moneyConverter(total_market_cap[currency],2)}</div>

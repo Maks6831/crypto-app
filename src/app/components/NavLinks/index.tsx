@@ -2,7 +2,7 @@
 import { usePathname,  useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-export const NavLinks = ({isDropDown, param}: {isDropDown: boolean, param: string}) => {
+export const NavLinks = ({isDropDown}: {isDropDown: boolean}) => {
     const [isHome, setIsHome] = useState(true);
     const pathname = usePathname()
     const router = useRouter();
