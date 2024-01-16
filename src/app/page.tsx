@@ -36,7 +36,7 @@ export default function Home() {
       </div>
       {isCoin ? 
         <>
-          <div className='mb-2'>
+          <div className='mb-2 flex justify-center items-center'>
             <Carousel />
           </div>
           <div className='flex h-[25rem] w-full justify-center m-2'>

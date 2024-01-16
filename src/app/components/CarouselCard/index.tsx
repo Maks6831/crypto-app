@@ -28,9 +28,9 @@ export const CarouselCard = (
   }
   
   return (
-    <div onClick={selectCoin}  className={displayElement ? `m-1  w-72 h-20 rounded-md rd cursor-pointer ${selectClass()}`: 'hidden'}>
-      <div className='flex h-full w-full p-3 '>
-        <div className='flex items-center justify-center'>
+    <div onClick={selectCoin}  className={displayElement ? `m-1 h-14 w-72 md:h-20 rounded-md rd cursor-pointer ${selectClass()}`: 'hidden'}>
+      <div className='flex  h-full w-full p-0 lg:p-3 justify-center items-center '>
+        <div className='flex h-6 w-6 md:h-8 md:w-8 items-center justify-center'>
           <Image 
             src={source} 
             alt={name}
@@ -38,11 +38,12 @@ export const CarouselCard = (
             height={32}
           />
         </div>
-        <div className='flex flex-col pl-5 '>
-          <div className='flex justify-center items-center font-medium text-base'>{name}&nbsp;({symbol.toUpperCase()})</div>
-          <div className='flex flex-row-reverse text-sm'>
-            <div className='p-2 font-normal' style={{color: `${colorChange(percentageChange, theme)}`}}>{percentFormatter(percentageChange)}</div>
-            <div className='p-2 font-normal text-light-text-color dark:text-card-text-gray '>{currentPrice.toFixed(2)}&nbsp;{currency}</div>
+        <div className='flex flex-col p-0 pl-1 lg:p-1 md:pl-3 lg:pl-5 '>
+          <div className='justify-center items-center font-medium xl:text-base text-sm hidden md:flex '>{name}&nbsp;({symbol.toUpperCase()})</div>
+          <div className='text-xs sm:text-base md:hidden'>{symbol.toUpperCase()}</div>
+          <div className='flex justify-center items-center lg:flex-row-reverse xl:text-sm text-xs'>
+            <div className='md:px-0 lg:px-1 xl:px-2 py-2 whitespace-nowrap hidden lg:flex  font-normal' style={{color: `${colorChange(percentageChange, theme)}`}}>{percentFormatter(percentageChange)}</div>
+            <div className='md:px-0 lg:px-1 xl:px-2 py-2 font-normal text-light-text-color dark:text-card-text-gray hidden md:flex '>{currentPrice.toFixed(2)}&nbsp;{currency}</div>
           </div>
         </div>
       </div>
