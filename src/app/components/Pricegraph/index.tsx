@@ -1,7 +1,7 @@
 'use client';
 import { priceChart } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { useAppDispatch, useAppSelector } from '@/app/GlobalRedux/hooks';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Chart } from "react-chartjs-2";
 import { useTheme } from 'next-themes';
 import { labelFormatter } from '@/app/Utils/labelFormatter';
@@ -19,6 +19,7 @@ import {
   LineController,
   BarController,
 } from "chart.js";
+import { useScreenSize } from '@/app/Utils/useScreenSize';
 
 ChartJS.register(
   Tooltip,
@@ -36,6 +37,8 @@ export const Pricegraph = (props : GraphProps) => {
   const dispatch = useAppDispatch();
   const { symbol } = useAppSelector(state => state.currencyReducer);
   const { theme, setTheme } = useTheme();
+  const screenSize = useScreenSize();
+  const [tickSize, setTickSize] = useState<number>(10)
 
   const data = {
     labels: props.isLine ? labelFormatter(props.labels, props.days) : labelFormatter(props.labelsTwo, props.days),
@@ -61,6 +64,7 @@ export const Pricegraph = (props : GraphProps) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false, 
+    
     tooltips: {
       mode: 'index',
       intersect: false, 
@@ -75,6 +79,9 @@ export const Pricegraph = (props : GraphProps) => {
     scales :{
       x: {
         ticks: {
+          font: {
+              size: tickSize,
+          },
           maxTicksLimit: 7,
           maxRotation: 0,
           stepSize: props.isLine ? Math.ceil(props.labels.length/10) : Math.ceil(props.labelsTwo.length / 10)
@@ -89,9 +96,17 @@ export const Pricegraph = (props : GraphProps) => {
       },
     }
   }
+  useEffect(() => {
+    if(screenSize.width > 700 && tickSize !== 10){
+      setTickSize(10)
+    } else if(screenSize.width < 700 && tickSize !== 7) {
+      setTickSize(7);
+    }
+  }, [screenSize.width]);
+  
 
   return (
-    <div className=' w-full h-64 flex justify-center items-end p-2'>
+    <div className=' max-w-full sm:h-32 md:h-44 lg:h-64 flex justify-center items-end p-2'>
       <Chart
       type={props.isLine ? 'line' : 'bar'}
       data={data}
