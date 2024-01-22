@@ -106,7 +106,7 @@ export const Pricegraph = (props : GraphProps) => {
   
 
   return (
-    <div className=' max-w-full sm:h-32 md:h-44 lg:h-64 flex justify-center items-end  md:p-2'>
+    <div className=' max-w-full sm:h-44 lg:h-64 flex justify-center items-end  md:p-2'>
       <Chart
       type={props.isLine ? 'line' : 'bar'}
       data={data}
