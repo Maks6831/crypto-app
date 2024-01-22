@@ -39,12 +39,12 @@ export default function Home() {
           <div className='mb-2 flex justify-center items-center'>
             <Carousel />
           </div>
-          <div className='flex md:h-80 lg:h-[25rem] max-w-full justify-center m-2'>
-            <div className=' overflow-hidden min-w-80 m-2 p-6 bg-white-color rounded-xl sm:h-60 md:h-80  lg:h-[25rem] max-w-[37rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
+          <div className='flex h-48 md:h-80 lg:h-[25rem] max-w-full justify-center m-2'>
+            <div className=' overflow-hidden min-w-80 m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-60 md:h-80  lg:h-[25rem] max-w-[37rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
               <CoinInfoContainer isPrice={true} />
               <Pricegraph isLine={true} prices={prices} labels={labels} days={days}/>
             </div>
-            <div className=' overflow-hidden min-w-80 m-2 p-6 bg-white-color rounded-xl sm:h-60 md:h-80   lg:h-[25rem] max-w-[37rem] flex justify-center items-end relative dark:bg-volume-background'>
+            <div className=' overflow-hidden min-w-80 m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-60 md:h-80   lg:h-[25rem] max-w-[37rem] flex justify-center items-end relative dark:bg-volume-background'>
               <CoinInfoContainer isPrice={false} />
               <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
             </div>
