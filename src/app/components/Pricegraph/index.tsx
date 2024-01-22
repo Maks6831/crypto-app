@@ -97,9 +97,9 @@ export const Pricegraph = (props : GraphProps) => {
     }
   }
   useEffect(() => {
-    if(screenSize.width > 700 && tickSize !== 10){
+    if(screenSize. width && screenSize.width > 700 && tickSize !== 10){
       setTickSize(10)
-    } else if(screenSize.width < 700 && tickSize !== 7) {
+    } else if(screenSize. width &&  screenSize.width < 700 && tickSize !== 7) {
       setTickSize(7);
     }
   }, [screenSize.width]);
