@@ -28,8 +28,8 @@ export const CarouselCard = (
   }
   
   return (
-    <div onClick={selectCoin}  className={displayElement ? `m-1 h-14 w-72 md:h-20 rounded-md rd cursor-pointer ${selectClass()}`: 'hidden'}>
-      <div className='flex  h-full w-full p-0 lg:p-3 justify-center items-center '>
+    <div onClick={selectCoin}  className={displayElement ? `m-1 h-14 md:h-20 overflow-hidden w-full  rounded-md rd cursor-pointer ${selectClass()}`: 'hidden'}>
+      <div className='flex  h-full w-full p-0 md:p-2 justify-center items-center '>
         <div className='flex h-6 w-6 md:h-8 md:w-8 items-center justify-center'>
           <Image 
             src={source} 

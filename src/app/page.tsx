@@ -30,14 +30,14 @@ export default function Home() {
 
   return (
   <div>
-    <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen'>
+    <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen flex flex-col justify-center items-center '>
         <TitleHeader isNavbar={false} />
-      <div className='w-3/4 md:w-1/2  h-full flex justify-center flex-col'>
+      <div className='w-3/4 md:w-1/2  h-full flex justify-center items-center flex-col'>
         <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
       </div>
       {isCoin ? 
         <>
-          <div className='mb-2 flex justify-center items-center'>
+          <div className='sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12'>
             <Carousel />
           </div>
           <div className='flex flex-col  sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] max-w-full justify-center items-center m-2'>
@@ -49,9 +49,11 @@ export default function Home() {
               <CoinInfoContainer isPrice={false} />
               <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
             </div>
-            </div>
+          </div>
             <Wrapper>
-            <Timebar days={days}/>
+              <div className=' flex  w-full sm:ml-0 md:ml-10 lg:ml-28 xl:ml-44 justify-start '>
+                <Timebar days={days}/>
+              </div>
             </Wrapper>
         </>
         :

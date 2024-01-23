@@ -2,6 +2,6 @@ import React, { ReactComponentElement } from 'react'
 
 export const Wrapper = ({children} : any) => {
   return (
-    <div style={{maxWidth: '1240px'}} className='flex justify-center items-center'>{children}</div>
+    <div style={{maxWidth: '2000px'}} className='flex justify-center items-center'>{children}</div>
   )
 }
