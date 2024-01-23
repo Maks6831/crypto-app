@@ -30,11 +30,15 @@ export default function Home() {
 
   return (
   <div>
-    <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen flex flex-col justify-center items-center '>
-        <TitleHeader isNavbar={false} />
-      <div className='w-3/4 md:w-1/2  h-full flex justify-center items-center flex-col'>
-        <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
-      </div>
+    <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen flex flex-col justify-center items-center'>
+      <Wrapper>
+        <div className='w-full flex flex-col justify-center items-center'>
+          <TitleHeader isNavbar={false} />
+          <div className=' w-full md:w-10/12 h-full m-2 flex border-2  justify-center items-center md:items-start flex-col'>
+              <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
+          </div>
+        </div>
+      </Wrapper>
       {isCoin ? 
         <>
           <div className='sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12'>
