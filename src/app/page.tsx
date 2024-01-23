@@ -11,6 +11,7 @@ import { HomeConverter } from './components/HomeConverter';
 import { useAppDispatch, useAppSelector } from './GlobalRedux/hooks';
 import { priceChart } from './GlobalRedux/Features/Chartdata/priceSlice';
 import { TitleHeader } from './components/TitleHeader';
+import { Wrapper } from './components/Wrapper';
 
 export default function Home() {
   const [isCoin, setisCoin] = useState(true);
@@ -49,9 +50,9 @@ export default function Home() {
               <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
             </div>
             </div>
-            <div className='m-4 w-1/2 h-full flex justify-center'>
-              <Timebar days={days}/>
-            </div>
+            <Wrapper>
+            <Timebar days={days}/>
+            </Wrapper>
         </>
         :
         <>
