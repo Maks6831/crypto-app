@@ -29,46 +29,50 @@ export default function Home() {
   },[coin, currency, days])
 
   return (
-  <div>
-    <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen flex flex-col justify-center items-center'>
-      <Wrapper>
-        <div className='w-full flex flex-col justify-center items-center'>
-          <TitleHeader isNavbar={false} />
-          <div className=' w-full md:w-10/12 h-full m-2 flex border-2  justify-center items-center md:items-start flex-col'>
-              <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
-          </div>
-        </div>
-      </Wrapper>
-      {isCoin ? 
-        <>
-          <div className='sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12'>
-            <Carousel />
-          </div>
-          <div className='flex flex-col  sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] max-w-full justify-center items-center m-2'>
-            <div className=' overflow-hidden sm:min-w-80 h-[25rem]  max-w-90  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-60 md:h-80  lg:h-[25rem] sm:max-w-[37rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
-              <CoinInfoContainer isPrice={true} />
-              <Pricegraph isLine={true} prices={prices} labels={labels} days={days}/>
-            </div>
-            <div className=' overflow-hidden min-w-80 h-[25rem]  m-2 p-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-60 md:h-80   lg:h-[25rem] max-w-[37rem] flex justify-center items-end relative dark:bg-volume-background'>
-              <CoinInfoContainer isPrice={false} />
-              <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
+  <div className='flex justify-center items-center'>
+    <Wrapper>
+      <div className=' bg-light-background w-full dark:bg-dark-background min-h-screen flex flex-col justify-center items-center'>
+        <Wrapper>
+          <div className='w-full flex flex-col justify-center items-center'>
+            <TitleHeader isNavbar={false} />
+            <div className=' w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col'>
+                <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
             </div>
           </div>
+        </Wrapper>
+        {isCoin ? 
+          <>
+            <div className='sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12'>
+              <Carousel />
+            </div>
             <Wrapper>
-              <div className=' flex  w-full sm:ml-0 md:ml-10 lg:ml-28 xl:ml-44 justify-start '>
-                <Timebar days={days}/>
+              <div className='flex flex-col border-2 sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] w-10/12 justify-center items-center m-2'>
+                <div className=' overflow-hidden sm:min-w-80 h-[25rem]   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-60 md:h-80 w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
+                  <CoinInfoContainer isPrice={true} />
+                  <Pricegraph isLine={true} prices={prices} labels={labels} days={days}/>
+                </div>
+                <div className=' overflow-hidden min-w-80 h-[25rem]  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-60 md:h-80   lg:h-[25rem] w-1/2 flex justify-center items-end relative dark:bg-volume-background'>
+                  <CoinInfoContainer isPrice={false} />
+                  <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
+                </div>
               </div>
             </Wrapper>
-        </>
-        :
-        <>
-          <HomeConverter/>
-        </>
-        }
-      <div className='flex justify-center items-center'>
-        <Cointable/>
-      </div>
-    </div> 
+              <Wrapper>
+                <div className=' flex  w-full sm:ml-0 md:ml-10 lg:ml-28 xl:ml-44 justify-start '>
+                  <Timebar days={days}/>
+                </div>
+              </Wrapper>
+          </>
+          :
+          <>
+            <HomeConverter/>
+          </>
+          }
+        <div className='flex justify-center items-center'>
+          <Cointable/>
+        </div>
+      </div> 
+    </Wrapper>
   </div>
   )
 }
