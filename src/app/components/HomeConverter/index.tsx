@@ -28,10 +28,12 @@ export const HomeConverter = () => {
   },[prices])
 
   return (
-    <div className='m-3 flex justify-center items-center flex-col'>
-      <div className=' w-full h-14 ml-24 flex flex-col pl-20'>
-        <div className=' text-light-text-color font-medium text-xl dark:text-white '>Online Currency Converter</div>
-        <div className=' text-light-text-color text-opacity-80 font-normal text-base dark:text-dark-date-color'>{timeFormatter(date)} {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</div>
+    <div className='m-3 w-full flex justify-center items-center flex-col border-2 h-full '>
+      <div className=' w-full h-14 flex item-start '>
+        <div className='md:w-1/2 flex items-center justify-center flex-col m-5 '>
+          <div className=' text-light-text-color font-medium text-xl dark:text-white text-left   w-80 '>Online Currency Converter</div>
+          <div className=' text-light-text-color text-opacity-80 font-normal text-base text-left w-80   dark:text-dark-date-color'>{timeFormatter(date)} {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</div>
+        </div>
       </div>
       <div className='flex justify-center relative'>
       <div onClick={switchPair} className='w-12 h-12 absolute rounded-3xl  left-[40rem] top-2/4 bg-purpleb dark:bg-white flex justify-center items-center cursor-pointer'>
