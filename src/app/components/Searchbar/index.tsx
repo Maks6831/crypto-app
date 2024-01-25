@@ -104,7 +104,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
   },[focusedIndex]) 
 
   return (
-    <div key={defaultValue} tabIndex={1} onKeyDown={handleKeyDown} className='relative m-2 w-89 flex'>
+    <div key={defaultValue} tabIndex={1} onKeyDown={handleKeyDown} className={`relative m-2  border-2 flex`}>
         { isSearch ? 
           <div className='absolute left-2 top-3 '>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
@@ -113,7 +113,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
           </div> :
           <></>
         }
-        <label className={`h-12 rounded-xl leading-10 ${isSearch ? 'w-89': 'w-96'}`}>
+        <label className={`h-12 rounded-xl leading-10 ${isSearch ? 'w-89': 'w-full'}`}>
             <input  className={isSearch ? 'h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none' :'h-12 outline-none w-full dark:bg-inherit'}
              placeholder={isSearch ? 'Search...': ''} 
              type='text' 

@@ -23,7 +23,7 @@ useEffect(()=>{
 },[currency]);
   
   return (
-    <div className='m-2 flex items-center w-full justify-center relative border '>
+    <div className='m-2 flex items-center w-full justify-center relative '>
       <div className='ml-4 mr-4 flex items-center w-full justify-center  m-3 relative'>
         <button className='flex justify-center items-center w-8 h-8 md:w-12 md:h-12 rounded-full border bg-carousel-button-color-one bg-opacity-20 border-carousel-button-color-two border-opacity-25 shadow-lg shadow-carousel-button-color-two absolute -left-6 md:-left-10 dark:shadow-black' onClick={decreaseIndex}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
