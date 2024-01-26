@@ -1,6 +1,6 @@
-import { ConverterData, ConverterObject, ConverterTypes } from "@/app/types/ConverterData";
+import { ConverterData, ConverterObject, ConverterTypes, converterObjects } from "@/app/types/ConverterData";
 import { GetState } from "@/app/types/GetState";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { elementExtractor } from "@/app/Utils/elementsExtractor";
 
 export const converterData = createAsyncThunk(
@@ -60,13 +60,14 @@ const converterSlice = createSlice({
       })
       .addCase(converterData.fulfilled, (state, action) => {
         const array = action.payload;
-        const stateData = state.data.map(item => ({ ...item }));
+        const stateData : ConverterObject[] = current(state.data);
         array.forEach(obj=> {
-            const objectIndex = stateData.findIndex(currentObj => currentObj.time === obj.time);
+            const objectIndex = stateData.findIndex(currentObj => currentObj.time === obj.time && currentObj.id === obj.id);
             if(objectIndex === -1){
                 state.data.push(obj);
             }
         })
+        
         const [pricesOne, pricesTwo] = array.map(elementExtractor('prices', 1));
         const labels  = array.filter((obj, index) => index === 0).map(elementExtractor('prices', 0)).flat();
         const prices = pricesOne?.reduce((array: number[], priceOne: number, index: number) => {

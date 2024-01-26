@@ -23,10 +23,6 @@ export const HomeConverter = () => {
     dispatch(converterData({currency, array:coinArray, days: parseInt(days)}))
   },[coins, currency, days]);
 
-  useEffect(()=>{
-    console.log('prices have changed');
-  },[prices])
-
   return (
     <div className='m-3 w-full flex justify-center items-center flex-col  h-full relative '>
       <div className=' w-full h-14 flex item-start '>
@@ -52,13 +48,22 @@ export const HomeConverter = () => {
           ))}
         </div>
       </div>
-      <div className=' relative p-3 pr-4 flex flex-col justify-center items-start bg-white w-[81rem] h-72 rounded-xl dark:bg-light-text-color-two'>
+      <div className=' relative p-3 pr-4 flex flex-col justify-center items-start bg-white w-10/12 h-full rounded-xl dark:bg-light-text-color-two'>
         <div className='flex absolute top-1 left-5 justify-center items-center '>
-          <div className='m-1 p-1 font-normal dark:text-white text-xl'>{coins[0].name} ({coins[0].symbol})</div>
+          <div className='m-1 p-1 font-normal dark:text-white text-sm md:text-xl'>{coins && coins[0].name} ({coins[0].symbol})</div>
           <div className='m-1 p-1 dark:text-dark-date-color '>to</div>
-          <div className='m-1 p-1 font-normal dark:text-white text-xl'>{coins[1].name} ({coins[1].symbol})</div>
+          <div className='m-1 p-1 font-normal dark:text-white text-sm md:text-xl'>{coins && coins[1].name} ({coins[1].symbol})</div>
         </div>
-        {prices && <Pricegraph isLine={true} labels={labels} prices={prices} days={days}/>}
+        <div className='w-full'>
+        {prices && 
+          <Pricegraph 
+            isLine={true} 
+            labels={labels} 
+            prices={prices} 
+            days={days}
+          />
+        }
+      </div>
       </div>
       <div className='m-5'>
         <Timebar days={days}/>
