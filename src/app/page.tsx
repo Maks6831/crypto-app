@@ -46,14 +46,18 @@ export default function Home() {
               <Carousel />
             </div>
             <Wrapper>
-              <div className='flex flex-col sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] w-10/12 justify-center items-center m-2'>
-                <div className=' overflow-hidden sm:min-w-80 m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-40  md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
+              <div className='flex flex-col sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] w-10/12 justify-center items-center m-2 '>
+                <div className=' overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
                   <CoinInfoContainer isPrice={true} />
+                  <div className='h-1/2 md:h-max w-full flex items-end'>
                   <Pricegraph isLine={true} prices={prices} labels={labels} days={days}/>
+                  </div>
                 </div>
-                <div className=' overflow-hidden min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl sm:h-40 md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background'>
+                <div className=' overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background'>
                   <CoinInfoContainer isPrice={false} />
-                  <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
+                  <div className='h-1/2 md:h-max w-full flex items-end'>
+                    <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
+                  </div>
                 </div>
               </div>
             </Wrapper>
