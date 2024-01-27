@@ -31,7 +31,7 @@ export default function Home() {
   return (
   <div className='flex justify-center items-center dark:bg-dark-background bg-light-background '>
     <Wrapper>
-      <div className=' bg-light-background w-full  min-h-screen flex flex-col justify-center items-center'>
+      <div className='  w-full  min-h-screen flex flex-col justify-center items-center'>
         <Wrapper>
           <div className='w-full flex flex-col justify-center items-center'>
             <TitleHeader isNavbar={false} />
@@ -58,8 +58,8 @@ export default function Home() {
               </div>
             </Wrapper>
               <Wrapper>
-                <div className=' flex  w-full justify-start'>
-                  <div className=' w-full lg:w-1/2 flex justify-center '>
+                <div className=' flex  w-full justify-start mb-10 '>
+                  <div className=' w-full lg:w-1/2 flex justify-center  '>
                     <Timebar days={days}/>
                   </div>
                 </div>
