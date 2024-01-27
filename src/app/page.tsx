@@ -62,8 +62,8 @@ export default function Home() {
               </div>
             </Wrapper>
               <Wrapper>
-                <div className=' flex  w-full justify-start mb-10 '>
-                  <div className=' w-full lg:w-1/2 flex justify-center  '>
+                <div className=' flex  w-full  justify-start mb-10 '>
+                  <div className=' w-full  lg:w-1/2 flex justify-center  '>
                     <Timebar days={days}/>
                   </div>
                 </div>
