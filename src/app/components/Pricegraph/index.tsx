@@ -106,7 +106,7 @@ export const Pricegraph = (props : GraphProps) => {
   
 
   return (
-    <div className=' max-w-full w-full max-h-full h-full  sm:h-44 lg:h-64 flex justify-center items-end  md:p-2'>
+    <div className=' max-w-full w-full max-h-full h-full  sm:h-48 lg:h-64 flex justify-center items-end  md:p-2'>
       <Chart
       width={'100%'}
       height={'100%'}
