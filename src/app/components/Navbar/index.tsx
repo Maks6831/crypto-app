@@ -5,11 +5,13 @@ import { Searchbar } from '../Searchbar';
 import { NavbarDropDown } from '../NavBarDropDown';
 import { NavLinks } from '../NavLinks';
 import { TitleHeader } from '../TitleHeader';
+import { Wrapper } from '../Wrapper';
 
 
 export const Navbar = () => {
   return (
-    <nav className='w-full flex justify-center items-center h-20'>
+    <Wrapper>
+    <nav className='w-full flex justify-center items-center h-20 '>
       <div className=' lg:w-11/12 w-full flex min-h-full items-center justify-between flex-column mr-3'>
         <TitleHeader isNavbar={true}/>
         <NavLinks isDropDown={false}/>
@@ -27,5 +29,6 @@ export const Navbar = () => {
         <NavbarDropDown/>
       </div>
     </nav>
+    </Wrapper>
   )
 }
