@@ -2,41 +2,41 @@ import React from 'react'
 
 export const CoinCard = () => {
   return (
-    <div className=' w-11/12 h-full dark:bg-purplea rounded-xl flex flex-col'>
-        <div className='border-2 h-1/2'>
-            <div className='border-2 h-1/2 w-full flex items-center p-2'>
+    <div className=' w-11/12 h-full dark:bg-purplea rounded-xl flex flex-col p-2'>
+        <div className=' h-3/5 p-2 '>
+            <div className=' h-1/2 w-full flex items-center p-2'>
                 <div className='h-12 w-12 border-2'>Image</div>
                 <div className='m-2'>
-                    <div className='text-2xl font-bold '>Bitcoin (BTC)</div>
-                    <div className='font-medium text-base'>www.bitcoin.org</div>
+                    <div className='xl:text-xl lg:text-2xl md:text-lg sm:text-base text-sm font-bold '>Bitcoin (BTC)</div>
+                    <div className='font-medium xl:text-base lg:text-lg md:text-md sm:text-sm text-xs'>www.bitcoin.org</div>
                 </div>
             </div>
-            <div className='border-2 h-1/2 w-full'>
-                <div className='flex justify-start items-center'>
-                    <div className='text-4xl font-bold p-1'>$40,017</div>
-                    <div className='font-medium text-xl p-1'>^5.02%</div>
+            <div className=' h-1/2 w-full border-b border-opacity-25 border-card-text-gray flex flex-col justify-center '>
+                <div className='flex justify-start items-center p-1'>
+                    <div className='xl:text-3xl lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold p-1'>$40,017</div>
+                    <div className='font-medium xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs p-1'>^5.02%</div>
                 </div>
                 <div className='flex justify-start items-center'>
-                    <div className='text-xl p-1'>profit:</div>
-                    <div className='text-xl p-1'>$1,504</div>
+                    <div className='xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs p-1'>profit:</div>
+                    <div className='xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs p-1'>$1,504</div>
                 </div>
             </div>
         </div>
         
-        <div className='border-2 h-1/2'>
-            <div className='border-2 h-1/2 w-full'>
+        <div className=' h-2/5 p-2'>
+            <div className=' h-1/2 w-full flex flex-col justify-center '>
                 <div className='flex justify-between w-full '>
-                    <div>All time high:</div>
-                    <div>$64,805</div>3
+                    <div className='xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs'>All time high:</div>
+                    <div className='xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm'>$64,805</div>
                 </div>
-                <div>Wed, 14 Sep 2023 11:54:46 GMT</div>
+                <div className='text-card-text-gray xl:text-base lg:text-lg md:text-md sm:text-sm text-xs'>Wed, 14 Sep 2023 11:54:46 GMT</div>
             </div>
-            <div className='border-2 h-1/2 w-full'>
+            <div className='h-1/2 w-full flex flex-col justify-center'>
             <div className='flex justify-between w-full '>
-                    <div>All time low:</div>
-                    <div>$64,805</div>
+                    <div className='xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs'>All time low:</div>
+                    <div className='xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm'>$64,805</div>
                 </div>
-                <div>Wed, 14 Sep 2023 11:54:46 GMT</div>
+                <div className='text-card-text-gray xl:text-base lg:text-lg md:text-md sm:text-sm text-xs'>Wed, 14 Sep 2023 11:54:46 GMT</div>
             </div>  
         </div>
     </div>
