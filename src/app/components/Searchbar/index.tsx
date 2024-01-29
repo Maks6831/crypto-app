@@ -127,7 +127,7 @@ export const Searchbar = ({isSearch, defaultValue}: {isSearch: boolean, defaultV
         {throwError &&  <div className='absolute left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  '>Error {error}</div>}
         {displayLoading && <div className={ `p-2 left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${isSearch ? 'top-14':'top-16'}`}>Loading...</div>}
         {rightData && 
-        <div ref={refOne}  className=' p-1 absolute left-0 top-14 bg-light-button-color bg-scroll bg-opacity-60  w-full rounded-xl z-50 dark:bg-dark-button-color scrollbar-thin scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
+        <div ref={refOne}  className=' p-2 absolute left-0 top-14 bg-light-button-color  bg-scroll bg-opacity-60 scrollbar-track-transparent scrollbar-track-rounded-xl scrollbar scrollbar-h-24 scrollbar-thumb-light-button-color scroll-smooth scrollbar-thumb-rounded-xl  w-full rounded-xl z-50 dark:bg-dark-button-color  max-h-44 overflow-x-hidden overflow-y-auto m-1  '>
           {data.map((element, index)=> (
             <div data-index={index} onMouseEnter={changeIndex} className=' cursor-pointer' onClick={isSearch ? searchCoin : setValue} key={element.id} ref={index === focusedIndex ? resultContainer : null}>
             <SearchItem
