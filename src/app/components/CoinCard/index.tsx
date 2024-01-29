@@ -24,8 +24,20 @@ export const CoinCard = () => {
         </div>
         
         <div className='border-2 h-1/2'>
-            <div className='border-2 h-1/2 w-full'></div>
-            <div className='border-2 h-1/2 w-full'></div>
+            <div className='border-2 h-1/2 w-full'>
+                <div className='flex justify-between w-full '>
+                    <div>All time high:</div>
+                    <div>$64,805</div>3
+                </div>
+                <div>Wed, 14 Sep 2023 11:54:46 GMT</div>
+            </div>
+            <div className='border-2 h-1/2 w-full'>
+            <div className='flex justify-between w-full '>
+                    <div>All time low:</div>
+                    <div>$64,805</div>
+                </div>
+                <div>Wed, 14 Sep 2023 11:54:46 GMT</div>
+            </div>  
         </div>
     </div>
   )
