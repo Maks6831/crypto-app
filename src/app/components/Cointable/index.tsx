@@ -28,16 +28,16 @@ export const Cointable = () => {
   },[coins])
   
   return (
-    <div>
+    <div className='flex justify-center items-center w-full '>
       <InfiniteScroll
             dataLength={dataLength}
             next={onScroll}
             hasMore={true}
             loader={<h4>Loading...</h4>}
           >   
-      <table className='w-[83rem] border-separate border-spacing-y-5'>
+      <table className='w-full mx-auto border-separate border-spacing-y-3'>
         <TableHeader/>
-        <tbody>
+        <tbody className='w-full'>
           {coins &&
           coins.map((coin, index) => (
               <TableElement

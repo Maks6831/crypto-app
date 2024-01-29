@@ -87,8 +87,10 @@ export const Sparkline = ({sparklineData, change7d, number} : {sparklineData: nu
 
       
   return (
-    <td className='pr-3 rounded-r-xl w-40 h-16'>
+    <td className='  bg-white dark:bg-dark-card  flex justify-center items-center  pr-3 rounded-r-xl w-28 sm:w-36  h-20 '>
+      <div className='w-full max-w-full max-h-full h-full   flex justify-center items-center  '>
         <Chart type='line'data={data} options={options} style={{height:'100%', width: '100%'}}/>
+      </div>
     </td>
   )
 }

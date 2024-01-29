@@ -18,11 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className='flex flex-col justify-center items-center dark:bg-dark-background bg-light-background'>
         <ProvidersTwo>
           <Providers>
             <Topbar/>
-            <Navbar/>
+            <div className='w-full flex justify-center items-center  bg-white dark:bg-dark-background '>
+              <Navbar/>
+            </div>
             {children}
           </Providers>
         </ProvidersTwo>
