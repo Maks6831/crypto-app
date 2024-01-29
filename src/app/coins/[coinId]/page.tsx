@@ -1,6 +1,7 @@
 'use client';
 import { CoinCard } from "@/app/components/CoinCard";
 
+<<<<<<< HEAD
 export default function Page({ params }: { params: {coinId: string}}) {
     return <div style={{maxWidth: '1300px'}} className="border-2 h-screen flex p-1 w-full">
       <div className="border-2 flex w-full p-3 h-full ">
@@ -14,4 +15,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
       </div>
       
     </div>
+=======
+export default function CoinPage({ params }: { params: {coinId: string}}) {
+    return <div>My Post: {params.coinId}</div>
+>>>>>>> main
   }

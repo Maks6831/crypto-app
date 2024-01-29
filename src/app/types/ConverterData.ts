@@ -22,3 +22,15 @@ export interface ConvertionData {
     second: string;
     prices : Array<number[]>;
 }
+
+export const converterObjects: ConverterObject[] = [
+    {
+        id: "1",
+        time: 1643222400,
+        data: {
+            prices: [[100, 1643222400], [105, 1643222500]], 
+            market_caps: [[5000000, 1643222400], [5100000, 1643222500]],
+            total_volumes: [[2000000, 1643222400], [2050000, 1643222500]] 
+        }
+    }
+];
