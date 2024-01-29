@@ -1,6 +1,8 @@
 import React from 'react'
 
 export const UrlContainer = ({url}: {url:string}) => {
+
+
   return (
     <div className='w-max  h-max p-1 m-1 flex justify-center items-center dark:bg-purplea rounded-xl'>
         <div>{url}</div>
