@@ -4,7 +4,7 @@ export const UrlContainer = ({url}: {url:string}) => {
 
 
   return (
-    <div className='w-max  h-max p-1 m-1 flex justify-center items-center dark:bg-purplea rounded-xl'>
+    <div className='w-max md:text-base text-sm   h-max p-1 m-1 flex justify-center items-center dark:bg-purplea rounded-xl'>
         <div>{url}</div>
         <div className='p-1'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
