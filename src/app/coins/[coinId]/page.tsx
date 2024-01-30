@@ -30,8 +30,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
   
    return <Wrapper>
           <div className="min-h-screen w-full m-4">
-            <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch border-2 w-full p-3 h-1/2 md:max-h-[30rem]  ">
-              <div className=" w-10/12 md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
+            <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch  w-full p-3 h-1/2 md:max-h-[30rem]  ">
+              <div className=" w-full min-[400px]:w-10/12 md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
                 <CoinCard/>
               </div>
               <div className="w-10/12 md:w-7/12 m-2 min-h-full flex flex-col justify-start">
@@ -51,16 +51,16 @@ export default function Page({ params }: { params: {coinId: string}}) {
                 </div>
               </div>
             </div>
-            <div className="card m-2 section flex flex-col justify-center items-center   min-h-[40rem]">
+            <div className="card m-2 section flex flex-col justify-start items-center  min-h-[40rem]">
                 <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
-                  <div className="h-full w-full md:w-1/2 m-2 flex  justify-center items-center ">
+                  <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
                     {firstCard &&
                     <DataCard
                       data={firstCard}
                     />
                   }
                   </div>
-                  <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center  ">
+                  <div className="h-full w-full md:w-1/2 m-2 flex  justify-center items-center  ">
                     {
                       secondCard &&
                       <DataCard
@@ -69,14 +69,15 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     }
                   </div>
                 </div>
-                <div className=" w-11/12 md:w-full h-1/2 m-2  flex ">
-                  <div className="h-full w-full md:w-1/2   flex justify-center items-start ">
+                <div className=" w-11/12 md:w-full h-1/2 md:m-3   flex flex-col md:flex-row justify-center items-center">
+                  <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
                     {thirdCard &&
                     <DataCard
                       data={thirdCard}
                     />
                   }
                   </div>
+                  <div className="h-full w-full md:w-1/2 m-2  bflex justify-center items-center "></div>
                 </div>
               </div>
           </div>

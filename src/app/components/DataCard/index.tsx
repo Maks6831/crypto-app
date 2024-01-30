@@ -3,7 +3,7 @@ import React from 'react';
 
 export const DataCard = ({data} : {data: string[][]}) => {
   return (
-    <div className=" bg-purplea rounded-xl max-h-5/6 w-11/12">
+    <div className=" bg-purplea rounded-xl max-h-5/6 w-full">
                       <div className="flex flex-col min-[430px]:flex-row justify-between w-full h-1/3  items-center p-3 min-[430px]:p-5">
                         <div className="flex justify-center items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
