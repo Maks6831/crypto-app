@@ -38,7 +38,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
                 <div  className="p-3 min-h-3/5 max-h-[20rem] text-sm  bg-scroll scrollbar  scrollbar-track-transparent  scrollbar-thumb-purplea scrollbar-h-24 overflow-y-scroll">
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra </p>
                 </div>
-                <div className=" border-2   w-full flex flex-wrap content-end items-center">
+                <div className="  w-full flex flex-wrap content-end items-center justify-center md:justify-start">
                   {websiteNames && 
                   websiteNames.map((el)=> (
                     <UrlContainer
@@ -51,16 +51,16 @@ export default function Page({ params }: { params: {coinId: string}}) {
                 </div>
               </div>
             </div>
-            <div className="card m-2 section  h-[40rem]">
-                <div className="w-full h-1/2  flex ">
-                  <div className="h-full w-1/2  flex justify-center items-center ">
+            <div className="card m-2 section flex flex-col justify-center items-center   min-h-[40rem]">
+                <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
+                  <div className="h-full w-full md:w-1/2 m-2 flex  justify-center items-center ">
                     {firstCard &&
                     <DataCard
                       data={firstCard}
                     />
                   }
                   </div>
-                  <div className="h-full w-1/2  flex justify-center items-center  ">
+                  <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center  ">
                     {
                       secondCard &&
                       <DataCard
@@ -69,8 +69,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     }
                   </div>
                 </div>
-                <div className="w-full h-1/2  flex ">
-                  <div className="h-full w-1/2  flex justify-center items-start ">
+                <div className=" w-11/12 md:w-full h-1/2 m-2  flex ">
+                  <div className="h-full w-full md:w-1/2   flex justify-center items-start ">
                     {thirdCard &&
                     <DataCard
                       data={thirdCard}
