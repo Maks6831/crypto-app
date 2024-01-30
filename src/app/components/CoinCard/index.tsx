@@ -2,7 +2,7 @@ import React from 'react'
 
 export const CoinCard = () => {
   return (
-    <div className=' w-11/12 h-full  bg-carousel-button-color-two bg-opacity-40 dark:bg-purplea rounded-xl flex flex-col p-2'>
+    <div className=' w-11/12 h-full shadow-lg  bg-carousel-button-color-two bg-opacity-40 dark:bg-purplea rounded-xl flex flex-col p-2'>
         <div className=' h-3/5 md:p-2  w-full '>
             <div className=' h-1/2 w-full flex flex-row-reverse md:flex-row md:justify-start justify-around  items-center    p-2'>
                 <div className=' h-20 w-20 md:h-12 md:w-12 '>Image</div>
