@@ -18,7 +18,14 @@ export default function Page({ params }: { params: {coinId: string}}) {
 
   const secondCard = [
     ["Max Supply", "21,000,000 BTC"],
-    ["Circulating Supply", "18,734,943 BTC"]
+    ["Circulating Supply", "18,734,943 BTC"],
+    ['progressbar', 'progressbar']
+  ]
+
+  const thirdCard = [
+    ['Market Cap', '$749,864,345,056'],
+    ['Fully Diluted Valuation', '$840,523,040,085'],
+    []
   ]
   
    return <Wrapper>
@@ -53,24 +60,24 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     />
                   }
                   </div>
-                  <div className="h-full w-1/2  flex justify-center items-center border-2 ">
-                    <div className=" bg-purplea rounded-xl h-5/6 w-11/12">
-                      <div className="flex justify-between w-full h-1/3 items-center p-5">
-                        <div>Max Supply</div>
-                        <div>21,000,000 BTC</div>
-                      </div>
-                      <div className="flex justify-between w-full h-1/3  items-center p-5 ">
-                        <div>Circulating Supply</div>
-                        <div>18,734,943 BTC</div>
-                      </div>
-                      <div className="flex justify-between w-full h-1/3   items-center p-5">
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
+                  <div className="h-full w-1/2  flex justify-center items-center  ">
+                    {
+                      secondCard &&
+                      <DataCard
+                      data={secondCard}
+                      />
+                    }
                   </div>
                 </div>
-                <div></div>
+                <div className="w-full h-1/2  flex ">
+                  <div className="h-full w-1/2  flex justify-center items-start ">
+                    {thirdCard &&
+                    <DataCard
+                      data={thirdCard}
+                    />
+                  }
+                  </div>
+                </div>
               </div>
           </div>
           </Wrapper>
