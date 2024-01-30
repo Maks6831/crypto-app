@@ -29,13 +29,13 @@ export default function Page({ params }: { params: {coinId: string}}) {
   ]
   
    return <Wrapper>
-          <div className="h-screen m-4">
-            <div className="flex w-full p-3 h-1/2  ">
-              <div className=" w-5/12 m-2 min-h-full flex justify-center  items-center">
+          <div className="min-h-screen w-full m-4">
+            <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch border-2 w-full p-3 h-1/2 md:max-h-[30rem]  ">
+              <div className=" w-10/12 md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
                 <CoinCard/>
               </div>
               <div className="w-7/12 m-2 min-h-full flex flex-col justify-start">
-                <div  className="p-3 min-h-3/5 text-sm  bg-scroll scrollbar  scrollbar-track-transparent  scrollbar-thumb-purplea scrollbar-h-24 overflow-y-scroll">
+                <div  className="p-3 min-h-3/5 max-h-[20rem] text-sm  bg-scroll scrollbar  scrollbar-track-transparent  scrollbar-thumb-purplea scrollbar-h-24 overflow-y-scroll">
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla augue ligula, viverra id cursus eu, imperdiet non odio. Phasellus nec dignissim felis, eu accumsan enim. Morbi rutrum justo iaculis lectus viverra </p>
                 </div>
                 <div className="h-1/5 m-1 w-full flex flex-wrap content-end items-center">
