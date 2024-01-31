@@ -35,7 +35,6 @@ export default function Page({ params }: { params: {coinId: string}}) {
   ]
 
   useEffect(()=>{
-    console.log(params.coinId);
     dispatch(coinPageData(params.coinId))
   },[])
   useEffect(()=>{
@@ -46,7 +45,9 @@ export default function Page({ params }: { params: {coinId: string}}) {
           <div className="min-h-screen w-full m-4">
             <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch  w-full p-3 h-1/2 md:max-h-[30rem]  ">
               <div className=" w-full min-[400px]:w-10/12 md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
-                <CoinCard/>
+                <CoinCard
+                isPortfolio={false}
+                />
               </div>
               <div className="w-10/12 md:w-7/12 m-2 min-h-full flex flex-col justify-start">
                 <div  className="p-3 min-h-3/5 max-h-[20rem] text-sm  bg-scroll scrollbar  scrollbar-track-transparent scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-scroll">

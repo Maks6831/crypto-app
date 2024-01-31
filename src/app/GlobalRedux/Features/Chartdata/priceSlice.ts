@@ -6,6 +6,7 @@ export const priceChart = createAsyncThunk(
     async({currency, coinId, days}: {currency: string, coinId: string, days: string}, thunkAPI) =>{
         const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
+        console.log(process.env.NEXT_PUBLIC_API_KEY)
         const json = await response.json();
         return json;
     }
