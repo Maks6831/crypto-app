@@ -169,9 +169,9 @@ export const coinPage: CoinPageType = {
         }
     },
     image: {
-        thumb: "https://example.com/thumb.png",
-        small: "https://example.com/small.png",
-        large: "https://example.com/large.png"
+        thumb: "",
+        small: "",
+        large: ""
     },
     country_origin: "Country",
     genesis_date: null,

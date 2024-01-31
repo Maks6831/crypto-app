@@ -1,11 +1,34 @@
-import React from 'react'
+'use client';
+import React from 'react';
+import {  useAppSelector } from "@/app/GlobalRedux/hooks";
+import Image from 'next/image';
+
+
 
 export const CoinCard = () => {
-  return (
+    const { data } = useAppSelector(state => state.coinPageReducer);
+    const {currency, symbol } = useAppSelector(state => state.currencyReducer);
+    const name = data.name;
+    const homepage = data.links.homepage[0];
+    const image = data.image.small;
+    const currentPrice = data.market_data.current_price[currency];
+    const athPrice = data.market_data.ath[currency];
+    const athData = data.market_data.ath_date[currency];
+    const atlPrice = data.market_data.atl[currency];
+    const atlData = data.market_data.atl_date[currency];
+
+return (
     <div className=' w-11/12 h-full shadow-lg  bg-carousel-button-color-two bg-opacity-40 dark:bg-purplea rounded-xl flex flex-col p-2'>
         <div className=' h-3/5 md:p-2  w-full '>
             <div className=' h-1/2 w-full flex flex-row-reverse md:flex-row md:justify-start justify-around  items-center    p-2'>
-                <div className=' h-20 w-20 md:h-12 md:w-12 '>Image</div>
+                <div className=' h-20 w-20 md:h-12 md:w-12 '>
+                    <Image
+                    alt='symbol'
+                    src={image}
+                    width={32}
+                    height={32} 
+                    />
+                </div>
                 <div className=' m-0 md:m-2'>
                     <div className='xl:text-xl lg:text-2xl md:text-lg sm:text-base text-sm font-bold '>Bitcoin (BTC)</div>
                     <div className='font-medium xl:text-base lg:text-lg md:text-md sm:text-sm text-xs text-light-text-color dark:text-card-text-gray'>www.bitcoin.org</div>

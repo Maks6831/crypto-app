@@ -3,8 +3,14 @@ import { CoinCard } from "@/app/components/CoinCard";
 import { Wrapper } from "@/app/components/Wrapper";
 import { UrlContainer } from "../../components/UrlContainer";
 import { DataCard } from "@/app/components/DataCard";
+import { useAppDispatch, useAppSelector } from "@/app/GlobalRedux/hooks";
+import { useEffect } from "react";
+import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice";
 
 export default function Page({ params }: { params: {coinId: string}}) {
+  const dispatch  = useAppDispatch();
+  const { data } = useAppSelector(state => state.coinPageReducer);
+ 
   const websiteNames = [
     "www.TechTrailblaze.com",
     "www.EcoHarmonyHub.com",
@@ -27,6 +33,14 @@ export default function Page({ params }: { params: {coinId: string}}) {
     ['Fully Diluted Valuation', '$840,523,040,085'],
     []
   ]
+
+  useEffect(()=>{
+    console.log(params.coinId);
+    dispatch(coinPageData(params.coinId))
+  },[])
+  useEffect(()=>{
+    console.log(data)
+  },[data])
   
    return <Wrapper>
           <div className="min-h-screen w-full m-4">
