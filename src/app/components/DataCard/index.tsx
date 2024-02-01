@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export const DataCard = ({data} : {data: string[][]}) => {
+export const DataCard = ({data} : {data: (string | number)[][]}) => {
   return (
     <div className=" shadow-lgbg-coin-card-color bg-opacity-30 dark:bg-purplea rounded-xl max-h-5/6 w-full">
                       <div className="flex flex-col min-[430px]:flex-row justify-between w-full h-1/3  items-center p-3 min-[430px]:p-5">

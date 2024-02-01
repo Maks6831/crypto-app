@@ -11,25 +11,27 @@ import { coinPage } from "@/app/types/CoinPageTypes";
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
   const { data } = useAppSelector(state => state.coinPageReducer);
+  const { currency } = useAppSelector(state => state.currencyReducer);
+  const dataChecker = data != coinPage;
   const description = data.description.en;
  
-  const websiteNames = data != coinPage && data.links.blockchain_site.slice(0,3);
+  const websiteNames = dataChecker && data.links.blockchain_site.slice(0,3);
 
-  const firstCard = [
-    ["Total Volume", "1,192,352 BTC"],
-    ["Volume 24h", "$47,714,337,481C"],
-    ["Volume/Market", "0.06363"]
+  const firstCard =  dataChecker && [
+    ["Total Volume", data.market_data.total_volume['btc']],
+    ["Volume 24h", data.ticker],
+    ["Volume/Market", 30]
   ];
 
   const secondCard = [
-    ["Max Supply", "21,000,000 BTC"],
-    ["Circulating Supply", "18,734,943 BTC"],
+    ["Max Supply", 30],
+    ["Circulating Supply", 30],
     ['progressbar', 'progressbar']
   ]
 
   const thirdCard = [
-    ['Market Cap', '$749,864,345,056'],
-    ['Fully Diluted Valuation', '$840,523,040,085'],
+    ['Market Cap', 30],
+    ['Fully Diluted Valuation', 30],
     []
   ]
 
@@ -54,7 +56,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
                 </div>
                 <div className="  w-full flex flex-wrap content-end items-center justify-center md:justify-start m-1">
                   {websiteNames && 
-                  websiteNames.map((el)=> (
+                  websiteNames.map((el:string)=> (
                     <UrlContainer
                     key={el}
                     url={el} 
@@ -68,7 +70,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
             <div className="card m-2 section flex flex-col justify-start items-center  min-h-[40rem]">
                 <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
                   <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
-                    {firstCard &&
+                    {firstCard && dataChecker &&
                     <DataCard
                       data={firstCard}
                     />

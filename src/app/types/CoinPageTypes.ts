@@ -1,4 +1,4 @@
-export interface CoinPageType {
+export interface CoinPageTypes {
     id:                              string;
     symbol:                          string;
     name:                            string;
@@ -26,6 +26,7 @@ export interface CoinPageType {
     community_data:                  CommunityData;
     status_updates:                  any[];
     last_updated:                    Date;
+    tickers:                         Ticker[];
 }
 
 export interface CommunityData {
@@ -49,6 +50,10 @@ export interface DetailPlatforms {
 export interface Ethereum {
     decimal_place:    number;
     contract_address: string;
+}
+
+export enum ID {
+    ShibaInu = "shiba-inu",
 }
 
 export interface Image {
@@ -127,59 +132,87 @@ export interface Platforms {
     ethereum: string;
 }
 
-export const coinPage: CoinPageType = {
-    id: "some_id",
-    symbol: "SYM",
-    name: "CoinName",
-    web_slug: "coin-name",
-    asset_platform_id: "eth",
+export interface Ticker {
+    base:                      string;
+    target:                    string;
+    market:                    Market;
+    last:                      number;
+    volume:                    number;
+    converted_last:            { [key: string]: number };
+    converted_volume:          { [key: string]: number };
+    trust_score:               string;
+    bid_ask_spread_percentage: number;
+    timestamp:                 Date;
+    last_traded_at:            Date;
+    last_fetch_at:             Date;
+    is_anomaly:                boolean;
+    is_stale:                  boolean;
+    trade_url:                 null | string;
+    token_info_url:            null | string;
+    coin_id:                   ID;
+    target_coin_id?:           string;
+}
+
+
+export interface Market {
+    name:                  string;
+    identifier:            string;
+    has_trading_incentive: boolean;
+}
+
+export const coinPage : CoinPageTypes = {
+    id: "shiba-inu",
+    symbol: "SHIB",
+    name: "Shiba Inu",
+    web_slug: "shiba-inu",
+    asset_platform_id: "ethereum",
     platforms: {
-        ethereum: "eth-address"
+        ethereum: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
     },
     detail_platforms: {
         ethereum: {
             decimal_place: 18,
-            contract_address: "0x1234567890abcdef"
-        }
+            contract_address: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+        },
     },
-    block_time_in_minutes: 10,
+    block_time_in_minutes: 15,
     hashing_algorithm: null,
-    categories: ["Crypto", "Blockchain"],
-    preview_listing: false,
+    categories: ["memecoin"],
+    preview_listing: true,
     public_notice: null,
     additional_notices: [],
     description: {
-        en: "Description of the coin."
+        en: "Shiba Inu is a meme coin inspired by the Shiba dog.",
     },
     links: {
-        homepage: ["https://example.com"],
-        whitepaper: "https://whitepaper.example.com",
-        blockchain_site: ["https://blockchain.example.com"],
-        official_forum_url: ["https://forum.example.com"],
-        chat_url: ["https://chat.example.com"],
-        announcement_url: ["https://announcement.example.com"],
-        twitter_screen_name: "coin_twitter",
-        facebook_username: "coin_facebook",
+        homepage: ["https://shiba-token.com/"],
+        whitepaper: "https://shiba-token.com/whitepaper",
+        blockchain_site: ["https://etherscan.io/token/0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE"],
+        official_forum_url: ["https://community.shiba-token.com/"],
+        chat_url: ["https://t.me/shibatoken"],
+        announcement_url: ["https://shiba-token.com/news"],
+        twitter_screen_name: "shiba",
+        facebook_username: "shibatoken",
         bitcointalk_thread_identifier: null,
-        telegram_channel_identifier: "coin_telegram",
-        subreddit_url: "https://reddit.com/r/coin",
+        telegram_channel_identifier: "shibatoken",
+        subreddit_url: "https://www.reddit.com/r/ShibaToken/",
         repos_url: {
-            github: [],
-            bitbucket: []
-        }
+            github: ["https://github.com/ShibaToken"],
+            bitbucket: [],
+        },
     },
     image: {
         thumb: "",
         small: "",
-        large: ""
+        large: "",
     },
-    country_origin: "Country",
+    country_origin: "Japan",
     genesis_date: null,
-    contract_address: "0x1234567890abcdef",
-    sentiment_votes_up_percentage: 70,
-    sentiment_votes_down_percentage: 30,
-    watchlist_portfolio_users: 1000,
-    market_cap_rank: 1,
+    contract_address: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+    sentiment_votes_up_percentage: 75,
+    sentiment_votes_down_percentage: 25,
+    watchlist_portfolio_users: 100000,
+    market_cap_rank: 42,
     market_data: {
         current_price: {
             usd: 100.0,
@@ -313,14 +346,44 @@ export const coinPage: CoinPageType = {
     },
     community_data: {
         facebook_likes: null,
-        twitter_followers: 50000,
-        reddit_average_posts_48h: 10,
-        reddit_average_comments_48h: 50,
-        reddit_subscribers: 20000,
-        reddit_accounts_active_48h: 5000,
-        telegram_channel_user_count: 1000
+        twitter_followers: 500000,
+        reddit_average_posts_48h: 50,
+        reddit_average_comments_48h: 100,
+        reddit_subscribers: 200000,
+        reddit_accounts_active_48h: 30000,
+        telegram_channel_user_count: 150000,
     },
     status_updates: [],
-    last_updated: new Date()
+    last_updated: new Date(),
+    tickers: [
+        {
+            base: "SHIB",
+            target: "USDT",
+            market: {
+                name: "Binance",
+                identifier: "binance",
+                has_trading_incentive: true,
+            },
+            last: 0.00001,
+            volume: 1000000,
+            converted_last: {
+                USDT: 0.00001,
+            },
+            converted_volume: {
+                USDT: 10,
+            },
+            trust_score: "green",
+            bid_ask_spread_percentage: 0.1,
+            timestamp: new Date(),
+            last_traded_at: new Date(),
+            last_fetch_at: new Date(),
+            is_anomaly: false,
+            is_stale: false,
+            trade_url: "https://www.binance.com/en/trade/SHIB_USDT",
+            token_info_url: "https://coinmarketcap.com/currencies/shiba-inu/",
+            coin_id: ID.ShibaInu,
+            target_coin_id: "tether",
+        },
+    ],
 };
 
