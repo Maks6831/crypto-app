@@ -43,7 +43,7 @@ export const DataCard = ({data, isProgress} : {data: (string | number)[][], isPr
                           percentage={+data[2][1]}
                           color={theme === 'dark' ? 'rgb(212,119,12)': 'rgb(99, 143, 254)'}
                           size='min-w-full h-2'
-                          backgroundColor='bg-white'
+                          backgroundColor={theme === 'dark' ? 'bg-coin-page-progress-two' : 'bg-blue-100'}
                           />
                         </div>
                       </div>
