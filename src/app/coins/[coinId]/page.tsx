@@ -6,19 +6,18 @@ import { DataCard } from "@/app/components/DataCard";
 import { useAppDispatch, useAppSelector } from "@/app/GlobalRedux/hooks";
 import { useEffect } from "react";
 import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice";
-import { coinPage } from "@/app/types/CoinPageTypes";
+import { coinPage, dummyData, isProgressData } from "@/app/types/CoinPageTypes";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
   const { data } = useAppSelector(state => state.coinPageReducer);
   const { currency, symbol } = useAppSelector(state => state.currencyReducer);
-  const dataChecker = data != coinPage;
+  const dataChecker = data !== coinPage;
   const description = data.description.en;
- 
   const websiteNames = dataChecker && data.links.blockchain_site.slice(0,3);
-
-  const {total_volume, market_cap, max_supply, circulating_supply, fully_diluted_valuation} = data.market_data
+  const {total_volume, market_cap, total_supply, circulating_supply, fully_diluted_valuation} = data.market_data;
+  const volumeOverMarket: number = dataChecker ? (circulating_supply/total_supply) * 100 : 0
 
   const firstCard =  dataChecker && [
     ["Volume 24h", symbol + moneyConverter(total_volume[currency], 2)],
@@ -26,13 +25,13 @@ export default function Page({ params }: { params: {coinId: string}}) {
     ["Volume/Market",  (total_volume[currency] / market_cap[currency]).toPrecision(3) ]
   ];
 
-  const secondCard = [
-    ["Max Supply", max_supply.toLocaleString()],
+  const secondCard : isProgressData = dataChecker ? [
+    ["Total Supply", total_supply.toLocaleString()],
     ["Circulating Supply", circulating_supply.toLocaleString()],
-    ['progressbar', 'progressbar']
-  ]
+    ['Circulating/Max',  volumeOverMarket]
+  ] : dummyData
 
-  const thirdCard = [
+  const thirdCard = dataChecker && [
     ['Market Cap', symbol + moneyConverter(market_cap[currency],2)],
     ['Fully Diluted Valuation', symbol + moneyConverter(fully_diluted_valuation[currency],2)],
     []
@@ -43,6 +42,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
   },[])
   useEffect(()=>{
     console.log(data)
+    console.log(volumeOverMarket);
+    
   },[data])
   
    return <Wrapper>
@@ -76,6 +77,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     {firstCard && dataChecker &&
                     <DataCard
                       data={firstCard}
+                      isProgress={false}
                     />
                   }
                   </div>
@@ -83,7 +85,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     {
                       secondCard &&
                       <DataCard
-                      data={secondCard}
+                      data={secondCard as isProgressData}
+                      isProgress={true}
                       />
                     }
                   </div>
@@ -93,6 +96,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     {thirdCard &&
                     <DataCard
                       data={thirdCard}
+                      isProgress={false}
                     />
                   }
                   </div>

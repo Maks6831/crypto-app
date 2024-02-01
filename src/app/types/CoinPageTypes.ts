@@ -123,7 +123,7 @@ export interface MarketData {
     market_cap_change_24h_in_currency:            { [key: string]: number };
     market_cap_change_percentage_24h_in_currency: { [key: string]: number };
     total_supply:                                 number;
-    max_supply:                                   null;
+    max_supply:                                   number;
     circulating_supply:                           number;
     last_updated:                                 Date;
 }
@@ -340,7 +340,7 @@ export const coinPage : CoinPageTypes = {
             btc: 0.01
         },
         total_supply: 1000000000,
-        max_supply: null,
+        max_supply: 5000,
         circulating_supply: 500000000,
         last_updated: new Date(),
     },
@@ -387,3 +387,14 @@ export const coinPage : CoinPageTypes = {
     ],
 };
 
+export type isProgressData = [
+    [string, string],
+    [string, string],
+    [string, number],
+]
+
+export const dummyData: isProgressData = [
+    ["First", "Value"],
+    ["Second", "Another Value"],
+    ["Third", 42],
+  ];
