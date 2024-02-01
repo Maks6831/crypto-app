@@ -12,27 +12,29 @@ import { moneyConverter } from "@/app/Utils/moneyConverter";
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
   const { data } = useAppSelector(state => state.coinPageReducer);
-  const { currency } = useAppSelector(state => state.currencyReducer);
+  const { currency, symbol } = useAppSelector(state => state.currencyReducer);
   const dataChecker = data != coinPage;
   const description = data.description.en;
  
   const websiteNames = dataChecker && data.links.blockchain_site.slice(0,3);
 
+  const {total_volume, market_cap, max_supply, circulating_supply, fully_diluted_valuation} = data.market_data
+
   const firstCard =  dataChecker && [
-    ["Volume 24h", moneyConverter(data.market_data.total_volume[currency], 2)],
+    ["Volume 24h", symbol + moneyConverter(total_volume[currency], 2)],
     [ "Market Cap Rank", data.market_cap_rank],
-    ["Volume/Market",  (data.market_data.total_volume[currency] / data.market_data.market_cap[currency]).toPrecision(3) ]
+    ["Volume/Market",  (total_volume[currency] / market_cap[currency]).toPrecision(3) ]
   ];
 
   const secondCard = [
-    ["Max Supply", data.market_data.max_supply],
-    ["Circulating Supply", data.market_data.circulating_supply],
+    ["Max Supply", max_supply.toLocaleString()],
+    ["Circulating Supply", circulating_supply.toLocaleString()],
     ['progressbar', 'progressbar']
   ]
 
   const thirdCard = [
-    ['Market Cap', data.market_data.market_cap[currency]],
-    ['Fully Diluted Valuation',  data.market_data.fully_diluted_valuation[currency]],
+    ['Market Cap', symbol + moneyConverter(market_cap[currency],2)],
+    ['Fully Diluted Valuation', symbol + moneyConverter(fully_diluted_valuation[currency],2)],
     []
   ]
 
