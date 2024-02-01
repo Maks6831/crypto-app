@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/app/GlobalRedux/hooks";
 import { useEffect } from "react";
 import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinPage } from "@/app/types/CoinPageTypes";
+import { moneyConverter } from "@/app/Utils/moneyConverter";
 
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
@@ -18,20 +19,20 @@ export default function Page({ params }: { params: {coinId: string}}) {
   const websiteNames = dataChecker && data.links.blockchain_site.slice(0,3);
 
   const firstCard =  dataChecker && [
-    ["Total Volume", data.market_data.total_volume['btc']],
-    ["Volume 24h", data.ticker],
-    ["Volume/Market", 30]
+    ["Volume 24h", moneyConverter(data.market_data.total_volume[currency], 2)],
+    [ "Market Cap Rank", data.market_cap_rank],
+    ["Volume/Market",  (data.market_data.total_volume[currency] / data.market_data.market_cap[currency]).toPrecision(3) ]
   ];
 
   const secondCard = [
-    ["Max Supply", 30],
-    ["Circulating Supply", 30],
+    ["Max Supply", data.market_data.max_supply],
+    ["Circulating Supply", data.market_data.circulating_supply],
     ['progressbar', 'progressbar']
   ]
 
   const thirdCard = [
-    ['Market Cap', 30],
-    ['Fully Diluted Valuation', 30],
+    ['Market Cap', data.market_data.market_cap[currency]],
+    ['Fully Diluted Valuation',  data.market_data.fully_diluted_valuation[currency]],
     []
   ]
 
