@@ -12,7 +12,7 @@ export const CoinCard = ({isPortfolio}: {isPortfolio: boolean}) => {
     const {currency, symbol } = useAppSelector(state => state.currencyReducer);
     const name = data.name;
     const coinSymbol = data.symbol.toUpperCase();
-    const homepage = data.links.homepage[0].replace('http://','');
+    const homepage = data.links.homepage[0];
     const image =   data.image.small;
     const currentPrice = data.market_data.current_price[currency].toLocaleString();
     const athPrice = data.market_data.ath[currency].toLocaleString();
@@ -36,7 +36,7 @@ return (
                 </div>
                 <div className=' m-0 md:m-2'>
                     <div className='xl:text-xl lg:text-2xl md:text-lg sm:text-base text-sm font-bold '>{name} ({coinSymbol})</div>
-                    <div className='font-medium xl:text-base lg:text-lg md:text-md sm:text-sm text-xs text-light-text-color dark:text-card-text-gray'>{homepage}</div>
+                    <a href={homepage} className='cursor-pointer font-medium xl:text-base lg:text-lg md:text-md sm:text-sm text-xs text-light-text-color dark:text-card-text-gray'>{homepage.replace('http://','')}</a>
                 </div>
             </div>
             <div className=' h-1/2 w-full border-b border-opacity-25 border-card-text-gray flex flex-col justify-center p-2 md:p-0  '>
