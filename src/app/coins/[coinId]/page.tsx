@@ -25,6 +25,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
     ["Volume/Market",  (total_volume[currency] / market_cap[currency]).toPrecision(3) ]
   ];
 
+
   const secondCard : isProgressData = dataChecker ? [
     ["Total Supply", total_supply.toLocaleString()],
     ["Circulating Supply", circulating_supply.toLocaleString()],
@@ -40,11 +41,6 @@ export default function Page({ params }: { params: {coinId: string}}) {
   useEffect(()=>{
     dispatch(coinPageData(params.coinId))
   },[])
-  useEffect(()=>{
-    console.log(data)
-    console.log(volumeOverMarket);
-    
-  },[data])
   
    return <Wrapper>
           <div className="min-h-screen w-full m-4">

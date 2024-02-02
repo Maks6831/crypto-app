@@ -8,7 +8,8 @@ export const moneyConverter = (value : number | undefined, decimal : number) => 
             value /=1000;
             index++;
         }
-        const newValue = index === 0 ? `${value.toFixed(2)}`: `${value.toFixed(decimal)} ${array[index]}`
+        const newValue = index === 0 ? value < 1 ? `${value.toPrecision(3)}` : `${value.toFixed(2)}`: `${value.toFixed(decimal)} ${array[index]}`
         return newValue;
     }
 }
+
