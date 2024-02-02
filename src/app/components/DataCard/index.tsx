@@ -43,12 +43,13 @@ export const DataCard = ({data, isProgress} : {data: (string | number)[][], isPr
                            <div className='p-1   md:text-base sm:text-sm text-xs font-normal text-light-blue text-opacity-90 dark:text-coin-page-progress'>Circulating/Max </div>
                            <div className=' md:text-base sm:text-sm text-xs font-normal text-light-blue dark:text-coin-page-progress-two'>{data[2][1].toFixed(2)}%</div>
                           </div>
+                          {theme && 
                           <ProgressBar
                           percentage={+data[2][1]}
                           color={theme === 'dark' ? 'rgb(212,119,12)': 'rgb(99, 143, 254)'}
                           size='min-w-full h-2'
                           backgroundColor={theme === 'dark' ? 'bg-coin-page-progress-two' : 'bg-blue-100'}
-                          />
+                          />}
                         </div>
                       </div>
                       :
