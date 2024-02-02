@@ -51,7 +51,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
                 />
               </div>
               <div className="w-10/12 md:w-7/12 m-2 min-h-full flex flex-col justify-start">
-                <div  className=" p-2 m-3 min-h-3/5 max-h-[20rem] text-sm  hover:scrollbar  scrollbar-track-transparent   scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-hidden  hover:overflow-y-scroll">
+                <div  className=" p-2 m-3 min-h-3/5 max-h-[20rem] text-sm  hover:scrollbar  scrollbar-track-transparent   scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-hidden  hover:overflow-y-auto">
                   <p  dangerouslySetInnerHTML={{ __html: description }} className="[&_a]:text-carousel-button-color-two text-justify "></p>
                 </div>
                 <div className="  w-full flex flex-wrap content-end items-center justify-center md:justify-start m-1">
