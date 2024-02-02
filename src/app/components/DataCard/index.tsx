@@ -7,11 +7,6 @@ import { useTheme } from 'next-themes';
 export const DataCard = ({data, isProgress} : {data: (string | number)[][], isProgress:boolean}) => {
   const {theme} = useTheme();
 
-  useEffect(()=>{
-    console.log(theme)
-  },[theme]);
-  
-
   return (
     <div className=" shadow-lg bg-coin-card-color bg-opacity-30 dark:bg-purplea rounded-xl max-h-5/6 w-full">
                       <div className="flex flex-col min-[430px]:flex-row justify-between w-full h-1/3  items-center p-3 min-[430px]:p-5">
@@ -40,7 +35,7 @@ export const DataCard = ({data, isProgress} : {data: (string | number)[][], isPr
                       <div>
                         <div className=" flex flex-col justify-between w-full items-center md:items-start max-h-1/3 start p-3  ">
                           <div className='flex items-center justify-between w-full '>
-                           <div className='p-1   md:text-base sm:text-sm text-xs font-normal text-light-blue text-opacity-90 dark:text-coin-page-progress'>Circulating/Max </div>
+                           <div className='p-1   md:text-base sm:text-sm text-xs font-normal text-opacity-90 dark:text-coin-page-progress'>Circulating/Max </div>
                            <div className=' md:text-base sm:text-sm text-xs font-normal text-light-blue dark:text-coin-page-progress-two'>{data[2][1].toFixed(2)}%</div>
                           </div>
                           {theme && 
