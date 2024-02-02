@@ -1,9 +1,7 @@
 import React from 'react'
+import { extractUrl } from '@/app/Utils/addressFormatter'
 
 export const UrlContainer = ({url}: {url:string}) => {
-  const extractUrl = (address:string):string => {
-    return (address.indexOf('://') > -1 ? address.split('/')[2] : address.split('/')[0]).split(':')[0]; 
-  }
 
   return (
     <a href={url} className=' cursor-pointer w-max md:text-base text-sm px-3 py-2  h-max p-1 m-1 flex justify-center items-center bg-light-button-color shadow-lg dark:bg-purplea rounded-xl'>

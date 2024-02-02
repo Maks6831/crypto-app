@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinPage, dummyData, isProgressData } from "@/app/types/CoinPageTypes";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
+import { extractUrl } from "@/app/Utils/addressFormatter";
 
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
@@ -54,6 +55,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
                   <div className="w-10/12 md:w-7/12 m-2 min-h-full flex flex-col justify-start">
                     <div  className=" p-2 m-3 min-h-3/5 max-h-[20rem] text-sm  hover:scrollbar  scrollbar-track-transparent   scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-hidden  hover:overflow-y-auto">
                       <p  dangerouslySetInnerHTML={{ __html: description }} className="[&_a]:text-carousel-button-color-two text-justify "></p>
+                      {!description && 
+                      <p  className="[&_a]:text-carousel-button-color-two text-justify ">There is currently no Information on this Coin. Please refer to <a className="" href={data.links.homepage[0]}>{extractUrl(data.links.homepage[0])}</a></p>}
                     </div>
                     <div className="  w-full flex flex-wrap content-end items-center justify-center md:justify-start m-1">
                       {websiteNames && 
