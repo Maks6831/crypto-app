@@ -13,6 +13,7 @@ import { Pricegraph } from "@/app/components/Pricegraph";
 import { priceChart } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { CoinInfoContainer } from "@/app/components/CoinInfoContainer";
 import { Buttonswitcher } from "@/app/components/Buttonswitcher";
+import { Timebar } from "@/app/components/Timebar";
 
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
@@ -95,6 +96,9 @@ export default function Page({ params }: { params: {coinId: string}}) {
                       <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} isCoinPage={true} />
                     }
                   </div>
+                </div>
+                <div>
+                  <Timebar days={days}/>
                 </div>
                 </div>
                 <div className="card m-2 section flex flex-col justify-start items-center  min-h-[40rem]">
