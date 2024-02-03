@@ -83,7 +83,7 @@ export const Pricegraph = (props : GraphProps) => {
           font: {
               size: tickSize,
           },
-          maxTicksLimit: 7,
+          maxTicksLimit: tickSize ,
           maxRotation: 0,
           stepSize: props.isLine ? Math.ceil(props.labels.length/10) : Math.ceil(props.labelsTwo.length / 10)
         },
@@ -98,20 +98,23 @@ export const Pricegraph = (props : GraphProps) => {
           display: false
         },
         ticks: {
-          // Include a dollar sign in the ticks
           callback: function(value:any, index:any, ticks:any) {
               return `${symbol}` + moneyConverter(value, 0, true);
-          }
+          },
+          font: {
+            size: tickSize,
+        },
+        maxTicksLimit: tickSize - 5,
       }
         
       },
     }
   }
   useEffect(() => {
-    if(screenSize. width && screenSize.width > 700 && tickSize !== 10){
-      setTickSize(10)
-    } else if(screenSize. width &&  screenSize.width < 700 && tickSize !== 7) {
-      setTickSize(7);
+    if(screenSize.width && screenSize.width > 700 && tickSize !== 20){
+      setTickSize(20)
+    } else if(screenSize.width &&  screenSize.width < 700 && tickSize !== 10) {
+      setTickSize(10);
     }
   }, [screenSize.width]);
   
