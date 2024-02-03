@@ -1,5 +1,6 @@
 export type GraphProps = {
     days : string
+    isCoinPage : boolean
   } & ({
     isLine: true
     prices : number[]

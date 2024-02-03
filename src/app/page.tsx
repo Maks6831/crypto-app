@@ -50,13 +50,13 @@ export default function Home() {
                 <div className=' overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
                   <CoinInfoContainer isPrice={true} />
                   <div className='h-1/2 md:h-max w-full flex items-end'>
-                  <Pricegraph isLine={true} prices={prices} labels={labels} days={days}/>
+                  <Pricegraph isLine={true} prices={prices} labels={labels} days={days} isCoinPage={false}/>
                   </div>
                 </div>
                 <div className=' overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background'>
                   <CoinInfoContainer isPrice={false} />
                   <div className='h-1/2 md:h-max w-full flex items-end'>
-                    <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} />
+                    <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} isCoinPage={false}/>
                   </div>
                 </div>
               </div>

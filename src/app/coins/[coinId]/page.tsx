@@ -9,16 +9,21 @@ import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice"
 import { coinPage, dummyData, isProgressData } from "@/app/types/CoinPageTypes";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 import { extractUrl } from "@/app/Utils/addressFormatter";
+import { Pricegraph } from "@/app/components/Pricegraph";
+import { priceChart } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
+import { CoinInfoContainer } from "@/app/components/CoinInfoContainer";
 
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
   const { data } = useAppSelector(state => state.coinPageReducer);
   const { currency, symbol } = useAppSelector(state => state.currencyReducer);
+  const { days, prices, labels  } = useAppSelector(state => state.priceChart);
+
   const dataChecker = data !== coinPage;
   const description = data.description.en;
   const websiteNames = dataChecker && data.links.blockchain_site.slice(0,3);
   const {total_volume, market_cap, total_supply, circulating_supply, fully_diluted_valuation} = data.market_data;
-  const volumeOverMarket: number = dataChecker ? (circulating_supply/total_supply) * 100 : 0
+  const volumeOverMarket: number = dataChecker ? (circulating_supply/total_supply) * 100 : 0;
 
   const firstCard =  dataChecker && [
     ["Volume 24h", symbol + moneyConverter(total_volume[currency], 2)],
@@ -42,6 +47,10 @@ export default function Page({ params }: { params: {coinId: string}}) {
   useEffect(()=>{
     dispatch(coinPageData(params.coinId))
   },[])
+
+  useEffect(()=>{
+    dispatch(priceChart({currency, coinId: params.coinId, days: days}))
+  },[ currency, days])
   
    return <Wrapper>
           { dataChecker && 
@@ -70,6 +79,15 @@ export default function Page({ params }: { params: {coinId: string}}) {
                       }
                     </div>
                   </div>
+                </div>
+                <div className="w-full flex flex-col justify-center items-center h-full border-2">
+                  <div className="">Historical Data</div>
+                  <div className=' overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl  h-[20rem]  w-10/12 md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
+                  <CoinInfoContainer isPrice={true} />
+                  <div className=' h-max w-full flex items-end'>
+                  <Pricegraph isLine={true} prices={prices} labels={labels} days={days} isCoinPage={true}/>
+                  </div>
+                </div>
                 </div>
                 <div className="card m-2 section flex flex-col justify-start items-center  min-h-[40rem]">
                     <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
@@ -101,6 +119,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
                       }
                       </div>
                       <div className="h-full w-full md:w-1/2 m-2  bflex justify-center items-center "></div>
+                    </div>
+                    <div className="w-full">
                     </div>
                   </div>
               </div>

@@ -92,7 +92,10 @@ export const Pricegraph = (props : GraphProps) => {
       },
       y: {
         suggestedMax: props.isLine ? Math.max(...props.prices) : Math.max(...props.market_caps) * 1.3 ,
-        display: false
+        display: props.isCoinPage ? true : false,
+        grid: {
+          display: false
+        }
       },
     }
   }
@@ -106,7 +109,7 @@ export const Pricegraph = (props : GraphProps) => {
   
 
   return (
-    <div className=' max-w-full w-full max-h-full h-full  sm:h-48 lg:h-64 flex justify-center items-end  md:p-2'>
+    <div className={`max-w-full w-full max-h-full h-full  ${props.isCoinPage ?' h-56' : ' sm:h-48 lg:h-64' }  flex justify-center items-end  md:p-2`}>
       <Chart
       width={'100%'}
       height={'100%'}
