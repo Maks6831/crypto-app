@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { Chart } from "react-chartjs-2";
 import { useTheme } from 'next-themes';
 import { labelFormatter } from '@/app/Utils/labelFormatter';
+import { moneyConverter } from '@/app/Utils/moneyConverter';
 import { GraphProps } from '@/app/types/GraphProps';
 import {
   Tooltip,
@@ -95,7 +96,14 @@ export const Pricegraph = (props : GraphProps) => {
         display: props.isCoinPage ? true : false,
         grid: {
           display: false
-        }
+        },
+        ticks: {
+          // Include a dollar sign in the ticks
+          callback: function(value:any, index:any, ticks:any) {
+              return `${symbol}` + moneyConverter(value, 0, true);
+          }
+      }
+        
       },
     }
   }

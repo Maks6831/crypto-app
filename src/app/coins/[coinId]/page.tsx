@@ -26,11 +26,10 @@ export default function Page({ params }: { params: {coinId: string}}) {
   const volumeOverMarket: number = dataChecker ? (circulating_supply/total_supply) * 100 : 0;
 
   const firstCard =  dataChecker && [
-    ["Volume 24h", symbol + moneyConverter(total_volume[currency], 2)],
+    ["Volume 24h", symbol + moneyConverter(total_volume[currency], 2, false)],
     [ "Market Cap Rank", data.market_cap_rank],
     ["Volume/Market",  (total_volume[currency] / market_cap[currency]).toPrecision(3) ]
   ];
-
 
   const secondCard : isProgressData = dataChecker ? [
     ["Total Supply", total_supply.toLocaleString()],
@@ -39,8 +38,8 @@ export default function Page({ params }: { params: {coinId: string}}) {
   ] : dummyData
 
   const thirdCard = dataChecker && [
-    ['Market Cap', symbol + moneyConverter(market_cap[currency],2)],
-    ['Fully Diluted Valuation', symbol + moneyConverter(fully_diluted_valuation[currency],2)],
+    ['Market Cap', symbol + moneyConverter(market_cap[currency],2, false)],
+    ['Fully Diluted Valuation', symbol + moneyConverter(fully_diluted_valuation[currency],2, false)],
     []
   ]
 
