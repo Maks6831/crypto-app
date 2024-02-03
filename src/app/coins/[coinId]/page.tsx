@@ -82,8 +82,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
                     </div>
                   </div>
                 </div>
-                <div className="w-full flex flex-col justify-center items-center h-full border-2">
-                  <div className="lg:text-3xl sm:text-2xl  p-2">Historical Data</div>
+                <div className="w-full flex flex-col justify-center items-center h-full ">
                   <div className=' w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col'>
                     <Buttonswitcher setState={setIsPrice} boolean={isPrice} nameArray={['Price', 'Market Caps']} />
                   </div>
