@@ -36,7 +36,7 @@ export default function Home() {
           <div className='w-full flex flex-col justify-center items-center'>
             <TitleHeader isNavbar={false} />
             <div className=' w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col'>
-                <Buttonswitcher setCoin={setCoin} isCoin={isCoin}/>
+                <Buttonswitcher setState={setCoin} boolean={isCoin} nameArray={['Coins', 'Converter']}/>
             </div>
           </div>
         </Wrapper>
