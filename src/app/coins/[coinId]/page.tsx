@@ -18,7 +18,7 @@ export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
   const { data } = useAppSelector(state => state.coinPageReducer);
   const { currency, symbol } = useAppSelector(state => state.currencyReducer);
-  const { days, prices, labels  } = useAppSelector(state => state.priceChart);
+  const { days, prices, labels, labelsTwo, market_caps  } = useAppSelector(state => state.priceChart);
   const [isPrice, setIsPrice] = useState(true);
 
   const dataChecker = data !== coinPage;
@@ -82,13 +82,18 @@ export default function Page({ params }: { params: {coinId: string}}) {
                   </div>
                 </div>
                 <div className="w-full flex flex-col justify-center items-center h-full border-2">
+                  <div className="lg:text-3xl sm:text-2xl  p-2">Historical Data</div>
                   <div className=' w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col'>
-                  <Buttonswitcher setState={setIsPrice} boolean={isPrice} nameArray={['Price', 'Market Caps']} />
+                    <Buttonswitcher setState={setIsPrice} boolean={isPrice} nameArray={['Price', 'Market Caps']} />
                   </div>
-                  <div className=' overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl  h-[20rem]  w-10/12 md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
+                  <div className=' overflow-hidden sm:min-w-80  m-3 px-3 pb-1 md:p-6 bg-white-color rounded-xl  h-[20rem]  w-10/12 md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
                   <CoinInfoContainer isPrice={true} />
                   <div className=' h-max w-full flex items-end'>
-                  <Pricegraph isLine={true} prices={prices} labels={labels} days={days} isCoinPage={true}/>
+                    {isPrice ? 
+                      <Pricegraph isLine={true} prices={prices} labels={labels} days={days} isCoinPage={true}/>
+                      :
+                      <Pricegraph isLine={false} market_caps={market_caps} labelsTwo={labelsTwo} days={days} isCoinPage={true} />
+                    }
                   </div>
                 </div>
                 </div>
