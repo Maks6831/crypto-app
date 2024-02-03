@@ -4,7 +4,7 @@ import { Wrapper } from "@/app/components/Wrapper";
 import { UrlContainer } from "../../components/UrlContainer";
 import { DataCard } from "@/app/components/DataCard";
 import { useAppDispatch, useAppSelector } from "@/app/GlobalRedux/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinPage, dummyData, isProgressData } from "@/app/types/CoinPageTypes";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
@@ -12,12 +12,14 @@ import { extractUrl } from "@/app/Utils/addressFormatter";
 import { Pricegraph } from "@/app/components/Pricegraph";
 import { priceChart } from '@/app/GlobalRedux/Features/Chartdata/priceSlice';
 import { CoinInfoContainer } from "@/app/components/CoinInfoContainer";
+import { Buttonswitcher } from "@/app/components/Buttonswitcher";
 
 export default function Page({ params }: { params: {coinId: string}}) {
   const dispatch  = useAppDispatch();
   const { data } = useAppSelector(state => state.coinPageReducer);
   const { currency, symbol } = useAppSelector(state => state.currencyReducer);
   const { days, prices, labels  } = useAppSelector(state => state.priceChart);
+  const [isPrice, setIsPrice] = useState(true);
 
   const dataChecker = data !== coinPage;
   const description = data.description.en;
@@ -80,7 +82,9 @@ export default function Page({ params }: { params: {coinId: string}}) {
                   </div>
                 </div>
                 <div className="w-full flex flex-col justify-center items-center h-full border-2">
-                  <div className="">Historical Data</div>
+                  <div className=' w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col'>
+                  <Buttonswitcher setState={setIsPrice} boolean={isPrice} nameArray={['Price', 'Market Caps']} />
+                  </div>
                   <div className=' overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl  h-[20rem]  w-10/12 md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two '>
                   <CoinInfoContainer isPrice={true} />
                   <div className=' h-max w-full flex items-end'>
