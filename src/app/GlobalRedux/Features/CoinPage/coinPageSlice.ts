@@ -1,6 +1,6 @@
 'use client';
 
-import { CoinPageType, coinPage } from "@/app/types/CoinPageTypes";
+import { CoinPageTypes , coinPage } from "@/app/types/CoinPageTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
@@ -14,7 +14,7 @@ export const coinPageData = createAsyncThunk(
       }
     );
 
-    const initialState : {data: CoinPageType, loading: boolean, error: string } = {
+    const initialState : {data: CoinPageTypes, loading: boolean, error: string } = {
         data: coinPage ,
         loading: false,
         error: '',
@@ -33,7 +33,7 @@ export const coinPageData = createAsyncThunk(
             state.error = "";
           })
           .addCase(coinPageData.fulfilled, (state, action) => {
-            state.data = action.payload as CoinPageType;
+            state.data = action.payload as CoinPageTypes;
           })
           .addCase(coinPageData.rejected, (state, action) => {
             state.loading = false;
