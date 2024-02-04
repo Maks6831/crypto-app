@@ -88,8 +88,11 @@ export const Pricegraph = (props: GraphProps) => {
         intersect: false,
         callbacks: {
           label: function (tooltipItem: any, data: any) {
-            const value =
-              tooltipItem.dataset.data[tooltipItem.dataIndex].toLocaleString();
+            let value = tooltipItem.dataset.data[tooltipItem.dataIndex];
+            value =
+              value < 1
+                ? value.toPrecision(3)
+                : value.toLocaleString().toFixed();
             return `${symbol}` + value;
           },
         },
