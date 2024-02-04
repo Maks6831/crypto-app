@@ -66,15 +66,17 @@ export const Pricegraph = (props: GraphProps) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-
-    tooltips: {
-      mode: 'index',
-      intersect: false,
-      callbacks: {
-        label: function (tooltipItem: any, data: any) {
-          const currencySymbol = symbol;
-          const value = tooltipItem.yLabel.toFixed(2);
-          return data.labels[tooltipItem.index] + ': ' + currencySymbol + value;
+    plugins: {
+      tooltip: {
+        enabled:true,
+        mode: 'index',
+        intersect: false,
+        callbacks: {
+          label: function (tooltipItem: any, data: any) {
+            const currencySymbol = symbol;
+            const value =  data
+            return  value;
+          }
         }
       }
     },
