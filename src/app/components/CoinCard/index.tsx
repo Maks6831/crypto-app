@@ -19,15 +19,13 @@ export const CoinCard = ({isPortfolio}: {isPortfolio: boolean}) => {
     const coinSymbol = data.symbol.toUpperCase();
     const homepage = data.links.homepage[0];
     const image =   data.image.small;
-    const currentPrice = moneyConverter(data.market_data.current_price[currency], 2).toLocaleString();
+    const currentPrice = moneyConverter(data.market_data.current_price[currency], 2, false).toLocaleString();
     const athPrice = data.market_data.ath[currency].toLocaleString();
     const athDate = timeFormatter(new Date(data.market_data.ath_date[currency]));
     const atlPrice = data.market_data.atl[currency].toLocaleString();
     const atlDate = timeFormatter(new Date(data.market_data.atl_date[currency]));
     const percentage = data.market_data.price_change_percentage_24h.toFixed(2);
     const high24H = data.market_data.high_24h[currency].toLocaleString();
-
-    console.log(data.market_data.current_price[currency]);
 
 return (
     <div className=' w-11/12 h-full shadow-lg  bg-carousel-button-color-two bg-opacity-30 dark:bg-purplea rounded-xl flex flex-col p-2'>
