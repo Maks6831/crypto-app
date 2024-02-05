@@ -93,6 +93,7 @@ export const Pricegraph = (props: GraphProps) => {
               value < 1
                 ? value.toPrecision(3)
                 : value.toFixed(2).toLocaleString();
+            props.isLine && props.handleHover(value);
             return `${symbol}` + value;
           },
         },

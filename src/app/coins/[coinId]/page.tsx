@@ -19,6 +19,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinPageReducer);
   const { currency, symbol } = useAppSelector((state) => state.currencyReducer);
+  const [currentPrice, setCurrentPrice] = useState(0);
   const { days, prices, labels, labelsTwo, market_caps } = useAppSelector(
     (state) => state.priceChart
   );
@@ -66,6 +67,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
 
   useEffect(() => {
     dispatch(coinPageData(params.coinId));
+    console.log("check");
   }, []);
 
   useEffect(() => {
@@ -113,7 +115,11 @@ export default function Page({ params }: { params: { coinId: string } }) {
               />
             </div>
             <div className=" overflow-hidden sm:min-w-80  m-3 px-3 pb-1  md:p-6 bg-white-color rounded-xl  h-[20rem]  w-10/12 md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
-              <CoinInfoContainer isPrice={true} isCoinPage={true} />
+              <CoinInfoContainer
+                isPrice={true}
+                isCoinPage={true}
+                currentPrice={currentPrice}
+              />
               <div className=" h-full w-full flex items-end">
                 {isPrice ? (
                   <div className=" h-5/6  md:h-full  w-full">
@@ -123,6 +129,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
                       labels={labels}
                       days={days}
                       isCoinPage={true}
+                      handleHover={setCurrentPrice}
                     />
                   </div>
                 ) : (

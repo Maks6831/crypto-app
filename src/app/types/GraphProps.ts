@@ -5,6 +5,7 @@ export type GraphProps = {
     isLine: true
     prices : number[]
     labels : number[]
+    handleHover : Function
   }|{
     isLine: false
     labelsTwo: number[]

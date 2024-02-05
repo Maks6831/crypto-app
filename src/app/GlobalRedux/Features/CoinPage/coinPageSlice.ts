@@ -9,7 +9,7 @@ export const coinPageData = createAsyncThunk(
     async (coin:string , thunkApi) => {
         const url = `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=true&market_data=true&community_data=true&developer_data=false&sparkline=false&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
-        const json: CoinPageType = await response.json();
+        const json: CoinPageTypes = await response.json();
         return json;
       }
     );
