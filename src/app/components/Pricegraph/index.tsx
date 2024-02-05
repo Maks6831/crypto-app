@@ -43,7 +43,7 @@ export const Pricegraph = (props: GraphProps) => {
   const initialScreenSize = screenSize.width && screenSize.width > 700 ? 16 : 8;
   const [tickSize, setTickSize] = useState<number>(initialScreenSize);
   const [hoverPrice, setHoverPrice] = useState(0);
-  const debouncedNumber = props.isLine && useDebounce(hoverPrice, 1000);
+  const debouncedNumber = useDebounce(hoverPrice, 1000);
 
   const data = {
     labels: props.isLine
