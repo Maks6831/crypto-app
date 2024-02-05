@@ -21,6 +21,7 @@ import {
   BarController,
 } from "chart.js";
 import { useScreenSize } from "@/app/Utils/useScreenSize";
+import { useDebounce } from "@/app/Utils/useDebounce";
 
 ChartJS.register(
   Tooltip,
@@ -41,6 +42,8 @@ export const Pricegraph = (props: GraphProps) => {
   const screenSize = useScreenSize();
   const initialScreenSize = screenSize.width && screenSize.width > 700 ? 16 : 8;
   const [tickSize, setTickSize] = useState<number>(initialScreenSize);
+  const [hoverPrice, setHoverPrice] = useState(0);
+  const debouncedNumber = props.isLine && useDebounce(hoverPrice, 1000);
 
   const data = {
     labels: props.isLine
@@ -93,7 +96,7 @@ export const Pricegraph = (props: GraphProps) => {
               value < 1
                 ? value.toPrecision(3)
                 : value.toFixed(2).toLocaleString();
-            props.isLine && props.handleHover(value);
+            props.isLine && setHoverPrice(value);
             return `${symbol}` + value;
           },
         },
@@ -146,8 +149,10 @@ export const Pricegraph = (props: GraphProps) => {
   }, [screenSize]);
 
   useEffect(() => {
-    console.log(screenSize.width);
-  }, []);
+    if (hoverPrice && props.isLine) {
+      props.handleHover(debouncedNumber);
+    }
+  }, [debouncedNumber]);
 
   return (
     <div
