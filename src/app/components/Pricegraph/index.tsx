@@ -96,7 +96,8 @@ export const Pricegraph = (props: GraphProps) => {
               value < 1
                 ? value.toPrecision(3)
                 : value.toFixed(2).toLocaleString();
-            props.isLine && setHoverPrice(value);
+            props.isLine &&
+              setHoverPrice(tooltipItem.dataset.data[tooltipItem.dataIndex]);
             return `${symbol}` + value;
           },
         },
