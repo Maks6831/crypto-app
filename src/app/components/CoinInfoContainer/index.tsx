@@ -3,6 +3,7 @@ import { useAppSelector } from "@/app/GlobalRedux/hooks";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 import { timeFormatter } from "@/app/Utils/timeFormatter";
 import React from "react";
+import { AnimatingNumber } from "../AnimatingNumber";
 
 export const CoinInfoContainer = ({
   isPrice,
@@ -31,7 +32,7 @@ export const CoinInfoContainer = ({
           {symbol}
           {isPrice
             ? isPrice && currentPrice
-              ? currentPrice
+              ? currentPrice && <AnimatingNumber value={currentPrice} />
               : moneyConverter(+prices[prices.length - 1], 3, false)
             : moneyConverter(market_caps[market_caps.length - 1], 3, false)}
         </div>

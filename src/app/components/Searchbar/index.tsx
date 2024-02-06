@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { searchData } from "@/app/GlobalRedux/Features/SearchData/searchSlice";
 import { useAppDispatch, useAppSelector } from "@/app/GlobalRedux/hooks";
 import { SearchItem } from "../SearchItem";
-import { useDebounce } from "@/app/Utils/useDebounce";
+import { useDebounce } from "@/app/Utils/Hooks/useDebounce";
 import { useRouter } from "next/navigation";
 import { changeArray } from "@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice";
 

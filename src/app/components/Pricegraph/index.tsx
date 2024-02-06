@@ -20,8 +20,8 @@ import {
   LineController,
   BarController,
 } from "chart.js";
-import { useScreenSize } from "@/app/Utils/useScreenSize";
-import { useDebounce } from "@/app/Utils/useDebounce";
+import { useScreenSize } from "@/app/Utils/Hooks/useScreenSize";
+import { useDebounce } from "@/app/Utils/Hooks/useDebounce";
 
 ChartJS.register(
   Tooltip,
