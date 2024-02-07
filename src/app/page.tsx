@@ -40,8 +40,8 @@ export default function Home() {
               <TitleHeader isNavbar={false} />
               <div className=" w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col">
                 <Buttonswitcher
-                  setState={setCoin}
-                  boolean={isCoin}
+                  handleClick={setCoin}
+                  isClicked={isCoin}
                   nameArray={["Coins", "Converter"]}
                 />
               </div>

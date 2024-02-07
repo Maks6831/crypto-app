@@ -109,8 +109,8 @@ export default function Page({ params }: { params: { coinId: string } }) {
           <div className="w-full flex flex-col justify-center items-center h-full ">
             <div className=" w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col">
               <Buttonswitcher
-                setState={setIsPrice}
-                boolean={isPrice}
+                handleClick={setIsPrice}
+                isClicked={isPrice}
                 nameArray={["Price", "Market Caps"]}
               />
             </div>
