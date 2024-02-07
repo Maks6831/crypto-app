@@ -28,11 +28,19 @@ export const CoinInfoContainer = ({
         {isPrice ? coinName : "Volume 24h"}
       </div>
       <div className="">
-        <div className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
+        <div className=" flex items-center  font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
           {symbol}
           {isPrice
             ? isPrice && currentPrice
-              ? currentPrice && <AnimatingNumber value={currentPrice} />
+              ? currentPrice && (
+                  <AnimatingNumber
+                    value={
+                      currentPrice < 1
+                        ? currentPrice.toPrecision(3)
+                        : currentPrice.toFixed(2)
+                    }
+                  />
+                )
               : moneyConverter(+prices[prices.length - 1], 3, false)
             : moneyConverter(market_caps[market_caps.length - 1], 3, false)}
         </div>
