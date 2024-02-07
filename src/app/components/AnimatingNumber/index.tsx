@@ -66,7 +66,7 @@ function Digit({
   let valueRoundedToPlace =
     Math.floor(num / place) === 0 ? num / place : Math.floor(num / place);
   let animatedValue = useSpring(valueRoundedToPlace, {
-    stiffness: 300,
+    stiffness: 500,
     damping: 50,
   });
 

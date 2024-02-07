@@ -2,7 +2,7 @@
 import { useAppSelector } from "@/app/GlobalRedux/hooks";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 import { timeFormatter } from "@/app/Utils/timeFormatter";
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatingNumber } from "../AnimatingNumber";
 
 export const CoinInfoContainer = ({
@@ -15,6 +15,7 @@ export const CoinInfoContainer = ({
   isCoinPage: boolean;
 }) => {
   const { coinName } = useAppSelector((state) => state.coinReducer);
+  const { coin } = useAppSelector((state) => state.coinReducer);
   const { prices, market_caps } = useAppSelector((state) => state.priceChart);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
@@ -28,9 +29,9 @@ export const CoinInfoContainer = ({
         {isPrice ? coinName : "Volume 24h"}
       </div>
       <div className="">
-        <div className=" flex items-center  font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
+        <div className=" flex items-center font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
           {symbol}
-          {isPrice
+          {isPrice && coin
             ? isPrice && currentPrice
               ? currentPrice && (
                   <AnimatingNumber
