@@ -40,6 +40,7 @@ export const Pricegraph = (props: GraphProps) => {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
   const { theme, setTheme } = useTheme();
   const screenSize = useScreenSize();
+  const { coin } = useAppSelector((state) => state.coinReducer);
   const initialScreenSize = screenSize.width && screenSize.width > 700 ? 16 : 8;
   const [tickSize, setTickSize] = useState<number>(initialScreenSize);
   const [hoverPrice, setHoverPrice] = useState(0);
@@ -154,6 +155,10 @@ export const Pricegraph = (props: GraphProps) => {
       props.handleHover(debouncedNumber);
     }
   }, [debouncedNumber]);
+
+  useLayoutEffect(() => {
+    props.isLine && props.handleHover(0);
+  }, [coin]);
 
   return (
     <div
