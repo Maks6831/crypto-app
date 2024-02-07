@@ -12,6 +12,7 @@ const padding = 10;
 const height = fontSize + padding;
 
 export const AnimatingNumber = ({ value }: { value: string }) => {
+  console.log(value);
   const stringValue = value.toString();
   const integerPart = Math.floor(parseFloat(value));
   const decimalPart = stringValue.includes(".")
@@ -83,7 +84,7 @@ function Digit({
 }
 const DecimalColumn = () => {
   return (
-    <div className="relative flex justify-center items-center py-3   w-[1ch] font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl leading-7 text-light-text-color-three dark:text-white tabular-nums ">
+    <div className="relative flex justify-center items-center py-3   w-[0.5ch] font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl leading-7 text-light-text-color-three dark:text-white tabular-nums ">
       <span className="absolute inset-0 flex items-center   justify-center">
         .
       </span>

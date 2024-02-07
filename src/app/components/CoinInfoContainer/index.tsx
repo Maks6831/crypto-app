@@ -36,13 +36,23 @@ export const CoinInfoContainer = ({
                   <AnimatingNumber
                     value={
                       currentPrice < 1
-                        ? currentPrice.toPrecision(3)
+                        ? parseFloat(
+                            currentPrice.toExponential().split("e")[0]
+                          ).toFixed(2)
                         : currentPrice.toFixed(2)
                     }
                   />
                 )
               : moneyConverter(+prices[prices.length - 1], 3, false)
             : moneyConverter(market_caps[market_caps.length - 1], 3, false)}
+          {isPrice && currentPrice && currentPrice < 1 ? (
+            <div className="text-sm m-2">
+              {"  x10"}
+              <sup>{currentPrice.toExponential().split("e")[1]}</sup>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="font-normal text-xs md:text-sm lg:text-base text-light-text-color  ">
           {timeFormatter(new Date())}
