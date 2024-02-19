@@ -116,7 +116,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
             </div>
             <div className=" overflow-hidden sm:min-w-80  m-3 px-3 pb-1  md:p-6 bg-white-color rounded-xl  h-[20rem]  w-10/12 md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
               <CoinInfoContainer
-                isPrice={true}
+                isPrice={isPrice}
                 isCoinPage={true}
                 currentPrice={currentPrice}
               />

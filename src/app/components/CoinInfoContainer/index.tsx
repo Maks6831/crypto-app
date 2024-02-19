@@ -29,7 +29,11 @@ export const CoinInfoContainer = ({
         {isPrice ? coinName : "Volume 24h"}
       </div>
       <div className="">
-        <div className=" flex items-center justify-end font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
+        <div
+          className={`${
+            isCoinPage ? "md:pr-20" : ""
+          } flex items-center justify-end font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white`}
+        >
           {symbol}
           {isPrice && coin ? (
             isPrice && currentPrice ? (
