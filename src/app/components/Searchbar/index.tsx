@@ -52,8 +52,8 @@ export const Searchbar = ({
   };
 
   const setValue = () => {
-    const coin = data[focusedIndex]; // working
-    const index = coins.findIndex((obj) => obj.name === defaultValue); // what is default value?
+    const coin = data[focusedIndex];
+    const index = coins.findIndex((obj) => obj.name === defaultValue);
     let coinArray = [...coins];
     coinArray[index] = coin;
     dispatch(changeArray(coinArray));
