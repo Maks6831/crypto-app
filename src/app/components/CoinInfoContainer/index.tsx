@@ -29,24 +29,36 @@ export const CoinInfoContainer = ({
         {isPrice ? coinName : "Volume 24h"}
       </div>
       <div className="">
-        <div className=" flex items-center font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
+        <div className=" flex items-center justify-end font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white">
           {symbol}
-          {isPrice && coin
-            ? isPrice && currentPrice
-              ? currentPrice && (
-                  <AnimatingNumber
-                    value={
-                      currentPrice < 1
-                        ? parseFloat(
-                            currentPrice.toExponential().split("e")[0]
-                          ).toFixed(2)
-                        : currentPrice.toFixed(2)
-                    }
-                  />
-                )
-              : moneyConverter(+prices[prices.length - 1], 3, false)
-            : moneyConverter(market_caps[market_caps.length - 1], 3, false)}
-          {isPrice && currentPrice && currentPrice < 1 ? (
+          {isPrice && coin ? (
+            isPrice && currentPrice ? (
+              currentPrice && currentPrice < 1 && currentPrice > 0.85 ? (
+                currentPrice
+                  .toString()
+                  .slice(0, currentPrice.toString().indexOf(".") + 3)
+              ) : (
+                <AnimatingNumber
+                  value={
+                    currentPrice < 0.1
+                      ? parseFloat(
+                          currentPrice.toExponential().split("e")[0]
+                        ).toFixed(2)
+                      : currentPrice > 1
+                      ? currentPrice.toFixed(2)
+                      : currentPrice
+                          .toString()
+                          .slice(0, currentPrice.toString().indexOf(".") + 3)
+                  }
+                />
+              )
+            ) : (
+              moneyConverter(+prices[prices.length - 1], 3, false)
+            )
+          ) : (
+            moneyConverter(market_caps[market_caps.length - 1], 3, false)
+          )}
+          {isPrice && currentPrice && currentPrice < 0.1 ? (
             <div className="text-sm m-2">
               {"  x10"}
               <sup>{currentPrice.toExponential().split("e")[1]}</sup>

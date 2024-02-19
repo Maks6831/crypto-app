@@ -12,7 +12,6 @@ const padding = 10;
 const height = fontSize + padding;
 
 export const AnimatingNumber = ({ value }: { value: string }) => {
-  console.log(value);
   const stringValue = value.toString();
   const integerPart = Math.floor(parseFloat(value));
   const decimalPart = stringValue.includes(".")

@@ -45,13 +45,13 @@ const priceChartSlice = createSlice({
       .addCase(priceChart.fulfilled, (state, action) => {
         state.loading = false;
         state.coinInfo = action.payload;
-        const {prices, market_caps} = action.payload;
-        state.labels = prices.map((arr: [number, number]) =>arr[0]);
+        const {prices, market_caps} = action.payload; 
+        state.labels = prices.map((arr: [number, number]) =>arr[0]); 
         state.prices = prices.map((arr: [number, number]) => arr[1]);
         state.labelsTwo = market_caps.map((arr: [number, number]) => arr[0]);
         state.market_caps = market_caps.map((arr: [number, number]) => arr[1]);
 
-      })
+      }) 
       .addCase(priceChart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ?? "An unkown error occurrfetchData"
