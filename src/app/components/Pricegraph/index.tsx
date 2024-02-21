@@ -148,13 +148,11 @@ export const Pricegraph = (props: GraphProps) => {
     } else if (screenSize.width && screenSize.width < 700 && tickSize !== 8) {
       setTickSize(8);
     }
-    //console.log(screenSize);
   }, [screenSize]);
 
   useEffect(() => {
     if (hoverPrice && props.isLine) {
       props.handleHover(debouncedNumber);
-      console.log(correctSeconds);
     }
   }, [debouncedNumber]);
 

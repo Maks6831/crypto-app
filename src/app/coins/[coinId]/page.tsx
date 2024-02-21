@@ -67,7 +67,6 @@ export default function Page({ params }: { params: { coinId: string } }) {
 
   useEffect(() => {
     dispatch(coinPageData(params.coinId));
-    console.log("check");
   }, []);
 
   useEffect(() => {

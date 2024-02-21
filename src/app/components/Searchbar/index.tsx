@@ -29,15 +29,12 @@ export const Searchbar = ({
   const router = useRouter();
   const [focus, setFocus] = useState(false);
 
-  const handleFocus = () => {
-    setFocus(true);
-  };
-
-  const handleBlur = () => {
-    setFocus(false);
+  const handleDropDown = (value: boolean) => {
+    value ? setFocus(true) : setFocus(false);
   };
 
   const changeIndex = (event: any) => {
+    event.nativeEvent.stopImmediatePropagation();
     if (!keyPress) {
       const { target } = event;
       const index = (target as any).dataset.index;
@@ -47,8 +44,10 @@ export const Searchbar = ({
   };
 
   const searchCoin = () => {
-    setDropDown(false);
+    console.log(`${data[focusedIndex].id}`);
     router.push(`/coins/${data[focusedIndex].id}`);
+    handleDropDown(false);
+    setSearchInput("");
   };
 
   const setValue = () => {
@@ -78,25 +77,18 @@ export const Searchbar = ({
   };
 
   const useHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.nativeEvent.stopImmediatePropagation();
     const { value } = event.target;
     setSearchInput(value);
     value !== "" && data.length > 0 ? setDropDown(true) : setDropDown(false);
   };
 
   const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData = !loading && !error && data.length > 0 && dropDown;
+  const rightData =
+    !loading && !error && data.length > 0 && searchInput !== "" && focus;
   const dropDownCheck = dropDown;
-  const displayLoading = loading && focus && searchInput !== "";
+  const displayLoading = loading && focus && !error && searchInput !== "";
   const throwError = error && searchInput !== "";
-
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (!refOne?.current?.contains(event.target)) {
-        setDropDown(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-  }, [refOne]);
 
   useEffect(() => {
     if (searchInput) {
@@ -116,6 +108,8 @@ export const Searchbar = ({
       tabIndex={1}
       onKeyDown={handleKeyDown}
       className={`relative ${isSearch ? "m-2" : "md:m-2"}  flex`}
+      onFocus={() => handleDropDown(true)}
+      onBlur={() => handleDropDown(false)}
     >
       {isSearch ? (
         <div className="absolute left-2 top-3 ">
@@ -148,8 +142,6 @@ export const Searchbar = ({
           type="text"
           value={searchInput}
           onChange={useHandleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
         />
       </label>
       {throwError && (
@@ -176,7 +168,7 @@ export const Searchbar = ({
               data-index={index}
               onMouseEnter={changeIndex}
               className=" cursor-pointer"
-              onClick={isSearch ? searchCoin : setValue}
+              onMouseDown={isSearch ? searchCoin : setValue}
               key={element.id}
               ref={index === focusedIndex ? resultContainer : null}
             >
