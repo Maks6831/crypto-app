@@ -76,12 +76,12 @@ export default function Page({ params }: { params: { coinId: string } }) {
   return (
     <Wrapper>
       {dataChecker && (
-        <div className="min-h-screen w-full m-4">
-          <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch  w-full p-3 h-1/2 md:max-h-[30rem]  ">
-            <div className=" w-full min-[400px]:w-10/12 md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
+        <div className="min-h-screen w-full ">
+          <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch   w-full p-3 h-1/2 md:max-h-[30rem]  ">
+            <div className=" w-full min-[400px]:w-10/12  md:w-5/12  md:min-h-full  flex justify-center  items-center">
               <CoinCard isPortfolio={false} />
             </div>
-            <div className="w-10/12 md:w-7/12 m-2 min-h-full flex flex-col justify-start">
+            <div className="w-10/12  md:w-7/12 m-2 min-h-full flex flex-col justify-start">
               <div className=" p-2 m-3 min-h-3/5 max-h-[20rem] text-sm  hover:scrollbar  scrollbar-track-transparent   scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-hidden  hover:overflow-y-auto">
                 <p
                   dangerouslySetInnerHTML={{ __html: description }}
@@ -148,7 +148,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
               <Timebar days={days} />
             </div>
           </div>
-          <div className="card m-2 section flex flex-col justify-start items-center  min-h-[40rem]">
+          <div className=" m-4  section flex flex-col justify-start items-center  min-h-[40rem]">
             <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
               <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
                 {firstCard && dataChecker && (

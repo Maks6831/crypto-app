@@ -95,8 +95,8 @@ export const Pricegraph = (props: GraphProps) => {
           label: function (tooltipItem: any, data: any) {
             let value = tooltipItem.dataset.data[tooltipItem.dataIndex];
             value =
-              value < 1
-                ? value.toPrecision(3)
+              value < 10
+                ? value.toPrecision(7)
                 : value.toFixed(2).toLocaleString();
             props.isLine &&
               setHoverPrice(tooltipItem.dataset.data[tooltipItem.dataIndex]);

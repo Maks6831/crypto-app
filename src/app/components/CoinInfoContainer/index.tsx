@@ -37,7 +37,7 @@ export const CoinInfoContainer = ({
           {symbol}
           {isPrice && coin ? (
             isPrice && currentPrice ? (
-              currentPrice && currentPrice < 1 && currentPrice > 0.85 ? (
+              currentPrice && currentPrice < 3 ? (
                 currentPrice
                   .toString()
                   .slice(0, currentPrice.toString().indexOf(".") + 3)
