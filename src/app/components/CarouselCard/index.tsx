@@ -63,7 +63,9 @@ export const CarouselCard = ({
       onClick={isCoinPage ? goToPage : selectCoin}
       className={
         displayElement
-          ? `m-1 h-10 md:h-20 overflow-hidden w-full  rounded-md rd cursor-pointer ${selectClass()}`
+          ? `m-1 h-10 md:h-20 overflow-hidden w-full  rounded-md rd cursor-pointer ${
+              isCoinPage ? "bg-white dark:bg-dark-card" : selectClass()
+            }`
           : "hidden"
       }
     >
