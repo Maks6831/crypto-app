@@ -50,7 +50,7 @@ export default function Home() {
           {isCoin ? (
             <>
               <div className="sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12">
-                <Carousel />
+                <Carousel isCoinPage={false} />
               </div>
               <Wrapper>
                 <div className="flex flex-col sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] w-11/12 justify-center items-center m-2 ">

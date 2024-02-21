@@ -14,6 +14,7 @@ import { priceChart } from "@/app/GlobalRedux/Features/Chartdata/priceSlice";
 import { CoinInfoContainer } from "@/app/components/CoinInfoContainer";
 import { Buttonswitcher } from "@/app/components/Buttonswitcher";
 import { Timebar } from "@/app/components/Timebar";
+import { Carousel } from "@/app/components/Carousel";
 
 export default function Page({ params }: { params: { coinId: string } }) {
   const dispatch = useAppDispatch();
@@ -147,8 +148,11 @@ export default function Page({ params }: { params: { coinId: string } }) {
             <div>
               <Timebar days={days} />
             </div>
+            <div className="sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12">
+              <Carousel isCoinPage={true} />
+            </div>
           </div>
-          <div className=" m-4  section flex flex-col justify-start items-center  min-h-[40rem]">
+          <div className=" m-4  section flex flex-col justify-start items-center  min-h-[28rem]">
             <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
               <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
                 {firstCard && dataChecker && (
