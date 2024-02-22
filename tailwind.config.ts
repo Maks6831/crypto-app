@@ -44,7 +44,11 @@ const config: Config = {
       'dark-red': '#F06142',
       'new-blue':'#5082CF',
       'dark-date-color':'#9E9E9E',
-      'dark-convert-color':'#FAFBFE'
+      'dark-convert-color':'#FAFBFE',
+      'coin-card-color':'#9D62F9',
+      'coin-page-progress':'#D4770C',
+      'coin-page-progress-two': '#F8D2A6'
+
       },
     extend: {
       backgroundImage: {
