@@ -92,7 +92,7 @@ export const Pricegraph = (props: GraphProps) => {
         mode: "index",
         intersect: false,
         callbacks: {
-          label: function (tooltipItem: any, data: any) {
+          label: function (tooltipItem: any) {
             let value = tooltipItem.dataset.data[tooltipItem.dataIndex];
             value =
               value < 10
@@ -171,7 +171,7 @@ export const Pricegraph = (props: GraphProps) => {
         height={"100%"}
         type={props.isLine ? "line" : "bar"}
         data={data}
-        options={options}
+        options={options as any}
         style={{ width: "100%", height: "100%" }}
       />
     </div>
