@@ -57,7 +57,7 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
               style={{ color: `${colorChange(parseInt(percentage), theme)}` }}
               className="font-medium xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs p-1"
             >
-              {percentFormatter(percentage)}
+              {percentFormatter(parseInt(percentage))}
             </div>
           </div>
           <div className="flex justify-start items-center">
