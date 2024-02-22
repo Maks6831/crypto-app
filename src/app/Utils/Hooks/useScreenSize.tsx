@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { ScreenSize } from "../../types/ScreenSize";
 
 export const useScreenSize = () => {
+  const isClient = typeof window == "object";
   const [screenSize, setScreenSize] = useState<ScreenSize>({
-    width: window.innerWidth && window.innerWidth,
-    height: window.innerHeight && window.innerHeight,
+    width: isClient ? window.innerWidth : 0,
+    height: isClient ? window.innerHeight : 0,
   });
 
   useEffect(() => {
