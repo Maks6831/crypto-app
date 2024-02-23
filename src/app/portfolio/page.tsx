@@ -1,10 +1,13 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import { useAppSelector } from "../GlobalRedux/hooks";
 import { numberFormatter } from "../Utils/numberFormatter";
+import { ProgressBar } from "../components/Progressbar";
 import { Wrapper } from "../components/Wrapper";
 
 export default function Portfolio() {
+  const { theme } = useTheme();
   const { symbol } = useAppSelector((state) => state.currencyReducer);
   return (
     <Wrapper>
@@ -63,16 +66,24 @@ export default function Portfolio() {
                     <div className=" text-sm font-normal dark:text-card-text-gray">
                       Market Cap vs Volume
                     </div>
-                    <div></div>
+                    <div className="w-full">
+                      <ProgressBar
+                        percentage={40}
+                        color="rgba(1, 241, 227, 1)"
+                        size="min-w-full h-1.5"
+                        backgroundColor="bg-card-text-gray"
+                      />
+                    </div>
                   </div>
                   <div className="flex justify-center items-center flex-col">
                     <div className=" text-sm font-normal dark:text-card-text-gray">
                       Circ Supply vs Max Supply
                     </div>
-                    <div></div>
+                    <div className="text-positive">$56,428</div>
                   </div>
                 </div>
               </div>
+              <hr></hr>
             </div>
           </div>
         </div>
