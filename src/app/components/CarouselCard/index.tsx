@@ -5,7 +5,7 @@ import {
   changeCoin,
   changeName,
 } from "@/app/GlobalRedux/Features/CurrentCoin/coinSlice";
-import { percentFormatter } from "@/app/Utils/percentFormatter";
+import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { useTheme } from "next-themes";
 import { colorChange } from "@/app/Utils/colorChange";
 import { useRouter } from "next/navigation";
@@ -85,7 +85,7 @@ export const CarouselCard = ({
               className="md:px-0 lg:px-1 xl:px-2 py-2 whitespace-nowrap hidden lg:flex  font-normal"
               style={{ color: `${colorChange(percentageChange, theme)}` }}
             >
-              {percentFormatter(percentageChange)}
+              {numberFormatter(percentageChange, true)}
             </div>
             <div className="md:px-0 lg:px-1 xl:px-2 py-2 font-normal text-light-text-color dark:text-card-text-gray hidden md:flex ">
               {currentPrice.toFixed(2)}&nbsp;{currency}

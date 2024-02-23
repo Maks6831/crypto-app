@@ -7,7 +7,7 @@ import { useAppSelector } from "@/app/GlobalRedux/hooks";
 import { TableBar } from "../TableBar";
 import { useTheme } from "next-themes";
 import { Sparkline } from "../Sparkline";
-import { percentFormatter } from "@/app/Utils/percentFormatter";
+import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { colorChange } from "@/app/Utils/colorChange";
 import { useRouter } from "next/navigation";
 
@@ -87,33 +87,33 @@ export const TableElement = ({
         </span>
         <span
           style={{ color: `${colorChange(change7d, theme)}` }}
-          className="flex md:hidden flex-row justify-center items-center text-xs"
+          className="flex md:hidden flex-row justify-center items-center text-xs whitespace-nowrap"
         >
-          {percentFormatter(change7d)}
+          {numberFormatter(change7d, true)}
         </span>
       </td>
       <td
         className=" bg-white dark:bg-dark-card   hidden xl:table-cell "
         style={{ color: `${colorChange(change1h, theme)}` }}
       >
-        <span className="flex flex-row justify-center items-center">
-          {percentFormatter(change1h)}
+        <span className="flex flex-row justify-center items-center whitespace-nowrap">
+          {numberFormatter(change1h, true)}
         </span>
       </td>
       <td
         className=" bg-white dark:bg-dark-card  hidden xl:table-cell"
         style={{ color: `${colorChange(change24h, theme)}` }}
       >
-        <span className="flex flex-row justify-center items-center">
-          {percentFormatter(change24h)}
+        <span className="flex flex-row justify-center items-center whitespace-nowrap">
+          {numberFormatter(change24h, true)}
         </span>
       </td>
       <td
         className=" bg-white dark:bg-dark-card hidden md:table-cell  h-full  "
         style={{ color: `${colorChange(change7d, theme)}` }}
       >
-        <span className="flex flex-row justify-center items-center ">
-          {percentFormatter(change7d)}
+        <span className="flex flex-row justify-center items-center whitespace-nowrap">
+          {numberFormatter(change7d, true)}
         </span>
       </td>
       <TableBar
