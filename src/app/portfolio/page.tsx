@@ -14,23 +14,23 @@ export default function Portfolio() {
       <div className="w-full min-h-screen justify-start items-center flex flex-col">
         <div className="w-11/12  h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
           <div>Your Statistics</div>
-          <button className="w-56 h-10 md:h-full  flex  justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one">
+          <button className="w-56 h-10 md:h-full  flex justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one">
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
-        <div className="w-full min-h-32  flex justify-center ">
-          <div className="w-11/12 bg-light-text-color-two h-72 p-3 flex">
-            <div className="w-3/12 flex justify-center items-center">
-              <div className="flex flex-col justify-center items-center">
+        <div className="w-full h-max flex  justify-center ">
+          <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] p-3 flex flex-col md:flex-row  rounded-lg ">
+            <div className=" w-full md:w-3/12 flex justify-center items-center dark:bg-volume-background">
+              <div className="flex flex-row-reverse md:flex-col justify-between w-full md:justify-center items-center">
                 <div>Image</div>
                 <div className="font-bold text-2xl">Name of coin</div>
               </div>
             </div>
-            <div className="w-9/12 p-2">
+            <div className="w-full md:w-9/12 p-2 flex flex-col justify-center items-center">
               <div className="flex w-full h-1/2 flex-col">
                 <div className="flex justify-between">
                   <div className="font-medium text-xl">Market Price</div>
-                  <div className="w-10 h-10 rounded-sm flex justify-center items-center dark:bg-edit-button-color">
+                  <div className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -48,46 +48,50 @@ export default function Portfolio() {
                   </div>
                 </div>
                 <div className="w-full  h-1/2 flex justify-between">
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      current Price
+                  <div className=" md:flex justify-around  w-1/2">
+                    <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray">
+                        current Price
+                      </div>
+                      <div className="text-positive text-base">$39,504</div>
                     </div>
-                    <div className="text-positive text-base">$39,504</div>
-                  </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Price Change 24h
-                    </div>
-                    <div className="text-positive text-base">
-                      {numberFormatter(45406, false, symbol)}
-                    </div>
-                  </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Market Cap vs Volume
-                    </div>
-                    <div className="w-full">
-                      <ProgressBar
-                        percentage={40}
-                        color="rgba(1, 241, 227, 1)"
-                        size="min-w-full h-1.5"
-                        backgroundColor="bg-card-text-gray"
-                      />
+                    <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray">
+                        Price Change 24h
+                      </div>
+                      <div className="text-positive text-base">
+                        {numberFormatter(45406, false, symbol)}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Circ Supply vs Max Supply
+                  <div className=" md:flex justify-around  w-1/2">
+                    <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray text-center">
+                        Market Cap vs Volume
+                      </div>
+                      <div className="w-full">
+                        <ProgressBar
+                          percentage={40}
+                          color="rgba(1, 241, 227, 1)"
+                          size="min-w-full h-1.5"
+                          backgroundColor="bg-card-text-gray"
+                        />
+                      </div>
                     </div>
-                    <div className="text-positive">$56,428</div>
+                    <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray text-center">
+                        Circ Supply vs Max Supply
+                      </div>
+                      <div className="text-positive">$56,428</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <hr></hr>
+              <hr className="border-2 border-card-text-gray border-opacity-40 my-4 w-full rounded-xl"></hr>
               <div className="flex w-full h-1/2 flex-col">
                 <div className="flex justify-between">
                   <div className="font-medium text-xl">Your Coin</div>
-                  <div className="w-10 h-10 rounded-sm flex justify-center items-center dark:bg-edit-button-color">
+                  <div className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -104,34 +108,38 @@ export default function Portfolio() {
                     </svg>
                   </div>
                 </div>
-                <div className="w-full  h-1/2 flex justify-between">
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Coin Amount
+                <div className="w-full   flex justify-between ">
+                  <div className=" md:flex justify-around  w-1/2">
+                    <div className="flex justify-center  m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray">
+                        Coin Amount
+                      </div>
+                      <div className="text-positive text-base">$39,504</div>
                     </div>
-                    <div className="text-positive text-base">$39,504</div>
-                  </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Amount Value
-                    </div>
-                    <div className="text-positive text-base">
-                      {numberFormatter(45406, false, symbol)}
-                    </div>
-                  </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Acount Price Change Since Purchase
-                    </div>
-                    <div className="text-positive">
-                      {numberFormatter(35.32, true, "")}
+                    <div className="flex justify-center  m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray">
+                        Amount Value
+                      </div>
+                      <div className="text-positive text-base">
+                        {numberFormatter(45406, false, symbol)}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
-                      Purchase Date
+                  <div className=" md:flex justify-around  w-1/2">
+                    <div className="flex justify-center  m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray">
+                        APCSP
+                      </div>
+                      <div className="text-positive">
+                        {numberFormatter(35.32, true, "")}
+                      </div>
                     </div>
-                    <div className="text-positive">3.2.2021</div>
+                    <div className="flex justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
+                      <div className=" text-sm font-normal dark:text-card-text-gray">
+                        Purchase Date
+                      </div>
+                      <div className="text-positive">3.2.2021</div>
+                    </div>
                   </div>
                 </div>
               </div>
