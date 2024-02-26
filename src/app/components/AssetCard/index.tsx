@@ -11,9 +11,12 @@ export const AssetCard = ({ id }: { id: string }) => {
   const { coins } = useAppSelector((state) => state.tableReducer);
   const { theme } = useTheme();
   const coin = coins.length > 0 && coins.find((el) => el.id === id);
+  const percentage =
+    coins.length > 0 && coin && (coin.market_cap / coin.total_volume) * 100;
   useEffect(() => {
     console.log(coins);
     console.log(coin);
+    console.log(percentage);
   }, []);
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
@@ -79,7 +82,7 @@ export const AssetCard = ({ id }: { id: string }) => {
                 </div>
                 <div className="w-full">
                   <ProgressBar
-                    percentage={40}
+                    percentage={typeof percentage === "number" ? percentage : 0}
                     color="rgba(1, 241, 227, 1)"
                     size="min-w-full h-1.5"
                     backgroundColor="bg-card-text-gray"
