@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const coinDatePrice = createAsyncThunk(
@@ -10,3 +10,32 @@ export const coinDatePrice = createAsyncThunk(
         return json;
       }
     );
+
+    const initialState = {
+        data :{},
+        loading:false,
+        error:''
+    }
+
+    const coinDatePriceSlice = createSlice({
+        name: 'coinDatePriceSlice',
+    initialState,
+    reducers: {},
+    extraReducers:builder => {
+        builder
+      .addCase(coinDatePrice.pending, (state, action) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(coinDatePrice.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(coinDatePrice.rejected, (state, action) => {
+        state.loading = false;
+        
+        state.error = action.error.message ?? "An unkown error occurrfetchData"
+        console.log(state.error);
+    })
+    }
+    })
