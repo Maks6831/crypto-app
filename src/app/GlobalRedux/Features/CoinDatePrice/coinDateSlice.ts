@@ -42,3 +42,5 @@ export const coinDatePrice = createAsyncThunk(
     })
     }
     })
+
+    export default coinDatePriceSlice.reducer;
