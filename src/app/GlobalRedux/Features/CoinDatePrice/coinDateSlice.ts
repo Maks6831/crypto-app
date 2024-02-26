@@ -11,8 +11,11 @@ export const coinDatePrice = createAsyncThunk(
       }
     );
 
+    const storedData = localStorage.getItem('dataPrices');
+    const dataPrices = storedData !== null ? JSON.parse(storedData) : [];
+
     const initialState = {
-        data :{},
+        data :dataPrices,
         loading:false,
         error:''
     }
@@ -29,7 +32,7 @@ export const coinDatePrice = createAsyncThunk(
       })
       .addCase(coinDatePrice.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.data.push(action.payload);
       })
       .addCase(coinDatePrice.rejected, (state, action) => {
         state.loading = false;
