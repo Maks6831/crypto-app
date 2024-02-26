@@ -3,13 +3,17 @@ import React, { useEffect } from "react";
 import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { ProgressBar } from "../Progressbar";
 import { useAppSelector } from "@/app/GlobalRedux/hooks";
+import { colorChange } from "@/app/Utils/colorChange";
+import { useTheme } from "next-themes";
 
 export const AssetCard = ({ id }: { id: string }) => {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
   const { coins } = useAppSelector((state) => state.tableReducer);
+  const { theme } = useTheme();
   const coin = coins.length > 0 && coins.find((el) => el.id === id);
   useEffect(() => {
     console.log(coins);
+    console.log(coin);
   }, []);
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
@@ -46,7 +50,7 @@ export const AssetCard = ({ id }: { id: string }) => {
                 <div className=" text-sm font-normal dark:text-card-text-gray">
                   current Price
                 </div>
-                <div className="text-positive text-base">
+                <div className=" text-positive text-base">
                   {symbol}
                   {coin && coin.current_price}
                 </div>
@@ -55,7 +59,14 @@ export const AssetCard = ({ id }: { id: string }) => {
                 <div className=" text-sm font-normal dark:text-card-text-gray">
                   Price Change 24h
                 </div>
-                <div className="text-positive text-base">
+                <div
+                  style={{
+                    color: `${
+                      coin && colorChange(coin.price_change_24h, theme)
+                    }`,
+                  }}
+                  className=" text-base"
+                >
                   {coin &&
                     numberFormatter(coin.price_change_24h, false, symbol)}
                 </div>

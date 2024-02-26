@@ -89,7 +89,7 @@ export const TableElement = ({
           style={{ color: `${colorChange(change7d, theme)}` }}
           className="flex md:hidden flex-row justify-center items-center text-xs whitespace-nowrap"
         >
-          {numberFormatter(change7d, true)}
+          {numberFormatter(change7d, true, "")}
         </span>
       </td>
       <td
@@ -97,7 +97,7 @@ export const TableElement = ({
         style={{ color: `${colorChange(change1h, theme)}` }}
       >
         <span className="flex flex-row justify-center items-center whitespace-nowrap">
-          {numberFormatter(change1h, true)}
+          {numberFormatter(change1h, true, "")}
         </span>
       </td>
       <td
@@ -105,7 +105,7 @@ export const TableElement = ({
         style={{ color: `${colorChange(change24h, theme)}` }}
       >
         <span className="flex flex-row justify-center items-center whitespace-nowrap">
-          {numberFormatter(change24h, true)}
+          {numberFormatter(change24h, true, "")}
         </span>
       </td>
       <td
@@ -113,7 +113,7 @@ export const TableElement = ({
         style={{ color: `${colorChange(change7d, theme)}` }}
       >
         <span className="flex flex-row justify-center items-center whitespace-nowrap">
-          {numberFormatter(change7d, true)}
+          {numberFormatter(change7d, true, "")}
         </span>
       </td>
       <TableBar
