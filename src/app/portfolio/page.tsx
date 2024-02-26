@@ -9,6 +9,7 @@ import { AssetCard } from "../components/AssetCard";
 
 export default function Portfolio() {
   const { theme } = useTheme();
+  const arr = ["bitcoin", "ethereum"];
   const { symbol } = useAppSelector((state) => state.currencyReducer);
   return (
     <Wrapper>
@@ -19,8 +20,10 @@ export default function Portfolio() {
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
-        <div className="w-full h-max flex  justify-center ">
-          <AssetCard />
+        <div className="w-full h-max flex flex-col items-center  justify-center ">
+          {arr.map((el) => (
+            <AssetCard key={el} id={el} />
+          ))}
         </div>
       </div>
     </Wrapper>

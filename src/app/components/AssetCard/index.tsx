@@ -1,17 +1,22 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { ProgressBar } from "../Progressbar";
 import { useAppSelector } from "@/app/GlobalRedux/hooks";
 
-export const AssetCard = () => {
+export const AssetCard = ({ id }: { id: string }) => {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
+  const { coins } = useAppSelector((state) => state.tableReducer);
+  const coin = coins.length > 0 && coins.find((el) => el.id === id);
+  useEffect(() => {
+    console.log(coins);
+  }, []);
   return (
-    <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] p-3 flex flex-col md:flex-row  rounded-lg ">
+    <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
       <div className=" w-full md:w-3/12 flex justify-center items-center dark:bg-volume-background">
         <div className="flex flex-row-reverse md:flex-col justify-between w-full md:justify-center items-center">
           <div>Image</div>
-          <div className="font-bold text-2xl">Name of coin</div>
+          <div className="font-bold text-2xl">{coin && coin.name}</div>
         </div>
       </div>
       <div className="w-full md:w-9/12 p-2 flex flex-col justify-center items-center">
@@ -41,14 +46,18 @@ export const AssetCard = () => {
                 <div className=" text-sm font-normal dark:text-card-text-gray">
                   current Price
                 </div>
-                <div className="text-positive text-base">$39,504</div>
+                <div className="text-positive text-base">
+                  {symbol}
+                  {coin && coin.current_price}
+                </div>
               </div>
               <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
                 <div className=" text-sm font-normal dark:text-card-text-gray">
                   Price Change 24h
                 </div>
                 <div className="text-positive text-base">
-                  {numberFormatter(45406, false, symbol)}
+                  {coin &&
+                    numberFormatter(coin.price_change_24h, false, symbol)}
                 </div>
               </div>
             </div>
