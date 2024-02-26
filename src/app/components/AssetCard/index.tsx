@@ -12,7 +12,7 @@ export const AssetCard = ({ id }: { id: string }) => {
   const { theme } = useTheme();
   const coin = coins.length > 0 && coins.find((el) => el.id === id);
   const percentage =
-    coins.length > 0 && coin && (coin.market_cap / coin.total_volume) * 100;
+    coins.length > 0 && coin && (coin.total_volume / coin.market_cap) * 100;
   useEffect(() => {
     console.log(coins);
     console.log(coin);
@@ -78,7 +78,7 @@ export const AssetCard = ({ id }: { id: string }) => {
             <div className=" md:flex justify-around  w-1/2">
               <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
                 <div className=" text-sm font-normal dark:text-card-text-gray text-center">
-                  Market Cap vs Volume
+                  Volume vs Market Cap
                 </div>
                 <div className="w-full">
                   <ProgressBar
