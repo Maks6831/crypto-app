@@ -6,11 +6,20 @@ import { numberFormatter } from "../Utils/numberFormatter";
 import { ProgressBar } from "../components/Progressbar";
 import { Wrapper } from "../components/Wrapper";
 import { AssetCard } from "../components/AssetCard";
+import { useEffect, useState } from "react";
+import { useLocalState } from "../Utils/Hooks/useLocalState";
 
 export default function Portfolio() {
   const { theme } = useTheme();
+  const { data } = useAppSelector((state) => state.coinDatePriceReducer);
+  const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const arr = ["bitcoin", "ethereum"];
   const { symbol } = useAppSelector((state) => state.currencyReducer);
+
+  useEffect(() => {
+    console.log(data);
+  }, []);
+
   return (
     <Wrapper>
       <div className="w-full min-h-screen justify-start items-center flex flex-col">
@@ -21,8 +30,8 @@ export default function Portfolio() {
           </button>
         </div>
         <div className="w-full h-max flex flex-col items-center  justify-center ">
-          {arr.map((el) => (
-            <AssetCard key={el} id={el} />
+          {data.map((el: any) => (
+            <AssetCard key={el.id} id={el.id} />
           ))}
         </div>
       </div>

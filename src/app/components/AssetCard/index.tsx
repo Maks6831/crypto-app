@@ -13,11 +13,7 @@ export const AssetCard = ({ id }: { id: string }) => {
   const coin = coins.length > 0 && coins.find((el) => el.id === id);
   const percentage =
     coins.length > 0 && coin && (coin.total_volume / coin.market_cap) * 100;
-  useEffect(() => {
-    console.log(coins);
-    console.log(coin);
-    console.log(percentage);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
       <div className=" w-full md:w-3/12 flex justify-center items-center dark:bg-volume-background">
