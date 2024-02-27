@@ -5,21 +5,45 @@ import { ProgressBar } from "../Progressbar";
 import { useAppSelector } from "@/app/GlobalRedux/hooks";
 import { colorChange } from "@/app/Utils/colorChange";
 import { useTheme } from "next-themes";
+import { coinPage } from "@/app/types/CoinPageTypes";
 
-export const AssetCard = ({ id }: { id: string }) => {
-  const { symbol } = useAppSelector((state) => state.currencyReducer);
+export const AssetCard = ({
+  id,
+  date,
+  index,
+}: {
+  id: string;
+  date: string;
+  index: number;
+}) => {
+  const { symbol, currency } = useAppSelector((state) => state.currencyReducer);
+  const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
   const { coins } = useAppSelector((state) => state.tableReducer);
   const { theme } = useTheme();
-  const coin = coins.length > 0 && coins.find((el) => el.id === id);
-  const percentage =
-    coins.length > 0 && coin && (coin.total_volume / coin.market_cap) * 100;
-  useEffect(() => {}, []);
+  const coin =
+    (portfolioData.length > index &&
+      portfolioData.find((el) => el.id === id)) ||
+    coinPage;
+
+  const {
+    current_price,
+    market_cap,
+    total_volume,
+    circulating_supply,
+    max_supply,
+    price_change_24h_in_currency,
+  } = coin.market_data;
+  const percentage = (total_volume[currency] / market_cap[currency]) * 100;
+  useEffect(() => {
+    console.log(portfolioData);
+    console.log(percentage);
+  }, [portfolioData]);
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
       <div className=" w-full md:w-3/12 flex justify-center items-center dark:bg-volume-background">
         <div className="flex flex-row-reverse md:flex-col justify-between w-full md:justify-center items-center">
           <div>Image</div>
-          <div className="font-bold text-2xl">{coin && coin.name}</div>
+          <div className="font-bold text-2xl">{coin.name}</div>
         </div>
       </div>
       <div className="w-full md:w-9/12 p-2 flex flex-col justify-center items-center">
@@ -51,7 +75,7 @@ export const AssetCard = ({ id }: { id: string }) => {
                 </div>
                 <div className=" text-positive text-base">
                   {symbol}
-                  {coin && coin.current_price}
+                  {current_price[currency].toLocaleString()}
                 </div>
               </div>
               <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
@@ -61,13 +85,18 @@ export const AssetCard = ({ id }: { id: string }) => {
                 <div
                   style={{
                     color: `${
-                      coin && colorChange(coin.price_change_24h, theme)
+                      coin &&
+                      colorChange(price_change_24h_in_currency[currency], theme)
                     }`,
                   }}
                   className=" text-base"
                 >
                   {coin &&
-                    numberFormatter(coin.price_change_24h, false, symbol)}
+                    numberFormatter(
+                      price_change_24h_in_currency[currency],
+                      false,
+                      symbol
+                    )}
                 </div>
               </div>
             </div>

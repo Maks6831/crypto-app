@@ -1,23 +1,38 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useAppSelector } from "../GlobalRedux/hooks";
+import { useAppDispatch, useAppSelector } from "../GlobalRedux/hooks";
 import { numberFormatter } from "../Utils/numberFormatter";
 import { ProgressBar } from "../components/Progressbar";
 import { Wrapper } from "../components/Wrapper";
 import { AssetCard } from "../components/AssetCard";
 import { useEffect, useState } from "react";
 import { useLocalState } from "../Utils/Hooks/useLocalState";
+import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 
 export default function Portfolio() {
   const { theme } = useTheme();
+  const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
-  const arr = ["bitcoin", "ethereum"];
+  const arrForApi = localData
+    .filter(
+      (value: string, index: number) => localData.indexOf(value) === index
+    )
+    .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
   useEffect(() => {
-    console.log(data);
+    setLocalData(data);
+  }, [data]);
+
+  useEffect(() => {
+    arrForApi.length > 0 &&
+      arrForApi.map((id: string) => {
+        console.log(id);
+        dispatch(coinPageData(id));
+      });
+    console.log(arrForApi);
   }, []);
 
   return (
@@ -30,8 +45,13 @@ export default function Portfolio() {
           </button>
         </div>
         <div className="w-full h-max flex flex-col items-center  justify-center ">
-          {data.map((el: any) => (
-            <AssetCard key={el.id} id={el.id} />
+          {data.map((el: any, index: number) => (
+            <AssetCard
+              key={el.id}
+              id={el.id}
+              date={el.date}
+              index={index + 1}
+            />
           ))}
         </div>
       </div>

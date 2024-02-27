@@ -21,7 +21,7 @@ export const coinDatePrice = createAsyncThunk(
     }
 
     const coinDatePriceSlice = createSlice({
-        name: 'coinDatePriceSlice',
+    name: 'coinDatePriceSlice',
     initialState,
     reducers: {},
     extraReducers:builder => {

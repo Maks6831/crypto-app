@@ -14,8 +14,9 @@ export const coinPageData = createAsyncThunk(
       }
     );
 
-    const initialState : {data: CoinPageTypes, loading: boolean, error: string } = {
+    const initialState : {data: CoinPageTypes, portfolioData:CoinPageTypes[] ,loading: boolean, error: string } = {
         data: coinPage ,
+        portfolioData:[],
         loading: false,
         error: '',
     }
@@ -33,7 +34,10 @@ export const coinPageData = createAsyncThunk(
             state.error = "";
           })
           .addCase(coinPageData.fulfilled, (state, action) => {
+            console.log('working');
             state.data = action.payload as CoinPageTypes;
+            state.portfolioData.push(action.payload);
+
           })
           .addCase(coinPageData.rejected, (state, action) => {
             state.loading = false;
