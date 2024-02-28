@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useLocalState } from "../Utils/Hooks/useLocalState";
 import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
+import { DatePriceObj } from "../types/DatePriceTypes";
 
 export default function Portfolio() {
   const { theme } = useTheme();
@@ -53,12 +54,13 @@ export default function Portfolio() {
           </button>
         </div>
         <div className="w-full h-max flex flex-col items-center  justify-center ">
-          {data.map((el: any, index: number) => (
+          {data.map((el: any, index: number, arr: DatePriceObj[]) => (
             <AssetCard
               key={el.id}
               id={el.id}
               date={el.date}
               index={index + 1}
+              array={arr}
             />
           ))}
         </div>
