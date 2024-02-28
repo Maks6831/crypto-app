@@ -24,7 +24,9 @@ export default function Portfolio() {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
   const addAsset = () => {
-    dispatch(coinDatePrice({ id: "ethereum", date: "15-11-2022" }));
+    dispatch(
+      coinDatePrice({ id: "tether", date: "13-05-2023", amount: 0.00015 })
+    );
     console.log("addAsset");
   };
 

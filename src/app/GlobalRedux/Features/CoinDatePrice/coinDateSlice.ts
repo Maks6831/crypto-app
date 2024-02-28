@@ -1,12 +1,13 @@
+import { DatePriceObj, DatePriceType } from "@/app/types/DatePriceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const coinDatePrice = createAsyncThunk(
     'coinDatePrice',
-    async ({id, date}: {id:string, date:string} ,thunkApi) => {
+    async ({id, date, amount}: {id:string, date:string, amount:number} ,thunkApi) => {
         const url = `https://api.coingecko.com/api/v3/coins/${id}/history?date=${date}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
-        const json = await response.json();
+        const json: DatePriceType = await response.json();
         return json;
       }
     );
@@ -14,7 +15,7 @@ export const coinDatePrice = createAsyncThunk(
     const storedData = localStorage.getItem('dataCoinPrices');
     const dataPrices = storedData !== null ? JSON.parse(storedData) : [];
 
-    const initialState = {
+    const initialState : {data: DatePriceObj[], loading: boolean, error: string}  = {
         data : dataPrices,
         loading:false,
         error:''
@@ -32,7 +33,13 @@ export const coinDatePrice = createAsyncThunk(
       })
       .addCase(coinDatePrice.fulfilled, (state, action) => {
         state.loading = false;
-        state.data.push(action.payload);
+        const {id, amount, date} = action.meta.arg;
+        const refactoredObj :DatePriceObj = Object.assign({}, action.payload, {
+          id: id,
+          amount:amount,
+          date: date,
+        });
+        state.data.push(refactoredObj);
         console.log('hello')
       })
       .addCase(coinDatePrice.rejected, (state, action) => {

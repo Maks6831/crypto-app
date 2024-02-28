@@ -1,4 +1,4 @@
-export interface DatePriceTypes {
+export interface DatePriceType {
     id:                    string;
     symbol:                string;
     name:                  string;
@@ -8,6 +8,12 @@ export interface DatePriceTypes {
     community_data:        CommunityData;
     developer_data:        DeveloperData;
     public_interest_stats: PublicInterestStats;
+}
+
+export interface DatePriceObj extends DatePriceType {
+    date: string;
+    amount: number;
+    id: string    
 }
 
 export interface CommunityData {
