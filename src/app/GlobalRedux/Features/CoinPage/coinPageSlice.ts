@@ -34,7 +34,6 @@ export const coinPageData = createAsyncThunk(
             state.error = "";
           })
           .addCase(coinPageData.fulfilled, (state, action) => {
-            console.log('working');
             state.data = action.payload as CoinPageTypes;
             state.portfolioData.push(action.payload);
 

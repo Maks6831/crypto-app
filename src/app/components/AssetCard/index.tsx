@@ -25,7 +25,6 @@ export const AssetCard = ({
     (portfolioData.length > index &&
       portfolioData.find((el) => el.id === id)) ||
     coinPage;
-
   const {
     current_price,
     market_cap,
@@ -35,10 +34,9 @@ export const AssetCard = ({
     price_change_24h_in_currency,
   } = coin.market_data;
   const percentage = (total_volume[currency] / market_cap[currency]) * 100;
-  useEffect(() => {
-    console.log(portfolioData);
-    console.log(percentage);
-  }, [portfolioData]);
+
+  useEffect(() => {}, [coin]);
+
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
       <div className=" w-full md:w-3/12 flex  justify-center items-center dark:bg-volume-background">
