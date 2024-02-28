@@ -48,7 +48,8 @@ const config: Config = {
       'coin-card-color':'#9D62F9',
       'coin-page-progress':'#D4770C',
       'coin-page-progress-two': '#F8D2A6',
-      'edit-button-color': '#3A3978'
+      'edit-button-color': '#3A3978',
+      'symbol-background':'#2C2C4A'
 
       },
     extend: {

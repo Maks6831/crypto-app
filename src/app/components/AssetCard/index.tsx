@@ -6,6 +6,7 @@ import { useAppSelector } from "@/app/GlobalRedux/hooks";
 import { colorChange } from "@/app/Utils/colorChange";
 import { useTheme } from "next-themes";
 import { coinPage } from "@/app/types/CoinPageTypes";
+import Image from "next/image";
 
 export const AssetCard = ({
   id,
@@ -40,10 +41,19 @@ export const AssetCard = ({
   }, [portfolioData]);
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
-      <div className=" w-full md:w-3/12 flex justify-center items-center dark:bg-volume-background">
-        <div className="flex flex-row-reverse md:flex-col justify-between w-full md:justify-center items-center">
-          <div>Image</div>
-          <div className="font-bold text-2xl">{coin.name}</div>
+      <div className=" w-full md:w-3/12 flex  justify-center items-center dark:bg-volume-background">
+        <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
+          <div className="m-3 h-16 w-16 flex justify-center items-center dark:bg-symbol-background rounded-md">
+            <Image
+              src={coin.image.small}
+              alt="coin symbol"
+              width={32}
+              height={32}
+            />
+          </div>
+          <div className="font-bold text-2xl">
+            {coin.name}({coin.symbol.toLocaleUpperCase()})
+          </div>
         </div>
       </div>
       <div className="w-full md:w-9/12 p-2 flex flex-col justify-center items-center">
