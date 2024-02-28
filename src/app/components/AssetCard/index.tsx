@@ -169,7 +169,11 @@ export const AssetCard = ({
                   </svg>
                 </div>
               </div>
-              <PortfolioCard />
+              <PortfolioCard
+                id={id}
+                date={date}
+                currentMarketPrice={current_price}
+              />
             </div>
           </div>
         </>

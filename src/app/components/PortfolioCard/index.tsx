@@ -1,26 +1,52 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { useAppSelector } from "@/app/GlobalRedux/hooks";
+import { useLocalState } from "@/app/Utils/Hooks/useLocalState";
+import { DatePriceObj, minimalDatePriceObj } from "@/app/types/DatePriceTypes";
 
-export const PortfolioCard = () => {
-  const { symbol } = useAppSelector((state) => state.currencyReducer);
+export const PortfolioCard = ({
+  id,
+  date,
+  currentMarketPrice,
+}: {
+  id: string;
+  date: string;
+  currentMarketPrice: { [key: string]: number };
+}) => {
+  const { symbol, currency } = useAppSelector((state) => state.currencyReducer);
+  const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
+  const [coin, setCoin] = useState<DatePriceObj>(minimalDatePriceObj);
+  useEffect(() => {
+    setCoin(
+      localData.find((el: DatePriceObj) => el.id === id && el.date === date)
+    );
+  }, []);
+  const historicalPrice = coin.market_data.current_price;
+  const total = coin.amount * currentMarketPrice[currency];
+  const purchasedPrice = historicalPrice[currency];
+  const priceChange =
+    (currentMarketPrice[currency] /
+      historicalPrice[currency] /
+      historicalPrice[currency]) *
+    100;
   return (
-    <div className="w-full border-2  flex justify-between ">
+    <div className="w-full  flex justify-between ">
       <div className=" md:flex justify-around  w-1/2">
         <div className="flex justify-center  m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
           <div className=" text-sm font-normal dark:text-card-text-gray">
-            Coin Amount
+            Total:
           </div>
-          <div className="text-positive text-base">$39,504</div>
+          <div className="text-positive text-base">
+            {symbol}
+            {total.toPrecision(3)}
+          </div>
         </div>
         <div className="flex justify-center  m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
           <div className=" text-sm font-normal dark:text-card-text-gray">
-            Amount Value
+            Purchased Price
           </div>
-          <div className="text-positive text-base">
-            {numberFormatter(45406, false, symbol)}
-          </div>
+          <div className="text-positive text-base">{purchasedPrice}</div>
         </div>
       </div>
       <div className=" md:flex justify-around  w-1/2">
@@ -29,14 +55,14 @@ export const PortfolioCard = () => {
             APCSP
           </div>
           <div className="text-positive">
-            {numberFormatter(35.32, true, "")}
+            {numberFormatter(priceChange, true, "")}
           </div>
         </div>
         <div className="flex justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
           <div className=" text-sm font-normal dark:text-card-text-gray">
             Purchase Date
           </div>
-          <div className="text-positive">3.2.2021</div>
+          <div className="text-positive">{date.replaceAll("-", ".")}</div>
         </div>
       </div>
     </div>
