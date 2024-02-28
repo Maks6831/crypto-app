@@ -30,10 +30,12 @@ export const AssetCard = ({
     market_cap,
     total_volume,
     circulating_supply,
-    max_supply,
+    total_supply,
     price_change_24h_in_currency,
   } = coin.market_data;
-  const percentage = (total_volume[currency] / market_cap[currency]) * 100;
+  const volumePercentage =
+    (total_volume[currency] / market_cap[currency]) * 100;
+  const supplyPercentage = (circulating_supply / total_supply) * 100;
 
   useEffect(() => {
     portfolioData.length === array.length &&
@@ -124,7 +126,9 @@ export const AssetCard = ({
                     <div className="w-full">
                       <ProgressBar
                         percentage={
-                          typeof percentage === "number" ? percentage : 0
+                          typeof volumePercentage === "number"
+                            ? volumePercentage
+                            : 0
                         }
                         color="rgba(1, 241, 227, 1)"
                         size="min-w-full h-1.5"
@@ -136,7 +140,9 @@ export const AssetCard = ({
                     <div className=" text-sm font-normal dark:text-card-text-gray text-center">
                       Circ Supply vs Max Supply
                     </div>
-                    <div className="text-positive">$56,428</div>
+                    <div className="text-positive">
+                      {supplyPercentage.toPrecision(3)}%
+                    </div>
                   </div>
                 </div>
               </div>
