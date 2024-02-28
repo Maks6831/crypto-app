@@ -12,7 +12,7 @@ export const coinDatePrice = createAsyncThunk(
       }
     );
 
-    const storedData = localStorage.getItem('dataCoinPrices');
+    const storedData = typeof window !== 'undefined' ? window.localStorage.getItem('dataCoinPrices') : null;
     const dataPrices = storedData !== null ? JSON.parse(storedData) : [];
 
     const initialState : {data: DatePriceObj[], loading: boolean, error: string}  = {

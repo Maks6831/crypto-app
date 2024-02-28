@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const useLocalState = (key : string, initialValue:any) => {
-    const storedValue = window.localStorage.getItem(key);
+    const storedValue = typeof window !== 'undefined' ? window.localStorage.getItem(key): null;
     const item = storedValue ? JSON.parse(storedValue) : initialValue;
     const [state, setState] = useState(item);
   
