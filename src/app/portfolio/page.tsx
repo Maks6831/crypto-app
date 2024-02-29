@@ -74,7 +74,7 @@ export default function Portfolio() {
         </div>
       </div>
       <dialog
-        className="w-3/5 justify-center items-center bg-grey rounded-3xl h-96  p-6 "
+        className="w-3/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-fit  p-6 "
         ref={modalRef}
       >
         <div className="w-full h-full justify-center items-center flex flex-col">
