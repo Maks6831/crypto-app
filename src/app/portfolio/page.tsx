@@ -6,7 +6,7 @@ import { numberFormatter } from "../Utils/numberFormatter";
 import { ProgressBar } from "../components/Progressbar";
 import { Wrapper } from "../components/Wrapper";
 import { AssetCard } from "../components/AssetCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocalState } from "../Utils/Hooks/useLocalState";
 import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
@@ -17,6 +17,7 @@ export default function Portfolio() {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
+  const modalRef = useRef<HTMLDialogElement>(null);
   const arrForApi = localData
     .filter(
       (value: string, index: number) => localData.indexOf(value) === index
@@ -24,11 +25,19 @@ export default function Portfolio() {
     .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
+  const closeModal = () => {
+    modalRef.current?.close();
+  };
+
   const addAsset = () => {
-    dispatch(
-      coinDatePrice({ id: "tether", date: "13-05-2023", amount: 0.00015 })
-    );
-    console.log("addAsset");
+    if (!modalRef.current) {
+      return;
+    }
+    modalRef.current?.showModal();
+    //dispatch(
+    //  coinDatePrice({ id: "tether", date: "13-05-2023", amount: 0.00015 })
+    //);
+    //console.log("addAsset");
   };
 
   useEffect(() => {
@@ -65,6 +74,9 @@ export default function Portfolio() {
           ))}
         </div>
       </div>
+      <dialog ref={modalRef}>
+        <button onClick={closeModal}>close button</button>
+      </dialog>
     </Wrapper>
   );
 }
