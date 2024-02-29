@@ -25,15 +25,13 @@ export default function Portfolio() {
     .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
-  const closeModal = () => {
-    modalRef.current?.close();
-  };
-
-  const addAsset = () => {
+  const toggleModal = () => {
     if (!modalRef.current) {
       return;
     }
-    modalRef.current?.showModal();
+    modalRef.current.hasAttribute("open")
+      ? modalRef.current.close()
+      : modalRef.current.showModal();
     //dispatch(
     //  coinDatePrice({ id: "tether", date: "13-05-2023", amount: 0.00015 })
     //);
@@ -56,7 +54,7 @@ export default function Portfolio() {
         <div className="w-11/12  h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
           <div>Your Statistics</div>
           <button
-            onClick={addAsset}
+            onClick={toggleModal}
             className="w-56 h-10 md:h-full  flex justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one"
           >
             <div className="font-medium text-base">Add Asset</div>
@@ -74,8 +72,31 @@ export default function Portfolio() {
           ))}
         </div>
       </div>
-      <dialog ref={modalRef}>
-        <button onClick={closeModal}>close button</button>
+      <dialog
+        className="w-3/5 justify-center items-center bg-dark-background rounded-3xl h-96  p-6 "
+        ref={modalRef}
+      >
+        <div className="w-full h-full justify-center items-center flex flex-col">
+          <div className=" flex m-3 w-10/12 justify-between">
+            <div>Select coin</div>
+            <button className="border-2" onClick={toggleModal}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </dialog>
     </Wrapper>
   );
