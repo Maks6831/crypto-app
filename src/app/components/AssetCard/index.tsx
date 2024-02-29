@@ -39,7 +39,7 @@ export const AssetCard = ({
   const supplyPercentage = (circulating_supply / total_supply) * 100;
 
   useEffect(() => {
-    portfolioData.length === array.length &&
+    portfolioData.length > 0 &&
       setCoin((initial) => portfolioData.find((el) => el.id === id) || initial);
   }, [portfolioData]);
 
