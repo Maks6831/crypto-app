@@ -11,6 +11,7 @@ import { useLocalState } from "../Utils/Hooks/useLocalState";
 import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
 import { DatePriceObj } from "../types/DatePriceTypes";
+import { Searchbar } from "../components/Searchbar";
 
 export default function Portfolio() {
   const { theme } = useTheme();
@@ -73,7 +74,7 @@ export default function Portfolio() {
         </div>
       </div>
       <dialog
-        className="w-3/5 justify-center items-center bg-dark-background rounded-3xl h-96  p-6 "
+        className="w-3/5 justify-center items-center bg-grey rounded-3xl h-96  p-6 "
         ref={modalRef}
       >
         <div className="w-full h-full justify-center items-center flex flex-col">
@@ -96,6 +97,19 @@ export default function Portfolio() {
               </svg>
             </button>
           </div>
+          <div className="flex  w-9/12 justify-between items-center">
+            <div>Choose coin</div>
+            <div>Add searchBar</div>
+          </div>
+          <div className="flex  w-9/12 justify-between items-center">
+            <div>Purchase Amount</div>
+            <div>input label</div>
+          </div>
+          <div className="flex  w-9/12 justify-between items-center">
+            <div>Date purchased</div>
+            <div>dateinput</div>
+          </div>
+          <button>Save</button>
         </div>
       </dialog>
     </Wrapper>
