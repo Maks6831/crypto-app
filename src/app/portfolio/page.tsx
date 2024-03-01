@@ -74,10 +74,10 @@ export default function Portfolio() {
         </div>
       </div>
       <dialog
-        className="  w-11/12 md:w-4/5  lg:w-7/12 2xl:w-2/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-96  p-1 "
+        className="  w-11/12 md:w-4/5 backdrop:delay-1000  lg:w-7/12 2xl:w-2/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-[20rem]  "
         ref={modalRef}
       >
-        <div className="w-full h-full justify-center   items-center flex flex-col">
+        <div className="w-full h-full justify-center  items-center flex flex-col">
           <div className=" flex m-3 w-11/12 justify-between">
             <div>Select coin</div>
             <button onClick={toggleModal}>
@@ -103,7 +103,7 @@ export default function Portfolio() {
               <div className="h-11 m-2">Purchase Amount</div>
               <div className="h-11 m-2">Date purchased</div>
             </div>
-            <div className="min-w-full   min-[320px]:w-7/12 ">
+            <div className="min-w-full   min-[580px]:min-w-0  min-[580px]:w-7/12 ">
               <div className=" w-full">
                 <Searchbar
                   isPortfolio={true}
@@ -134,7 +134,7 @@ export default function Portfolio() {
             </div>
           </div>
           <div className="w-10/12  flex justify-end items-center">
-            <div className="min-w-full   min-[320px]:w-7/12 flex ">
+            <div className="min-w-full min-[580px]:min-w-0   min-[580px]:w-7/12 flex ">
               <div className="w-1/2 flex justify-center items-center">
                 <button className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 ">
                   Cancel
