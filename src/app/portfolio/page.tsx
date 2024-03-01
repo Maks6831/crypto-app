@@ -74,7 +74,7 @@ export default function Portfolio() {
         </div>
       </div>
       <dialog
-        className="w-3/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-96  p-6 "
+        className="  w-11/12 md:w-4/5  lg:w-7/12 2xl:w-2/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-96  p-1 "
         ref={modalRef}
       >
         <div className="w-full h-full justify-center   items-center flex flex-col">
@@ -98,38 +98,55 @@ export default function Portfolio() {
             </button>
           </div>
           <div className="flex  w-10/12 justify-between items-center">
-            <div>Choose coin</div>
-            <div className=" w-1/2">
-              <Searchbar isPortfolio={true} isSearch={false} defaultValue="" />
+            <div className="w-5/12 min-[580px]:block hidden  ">
+              <div className="h-11 m-2">Choose coin</div>
+              <div className="h-11 m-2">Purchase Amount</div>
+              <div className="h-11 m-2">Date purchased</div>
             </div>
-          </div>
-          <div className="flex  w-10/12 justify-between items-center">
-            <div>Purchase Amount</div>
-            <div className="w-1/2">
-              <div className="md:m-2">
-                <label className="scrollbar-w-full">
-                  <input
-                    className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
-                    placeholder="Purchased Amount..."
-                  />
-                </label>
+            <div className="min-w-full   min-[320px]:w-7/12 ">
+              <div className=" w-full">
+                <Searchbar
+                  isPortfolio={true}
+                  isSearch={false}
+                  defaultValue=""
+                />
+              </div>
+              <div className="w-full">
+                <div className="m-2 relative flex ">
+                  <label className="h-12 rounded-xl leading-10 w-full">
+                    <input
+                      className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                      placeholder="Purchased Amount..."
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="m-2 relative flex">
+                  <label className="h-12 rounded-xl leading-10 w-full">
+                    <input
+                      className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                      placeholder="Purchase date..."
+                    />
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex  w-10/12 justify-between items-center">
-            <div>Date purchased</div>
-            <div className="w-1/2">
-              <div className="md:m-2">
-                <label className="scrollbar-w-full">
-                  <input
-                    className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
-                    placeholder="Purchase date..."
-                  />
-                </label>
+          <div className="w-10/12  flex justify-end items-center">
+            <div className="min-w-full   min-[320px]:w-7/12 flex ">
+              <div className="w-1/2 flex justify-center items-center">
+                <button className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 ">
+                  Cancel
+                </button>
+              </div>
+              <div className="w-1/2 flex justify-center items-center">
+                <button className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base ">
+                  Save
+                </button>
               </div>
             </div>
           </div>
-          <button>Save</button>
         </div>
       </dialog>
     </Wrapper>
