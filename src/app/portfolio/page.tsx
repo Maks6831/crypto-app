@@ -13,6 +13,7 @@ import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSli
 import { DatePriceObj } from "../types/DatePriceTypes";
 import { Searchbar } from "../components/Searchbar";
 import { Coin, exampleAsset } from "../types/searchTypes";
+import Image from "next/image";
 
 export default function Portfolio() {
   const { theme } = useTheme();
@@ -29,6 +30,7 @@ export default function Portfolio() {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
   const toggleModal = () => {
+    setChosenCoin(exampleAsset);
     if (!modalRef.current) {
       return;
     }
@@ -76,7 +78,7 @@ export default function Portfolio() {
         </div>
       </div>
       <dialog
-        className="  w-11/12 md:w-4/5 backdrop:delay-1000  lg:w-7/12 2xl:w-2/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-[20rem]  "
+        className="  w-11/12 md:w-4/5 backdrop:delay-1000 p-3 lg:w-7/12 2xl:w-2/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-max min-[580px]:h-[22rem] py-10 "
         ref={modalRef}
       >
         <div className="w-full h-full justify-center  items-center flex flex-col">
@@ -99,63 +101,80 @@ export default function Portfolio() {
               </svg>
             </button>
           </div>
-          <div className="flex  w-10/12 justify-between items-center">
+          <div className="flex flex-col h-full   min-[580px]:flex-row w-10/12 justify-between items-center">
             {chosenCoin && chosenCoin === exampleAsset ? (
-              <div className="w-5/12 min-[580px]:block hidden  ">
-                <div className="h-11 m-2">Choose coin</div>
-                <div className="h-11 m-2">Purchase Amount</div>
-                <div className="h-11 m-2">Date purchased</div>
+              <div className="w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
+                <div className="h-14 pt-1 m-2">Choose coin</div>
+                <div className="h-14 m-2">Purchase Amount</div>
+                <div className="h-14 m-2">Date purchased</div>
               </div>
             ) : (
-              <div className="w-5/12 min-[580px]:block hidden  ">
-                {chosenCoin.name}
+              <div className="m-2  w-full h-full  min-[580px]:w-5/12">
+                <div className=" flex w-full  h-full rounded-xl   justify-center items-center dark:bg-volume-background">
+                  <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
+                    <div className="m-3 h-16 w-16 flex justify-center items-center dark:bg-symbol-background rounded-md">
+                      <Image
+                        src={chosenCoin.large}
+                        alt="coin symbol"
+                        width={32}
+                        height={32}
+                      />
+                    </div>
+                    <div className=" pl-3 min-[580px]:pl-0 font-bold flex xl:text-2xl lg:text-lg text-base ">
+                      {chosenCoin.name}
+                      <div className="hidden md:flex">
+                        ({chosenCoin.symbol.toLocaleUpperCase()})
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
-
-            <div className="min-w-full   min-[580px]:min-w-0  min-[580px]:w-7/12 ">
-              <div className=" w-full">
-                <Searchbar
-                  isPortfolio={true}
-                  isSearch={false}
-                  liftStateUp={setChosenCoin}
-                />
-              </div>
-              <div className="w-full">
-                <div className="m-2 relative flex ">
-                  <label className="h-12 rounded-xl leading-10 w-full">
-                    <input
-                      className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
-                      placeholder="Purchased Amount..."
-                    />
-                  </label>
+            <div className=" min-w-full w-full h-full flex flex-col justify-between min-[580px]:min-w-0  min-[580px]:w-7/12 ">
+              <div className=" w-full flex flex-col justify-between">
+                <div className=" w-full">
+                  <Searchbar
+                    isPortfolio={true}
+                    isSearch={false}
+                    liftStateUp={setChosenCoin}
+                  />
+                </div>
+                <div className="w-full ">
+                  <div className="m-2 relative flex ">
+                    <label className="h-12 rounded-xl leading-10 w-full">
+                      <input
+                        className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                        placeholder="Purchased Amount..."
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div className="w-full">
+                  <div className="m-2 relative flex">
+                    <label className="h-12 rounded-xl leading-10 w-full">
+                      <input
+                        className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                        placeholder="Purchase date..."
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
-              <div className="w-full">
-                <div className="m-2 relative flex">
-                  <label className="h-12 rounded-xl leading-10 w-full">
-                    <input
-                      className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
-                      placeholder="Purchase date..."
-                    />
-                  </label>
+              <div className="w-full flex ">
+                <div className="w-1/2 flex justify-center items-center">
+                  <button className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 ">
+                    Cancel
+                  </button>
+                </div>
+                <div className="w-1/2 flex justify-center items-center">
+                  <button className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base ">
+                    Save
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-10/12  flex justify-end items-center">
-            <div className="min-w-full min-[580px]:min-w-0   min-[580px]:w-7/12 flex ">
-              <div className="w-1/2 flex justify-center items-center">
-                <button className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 ">
-                  Cancel
-                </button>
-              </div>
-              <div className="w-1/2 flex justify-center items-center">
-                <button className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base ">
-                  Save
-                </button>
-              </div>
-            </div>
-          </div>
+          <div className="w-10/12  flex justify-end items-center"></div>
         </div>
       </dialog>
     </Wrapper>

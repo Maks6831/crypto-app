@@ -7,3 +7,4 @@ export type SearchBarProps = {
     isPortfolio: false
     defaultValue: string;
 })
+
