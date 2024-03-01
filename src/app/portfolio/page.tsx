@@ -104,9 +104,9 @@ export default function Portfolio() {
           <div className="flex flex-col h-full   min-[580px]:flex-row w-10/12 justify-between items-center">
             {chosenCoin && chosenCoin === exampleAsset ? (
               <div className="w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
-                <div className="h-14 pt-1 m-2">Choose coin</div>
-                <div className="h-14 m-2">Purchase Amount</div>
-                <div className="h-14 m-2">Date purchased</div>
+                <div className="h-14 pt-1 m-2">Select a cryptocurrency</div>
+                <div className="h-14 m-2">Enter the amount you purchased</div>
+                <div className="h-14 m-2">Select the date of purchase</div>
               </div>
             ) : (
               <div className="m-2  w-full h-full  min-[580px]:w-5/12">
@@ -162,7 +162,10 @@ export default function Portfolio() {
               </div>
               <div className="w-full flex ">
                 <div className="w-1/2 flex justify-center items-center">
-                  <button className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 ">
+                  <button
+                    onClick={toggleModal}
+                    className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
+                  >
                     Cancel
                   </button>
                 </div>
@@ -174,7 +177,6 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
-          <div className="w-10/12  flex justify-end items-center"></div>
         </div>
       </dialog>
     </Wrapper>
