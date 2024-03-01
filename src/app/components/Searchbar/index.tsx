@@ -142,9 +142,9 @@ export const Searchbar = ({
             isSearch
               ? "pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
               : isPortfolio
-              ? " dark:bg-dark-button-color w-full rounded-md pl-2"
-              : " w-full dark:bg-inherit text-base md:text-2xl"
-          } ouline-none h-12 `}
+              ? " dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+              : " w-full dark:bg-inherit text-base md:text-2xl h-12 "
+          } ouline-none  `}
           placeholder={
             isSearch ? "Search..." : isPortfolio ? "Select Coin..." : ""
           }

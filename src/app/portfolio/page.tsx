@@ -77,10 +77,10 @@ export default function Portfolio() {
         className="w-3/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-96  p-6 "
         ref={modalRef}
       >
-        <div className="w-full h-full justify-start items-center flex flex-col">
-          <div className=" flex m-3 w-10/12 justify-between">
+        <div className="w-full h-full justify-center   items-center flex flex-col">
+          <div className=" flex m-3 w-11/12 justify-between">
             <div>Select coin</div>
-            <button className="border-2" onClick={toggleModal}>
+            <button onClick={toggleModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -97,19 +97,37 @@ export default function Portfolio() {
               </svg>
             </button>
           </div>
-          <div className="flex  w-9/12 justify-between items-center">
+          <div className="flex  w-10/12 justify-between items-center">
             <div>Choose coin</div>
             <div className=" w-1/2">
               <Searchbar isPortfolio={true} isSearch={false} defaultValue="" />
             </div>
           </div>
-          <div className="flex  w-9/12 justify-between items-center">
+          <div className="flex  w-10/12 justify-between items-center">
             <div>Purchase Amount</div>
-            <div>input label</div>
+            <div className="w-1/2">
+              <div className="md:m-2">
+                <label className="scrollbar-w-full">
+                  <input
+                    className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                    placeholder="Purchased Amount..."
+                  />
+                </label>
+              </div>
+            </div>
           </div>
-          <div className="flex  w-9/12 justify-between items-center">
+          <div className="flex  w-10/12 justify-between items-center">
             <div>Date purchased</div>
-            <div>dateinput</div>
+            <div className="w-1/2">
+              <div className="md:m-2">
+                <label className="scrollbar-w-full">
+                  <input
+                    className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                    placeholder="Purchase date..."
+                  />
+                </label>
+              </div>
+            </div>
           </div>
           <button>Save</button>
         </div>
