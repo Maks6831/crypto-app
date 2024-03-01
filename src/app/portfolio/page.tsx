@@ -74,10 +74,10 @@ export default function Portfolio() {
         </div>
       </div>
       <dialog
-        className="w-3/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-fit  p-6 "
+        className="w-3/5 backdrop:backdrop-blur-lg  bg-dark-background rounded-3xl h-96  p-6 "
         ref={modalRef}
       >
-        <div className="w-full h-full justify-center items-center flex flex-col">
+        <div className="w-full h-full justify-start items-center flex flex-col">
           <div className=" flex m-3 w-10/12 justify-between">
             <div>Select coin</div>
             <button className="border-2" onClick={toggleModal}>
@@ -99,7 +99,9 @@ export default function Portfolio() {
           </div>
           <div className="flex  w-9/12 justify-between items-center">
             <div>Choose coin</div>
-            <div>Add searchBar</div>
+            <div className=" w-1/2">
+              <Searchbar isPortfolio={true} isSearch={false} defaultValue="" />
+            </div>
           </div>
           <div className="flex  w-9/12 justify-between items-center">
             <div>Purchase Amount</div>

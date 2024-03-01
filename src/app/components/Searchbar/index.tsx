@@ -10,10 +10,12 @@ import { changeArray } from "@/app/GlobalRedux/Features/ConverterCoins/ConvertSl
 
 export const Searchbar = ({
   isSearch,
+  isPortfolio,
   defaultValue,
 }: {
   isSearch: boolean;
   defaultValue: string;
+  isPortfolio: boolean;
 }) => {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(
@@ -52,12 +54,15 @@ export const Searchbar = ({
 
   const setValue = () => {
     const coin = data[focusedIndex];
-    const index = coins.findIndex((obj) => obj.name === defaultValue);
-    let coinArray = [...coins];
-    coinArray[index] = coin;
-    dispatch(changeArray(coinArray));
+    if (!isSearch && !isPortfolio) {
+      const index = coins.findIndex((obj) => obj.name === defaultValue);
+      let coinArray = [...coins];
+      coinArray[index] = coin;
+      dispatch(changeArray(coinArray));
+    }
     setSearchInput(coin.name);
     setDropDown(false);
+    handleDropDown(false);
   };
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
@@ -107,7 +112,7 @@ export const Searchbar = ({
       key={defaultValue}
       tabIndex={1}
       onKeyDown={handleKeyDown}
-      className={`relative ${isSearch ? "m-2" : "md:m-2"}  flex`}
+      className={`relative ${isSearch ? "m-2" : "md:m-2"} flex`}
       onFocus={() => handleDropDown(true)}
       onBlur={() => handleDropDown(false)}
     >
@@ -133,12 +138,16 @@ export const Searchbar = ({
         className={`h-12 rounded-xl leading-10 ${isSearch ? "w-89" : "w-full"}`}
       >
         <input
-          className={
+          className={`${
             isSearch
-              ? " h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none"
-              : "h-12 outline-none w-full dark:bg-inherit text-base md:text-2xl"
+              ? "pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
+              : isPortfolio
+              ? " dark:bg-dark-button-color w-full rounded-md pl-2"
+              : " w-full dark:bg-inherit text-base md:text-2xl"
+          } ouline-none h-12 `}
+          placeholder={
+            isSearch ? "Search..." : isPortfolio ? "Select Coin..." : ""
           }
-          placeholder={isSearch ? "Search..." : ""}
           type="text"
           value={searchInput}
           onChange={useHandleChange}
