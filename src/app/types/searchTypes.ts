@@ -39,3 +39,14 @@ export interface Nft {
     symbol: string;
     thumb:  string;
 }
+
+
+const exampleAsset: Coin = {
+    id: "exampleId",
+    name: "Example Asset",
+    api_symbol: "EXM",
+    symbol: "$EXM",
+    market_cap_rank: 1,
+    thumb: "url/to/thumb/image.jpg",
+    large: "url/to/large/image.jpg"
+};

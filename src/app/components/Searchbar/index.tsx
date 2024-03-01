@@ -7,16 +7,12 @@ import { SearchItem } from "../SearchItem";
 import { useDebounce } from "@/app/Utils/Hooks/useDebounce";
 import { useRouter } from "next/navigation";
 import { changeArray } from "@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice";
+import { SearchBarProps } from "@/app/types/SearchBarType";
 
-export const Searchbar = ({
-  isSearch,
-  isPortfolio,
-  defaultValue,
-}: {
-  isSearch: boolean;
-  defaultValue: string;
-  isPortfolio: boolean;
-}) => {
+export const Searchbar = (props: SearchBarProps) => {
+  const defaultValue = props.isPortfolio ? "" : props.defaultValue;
+  const isSearch = props.isSearch;
+  const isPortfolio = props.isPortfolio;
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(
     (state) => state.searchReducer
