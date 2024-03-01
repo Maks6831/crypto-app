@@ -12,11 +12,13 @@ import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
 import { DatePriceObj } from "../types/DatePriceTypes";
 import { Searchbar } from "../components/Searchbar";
+import { Coin, exampleAsset } from "../types/searchTypes";
 
 export default function Portfolio() {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
+  const [chosenCoin, setChosenCoin] = useState<Coin>(exampleAsset);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const modalRef = useRef<HTMLDialogElement>(null);
   const arrForApi = localData
@@ -98,17 +100,24 @@ export default function Portfolio() {
             </button>
           </div>
           <div className="flex  w-10/12 justify-between items-center">
-            <div className="w-5/12 min-[580px]:block hidden  ">
-              <div className="h-11 m-2">Choose coin</div>
-              <div className="h-11 m-2">Purchase Amount</div>
-              <div className="h-11 m-2">Date purchased</div>
-            </div>
+            {chosenCoin && chosenCoin === exampleAsset ? (
+              <div className="w-5/12 min-[580px]:block hidden  ">
+                <div className="h-11 m-2">Choose coin</div>
+                <div className="h-11 m-2">Purchase Amount</div>
+                <div className="h-11 m-2">Date purchased</div>
+              </div>
+            ) : (
+              <div className="w-5/12 min-[580px]:block hidden  ">
+                {chosenCoin.name}
+              </div>
+            )}
+
             <div className="min-w-full   min-[580px]:min-w-0  min-[580px]:w-7/12 ">
               <div className=" w-full">
                 <Searchbar
                   isPortfolio={true}
                   isSearch={false}
-                  defaultValue=""
+                  liftStateUp={setChosenCoin}
                 />
               </div>
               <div className="w-full">

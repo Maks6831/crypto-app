@@ -56,6 +56,10 @@ export const Searchbar = (props: SearchBarProps) => {
       coinArray[index] = coin;
       dispatch(changeArray(coinArray));
     }
+    if (isPortfolio) {
+      console.log(coin);
+      props.liftStateUp(coin);
+    }
     setSearchInput(coin.name);
     setDropDown(false);
     handleDropDown(false);

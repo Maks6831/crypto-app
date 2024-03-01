@@ -41,7 +41,7 @@ export interface Nft {
 }
 
 
-const exampleAsset: Coin = {
+export const exampleAsset: Coin = {
     id: "exampleId",
     name: "Example Asset",
     api_symbol: "EXM",
