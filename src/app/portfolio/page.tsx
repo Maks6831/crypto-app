@@ -22,6 +22,8 @@ export default function Portfolio() {
   const [chosenCoin, setChosenCoin] = useState<Coin>(exampleAsset);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const modalRef = useRef<HTMLDialogElement>(null);
+  const amountRef = useRef<HTMLInputElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
   const arrForApi = localData
     .filter(
       (value: string, index: number) => localData.indexOf(value) === index
@@ -145,6 +147,7 @@ export default function Portfolio() {
                       <input
                         className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                         placeholder="Purchased Amount..."
+                        ref={amountRef}
                       />
                     </label>
                   </div>
@@ -155,6 +158,8 @@ export default function Portfolio() {
                       <input
                         className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                         placeholder="Purchase date..."
+                        ref={dateRef}
+                        type="date"
                       />
                     </label>
                   </div>
