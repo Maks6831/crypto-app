@@ -47,6 +47,7 @@ export const PortfolioCard = ({
             Purchased Price
           </div>
           <div className="text-positive text-base">
+            {symbol}
             {purchasedPrice.toFixed(2)}
           </div>
         </div>
