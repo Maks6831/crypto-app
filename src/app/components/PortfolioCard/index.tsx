@@ -46,7 +46,9 @@ export const PortfolioCard = ({
           <div className=" text-sm font-normal dark:text-card-text-gray">
             Purchased Price
           </div>
-          <div className="text-positive text-base">{purchasedPrice}</div>
+          <div className="text-positive text-base">
+            {purchasedPrice.toFixed(2)}
+          </div>
         </div>
       </div>
       <div className=" md:flex justify-around  w-1/2">

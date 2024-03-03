@@ -37,10 +37,12 @@ export default function Portfolio() {
       amountRef.current?.value &&
       dateRef.current?.value
     ) {
+      const parts = dateRef.current.value.split("-");
+      const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
       dispatch(
         coinDatePrice({
           id: chosenCoin.id,
-          date: dateRef.current?.value,
+          date: dateCorrectedForAPi,
           amount: parseFloat(amountRef.current?.value),
         })
       );
@@ -55,13 +57,15 @@ export default function Portfolio() {
     modalRef.current.hasAttribute("open")
       ? modalRef.current.close()
       : modalRef.current.showModal();
-
-    //console.log("addAsset");
   };
 
   useEffect(() => {
     arrForApi.length > 0 &&
       arrForApi.map((id: string) => dispatch(coinPageData(id)));
+  }, [data]);
+
+  useEffect(() => {
+    setLocalData(data);
   }, [data]);
 
   return (

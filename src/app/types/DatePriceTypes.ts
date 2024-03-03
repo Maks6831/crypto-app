@@ -140,7 +140,11 @@ export const minimalDatePriceObj: DatePriceObj = {
         small: "",
     },
     market_data: {
-        current_price: {},
+        current_price: {
+            "usd":0.2,
+            "eur":9.2,
+            "gbp":9.0
+        },
         market_cap: {},
         total_volume: {},
     },
