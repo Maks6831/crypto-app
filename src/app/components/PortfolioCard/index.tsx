@@ -15,13 +15,14 @@ export const PortfolioCard = ({
   currentMarketPrice: { [key: string]: number };
 }) => {
   const { symbol, currency } = useAppSelector((state) => state.currencyReducer);
-  const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
+  const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const [coin, setCoin] = useState<DatePriceObj>(minimalDatePriceObj);
   useEffect(() => {
     setCoin(
-      localData.find((el: DatePriceObj) => el.id === id && el.date === date)
+      data.find((el: DatePriceObj) => el.id === id && el.date === date) ||
+        minimalDatePriceObj
     );
-  }, []);
+  }, [data]);
   const historicalPrice = coin.market_data.current_price;
   const total = coin.amount * currentMarketPrice[currency];
   const purchasedPrice = historicalPrice[currency];

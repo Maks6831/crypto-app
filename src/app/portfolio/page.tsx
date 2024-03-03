@@ -31,12 +31,22 @@ export default function Portfolio() {
     .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
+  const toggleModal = () => {
+    setChosenCoin(exampleAsset);
+    if (!modalRef.current) {
+      return;
+    }
+    modalRef.current.hasAttribute("open")
+      ? modalRef.current.close()
+      : modalRef.current.showModal();
+  };
   const saveAsset = () => {
     if (
       chosenCoin !== exampleAsset &&
       amountRef.current?.value &&
       dateRef.current?.value
     ) {
+      console.log("working");
       const parts = dateRef.current.value.split("-");
       const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
       dispatch(
@@ -47,16 +57,7 @@ export default function Portfolio() {
         })
       );
     }
-  };
-
-  const toggleModal = () => {
-    setChosenCoin(exampleAsset);
-    if (!modalRef.current) {
-      return;
-    }
-    modalRef.current.hasAttribute("open")
-      ? modalRef.current.close()
-      : modalRef.current.showModal();
+    toggleModal;
   };
 
   useEffect(() => {
