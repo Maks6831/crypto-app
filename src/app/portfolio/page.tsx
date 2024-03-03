@@ -31,6 +31,22 @@ export default function Portfolio() {
     .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
+  const saveAsset = () => {
+    if (
+      chosenCoin !== exampleAsset &&
+      amountRef.current?.value &&
+      dateRef.current?.value
+    ) {
+      dispatch(
+        coinDatePrice({
+          id: chosenCoin.id,
+          date: dateRef.current?.value,
+          amount: parseFloat(amountRef.current?.value),
+        })
+      );
+    }
+  };
+
   const toggleModal = () => {
     setChosenCoin(exampleAsset);
     if (!modalRef.current) {
@@ -39,16 +55,9 @@ export default function Portfolio() {
     modalRef.current.hasAttribute("open")
       ? modalRef.current.close()
       : modalRef.current.showModal();
-    //dispatch(
-    //  coinDatePrice({ id: "tether", date: "13-05-2023", amount: 0.00015 })
-    //);
+
     //console.log("addAsset");
   };
-
-  useEffect(() => {
-    setLocalData(data);
-    console.log(data);
-  }, [data]);
 
   useEffect(() => {
     arrForApi.length > 0 &&
@@ -143,10 +152,14 @@ export default function Portfolio() {
                 </div>
                 <div className="w-full ">
                   <div className="m-2 relative flex ">
-                    <label className="h-12 rounded-xl leading-10 w-full">
+                    <label
+                      htmlFor="amountRef"
+                      className="h-12 rounded-xl leading-10 w-full"
+                    >
                       <input
                         className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                         placeholder="Purchased Amount..."
+                        name="amountRef"
                         ref={amountRef}
                       />
                     </label>
@@ -154,10 +167,14 @@ export default function Portfolio() {
                 </div>
                 <div className="w-full">
                   <div className="m-2 relative flex">
-                    <label className="h-12 rounded-xl leading-10 w-full">
+                    <label
+                      htmlFor="dateRef"
+                      className="h-12 rounded-xl leading-10 w-full"
+                    >
                       <input
                         className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                         placeholder="Purchase date..."
+                        name="dateRef"
                         ref={dateRef}
                         type="date"
                       />
@@ -175,7 +192,10 @@ export default function Portfolio() {
                   </button>
                 </div>
                 <div className="w-1/2 flex justify-center items-center">
-                  <button className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base ">
+                  <button
+                    onClick={saveAsset}
+                    className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
+                  >
                     Save
                   </button>
                 </div>
