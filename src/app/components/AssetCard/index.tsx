@@ -44,7 +44,7 @@ export const AssetCard = ({
     console.log("array.length:", array.length);
     console.log("portfolioDate", portfolioData);
 
-    if (portfolioData.length === array.length) {
+    if (portfolioData.length >= array.length) {
       const currenMarketCoin =
         portfolioData.find((el) => el.id === id) || coinPage;
       setCoin(currenMarketCoin);
