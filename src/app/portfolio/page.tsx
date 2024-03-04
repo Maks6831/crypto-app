@@ -19,6 +19,7 @@ export default function Portfolio() {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
+  const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
   const [chosenCoin, setChosenCoin] = useState<Coin>(exampleAsset);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -56,8 +57,9 @@ export default function Portfolio() {
           amount: parseFloat(amountRef.current?.value),
         })
       );
+      dispatch(coinPageData(chosenCoin.id));
+      toggleModal();
     }
-    toggleModal;
   };
 
   useEffect(() => {
@@ -82,15 +84,16 @@ export default function Portfolio() {
           </button>
         </div>
         <div className="w-full h-max flex flex-col items-center  justify-center ">
-          {data.map((el: any, index: number, arr: DatePriceObj[]) => (
-            <AssetCard
-              key={el.id}
-              id={el.id}
-              date={el.date}
-              index={index + 1}
-              array={arr}
-            />
-          ))}
+          {data &&
+            data.map((el: any, index: number, arr: DatePriceObj[]) => (
+              <AssetCard
+                key={el.id}
+                id={el.id}
+                date={el.date}
+                index={index + 1}
+                array={arr}
+              />
+            ))}
         </div>
       </div>
       <dialog

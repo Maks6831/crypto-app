@@ -40,7 +40,6 @@ export const coinDatePrice = createAsyncThunk(
           date: date,
         });
         state.data.push(refactoredObj);
-        console.log('hello')
       })
       .addCase(coinDatePrice.rejected, (state, action) => {
         state.loading = false;

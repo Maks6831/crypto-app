@@ -1,5 +1,4 @@
 'use client';
-
 import { CoinPageTypes , coinPage } from "@/app/types/CoinPageTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -35,7 +34,9 @@ export const coinPageData = createAsyncThunk(
           })
           .addCase(coinPageData.fulfilled, (state, action) => {
             state.data = action.payload as CoinPageTypes;
+            console.log(action.payload);
             state.portfolioData.push(action.payload);
+            console.log('portfolio data from redux', state.portfolioData);
 
           })
           .addCase(coinPageData.rejected, (state, action) => {

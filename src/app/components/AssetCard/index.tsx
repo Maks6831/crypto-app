@@ -26,6 +26,7 @@ export const AssetCard = ({
   const { coins } = useAppSelector((state) => state.tableReducer);
   const { theme } = useTheme();
   const [coin, setCoin] = useState<CoinPageTypes>(coinPage);
+  const [isLoaded, setIsLoading] = useState<boolean>(false);
   const {
     current_price,
     market_cap,
@@ -39,13 +40,24 @@ export const AssetCard = ({
   const supplyPercentage = (circulating_supply / total_supply) * 100;
 
   useEffect(() => {
-    portfolioData.length > 0 &&
-      setCoin((initial) => portfolioData.find((el) => el.id === id) || initial);
+    console.log("portfolioData.length:", portfolioData.length);
+    console.log("array.length:", array.length);
+    console.log("portfolioDate", portfolioData);
+
+    if (portfolioData.length === array.length) {
+      const currenMarketCoin =
+        portfolioData.find((el) => el.id === id) || coinPage;
+      setCoin(currenMarketCoin);
+    }
   }, [portfolioData]);
+
+  useEffect(() => {
+    coin !== coinPage ? setIsLoading(true) : null;
+  }, [coin]);
 
   return (
     <div className="w-11/12 bg-light-text-color-two  min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
-      {coin && (
+      {isLoaded && coin !== coinPage && (
         <>
           <div className=" w-full md:w-3/12 flex  justify-center items-center dark:bg-volume-background">
             <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
