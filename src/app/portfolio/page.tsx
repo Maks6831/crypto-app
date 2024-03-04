@@ -37,10 +37,15 @@ export default function Portfolio() {
     if (!modalRef.current) {
       return;
     }
-    modalRef.current.hasAttribute("open")
-      ? modalRef.current.close()
-      : modalRef.current.showModal();
+    if (modalRef.current.hasAttribute("open")) {
+      modalRef.current.close();
+      amountRef.current?.value && (amountRef.current.value = "");
+      dateRef.current?.value && (dateRef.current.value = "");
+    } else {
+      modalRef.current.showModal();
+    }
   };
+
   const saveAsset = () => {
     if (
       chosenCoin !== exampleAsset &&
@@ -58,6 +63,7 @@ export default function Portfolio() {
         })
       );
       dispatch(coinPageData(chosenCoin.id));
+
       toggleModal();
     }
   };
