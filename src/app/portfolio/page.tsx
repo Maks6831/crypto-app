@@ -14,6 +14,7 @@ import { DatePriceObj } from "../types/DatePriceTypes";
 import { Searchbar } from "../components/Searchbar";
 import { Coin, exampleAsset } from "../types/searchTypes";
 import Image from "next/image";
+import { CoinPageTypes } from "../types/CoinPageTypes";
 
 export default function Portfolio() {
   const { theme } = useTheme();
@@ -21,7 +22,9 @@ export default function Portfolio() {
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
   const searchData = useAppSelector((state) => state.searchReducer.data);
-  const [chosenCoin, setChosenCoin] = useState<Coin>(exampleAsset);
+  const [chosenCoin, setChosenCoin] = useState<Coin | CoinPageTypes>(
+    exampleAsset
+  );
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -37,7 +40,8 @@ export default function Portfolio() {
   const toggleModal = (isEdit: boolean, id: string) => {
     if (isEdit) {
       const coinFromSearchData =
-        searchData.find((el) => el.id === id) || exampleAsset;
+        portfolioData.find((el) => el.id === id) || exampleAsset;
+      console.log(coinFromSearchData);
       setChosenCoin(coinFromSearchData);
     } else {
       setChosenCoin(exampleAsset);
@@ -62,7 +66,6 @@ export default function Portfolio() {
       amountRef.current?.value &&
       dateRef.current?.value
     ) {
-      console.log("working");
       const parts = dateRef.current.value.split("-");
       const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
       dispatch(
@@ -150,15 +153,21 @@ export default function Portfolio() {
                   <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
                     <div className="m-3 h-16 w-16 flex justify-center items-center dark:bg-symbol-background rounded-md">
                       <Image
-                        src={chosenCoin.large}
+                        src={
+                          "image" in chosenCoin
+                            ? chosenCoin.image.large
+                            : chosenCoin.large
+                        }
                         alt="coin symbol"
                         width={32}
                         height={32}
                       />
                     </div>
-                    <div className=" pl-3 min-[580px]:pl-0 font-bold flex xl:text-2xl lg:text-lg text-base ">
-                      {chosenCoin.name}
-                      <div className="hidden md:flex">
+                    <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex justify-center items-center xl:text-2xl lg:text-sm text-base ">
+                      <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
+                        {chosenCoin.name}
+                      </div>
+                      <div className="hidden md:flex xl:text-xl lg:text-lg text-bas">
                         ({chosenCoin.symbol.toLocaleUpperCase()})
                       </div>
                     </div>

@@ -42,10 +42,6 @@ export const AssetCard = ({
   const supplyPercentage = (circulating_supply / total_supply) * 100;
 
   useEffect(() => {
-    console.log("portfolioData.length:", portfolioData.length);
-    console.log("array.length:", array.length);
-    console.log("portfolioDate", portfolioData);
-
     if (portfolioData.length >= array.length) {
       const currenMarketCoin =
         portfolioData.find((el) => el.id === id) || coinPage;

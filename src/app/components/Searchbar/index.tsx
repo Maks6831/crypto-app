@@ -43,7 +43,6 @@ export const Searchbar = (props: SearchBarProps) => {
   };
 
   const searchCoin = () => {
-    console.log(`${data[focusedIndex].id}`);
     router.push(`/coins/${data[focusedIndex].id}`);
     handleDropDown(false);
     setSearchInput("");
