@@ -15,11 +15,13 @@ export const AssetCard = ({
   date,
   index,
   array,
+  toggleModal,
 }: {
   id: string;
   date: string;
   index: number;
   array: DatePriceObj[];
+  toggleModal: Function;
 }) => {
   const { symbol, currency } = useAppSelector((state) => state.currencyReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
@@ -145,7 +147,7 @@ export const AssetCard = ({
                         }
                         color="rgba(1, 241, 227, 1)"
                         size="min-w-full h-1.5"
-                        backgroundColor="bg-card-text-gray"
+                        backgroundColor="bg-positive bg-opacity-50"
                       />
                     </div>
                   </div>
@@ -164,7 +166,10 @@ export const AssetCard = ({
             <div className="flex w-full h-1/2 flex-col">
               <div className="flex justify-between">
                 <div className="font-medium text-xl">Your Coin</div>
-                <div className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color">
+                <div
+                  onClick={() => toggleModal(true, `${coin.id}`)}
+                  className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

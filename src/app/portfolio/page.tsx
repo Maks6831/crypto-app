@@ -20,6 +20,7 @@ export default function Portfolio() {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
+  const searchData = useAppSelector((state) => state.searchReducer.data);
   const [chosenCoin, setChosenCoin] = useState<Coin>(exampleAsset);
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
@@ -33,8 +34,15 @@ export default function Portfolio() {
     .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
-  const toggleModal = () => {
-    setChosenCoin(exampleAsset);
+  const toggleModal = (isEdit: boolean, id: string) => {
+    if (isEdit) {
+      const coinFromSearchData =
+        searchData.find((el) => el.id === id) || exampleAsset;
+      setChosenCoin(coinFromSearchData);
+    } else {
+      setChosenCoin(exampleAsset);
+    }
+
     if (!modalRef.current) {
       return;
     }
@@ -66,7 +74,7 @@ export default function Portfolio() {
       );
       dispatch(coinPageData(chosenCoin.id));
 
-      toggleModal();
+      toggleModal(false, "");
     }
   };
 
@@ -85,7 +93,7 @@ export default function Portfolio() {
         <div className="w-11/12  h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
           <div>Your Statistics</div>
           <button
-            onClick={toggleModal}
+            onClick={() => toggleModal(false, "")}
             className="w-56 h-10 md:h-full  flex justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one"
           >
             <div className="font-medium text-base">Add Asset</div>
@@ -100,6 +108,7 @@ export default function Portfolio() {
                 date={el.date}
                 index={index + 1}
                 array={arr}
+                toggleModal={toggleModal}
               />
             ))}
         </div>
@@ -111,7 +120,7 @@ export default function Portfolio() {
         <div className="w-full h-full justify-center  items-center flex flex-col">
           <div className=" flex m-3 w-11/12 justify-between">
             <div>Select coin</div>
-            <button onClick={toggleModal}>
+            <button onClick={() => toggleModal(false, "")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -202,7 +211,7 @@ export default function Portfolio() {
               <div className="w-full flex ">
                 <div className="w-1/2 flex justify-center items-center">
                   <button
-                    onClick={toggleModal}
+                    onClick={() => toggleModal(false, "")}
                     className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
                   >
                     Cancel
