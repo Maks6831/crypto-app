@@ -21,6 +21,7 @@ export default function Portfolio() {
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
   const [chosenCoin, setChosenCoin] = useState<Coin>(exampleAsset);
+  const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const modalRef = useRef<HTMLDialogElement>(null);
   const amountRef = useRef<HTMLInputElement>(null);
@@ -41,6 +42,7 @@ export default function Portfolio() {
       modalRef.current.close();
       amountRef.current?.value && (amountRef.current.value = "");
       dateRef.current?.value && (dateRef.current.value = "");
+      setModalCloseCheck(!modalCloseCheck);
     } else {
       modalRef.current.showModal();
     }
@@ -162,6 +164,7 @@ export default function Portfolio() {
                     isPortfolio={true}
                     isSearch={false}
                     liftStateUp={setChosenCoin}
+                    modalCloseChecker={modalCloseCheck}
                   />
                 </div>
                 <div className="w-full ">

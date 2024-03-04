@@ -13,6 +13,7 @@ export const Searchbar = (props: SearchBarProps) => {
   const defaultValue = props.isPortfolio ? "" : props.defaultValue;
   const isSearch = props.isSearch;
   const isPortfolio = props.isPortfolio;
+  const modalCloseCheck = props.isPortfolio ? props.modalCloseChecker : false;
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(
     (state) => state.searchReducer
@@ -105,6 +106,10 @@ export const Searchbar = (props: SearchBarProps) => {
       resultContainer.current.scrollIntoView({ block: "nearest" });
     }
   }, [focusedIndex]);
+
+  useEffect(() => {
+    setSearchInput("");
+  }, [modalCloseCheck]);
 
   return (
     <div

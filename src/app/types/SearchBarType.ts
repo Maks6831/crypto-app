@@ -3,6 +3,7 @@ export type SearchBarProps = {
 } & ({
     isPortfolio: true;
     liftStateUp : Function;
+    modalCloseChecker: boolean;
 }|{
     isPortfolio: false
     defaultValue: string;
