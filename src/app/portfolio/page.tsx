@@ -1,9 +1,7 @@
 "use client";
-
+import * as Yup from "yup";
 import { useTheme } from "next-themes";
 import { useAppDispatch, useAppSelector } from "../GlobalRedux/hooks";
-import { numberFormatter } from "../Utils/numberFormatter";
-import { ProgressBar } from "../components/Progressbar";
 import { Wrapper } from "../components/Wrapper";
 import { AssetCard } from "../components/AssetCard";
 import { useEffect, useRef, useState } from "react";
@@ -21,13 +19,13 @@ export default function Portfolio() {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.coinDatePriceReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
-  const searchData = useAppSelector((state) => state.searchReducer.data);
   const [chosenCoin, setChosenCoin] = useState<Coin | CoinPageTypes>(
     exampleAsset
   );
-  const [isAddAsset, setIsAddAsset] = useState<boolean>(false);
+  const [isAddAsset, setIsAddAsset] = useState<boolean>(true);
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
+  const searchData = useAppSelector((state) => state.searchReducer.data);
   const modalRef = useRef<HTMLDialogElement>(null);
   const amountRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
@@ -37,6 +35,24 @@ export default function Portfolio() {
     )
     .map((el: { id: string }) => el.id);
   const { symbol } = useAppSelector((state) => state.currencyReducer);
+
+  const validationSchema = Yup.object({
+    id: Yup.string()
+      .required("Please provide the ID (required)")
+      .oneOf(
+        searchData.filter((el) => el.id).map((el) => el.id),
+        "Please choose a valid currency from the dropdown"
+      ),
+    date: Yup.date()
+      .required("Purchase date is required")
+      .max(
+        new Date(),
+        "The date cannot be in the future. Please enter a historical date"
+      ),
+    amount: Yup.number()
+      .required("Please enter a valid amount")
+      .min(0, "Please enter a positive amount"),
+  });
 
   const toggleModal = (isEdit: boolean, id: string) => {
     if (isEdit) {
@@ -63,24 +79,36 @@ export default function Portfolio() {
     }
   };
 
-  const saveAsset = () => {
-    if (
-      chosenCoin !== exampleAsset &&
-      amountRef.current?.value &&
-      dateRef.current?.value
-    ) {
-      const parts = dateRef.current.value.split("-");
-      const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
-      dispatch(
+  const saveAsset = async () => {
+    console.log("working bro!!");
+    const date = dateRef.current?.value || "2023-03-03";
+    const amount = amountRef.current?.value || "";
+
+    const parts = date.split("-");
+    const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
+    const isoString = new Date(date).toISOString();
+    try {
+      console.log("working");
+      await validationSchema.validate(
+        {
+          id: chosenCoin.id,
+          date: isoString,
+          amount: parseFloat(amount),
+        },
+        { abortEarly: false }
+      );
+      await dispatch(
         coinDatePrice({
           id: chosenCoin.id,
           date: dateCorrectedForAPi,
-          amount: parseFloat(amountRef.current?.value),
+          amount: parseFloat(amount),
         })
       );
-      dispatch(coinPageData(chosenCoin.id));
-
+      await dispatch(coinPageData(chosenCoin.id));
       toggleModal(false, "");
+    } catch (error: any) {
+      const newErrors = {};
+      console.log(error);
     }
   };
 
