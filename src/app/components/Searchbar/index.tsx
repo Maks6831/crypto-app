@@ -110,6 +110,11 @@ export const Searchbar = (props: SearchBarProps) => {
     setSearchInput("");
   }, [modalCloseCheck]);
 
+  useEffect(() => {
+    if (props.isPortfolio) {
+      props.setSearchState(searchInput);
+    }
+  }, [searchInput]);
   return (
     <div
       key={defaultValue}

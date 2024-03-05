@@ -14,6 +14,12 @@ import { Coin, exampleAsset } from "../types/searchTypes";
 import Image from "next/image";
 import { CoinPageTypes } from "../types/CoinPageTypes";
 
+interface Error {
+  id?: string;
+  amount?: string;
+  date?: string;
+}
+
 export default function Portfolio() {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
@@ -22,6 +28,8 @@ export default function Portfolio() {
   const [chosenCoin, setChosenCoin] = useState<Coin | CoinPageTypes>(
     exampleAsset
   );
+  const [errors, setErrors] = useState<Error>({});
+  const [searchValue, setSearchValue] = useState<string>("");
   const [isAddAsset, setIsAddAsset] = useState<boolean>(true);
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
@@ -91,7 +99,7 @@ export default function Portfolio() {
       console.log("working");
       await validationSchema.validate(
         {
-          id: chosenCoin.id,
+          id: chosenCoin === exampleAsset ? null : chosenCoin.id,
           date: isoString,
           amount: parseFloat(amount),
         },
@@ -107,9 +115,17 @@ export default function Portfolio() {
       await dispatch(coinPageData(chosenCoin.id));
       toggleModal(false, "");
     } catch (error: any) {
-      const newErrors = {};
-      console.log(error);
+      const newErrors: any = {};
+      console.log(error.inner);
+      error.inner.forEach((err: { path: string | number; message: any }) => {
+        newErrors[err.path] = err.message;
+        setErrors(newErrors);
+      });
     }
+  };
+
+  const handlerFunction = (value: string) => {
+    setSearchValue(value);
   };
 
   useEffect(() => {
@@ -120,6 +136,10 @@ export default function Portfolio() {
   useEffect(() => {
     setLocalData(data);
   }, [data]);
+
+  useEffect(() => {
+    console.log("search value", searchValue);
+  }, [searchValue]);
 
   return (
     <Wrapper>
@@ -215,11 +235,18 @@ export default function Portfolio() {
                       isSearch={false}
                       liftStateUp={setChosenCoin}
                       modalCloseChecker={modalCloseCheck}
+                      setSearchState={handlerFunction}
                     />
+                    {errors && errors.id && (
+                      <div className=" w-full text-xs text-red-700 ">
+                        {errors.id}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div></div>
                 )}
+
                 <div className="w-full ">
                   <div className="m-2 relative flex ">
                     <label
