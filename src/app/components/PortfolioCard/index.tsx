@@ -23,7 +23,9 @@ export const PortfolioCard = ({
         minimalDatePriceObj
     );
   }, [data]);
-  const historicalPrice = coin.market_data.current_price;
+  const historicalPrice = coin.market_data
+    ? coin.market_data.current_price
+    : minimalDatePriceObj.market_data.current_price;
   const total = coin.amount * currentMarketPrice[currency];
   const purchasedPrice = historicalPrice[currency];
   const priceChange =

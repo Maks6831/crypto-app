@@ -25,6 +25,7 @@ export default function Portfolio() {
   const [chosenCoin, setChosenCoin] = useState<Coin | CoinPageTypes>(
     exampleAsset
   );
+  const [isAddAsset, setIsAddAsset] = useState<boolean>(false);
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -39,6 +40,7 @@ export default function Portfolio() {
 
   const toggleModal = (isEdit: boolean, id: string) => {
     if (isEdit) {
+      setIsAddAsset(false);
       const coinFromSearchData =
         portfolioData.find((el) => el.id === id) || exampleAsset;
       console.log(coinFromSearchData);
@@ -52,6 +54,7 @@ export default function Portfolio() {
     }
     if (modalRef.current.hasAttribute("open")) {
       modalRef.current.close();
+      setIsAddAsset(true);
       amountRef.current?.value && (amountRef.current.value = "");
       dateRef.current?.value && (dateRef.current.value = "");
       setModalCloseCheck(!modalCloseCheck);
@@ -177,14 +180,18 @@ export default function Portfolio() {
             )}
             <div className=" min-w-full w-full h-full flex flex-col justify-between min-[580px]:min-w-0  min-[580px]:w-7/12 ">
               <div className=" w-full flex flex-col justify-between">
-                <div className=" w-full">
-                  <Searchbar
-                    isPortfolio={true}
-                    isSearch={false}
-                    liftStateUp={setChosenCoin}
-                    modalCloseChecker={modalCloseCheck}
-                  />
-                </div>
+                {isAddAsset ? (
+                  <div className=" w-full">
+                    <Searchbar
+                      isPortfolio={true}
+                      isSearch={false}
+                      liftStateUp={setChosenCoin}
+                      modalCloseChecker={modalCloseCheck}
+                    />
+                  </div>
+                ) : (
+                  <div></div>
+                )}
                 <div className="w-full ">
                   <div className="m-2 relative flex ">
                     <label
