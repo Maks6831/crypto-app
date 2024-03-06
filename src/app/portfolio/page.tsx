@@ -45,12 +45,14 @@ export default function Portfolio() {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
   const validationSchema = Yup.object({
-    id: Yup.string()
-      .required("Please provide the ID (required)")
-      .oneOf(
-        searchData.filter((el) => el.id).map((el) => el.id),
-        "Please choose a valid currency from the dropdown"
-      ),
+    id: Yup.string().oneOf(
+      searchData.filter((el) => el.id).map((el) => el.id),
+      (value) => {
+        return value.value === ""
+          ? "Please provide the ID (required)"
+          : "Please choose a valid currency from the dropdown";
+      }
+    ),
     date: Yup.date()
       .required("Purchase date is required")
       .max(
@@ -67,7 +69,6 @@ export default function Portfolio() {
       setIsAddAsset(false);
       const coinFromSearchData =
         portfolioData.find((el) => el.id === id) || exampleAsset;
-      console.log(coinFromSearchData);
       setChosenCoin(coinFromSearchData);
     } else {
       setChosenCoin(exampleAsset);
@@ -88,7 +89,6 @@ export default function Portfolio() {
   };
 
   const saveAsset = async () => {
-    console.log("working bro!!");
     const date = dateRef.current?.value || "2023-03-03";
     const amount = amountRef.current?.value || "";
 
@@ -96,10 +96,9 @@ export default function Portfolio() {
     const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
     const isoString = new Date(date).toISOString();
     try {
-      console.log("working");
       await validationSchema.validate(
         {
-          id: chosenCoin === exampleAsset ? null : chosenCoin.id,
+          id: searchValue,
           date: isoString,
           amount: parseFloat(amount),
         },
@@ -116,7 +115,6 @@ export default function Portfolio() {
       toggleModal(false, "");
     } catch (error: any) {
       const newErrors: any = {};
-      console.log(error.inner);
       error.inner.forEach((err: { path: string | number; message: any }) => {
         newErrors[err.path] = err.message;
         setErrors(newErrors);
@@ -136,10 +134,6 @@ export default function Portfolio() {
   useEffect(() => {
     setLocalData(data);
   }, [data]);
-
-  useEffect(() => {
-    console.log("search value", searchValue);
-  }, [searchValue]);
 
   return (
     <Wrapper>
@@ -195,6 +189,9 @@ export default function Portfolio() {
             {chosenCoin && chosenCoin === exampleAsset ? (
               <div className="w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
                 <div className="h-14 pt-1 m-2">Select a cryptocurrency</div>
+                {errors && errors.id && (
+                  <div className=" w-full text-xs text-red-700 h-2 "></div>
+                )}
                 <div className="h-14 m-2">Enter the amount you purchased</div>
                 <div className="h-14 m-2">Select the date of purchase</div>
               </div>
