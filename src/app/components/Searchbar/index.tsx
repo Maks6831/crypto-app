@@ -120,7 +120,9 @@ export const Searchbar = (props: SearchBarProps) => {
       key={defaultValue}
       tabIndex={1}
       onKeyDown={handleKeyDown}
-      className={`relative ${isSearch || isPortfolio ? "m-2" : "md:m-2"} flex`}
+      className={`relative ${
+        isSearch ? "m-2" : isPortfolio ? "m-1 py-1" : "md:m-2"
+      } flex`}
       onFocus={() => handleDropDown(true)}
       onBlur={() => handleDropDown(false)}
     >

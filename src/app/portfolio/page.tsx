@@ -55,13 +55,8 @@ export default function Portfolio() {
     ),
     date: Yup.date()
       .required("Purchase date is required")
-      .max(
-        new Date(),
-        "The date cannot be in the future. Please enter a historical date"
-      ),
-    amount: Yup.number()
-      .required("Please enter a valid amount")
-      .min(0, "Please enter a positive amount"),
+      .max(new Date(), "Please enter a historical date"),
+    amount: Yup.number().moreThan(0, "Please enter a valid amount"),
   });
 
   const toggleModal = (isEdit: boolean, id: string) => {
@@ -90,7 +85,7 @@ export default function Portfolio() {
 
   const saveAsset = async () => {
     const date = dateRef.current?.value || "2023-03-03";
-    const amount = amountRef.current?.value || "";
+    const amount = amountRef.current ? amountRef.current?.value : "0";
 
     const parts = date.split("-");
     const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
@@ -100,7 +95,7 @@ export default function Portfolio() {
         {
           id: searchValue,
           date: isoString,
-          amount: parseFloat(amount),
+          amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         },
         { abortEarly: false }
       );
@@ -108,13 +103,14 @@ export default function Portfolio() {
         coinDatePrice({
           id: chosenCoin.id,
           date: dateCorrectedForAPi,
-          amount: parseFloat(amount),
+          amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         })
       );
       await dispatch(coinPageData(chosenCoin.id));
       toggleModal(false, "");
     } catch (error: any) {
       const newErrors: any = {};
+      console.log(error.inner);
       error.inner.forEach((err: { path: string | number; message: any }) => {
         newErrors[err.path] = err.message;
         setErrors(newErrors);
@@ -190,7 +186,9 @@ export default function Portfolio() {
               <div className="w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
                 <div className="h-14 pt-1 m-2">Select a cryptocurrency</div>
                 {errors && errors.id && (
-                  <div className=" w-full text-xs text-red-700 h-2 "></div>
+                  <div className=" w-full text-xs text-red-700 h-1 pb-1 opacity-0 ">
+                    ghio
+                  </div>
                 )}
                 <div className="h-14 m-2">Enter the amount you purchased</div>
                 <div className="h-14 m-2">Select the date of purchase</div>
@@ -235,7 +233,7 @@ export default function Portfolio() {
                       setSearchState={handlerFunction}
                     />
                     {errors && errors.id && (
-                      <div className=" w-full text-xs text-red-700 ">
+                      <div className=" w-full text-xs text-red-700 text-center pb-1 ">
                         {errors.id}
                       </div>
                     )}
@@ -245,7 +243,7 @@ export default function Portfolio() {
                 )}
 
                 <div className="w-full ">
-                  <div className="m-2 relative flex ">
+                  <div className="m-1 py-1 relative flex ">
                     <label
                       htmlFor="amountRef"
                       className="h-12 rounded-xl leading-10 w-full"
@@ -258,9 +256,14 @@ export default function Portfolio() {
                       />
                     </label>
                   </div>
+                  {errors && errors.amount && (
+                    <div className=" w-full text-xs text-red-700 text-center pb-1 ">
+                      {errors.amount}
+                    </div>
+                  )}
                 </div>
                 <div className="w-full">
-                  <div className="m-2 relative flex">
+                  <div className="m-1 py-1 relative flex">
                     <label
                       htmlFor="dateRef"
                       className="h-12 rounded-xl leading-10 w-full"
