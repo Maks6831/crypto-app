@@ -84,12 +84,12 @@ export default function Portfolio() {
   };
 
   const saveAsset = async () => {
-    const date = dateRef.current?.value || "2023-03-03";
+    const date = dateRef.current ? dateRef.current?.value : "undefined";
     const amount = amountRef.current ? amountRef.current?.value : "0";
 
     const parts = date.split("-");
     const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
-    const isoString = new Date(date).toISOString();
+    const isoString = date === "" ? null : new Date(date).toISOString();
     try {
       await validationSchema.validate(
         {
@@ -191,7 +191,17 @@ export default function Portfolio() {
                   </div>
                 )}
                 <div className="h-14 m-2">Enter the amount you purchased</div>
+                {errors && errors.amount && (
+                  <div className=" w-full text-xs text-red-700 text-center pb-1 opacity-0 ">
+                    {errors.amount}
+                  </div>
+                )}
                 <div className="h-14 m-2">Select the date of purchase</div>
+                {errors && errors.date && (
+                  <div className=" w-full text-xs text-red-700 text-center pb-1 opacity-0 ">
+                    {errors.date}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="m-2  w-full h-full  min-[580px]:w-5/12">
@@ -277,6 +287,11 @@ export default function Portfolio() {
                       />
                     </label>
                   </div>
+                  {errors && errors.date && (
+                    <div className=" w-full text-xs text-red-700 text-center pb-1 ">
+                      {errors.date}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="w-full flex ">
