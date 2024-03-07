@@ -46,7 +46,7 @@ export default function Portfolio() {
 
   const validationSchema = Yup.object({
     id: Yup.string().oneOf(
-      searchData.filter((el) => el.id).map((el) => el.id),
+      searchData.filter((el) => el.id).map((el) => el.name),
       (value) => {
         return value.value === ""
           ? "Please provide the ID (required)"
@@ -93,7 +93,7 @@ export default function Portfolio() {
     try {
       await validationSchema.validate(
         {
-          id: chosenCoin.id,
+          id: searchValue,
           date: isoString,
           amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         },
@@ -116,10 +116,6 @@ export default function Portfolio() {
         setErrors(newErrors);
       });
     }
-  };
-
-  const handlerFunction = (value: string) => {
-    setSearchValue(value);
   };
 
   useEffect(() => {
@@ -246,7 +242,7 @@ export default function Portfolio() {
                       isSearch={false}
                       liftStateUp={setChosenCoin}
                       modalCloseChecker={modalCloseCheck}
-                      setSearchState={handlerFunction}
+                      setSearchState={setSearchValue}
                     />
                     {errors && errors.id && (
                       <div className=" w-full text-xs text-red-700 text-center pb-1 ">

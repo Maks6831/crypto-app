@@ -114,7 +114,7 @@ export const Searchbar = (props: SearchBarProps) => {
     if (props.isPortfolio) {
       props.setSearchState(searchInput);
     }
-  }, [searchInput]);
+  }, [searchInput, props]);
   return (
     <div
       key={defaultValue}
