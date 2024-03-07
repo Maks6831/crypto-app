@@ -23,7 +23,7 @@ interface Error {
 export default function Portfolio() {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.coinDatePriceReducer);
+  const { data, error } = useAppSelector((state) => state.coinDatePriceReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
   const [chosenCoin, setChosenCoin] = useState<Coin | CoinPageTypes>(
     exampleAsset
@@ -93,7 +93,7 @@ export default function Portfolio() {
     try {
       await validationSchema.validate(
         {
-          id: searchValue,
+          id: chosenCoin.id,
           date: isoString,
           amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         },
@@ -107,7 +107,7 @@ export default function Portfolio() {
         })
       );
       await dispatch(coinPageData(chosenCoin.id));
-      toggleModal(false, "");
+      //toggleModal(false, "");
     } catch (error: any) {
       const newErrors: any = {};
       console.log(error.inner);
@@ -130,6 +130,12 @@ export default function Portfolio() {
   useEffect(() => {
     setLocalData(data);
   }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      setErrors((prevErrors) => ({ ...prevErrors, date: error }));
+    }
+  }, [error]);
 
   return (
     <Wrapper>

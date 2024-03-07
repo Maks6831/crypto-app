@@ -34,12 +34,16 @@ export const coinDatePrice = createAsyncThunk(
       .addCase(coinDatePrice.fulfilled, (state, action) => {
         state.loading = false;
         const {id, amount, date} = action.meta.arg;
-        const refactoredObj :DatePriceObj = Object.assign({}, action.payload, {
-          id: id,
-          amount:amount,
-          date: date,
-        });
-        state.data.push(refactoredObj);
+        if(action.payload.hasOwnProperty('market_data')){
+          const refactoredObj :DatePriceObj = Object.assign({}, action.payload, {
+            id: id,
+            amount:amount,
+            date: date,
+          });
+          state.data.push(refactoredObj);
+        } else {
+          state.error = 'Requested date is too early for currency data';
+        }
       })
       .addCase(coinDatePrice.rejected, (state, action) => {
         state.loading = false;
