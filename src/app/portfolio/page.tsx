@@ -68,7 +68,6 @@ export default function Portfolio() {
     } else {
       setChosenCoin(exampleAsset);
     }
-
     if (!modalRef.current) {
       return;
     }
@@ -86,7 +85,6 @@ export default function Portfolio() {
   const saveAsset = async () => {
     const date = dateRef.current ? dateRef.current?.value : "undefined";
     const amount = amountRef.current ? amountRef.current?.value : "0";
-
     const parts = date.split("-");
     const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
     const isoString = date === "" ? null : new Date(date).toISOString();
@@ -107,7 +105,7 @@ export default function Portfolio() {
         })
       );
       await dispatch(coinPageData(chosenCoin.id));
-      //toggleModal(false, "");
+      toggleModal(false, "");
     } catch (error: any) {
       const newErrors: any = {};
       console.log(error.inner);
@@ -132,7 +130,6 @@ export default function Portfolio() {
       setErrors((prevErrors) => ({ ...prevErrors, date: error }));
     }
   }, [error]);
-
   return (
     <Wrapper>
       <div className="w-full min-h-screen justify-start items-center flex flex-col">
@@ -265,6 +262,7 @@ export default function Portfolio() {
                         placeholder="Purchased Amount..."
                         name="amountRef"
                         ref={amountRef}
+                        onFocus={() => setErrors({ ...errors, amount: "" })}
                       />
                     </label>
                   </div>
@@ -286,6 +284,7 @@ export default function Portfolio() {
                         name="dateRef"
                         ref={dateRef}
                         type="date"
+                        onFocus={() => setErrors({ ...errors, date: "" })}
                       />
                     </label>
                   </div>
