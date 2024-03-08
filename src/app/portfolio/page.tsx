@@ -75,8 +75,6 @@ export default function Portfolio() {
     if (modalRef.current.hasAttribute("open")) {
       modalRef.current.close();
       setIsAddAsset(true);
-      amountRef.current?.value && (amountRef.current.value = "");
-      dateRef.current?.value && (dateRef.current.value = "");
       setModalCloseCheck(!modalCloseCheck);
     } else {
       modalRef.current.showModal();
@@ -131,6 +129,10 @@ export default function Portfolio() {
       setErrors((prevErrors) => ({ ...prevErrors, date: error }));
     }
   }, [error]);
+
+  useEffect(() => {
+    console.log(isAddAsset);
+  }, [isAddAsset]);
 
   return (
     <Wrapper>
@@ -265,6 +267,19 @@ export default function Portfolio() {
                         name="amountRef"
                         ref={amountRef}
                         onFocus={() => setErrors({ ...errors, amount: "" })}
+                        defaultValue={
+                          isAddAsset && isAddAsset
+                            ? ""
+                            : localData &&
+                              localData.filter(
+                                (el: {
+                                  id: string;
+                                  date: string | undefined;
+                                }) =>
+                                  el.id === chosenCoin.id &&
+                                  el.date === chosenCoin.date
+                              )[0].amount
+                        }
                       />
                     </label>
                   </div>
