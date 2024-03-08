@@ -19,6 +19,7 @@ export interface Coin {
     market_cap_rank: number;
     thumb:           string;
     large:           string;
+    date?:           string;
 }
 
 export interface Exchange {

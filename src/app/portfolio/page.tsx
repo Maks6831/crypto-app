@@ -8,11 +8,12 @@ import { useEffect, useRef, useState } from "react";
 import { useLocalState } from "../Utils/Hooks/useLocalState";
 import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
-import { DatePriceObj } from "../types/DatePriceTypes";
+import { DatePriceObj, DatePriceType } from "../types/DatePriceTypes";
 import { Searchbar } from "../components/Searchbar";
 import { Coin, exampleAsset } from "../types/searchTypes";
 import Image from "next/image";
 import { CoinPageTypes } from "../types/CoinPageTypes";
+import { dateConverter } from "../Utils/dateConverter";
 
 interface Error {
   id?: string;
@@ -59,12 +60,12 @@ export default function Portfolio() {
     amount: Yup.number().moreThan(0, "Please enter a valid amount"),
   });
 
-  const toggleModal = (isEdit: boolean, id: string) => {
+  const toggleModal = (isEdit: boolean, id: string, date: string) => {
     if (isEdit) {
       setIsAddAsset(false);
       const coinFromSearchData =
         portfolioData.find((el) => el.id === id) || exampleAsset;
-      setChosenCoin(coinFromSearchData);
+      setChosenCoin({ ...coinFromSearchData, date: date });
     } else {
       setChosenCoin(exampleAsset);
     }
@@ -86,7 +87,7 @@ export default function Portfolio() {
     const date = dateRef.current ? dateRef.current?.value : "undefined";
     const amount = amountRef.current ? amountRef.current?.value : "0";
     const parts = date.split("-");
-    const dateCorrectedForAPi = parts[2] + "-" + parts[1] + "-" + parts[0];
+    const dateCorrectedForAPi = dateConverter(date);
     const isoString = date === "" ? null : new Date(date).toISOString();
     try {
       await validationSchema.validate(
@@ -105,7 +106,7 @@ export default function Portfolio() {
         })
       );
       await dispatch(coinPageData(chosenCoin.id));
-      toggleModal(false, "");
+      toggleModal(false, "", "");
     } catch (error: any) {
       const newErrors: any = {};
       console.log(error.inner);
@@ -130,13 +131,14 @@ export default function Portfolio() {
       setErrors((prevErrors) => ({ ...prevErrors, date: error }));
     }
   }, [error]);
+
   return (
     <Wrapper>
       <div className="w-full min-h-screen justify-start items-center flex flex-col">
         <div className="w-11/12  h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
           <div>Your Statistics</div>
           <button
-            onClick={() => toggleModal(false, "")}
+            onClick={() => toggleModal(false, "", "")}
             className="w-56 h-10 md:h-full  flex justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one"
           >
             <div className="font-medium text-base">Add Asset</div>
@@ -163,7 +165,7 @@ export default function Portfolio() {
         <div className="w-full h-full justify-center  items-center flex flex-col">
           <div className=" flex m-3 w-11/12 justify-between">
             <div>Select coin</div>
-            <button onClick={() => toggleModal(false, "")}>
+            <button onClick={() => toggleModal(false, "", "")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -285,6 +287,19 @@ export default function Portfolio() {
                         ref={dateRef}
                         type="date"
                         onFocus={() => setErrors({ ...errors, date: "" })}
+                        defaultValue={
+                          isAddAsset
+                            ? ""
+                            : localData &&
+                              localData.filter(
+                                (el: {
+                                  id: string;
+                                  date: string | undefined;
+                                }) =>
+                                  el.id === chosenCoin.id &&
+                                  el.date === chosenCoin.date
+                              )[0].date
+                        }
                       />
                     </label>
                   </div>
@@ -298,7 +313,7 @@ export default function Portfolio() {
               <div className="w-full flex ">
                 <div className="w-1/2 flex justify-center items-center">
                   <button
-                    onClick={() => toggleModal(false, "")}
+                    onClick={() => toggleModal(false, "", "")}
                     className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
                   >
                     Cancel

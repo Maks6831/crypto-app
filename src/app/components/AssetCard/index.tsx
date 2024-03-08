@@ -163,7 +163,7 @@ export const AssetCard = ({
               <div className="flex justify-between">
                 <div className="font-medium text-xl">Your Coin</div>
                 <div
-                  onClick={() => toggleModal(true, `${coin.id}`)}
+                  onClick={() => toggleModal(true, `${coin.id}`, date)}
                   className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color"
                 >
                   <svg
