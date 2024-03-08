@@ -291,14 +291,16 @@ export default function Portfolio() {
                           isAddAsset
                             ? ""
                             : localData &&
-                              localData.filter(
-                                (el: {
-                                  id: string;
-                                  date: string | undefined;
-                                }) =>
-                                  el.id === chosenCoin.id &&
-                                  el.date === chosenCoin.date
-                              )[0].date
+                              dateConverter(
+                                localData.filter(
+                                  (el: {
+                                    id: string;
+                                    date: string | undefined;
+                                  }) =>
+                                    el.id === chosenCoin.id &&
+                                    el.date === chosenCoin.date
+                                )[0].date
+                              )
                         }
                       />
                     </label>
