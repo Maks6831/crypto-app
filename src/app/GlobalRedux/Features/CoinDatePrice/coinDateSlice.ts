@@ -1,5 +1,6 @@
 import { DatePriceObj, DatePriceType } from "@/app/types/DatePriceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const coinDatePrice = createAsyncThunk(
