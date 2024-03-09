@@ -286,8 +286,8 @@ export default function Portfolio() {
                         defaultValue={
                           isAddAsset
                             ? ""
-                            : localData &&
-                              localData.filter(
+                            : data &&
+                              data.filter(
                                 (el: { uid: string }) =>
                                   el.uid === chosenCoin.uid
                               )[0].amount
@@ -320,12 +320,8 @@ export default function Portfolio() {
                             : data &&
                               dateConverter(
                                 data.filter(
-                                  (el: {
-                                    id: string;
-                                    date: string | undefined;
-                                  }) =>
-                                    el.id === chosenCoin.id &&
-                                    el.date === chosenCoin.date
+                                  (el: { uid: string }) =>
+                                    el.uid === chosenCoin.uid
                                 )[0].date
                               )
                         }

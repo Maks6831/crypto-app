@@ -164,7 +164,7 @@ export const AssetCard = ({
                 <div className="font-medium text-xl">Your Coin</div>
                 <div
                   onClick={() => toggleModal(true, coin.id, date, uid)}
-                  className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color"
+                  className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
