@@ -1,11 +1,10 @@
 import { DatePriceObj, DatePriceType } from "@/app/types/DatePriceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from 'uuid';
 
 
 export const coinDatePrice = createAsyncThunk(
     'coinDatePrice',
-    async ({id, date, amount}: {id:string, date:string, amount:number} ,thunkApi) => {
+    async ({id, date, amount, uid}: {id:string, date:string, amount:number, uid: string} ,thunkApi) => {
         const url = `https://api.coingecko.com/api/v3/coins/${id}/history?date=${date}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
         const json: DatePriceType = await response.json();
@@ -34,14 +33,16 @@ export const coinDatePrice = createAsyncThunk(
       })
       .addCase(coinDatePrice.fulfilled, (state, action) => {
         state.loading = false;
-        const {id, amount, date} = action.meta.arg;
+        const {id, amount, date, uid} = action.meta.arg;
         if(action.payload.hasOwnProperty('market_data')){
           const refactoredObj :DatePriceObj = Object.assign({}, action.payload, {
             id: id,
             amount:amount,
             date: date,
+            uid: uid
           });
-          state.data.push(refactoredObj);
+        const indexIfObjectisEdit = state.data.findIndex(obj => obj.uid === uid) 
+        indexIfObjectisEdit === -1 ? state.data.push(refactoredObj): state.data[indexIfObjectisEdit] = refactoredObj;
         } else {
           state.error = 'Requested date is too early for currency data';
         }

@@ -13,7 +13,8 @@ export interface DatePriceType {
 export interface DatePriceObj extends DatePriceType {
     date: string;
     amount: number;
-    id: string    
+    id: string;
+    uid: string;
 }
 
 export interface CommunityData {
@@ -43,6 +44,7 @@ export interface CodeAdditionsDeletions4_Weeks {
 }
 
 export interface Image {
+    large: string;
     thumb: string;
     small: string;
 }
@@ -138,6 +140,7 @@ export const minimalDatePriceObj: DatePriceObj = {
     image: {
         thumb: "",
         small: "",
+        large:'',
     },
     market_data: {
         current_price: {
@@ -176,4 +179,5 @@ export const minimalDatePriceObj: DatePriceObj = {
     },
     date: "",
     amount: 0,
+    uid: '202020-3'
 };

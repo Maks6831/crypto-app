@@ -20,6 +20,8 @@ export interface Coin {
     thumb:           string;
     large:           string;
     date?:           string;
+    uid?:            string;
+    amount?:         string;
 }
 
 export interface Exchange {

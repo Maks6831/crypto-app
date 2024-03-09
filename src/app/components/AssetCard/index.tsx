@@ -13,15 +13,15 @@ import { PortfolioCard } from "../PortfolioCard";
 export const AssetCard = ({
   id,
   date,
-  index,
   array,
   toggleModal,
+  uid,
 }: {
   id: string;
   date: string;
-  index: number;
   array: DatePriceObj[];
   toggleModal: Function;
+  uid: string;
 }) => {
   const { symbol, currency } = useAppSelector((state) => state.currencyReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
@@ -163,7 +163,7 @@ export const AssetCard = ({
               <div className="flex justify-between">
                 <div className="font-medium text-xl">Your Coin</div>
                 <div
-                  onClick={() => toggleModal(true, `${coin.id}`, date)}
+                  onClick={() => toggleModal(true, coin.id, date, uid)}
                   className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color"
                 >
                   <svg

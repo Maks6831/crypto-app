@@ -28,6 +28,7 @@ export interface CoinPageTypes {
     last_updated:                    Date;
     tickers:                         Ticker[];
     date?:                           string;
+    uid?:                            string;
 }
 
 export interface CommunityData {

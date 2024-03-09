@@ -14,6 +14,7 @@ import { Coin, exampleAsset } from "../types/searchTypes";
 import Image from "next/image";
 import { CoinPageTypes } from "../types/CoinPageTypes";
 import { dateConverter } from "../Utils/dateConverter";
+import { v4 as uuidv4 } from "uuid";
 
 interface Error {
   id?: string;
@@ -26,7 +27,7 @@ export default function Portfolio() {
   const dispatch = useAppDispatch();
   const { data, error } = useAppSelector((state) => state.coinDatePriceReducer);
   const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
-  const [chosenCoin, setChosenCoin] = useState<Coin | CoinPageTypes>(
+  const [chosenCoin, setChosenCoin] = useState<Coin | DatePriceObj>(
     exampleAsset
   );
   const [errors, setErrors] = useState<Error>({});
@@ -46,26 +47,38 @@ export default function Portfolio() {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
   const validationSchema = Yup.object({
-    id: Yup.string().oneOf(
-      searchData.filter((el) => el.id).map((el) => el.name),
-      (value) => {
-        return value.value === ""
-          ? "Please provide the ID (required)"
-          : "Please choose a valid currency from the dropdown";
-      }
-    ),
+    id: Yup.string().when("isEdit", {
+      is: !isAddAsset,
+      then: (schema) =>
+        schema.oneOf(
+          searchData.filter((el) => el.id).map((el) => el.name),
+          (value) => {
+            return value.value === ""
+              ? "Please provide the ID (required)"
+              : "Please choose a valid currency from the dropdown";
+          }
+        ),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
     date: Yup.date()
       .required("Purchase date is required")
       .max(new Date(), "Please enter a historical date"),
     amount: Yup.number().moreThan(0, "Please enter a valid amount"),
   });
 
-  const toggleModal = (isEdit: boolean, id: string, date: string) => {
+  const toggleModal = (
+    isEdit: boolean,
+    id: string,
+    date: string,
+    uid: string
+  ) => {
     if (isEdit) {
       setIsAddAsset(false);
-      const coinFromSearchData =
-        portfolioData.find((el) => el.id === id) || exampleAsset;
-      setChosenCoin({ ...coinFromSearchData, date: date });
+      const coinFromLocalData =
+        data.find((el) => el.uid === uid) || exampleAsset;
+      setChosenCoin(coinFromLocalData);
+      console.log(coinFromLocalData);
     } else {
       setChosenCoin(exampleAsset);
     }
@@ -84,13 +97,15 @@ export default function Portfolio() {
   const saveAsset = async () => {
     const date = dateRef.current ? dateRef.current?.value : "undefined";
     const amount = amountRef.current ? amountRef.current?.value : "0";
+    console.log(chosenCoin);
+    const uid = chosenCoin.uid ? chosenCoin.uid : uuidv4();
     const parts = date.split("-");
     const dateCorrectedForAPi = dateConverter(date);
     const isoString = date === "" ? null : new Date(date).toISOString();
     try {
       await validationSchema.validate(
         {
-          id: searchValue,
+          id: chosenCoin.uid ? chosenCoin.name : searchValue,
           date: isoString,
           amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         },
@@ -101,10 +116,11 @@ export default function Portfolio() {
           id: chosenCoin.id,
           date: dateCorrectedForAPi,
           amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
+          uid: uid,
         })
       );
       await dispatch(coinPageData(chosenCoin.id));
-      toggleModal(false, "", "");
+      toggleModal(false, "", "", "");
     } catch (error: any) {
       const newErrors: any = {};
       console.log(error.inner);
@@ -140,7 +156,7 @@ export default function Portfolio() {
         <div className="w-11/12  h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
           <div>Your Statistics</div>
           <button
-            onClick={() => toggleModal(false, "", "")}
+            onClick={() => toggleModal(false, "", "", "")}
             className="w-56 h-10 md:h-full  flex justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one"
           >
             <div className="font-medium text-base">Add Asset</div>
@@ -148,14 +164,14 @@ export default function Portfolio() {
         </div>
         <div className="w-full h-max flex flex-col items-center  justify-center ">
           {data &&
-            data.map((el: any, index: number, arr: DatePriceObj[]) => (
+            data.map((el: any, index, arr: DatePriceObj[]) => (
               <AssetCard
                 key={el.id}
                 id={el.id}
                 date={el.date}
-                index={index + 1}
                 array={arr}
                 toggleModal={toggleModal}
+                uid={el.uid}
               />
             ))}
         </div>
@@ -167,7 +183,7 @@ export default function Portfolio() {
         <div className="w-full h-full justify-center  items-center flex flex-col">
           <div className=" flex m-3 w-11/12 justify-between">
             <div>Select coin</div>
-            <button onClick={() => toggleModal(false, "", "")}>
+            <button onClick={() => toggleModal(false, "", "", "")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -214,7 +230,7 @@ export default function Portfolio() {
                       <Image
                         src={
                           "image" in chosenCoin
-                            ? chosenCoin.image.large
+                            ? chosenCoin.image.thumb
                             : chosenCoin.large
                         }
                         alt="coin symbol"
@@ -226,7 +242,7 @@ export default function Portfolio() {
                       <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
                         {chosenCoin.name}
                       </div>
-                      <div className="hidden md:flex xl:text-xl lg:text-lg text-bas">
+                      <div className="hidden md:flex xl:text-xl lg:text-lg text-base">
                         ({chosenCoin.symbol.toLocaleUpperCase()})
                       </div>
                     </div>
@@ -268,16 +284,12 @@ export default function Portfolio() {
                         ref={amountRef}
                         onFocus={() => setErrors({ ...errors, amount: "" })}
                         defaultValue={
-                          isAddAsset && isAddAsset
+                          isAddAsset
                             ? ""
                             : localData &&
                               localData.filter(
-                                (el: {
-                                  id: string;
-                                  date: string | undefined;
-                                }) =>
-                                  el.id === chosenCoin.id &&
-                                  el.date === chosenCoin.date
+                                (el: { uid: string }) =>
+                                  el.uid === chosenCoin.uid
                               )[0].amount
                         }
                       />
@@ -305,9 +317,9 @@ export default function Portfolio() {
                         defaultValue={
                           isAddAsset
                             ? ""
-                            : localData &&
+                            : data &&
                               dateConverter(
-                                localData.filter(
+                                data.filter(
                                   (el: {
                                     id: string;
                                     date: string | undefined;
@@ -330,7 +342,7 @@ export default function Portfolio() {
               <div className="w-full flex ">
                 <div className="w-1/2 flex justify-center items-center">
                   <button
-                    onClick={() => toggleModal(false, "", "")}
+                    onClick={() => toggleModal(false, "", "", "")}
                     className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
                   >
                     Cancel
