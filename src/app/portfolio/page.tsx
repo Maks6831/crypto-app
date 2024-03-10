@@ -18,6 +18,8 @@ import Image from "next/image";
 import { CoinPageTypes } from "../types/CoinPageTypes";
 import { dateConverter } from "../Utils/dateConverter";
 import { v4 as uuidv4 } from "uuid";
+import { InfinitySpin, RotatingLines } from "react-loader-spinner";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 
 interface Error {
   id?: string;
@@ -29,7 +31,9 @@ export default function Portfolio() {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const { data, error } = useAppSelector((state) => state.coinDatePriceReducer);
-  const { portfolioData } = useAppSelector((state) => state.coinPageReducer);
+  const { portfolioData, loading } = useAppSelector(
+    (state) => state.coinPageReducer
+  );
   const [chosenCoin, setChosenCoin] = useState<Coin | DatePriceObj>(
     exampleAsset
   );
@@ -42,6 +46,7 @@ export default function Portfolio() {
   const [dateValue, setDateValue] = useState<string>("");
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const searchData = useAppSelector((state) => state.searchReducer.data);
+  const loadingTwo = useAppSelector((state) => state.searchReducer.loading);
   const modalRef = useRef<HTMLDialogElement>(null);
   const arrForApi = localData
     .filter(
@@ -184,19 +189,27 @@ export default function Portfolio() {
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
-        <div className="w-full h-max flex flex-col items-center  justify-center ">
-          {data &&
-            data.map((el: any, index, arr: DatePriceObj[]) => (
-              <AssetCard
-                key={el.id}
-                id={el.id}
-                date={el.date}
-                array={arr}
-                toggleModal={toggleModal}
-                uid={el.uid}
-              />
-            ))}
-        </div>
+        {true ? (
+          <div className="w-full min-h-[20rem] flex justify-center items-center">
+            <div className="w-1/6">
+              <LoadingSpinner />
+            </div>
+          </div>
+        ) : (
+          <div className="w-full h-max flex flex-col items-center  justify-center ">
+            {data &&
+              data.map((el: any, index, arr: DatePriceObj[]) => (
+                <AssetCard
+                  key={el.id}
+                  id={el.id}
+                  date={el.date}
+                  array={arr}
+                  toggleModal={toggleModal}
+                  uid={el.uid}
+                />
+              ))}
+          </div>
+        )}
       </div>
       <dialog
         className={` ${
