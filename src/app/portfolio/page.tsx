@@ -51,10 +51,11 @@ export default function Portfolio() {
   const { symbol } = useAppSelector((state) => state.currencyReducer);
 
   const validationSchema = Yup.object({
-    id: Yup.string().when("isEdit", {
-      is: !isAddAsset,
+    isAddAsset: Yup.boolean().required(),
+    id: Yup.string().when("isAddAsset", {
+      is: isAddAsset,
       then: (schema) =>
-        schema.oneOf(
+        schema.required().oneOf(
           searchData.filter((el) => el.id).map((el) => el.name),
           (value) => {
             return value.value === ""
@@ -114,10 +115,14 @@ export default function Portfolio() {
     const uid = chosenCoin.uid ? chosenCoin.uid : uuidv4();
     const dateCorrectedForAPi = dateConverter(date);
     const isoString = date === "" ? null : new Date(date).toISOString();
+    console.log(searchValue);
+    console.log(searchData.filter((el) => el.id).map((el) => el.name));
+    console.log(isAddAsset);
     try {
       await validationSchema.validate(
         {
-          id: chosenCoin.uid ? chosenCoin.name : searchValue,
+          isAddAsset: isAddAsset,
+          id: searchValue,
           date: isoString,
           amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         },
@@ -294,7 +299,7 @@ export default function Portfolio() {
                           height={32}
                         />
                       </div>
-                      <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex justify-center items-center xl:text-2xl lg:text-sm text-base ">
+                      <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex flex-wrap justify-center items-center xl:text-2xl lg:text-sm text-base ">
                         <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
                           {chosenCoin.name}
                         </div>
