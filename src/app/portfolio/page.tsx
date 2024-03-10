@@ -200,12 +200,12 @@ export default function Portfolio() {
         className={` ${
           deleteModal
             ? " max-w-7 h-60 p-3  "
-            : " w-11/12 md:w-4/5  p-3 lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[22rem] py-10 "
+            : " w-11/12 md:w-4/5  p-3 lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[25rem] py-10 "
         }  bg-dark-background backdrop:backdrop-blur-lg rounded-3xl backdrop:delay-1000`}
         ref={modalRef}
       >
         {deleteModal ? (
-          <div className="m-1 p-3 flex justify-between items-center flex-col h-28">
+          <div className="m-1 p-3 flex justify-between items-center flex-col h-28 text-center">
             <div>Are you sure you want to delete this coin?</div>
             <div className="flex justify-center items-center flex-col dark:text-card-text-gray">
               {chosenCoin.name}
