@@ -212,7 +212,7 @@ export default function Portfolio() {
               <div className="w-1/2 flex justify-center items-center">
                 <button
                   onClick={saveAsset}
-                  className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
+                  className=" bg-negative bg-opacity-80 w-11/12 h-11 rounded-md text-sm lg:text-base  "
                 >
                   Delete
                 </button>
