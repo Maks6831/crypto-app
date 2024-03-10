@@ -38,11 +38,11 @@ export default function Portfolio() {
   const [isAddAsset, setIsAddAsset] = useState<boolean>(true);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
+  const [amountValue, setAmountValue] = useState<string>("");
+  const [dateValue, setDateValue] = useState<string>("");
   const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
   const searchData = useAppSelector((state) => state.searchReducer.data);
   const modalRef = useRef<HTMLDialogElement>(null);
-  const amountRef = useRef<HTMLInputElement>(null);
-  const dateRef = useRef<HTMLInputElement>(null);
   const arrForApi = localData
     .filter(
       (value: string, index: number) => localData.indexOf(value) === index
@@ -79,7 +79,12 @@ export default function Portfolio() {
   ) => {
     const coinFromLocalData = data.find((el) => el.uid === uid) || exampleAsset;
     if (isEdit) {
+      setIsAddAsset(false);
       setChosenCoin(coinFromLocalData);
+      if (coinFromLocalData !== exampleAsset) {
+        setAmountValue(coinFromLocalData.amount?.toString() || "");
+        setDateValue(dateConverter(coinFromLocalData.date || "") || "");
+      }
     } else if (id === "") {
       setChosenCoin(exampleAsset);
     } else if (id === "delete!") {
@@ -96,17 +101,17 @@ export default function Portfolio() {
       if (deleteModal) {
         setDeleteModal(false);
       }
+      setAmountValue("");
+      setDateValue("");
     } else {
       deleteModal ? modalRef.current.show() : modalRef.current.showModal();
     }
   };
 
   const saveAsset = async () => {
-    const date = dateRef.current ? dateRef.current?.value : "undefined";
-    const amount = amountRef.current ? amountRef.current?.value : "0";
-    console.log(chosenCoin);
+    const date = dateValue;
+    const amount = amountValue;
     const uid = chosenCoin.uid ? chosenCoin.uid : uuidv4();
-    const parts = date.split("-");
     const dateCorrectedForAPi = dateConverter(date);
     const isoString = date === "" ? null : new Date(date).toISOString();
     try {
@@ -156,8 +161,8 @@ export default function Portfolio() {
   }, [error]);
 
   useEffect(() => {
-    console.log(isAddAsset);
-  }, [isAddAsset]);
+    console.log(dateValue);
+  }, [dateValue]);
 
   return (
     <Wrapper>
@@ -332,17 +337,9 @@ export default function Portfolio() {
                           className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                           placeholder="Purchased Amount..."
                           name="amountRef"
-                          ref={amountRef}
                           onFocus={() => setErrors({ ...errors, amount: "" })}
-                          defaultValue={
-                            isAddAsset
-                              ? ""
-                              : data &&
-                                data.filter(
-                                  (el: { uid: string }) =>
-                                    el.uid === chosenCoin.uid
-                                )[0].amount
-                          }
+                          value={amountValue}
+                          onChange={(e) => setAmountValue(e.target.value)}
                         />
                       </label>
                     </div>
@@ -362,20 +359,10 @@ export default function Portfolio() {
                           className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                           placeholder="Purchase date..."
                           name="dateRef"
-                          ref={dateRef}
                           type="date"
                           onFocus={() => setErrors({ ...errors, date: "" })}
-                          defaultValue={
-                            isAddAsset
-                              ? ""
-                              : data &&
-                                dateConverter(
-                                  data.filter(
-                                    (el: { uid: string }) =>
-                                      el.uid === chosenCoin.uid
-                                  )[0].date
-                                )
-                          }
+                          value={dateValue}
+                          onChange={(e) => setDateValue(e.target.value)}
                         />
                       </label>
                     </div>
