@@ -138,7 +138,9 @@ export default function Portfolio() {
         })
       );
       await dispatch(coinPageData(chosenCoin.id));
-      toggleModal(false, "", "", "");
+      if (!error) {
+        toggleModal(false, "", "", "");
+      }
     } catch (error: any) {
       const newErrors: any = {};
       console.log(error.inner);
