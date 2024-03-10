@@ -35,7 +35,8 @@ export const coinPageData = createAsyncThunk(
           .addCase(coinPageData.fulfilled, (state, action) => {
             state.data = action.payload as CoinPageTypes;
             state.portfolioData.push(action.payload);
-          })
+            state.loading = false;
+             })
           .addCase(coinPageData.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message ?? "An unkown error occurrfetchData"

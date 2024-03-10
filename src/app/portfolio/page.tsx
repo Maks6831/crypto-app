@@ -18,7 +18,6 @@ import Image from "next/image";
 import { CoinPageTypes } from "../types/CoinPageTypes";
 import { dateConverter } from "../Utils/dateConverter";
 import { v4 as uuidv4 } from "uuid";
-import { InfinitySpin, RotatingLines } from "react-loader-spinner";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 
 interface Error {
@@ -38,6 +37,7 @@ export default function Portfolio() {
     exampleAsset
   );
   const [errors, setErrors] = useState<Error>({});
+  const [animation, setAnimation] = useState<boolean>(true);
   const [searchValue, setSearchValue] = useState<string>("");
   const [isAddAsset, setIsAddAsset] = useState<boolean>(true);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
@@ -121,9 +121,6 @@ export default function Portfolio() {
     const uid = chosenCoin.uid ? chosenCoin.uid : uuidv4();
     const dateCorrectedForAPi = dateConverter(date);
     const isoString = date === "" ? null : new Date(date).toISOString();
-    console.log(searchValue);
-    console.log(searchData.filter((el) => el.id).map((el) => el.name));
-    console.log(isAddAsset);
     try {
       await validationSchema.validate(
         {
@@ -189,27 +186,27 @@ export default function Portfolio() {
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
-        {!loading && loadingTwo ? (
+        {loading && (
           <div className="w-full min-h-[20rem] flex justify-center items-center">
             <div className="md:w-5/12">
               <LoadingSpinner />
             </div>
           </div>
-        ) : (
-          <div className="w-full h-max flex flex-col items-center  justify-center ">
-            {data &&
-              data.map((el: any, index, arr: DatePriceObj[]) => (
-                <AssetCard
-                  key={el.id}
-                  id={el.id}
-                  date={el.date}
-                  array={arr}
-                  toggleModal={toggleModal}
-                  uid={el.uid}
-                />
-              ))}
-          </div>
         )}
+        <div className="w-full h-max flex flex-col items-center  justify-center ">
+          {data &&
+            !loading &&
+            data.map((el: any, index, arr: DatePriceObj[]) => (
+              <AssetCard
+                key={el.id}
+                id={el.id}
+                date={el.date}
+                array={arr}
+                toggleModal={toggleModal}
+                uid={el.uid}
+              />
+            ))}
+        </div>
       </div>
       <dialog
         className={` ${

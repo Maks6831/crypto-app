@@ -12,16 +12,18 @@ import { useAppDispatch, useAppSelector } from "./GlobalRedux/hooks";
 import { priceChart } from "./GlobalRedux/Features/Chartdata/priceSlice";
 import { TitleHeader } from "./components/TitleHeader";
 import { Wrapper } from "./components/Wrapper";
+import { LoadingSpinner } from "./components/LoadingSpinner";
 
 export default function Home() {
   const [isCoin, setisCoin] = useState(true);
-  const { prices, labels, labelsTwo, market_caps, days } = useAppSelector(
-    (state) => state.priceChart
-  );
+  const { prices, labels, labelsTwo, market_caps, days, loading } =
+    useAppSelector((state) => state.priceChart);
   const { currency, symbol } = useAppSelector((state) => state.currencyReducer);
   const { coin } = useAppSelector((state) => state.coinReducer);
   const dispatch = useAppDispatch();
   const [currentPrice, setCurrentPrice] = useState(0);
+  const displayGraphData =
+    prices && labels && labelsTwo && market_caps && !loading;
 
   const setCoin = (value: boolean) => {
     value ? setisCoin(true) : setisCoin(false);
@@ -55,37 +57,59 @@ export default function Home() {
               <Wrapper>
                 <div className="flex flex-col sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] w-11/12 justify-center items-center m-2 ">
                   <div className=" overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
-                    <CoinInfoContainer
-                      isPrice={true}
-                      isCoinPage={false}
-                      currentPrice={currentPrice}
-                    />
-                    <div className="h-1/2 md:h-max w-full flex items-end">
-                      <Pricegraph
-                        isLine={true}
-                        prices={prices}
-                        labels={labels}
-                        days={days}
-                        isCoinPage={false}
-                        handleHover={setCurrentPrice}
-                      />
-                    </div>
+                    {loading && (
+                      <div className="w-full h-full flex justify-center items-center">
+                        <div className="h-20 w-20">
+                          <LoadingSpinner />
+                        </div>
+                      </div>
+                    )}
+                    {displayGraphData && (
+                      <>
+                        <CoinInfoContainer
+                          isPrice={true}
+                          isCoinPage={false}
+                          currentPrice={currentPrice}
+                        />
+                        <div className="h-1/2 md:h-max w-full flex items-end">
+                          <Pricegraph
+                            isLine={true}
+                            prices={prices}
+                            labels={labels}
+                            days={days}
+                            isCoinPage={false}
+                            handleHover={setCurrentPrice}
+                          />
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div className=" overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background">
-                    <CoinInfoContainer
-                      isPrice={false}
-                      isCoinPage={false}
-                      currentPrice={currentPrice}
-                    />
-                    <div className="h-1/2 md:h-max w-full flex items-end">
-                      <Pricegraph
-                        isLine={false}
-                        market_caps={market_caps}
-                        labelsTwo={labelsTwo}
-                        days={days}
-                        isCoinPage={false}
-                      />
-                    </div>
+                    {loading && (
+                      <div className="w-full h-full flex justify-center items-center">
+                        <div className="h-20 w-20">
+                          <LoadingSpinner />
+                        </div>
+                      </div>
+                    )}
+                    {displayGraphData && (
+                      <>
+                        <CoinInfoContainer
+                          isPrice={false}
+                          isCoinPage={false}
+                          currentPrice={currentPrice}
+                        />
+                        <div className="h-1/2 md:h-max w-full flex items-end">
+                          <Pricegraph
+                            isLine={false}
+                            market_caps={market_caps}
+                            labelsTwo={labelsTwo}
+                            days={days}
+                            isCoinPage={false}
+                          />
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </Wrapper>
