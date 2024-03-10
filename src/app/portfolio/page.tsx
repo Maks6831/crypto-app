@@ -78,6 +78,7 @@ export default function Portfolio() {
     date: string,
     uid: string
   ) => {
+    setErrors({});
     const coinFromLocalData = data.find((el) => el.uid === uid) || exampleAsset;
     if (isEdit) {
       setIsAddAsset(false);
@@ -166,8 +167,8 @@ export default function Portfolio() {
   }, [error]);
 
   useEffect(() => {
-    console.log(dateValue);
-  }, [dateValue]);
+    setErrors((prevErrors) => ({ ...prevErrors, id: "" }));
+  }, [searchValue]);
 
   return (
     <Wrapper>
@@ -321,6 +322,7 @@ export default function Portfolio() {
                         liftStateUp={setChosenCoin}
                         modalCloseChecker={modalCloseCheck}
                         setSearchState={setSearchValue}
+                        saveAsset={saveAsset}
                       />
                       {errors && errors.id && (
                         <div className=" w-full text-xs text-red-700 text-center pb-1 ">

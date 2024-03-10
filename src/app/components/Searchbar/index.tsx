@@ -27,6 +27,12 @@ export const Searchbar = (props: SearchBarProps) => {
   const [keyPress, setKeyPress] = useState(false);
   const router = useRouter();
   const [focus, setFocus] = useState(false);
+  const debouncedSearch = useDebounce(searchInput, 1000);
+  const rightData =
+    !loading && !error && data.length > 0 && searchInput !== "" && focus;
+  const dropDownCheck = dropDown;
+  const displayLoading = loading && focus && !error && searchInput !== "";
+  const throwError = error && searchInput !== "";
 
   const handleDropDown = (value: boolean) => {
     value ? setFocus(true) : setFocus(false);
@@ -57,7 +63,11 @@ export const Searchbar = (props: SearchBarProps) => {
       dispatch(changeArray(coinArray));
     }
     if (isPortfolio) {
-      !coin ? props.liftStateUp(data[0]) : props.liftStateUp(coin);
+      if (data.length > 0) {
+        !coin ? props.liftStateUp(data[0]) : props.liftStateUp(coin);
+      } else {
+        props.saveAsset();
+      }
     }
     setSearchInput(coin ? coin.name : data[0].name);
     setDropDown(false);
@@ -86,13 +96,6 @@ export const Searchbar = (props: SearchBarProps) => {
     setSearchInput(value);
     value !== "" && data.length > 0 ? setDropDown(true) : setDropDown(false);
   };
-
-  const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData =
-    !loading && !error && data.length > 0 && searchInput !== "" && focus;
-  const dropDownCheck = dropDown;
-  const displayLoading = loading && focus && !error && searchInput !== "";
-  const throwError = error && searchInput !== "";
 
   useEffect(() => {
     if (searchInput) {
