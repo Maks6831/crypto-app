@@ -189,9 +189,9 @@ export default function Portfolio() {
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
-        {true ? (
+        {!loading && loadingTwo ? (
           <div className="w-full min-h-[20rem] flex justify-center items-center">
-            <div className="w-1/6">
+            <div className="md:w-5/12">
               <LoadingSpinner />
             </div>
           </div>
