@@ -76,7 +76,10 @@ export const AssetCard = ({
             <div className="flex w-full h-1/2 flex-col">
               <div className="flex justify-between">
                 <div className="font-medium text-xl">Market Price</div>
-                <div className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color">
+                <div
+                  onClick={() => toggleModal(false, "delete!", "", uid)}
+                  className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color cursor-pointer"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
