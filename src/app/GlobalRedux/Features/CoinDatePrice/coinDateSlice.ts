@@ -24,7 +24,13 @@ export const coinDatePrice = createAsyncThunk(
     const coinDatePriceSlice = createSlice({
     name: 'coinDatePriceSlice',
     initialState,
-    reducers: {},
+    reducers: {
+      deleteCoin: (state, action) => {
+        const uuid = action.payload;
+        const coinToDeleteIndex = state.data.findIndex(obj => obj.uid === uuid)
+       state.data.splice(coinToDeleteIndex, 1);
+      }
+    },
     extraReducers:builder => {
         builder
       .addCase(coinDatePrice.pending, (state, action) => {
@@ -53,5 +59,6 @@ export const coinDatePrice = createAsyncThunk(
     })
     }
     })
-
+    
+    export const { deleteCoin } = coinDatePriceSlice.actions;
     export default coinDatePriceSlice.reducer;

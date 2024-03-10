@@ -7,7 +7,10 @@ import { AssetCard } from "../components/AssetCard";
 import { useEffect, useRef, useState } from "react";
 import { useLocalState } from "../Utils/Hooks/useLocalState";
 import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
-import { coinDatePrice } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
+import {
+  coinDatePrice,
+  deleteCoin,
+} from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
 import { DatePriceObj, DatePriceType } from "../types/DatePriceTypes";
 import { Searchbar } from "../components/Searchbar";
 import { Coin, exampleAsset } from "../types/searchTypes";
@@ -76,7 +79,6 @@ export default function Portfolio() {
   ) => {
     const coinFromLocalData = data.find((el) => el.uid === uid) || exampleAsset;
     if (isEdit) {
-      setIsAddAsset(false);
       setChosenCoin(coinFromLocalData);
     } else if (id === "") {
       setChosenCoin(exampleAsset);
@@ -136,6 +138,11 @@ export default function Portfolio() {
     }
   };
 
+  const deleteAssetCard = async (id: string | undefined) => {
+    await dispatch(deleteCoin(id));
+    toggleModal(false, "", "", "");
+  };
+
   useEffect(() => {
     arrForApi.length > 0 &&
       arrForApi.map((id: string) => dispatch(coinPageData(id)));
@@ -147,6 +154,10 @@ export default function Portfolio() {
       setErrors((prevErrors) => ({ ...prevErrors, date: error }));
     }
   }, [error]);
+
+  useEffect(() => {
+    console.log(isAddAsset);
+  }, [isAddAsset]);
 
   return (
     <Wrapper>
@@ -211,7 +222,7 @@ export default function Portfolio() {
               </div>
               <div className="w-1/2 flex justify-center items-center">
                 <button
-                  onClick={saveAsset}
+                  onClick={() => deleteAssetCard(chosenCoin.uid)}
                   className=" bg-negative bg-opacity-80 w-11/12 h-11 rounded-md text-sm lg:text-base  "
                 >
                   Delete
