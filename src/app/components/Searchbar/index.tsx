@@ -124,13 +124,13 @@ export const Searchbar = (props: SearchBarProps) => {
       tabIndex={1}
       onKeyDown={handleKeyDown}
       className={`relative ${
-        isSearch ? "m-2" : isPortfolio ? "m-1 py-1" : "md:m-2"
+        isSearch ? "m-2 h-full" : isPortfolio ? "m-1 py-1" : "md:m-2"
       } flex`}
       onFocus={() => handleDropDown(true)}
       onBlur={() => handleDropDown(false)}
     >
       {isSearch ? (
-        <div className="absolute left-2 top-2 ">
+        <div className="absolute left-2 top-3 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -148,12 +148,14 @@ export const Searchbar = (props: SearchBarProps) => {
         <></>
       )}
       <label
-        className={`h-12 rounded-xl leading-10 ${isSearch ? "w-89" : "w-full"}`}
+        className={`rounded-xl leading-10 ${
+          isSearch ? "w-89 h-full " : " h-12 w-full"
+        }`}
       >
         <input
           className={`${
             isSearch
-              ? "pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
+              ? " h-12 pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
               : isPortfolio
               ? " dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
               : " w-full dark:bg-inherit text-base md:text-2xl h-12 "
@@ -173,7 +175,7 @@ export const Searchbar = (props: SearchBarProps) => {
       )}
       {displayLoading && (
         <div
-          className={`p-2 left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${
+          className={`p-2 left-0 top-14 z-50  bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${
             isSearch ? "top-14" : "top-16"
           }`}
         >
