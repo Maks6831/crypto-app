@@ -50,8 +50,8 @@ export const ConvertCard = ({
         <div className="text-xl font-medium text-purpleb  md:p-2 dark:text-white flex justify-between item-center">
           <Searchbar
             isSearch={false}
-            defaultValue={defaultValue}
             isPortfolio={false}
+            defaultValue={defaultValue}
           />
           <div className=" p-1 pt-4 flex justify-center items-center">
             {convertedValue}

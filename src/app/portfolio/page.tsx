@@ -58,7 +58,7 @@ export default function Portfolio() {
   const validationSchema = Yup.object({
     isAddAsset: Yup.boolean().required(),
     id: Yup.string().when("isAddAsset", {
-      is: isAddAsset,
+      is: true,
       then: (schema) =>
         schema.required().oneOf(
           searchData.filter((el) => el.id).map((el) => el.name),
