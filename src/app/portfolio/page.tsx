@@ -20,6 +20,7 @@ import { CoinPageTypes } from "../types/CoinPageTypes";
 import { dateConverter } from "../Utils/dateConverter";
 import { v4 as uuidv4 } from "uuid";
 import { LoadingSpinner } from "../components/LoadingSpinner";
+import { PortfolioHeader } from "../components/PortFolioHeader";
 
 interface Error {
   id?: string;
@@ -138,9 +139,7 @@ export default function Portfolio() {
         amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         uid: uid,
       };
-
       await dispatch(coinDatePrice(values));
-
       await dispatch(coinPageData(chosenCoin.id));
       if (!error) {
         toggleModal(false, "", "", "");
@@ -188,10 +187,13 @@ export default function Portfolio() {
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
+        {data.length === 0 && <PortfolioHeader />}
         {loading && (
           <div className="w-full min-h-[20rem] flex justify-center items-center">
             <div className="md:w-5/12">
-              <LoadingSpinner />
+              <div className="w-20 h-20">
+                <LoadingSpinner />
+              </div>
             </div>
           </div>
         )}
