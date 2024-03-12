@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocalState } from "../Utils/Hooks/useLocalState";
 import { coinPageData } from "../GlobalRedux/Features/CoinPage/coinPageSlice";
 import {
+  DatePriceAttributes,
   coinDatePrice,
   deleteCoin,
 } from "../GlobalRedux/Features/CoinDatePrice/coinDateSlice";
@@ -131,14 +132,15 @@ export default function Portfolio() {
         },
         { abortEarly: false }
       );
-      await dispatch(
-        coinDatePrice({
-          id: chosenCoin.id,
-          date: dateCorrectedForAPi,
-          amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
-          uid: uid,
-        })
-      );
+      const values: DatePriceAttributes = {
+        id: chosenCoin.id,
+        date: dateCorrectedForAPi,
+        amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
+        uid: uid,
+      };
+
+      await dispatch(coinDatePrice(values));
+
       await dispatch(coinPageData(chosenCoin.id));
       if (!error) {
         toggleModal(false, "", "", "");

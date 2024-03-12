@@ -1,14 +1,41 @@
 import { DatePriceObj, DatePriceType } from "@/app/types/DatePriceTypes";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit";
+import { reject } from "lodash";
 
+export interface DatePriceAttributes {
+  id:string;
+  date:string;
+  amount:number;
+  uid: string;
+}
 
-export const coinDatePrice = createAsyncThunk(
+interface MyKnownError {
+  errorMessage: string
+}
+
+export const coinDatePrice = createAsyncThunk<
+DatePriceObj,
+DatePriceAttributes,
+{
+  rejectValue: MyKnownError,
+}
+>(
     'coinDatePrice',
-    async ({id, date, amount, uid}: {id:string, date:string, amount:number, uid: string} ,thunkApi) => {
+    async ({id, date, amount, uid} ,thunkApi) => {
         const url = `https://api.coingecko.com/api/v3/coins/${id}/history?date=${date}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
         const json: DatePriceType = await response.json();
-        return json;
+        if(json.hasOwnProperty('market_data')){
+          const refactoredObj :DatePriceObj = Object.assign({}, json, {
+            id: id,
+            amount:amount,
+            date: date,
+            uid: uid
+          });
+          return refactoredObj;
+        } else {
+          return thunkApi.rejectWithValue({errorMessage :'Requested date is too early for currency data' } as MyKnownError) 
+        }
       }
     );
 
@@ -39,23 +66,19 @@ export const coinDatePrice = createAsyncThunk(
       })
       .addCase(coinDatePrice.fulfilled, (state, action) => {
         state.loading = false;
-        const {id, amount, date, uid} = action.meta.arg;
-        if(action.payload.hasOwnProperty('market_data')){
-          const refactoredObj :DatePriceObj = Object.assign({}, action.payload, {
-            id: id,
-            amount:amount,
-            date: date,
-            uid: uid
-          });
-        const indexIfObjectisEdit = state.data.findIndex(obj => obj.uid === uid) 
-        indexIfObjectisEdit === -1 ? state.data.push(refactoredObj): state.data[indexIfObjectisEdit] = refactoredObj;
-        } else {
-          state.error = 'Requested date is too early for currency data';
+        state.error='';
+        if(typeof action.payload !== 'boolean'){
+          const indexIfObjectisEdit = state.data.findIndex(obj => obj.uid === action.payload.uid) 
+          indexIfObjectisEdit === -1 ? state.data.push(action.payload): state.data[indexIfObjectisEdit] = action.payload;
         }
       })
       .addCase(coinDatePrice.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? "An unkown error occurrfetchData"
+        if (action.payload) {
+          state.error = action.payload.errorMessage
+        } else {
+          state.error = action.error.message ?? "An unkown error occurrfetchDatePrice"
+        }
     })
     }
     })
