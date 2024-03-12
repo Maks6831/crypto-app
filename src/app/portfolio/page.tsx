@@ -187,7 +187,7 @@ export default function Portfolio() {
             <div className="font-medium text-base">Add Asset</div>
           </button>
         </div>
-        {data.length === 0 && <PortfolioHeader />}
+        {data && data.length === -1 && !loading && <PortfolioHeader />}
         {loading && (
           <div className="w-full min-h-[20rem] flex justify-center items-center">
             <div className="md:w-5/12">
