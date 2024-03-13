@@ -182,7 +182,7 @@ export default function Portfolio() {
           <div>Your Statistics</div>
           <button
             onClick={() => toggleModal(false, "", "", "")}
-            className="w-56 h-10 md:h-full  flex justify-center items-center dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one"
+            className="w-56 h-10 md:h-full  flex justify-center items-center bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-two dark:bg-opacity-50 rounded-md dark:border-carousel-button-color-one dark:border-opacity-20 shadow-lg dark:shadow-border-carousel-button-color-one"
           >
             <div className="font-medium text-base">Add Asset</div>
           </button>

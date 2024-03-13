@@ -68,9 +68,9 @@ export const AssetCard = ({
             />
           </div>
 
-          <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-20 dark:bg-volume-background rounded-lg">
+          <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-10 dark:bg-volume-background rounded-lg">
             <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
-              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-40 dark:bg-symbol-background rounded-md">
+              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
                 <Image
                   src={coin.image.small}
                   alt="coin symbol"
