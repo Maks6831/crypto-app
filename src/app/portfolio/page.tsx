@@ -216,7 +216,7 @@ export default function Portfolio() {
         className={` ${
           deleteModal
             ? " max-w-7 h-60 p-3  "
-            : " w-11/12 md:w-4/5  p-3 lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[25rem] py-10 "
+            : " w-11/12 md:w-4/5   lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[25rem] py-10 "
         }   bg-white dark:bg-dark-background backdrop:backdrop-blur-lg rounded-3xl backdrop:delay-1000`}
         ref={modalRef}
       >
@@ -225,7 +225,7 @@ export default function Portfolio() {
             <div>Are you sure you want to delete this coin?</div>
             <div className="flex justify-center items-center flex-col dark:text-card-text-gray">
               {chosenCoin.name}
-              <div className="m-3 h-16 w-16 flex justify-center items-center dark:bg-symbol-background rounded-md">
+              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
                 <Image
                   src={
                     "image" in chosenCoin
@@ -242,7 +242,7 @@ export default function Portfolio() {
               <div className="w-1/2 flex justify-center items-center">
                 <button
                   onClick={() => toggleModal(false, "", "", "")}
-                  className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
+                  className=" bg-slate-100 dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
                 >
                   Cancel
                 </button>
@@ -302,9 +302,9 @@ export default function Portfolio() {
                 </div>
               ) : (
                 <div className="m-2  w-full h-full  min-[580px]:w-5/12">
-                  <div className=" flex w-full  h-full rounded-xl   justify-center items-center dark:bg-volume-background">
+                  <div className=" flex w-full  h-full rounded-xl   justify-center items-center bg-portfolio-button-color bg-opacity-10  dark:bg-volume-background">
                     <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
-                      <div className="m-3 h-16 w-16 flex justify-center items-center dark:bg-symbol-background rounded-md">
+                      <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
                         <Image
                           src={
                             "image" in chosenCoin
@@ -347,7 +347,7 @@ export default function Portfolio() {
                       )}
                     </div>
                   ) : (
-                    <div></div>
+                    <div className="h-20"></div>
                   )}
 
                   <div className="w-full ">
@@ -400,7 +400,7 @@ export default function Portfolio() {
                   <div className="w-1/2 flex justify-center items-center">
                     <button
                       onClick={() => toggleModal(false, "", "", "")}
-                      className=" bg-slate-100 dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
+                      className=" bg-slate-100 dark:bg-timebar-background-color rounded-md h-11 w-11/12 cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -408,7 +408,7 @@ export default function Portfolio() {
                   <div className="w-1/2 flex justify-center items-center">
                     <button
                       onClick={saveAsset}
-                      className=" bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
+                      className=" bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one dark:bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
                     >
                       Save
                     </button>

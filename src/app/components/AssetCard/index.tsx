@@ -59,7 +59,7 @@ export const AssetCard = ({
     >
       {isLoaded && coin !== coinPage && (
         <>
-          <div className="absolute w-full flex  justify-end items-start  h-full bottom-24 left-24 opacity-10 dark:opacity-10">
+          <div className="absolute w-full flex  justify-end items-start pointer-events-none h-full bottom-24 left-24 opacity-10 dark:opacity-10">
             <Image
               src={coin.image.large}
               alt="coin symbol"
@@ -67,7 +67,6 @@ export const AssetCard = ({
               height={400}
             />
           </div>
-
           <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-10 dark:bg-volume-background rounded-lg">
             <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
               <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
