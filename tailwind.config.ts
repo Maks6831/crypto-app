@@ -49,7 +49,8 @@ const config: Config = {
       'coin-page-progress':'#D4770C',
       'coin-page-progress-two': '#F8D2A6',
       'edit-button-color': '#3A3978',
-      'symbol-background':'#2C2C4A'
+      'symbol-background':'#2C2C4A',
+      'portfolio-button-color': '#CDAFEB'
 
       },
     extend: {

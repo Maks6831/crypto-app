@@ -54,12 +54,23 @@ export const AssetCard = ({
   }, [coin]);
 
   return (
-    <div className="w-11/12 dark:bg-light-text-color-two bg-white min-h-[18rem] my-3 p-3 flex flex-col md:flex-row  rounded-lg ">
+    <div
+      className={`w-11/12 dark:bg-light-text-color-two relative  overflow-hidden bg-white min-h-[18rem]  my-3 p-3 flex flex-col   md:flex-row  rounded-lg `}
+    >
       {isLoaded && coin !== coinPage && (
         <>
-          <div className=" w-full md:w-3/12 flex  justify-center items-center  dark:bg-volume-background">
+          <div className="absolute w-full flex  justify-end items-start  h-full bottom-24 left-24 opacity-10 dark:opacity-10">
+            <Image
+              src={coin.image.large}
+              alt="coin symbol"
+              width={400}
+              height={400}
+            />
+          </div>
+
+          <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-20 dark:bg-volume-background rounded-lg">
             <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
-              <div className="m-3 h-16 w-16 flex justify-center items-center dark:bg-symbol-background rounded-md">
+              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-40 dark:bg-symbol-background rounded-md">
                 <Image
                   src={coin.image.small}
                   alt="coin symbol"
@@ -67,7 +78,7 @@ export const AssetCard = ({
                   height={32}
                 />
               </div>
-              <div className="font-bold text-2xl flex  justify-center items-center flex-wrap">
+              <div className="font-semibold text-2xl flex  justify-center items-center flex-wrap">
                 <div className="w-max">{coin.name}</div>
                 <div>({coin.symbol.toLocaleUpperCase()})</div>
               </div>
@@ -79,7 +90,7 @@ export const AssetCard = ({
                 <div className="font-medium text-xl">Market Price</div>
                 <div
                   onClick={() => toggleModal(false, "delete!", "", uid)}
-                  className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color cursor-pointer"
+                  className="w-10 h-10 rounded-md flex justify-center items-center bg-portfolio-button-color bg-opacity-50 shadow-md shadow-carousel-button-color dark:bg-edit-button-color cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,16 +111,23 @@ export const AssetCard = ({
               <div className="w-full  h-1/2 flex justify-between">
                 <div className=" md:flex justify-around  w-1/2">
                   <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
+                    <div className=" text-sm font-normal text-light-text-color dark:text-card-text-gray">
                       current Price
                     </div>
-                    <div className=" text-positive text-base">
+                    <div
+                      className=" text-positive text-base"
+                      style={{
+                        color: `${
+                          coin && colorChange(current_price[currency], theme)
+                        }`,
+                      }}
+                    >
                       {symbol}
                       {current_price[currency].toLocaleString()}
                     </div>
                   </div>
                   <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray">
+                    <div className=" text-sm font-normal text-light-text-color dark:text-card-text-gray">
                       Price Change 24h
                     </div>
                     <div
@@ -135,7 +153,7 @@ export const AssetCard = ({
                 </div>
                 <div className=" md:flex justify-around  w-1/2">
                   <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray text-center">
+                    <div className=" text-sm font-normal text-light-text-color dark:text-card-text-gray text-center">
                       Volume vs Market Cap
                     </div>
                     <div className="w-full">
@@ -152,23 +170,30 @@ export const AssetCard = ({
                     </div>
                   </div>
                   <div className="flex h-20 sm:h-fit justify-center m-2 p-1 border border-opacity-20 border-card-text-gray md:border-none items-center flex-col">
-                    <div className=" text-sm font-normal dark:text-card-text-gray text-center">
+                    <div className=" text-sm font-normal text-light-text-color dark:text-card-text-gray text-center">
                       Circ Supply vs Max Supply
                     </div>
-                    <div className="text-positive">
+                    <div
+                      className="text-base"
+                      style={{
+                        color: `${
+                          coin && colorChange(supplyPercentage, theme)
+                        }`,
+                      }}
+                    >
                       {supplyPercentage.toPrecision(3)}%
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <hr className="border-2 border-card-text-gray border-opacity-40 my-4 w-full rounded-xl"></hr>
+            <hr className=" border dark:border-2 border-black dark:border-card-text-gray dark:border-opacity-40 my-4 w-full rounded-xl"></hr>
             <div className="flex w-full h-1/2 flex-col">
               <div className="flex justify-between">
                 <div className="font-medium text-xl">Your Coin</div>
                 <div
                   onClick={() => toggleModal(true, coin.id, date, uid)}
-                  className="w-10 h-10 rounded-md flex justify-center items-center dark:bg-edit-button-color cursor-pointer"
+                  className="w-10 h-10 rounded-md flex justify-center items-center bg-portfolio-button-color bg-opacity-50 shadow-md shadow-carousel-button-color dark:bg-edit-button-color cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
