@@ -49,9 +49,12 @@ export const Searchbar = (props: SearchBarProps) => {
   };
 
   const searchCoin = () => {
-    router.push(`/coins/${data[focusedIndex].id}`);
-    handleDropDown(false);
-    setSearchInput("");
+    if (data[focusedIndex]) {
+      setSearchInput("");
+      handleDropDown(false);
+      router.push(`/coins/${data[focusedIndex].id}`);
+      setFocusedIndex(-1);
+    }
   };
 
   const setValue = () => {
@@ -77,11 +80,11 @@ export const Searchbar = (props: SearchBarProps) => {
   const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     const { key } = e;
     setKeyPress(true);
-    if (key === "ArrowDown") {
+    if (key === "ArrowDown" && rightData) {
       const nextIndexCount = (focusedIndex + 1) % data.length;
       setFocusedIndex(nextIndexCount);
     }
-    if (key === "ArrowUp") {
+    if (key === "ArrowUp" && rightData) {
       const nextIndexCount = (focusedIndex + data.length - 1) % data.length;
       setFocusedIndex(nextIndexCount);
     }
