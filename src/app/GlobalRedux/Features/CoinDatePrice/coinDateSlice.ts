@@ -69,7 +69,7 @@ DatePriceAttributes,
         state.error='';
         if(typeof action.payload !== 'boolean'){
           const indexIfObjectisEdit = state.data.findIndex(obj => obj.uid === action.payload.uid) 
-          indexIfObjectisEdit === -1 ? state.data.push(action.payload): state.data[indexIfObjectisEdit] = action.payload;
+          indexIfObjectisEdit === -1 ? state.data.unshift(action.payload): state.data[indexIfObjectisEdit] = action.payload;
         }
       })
       .addCase(coinDatePrice.rejected, (state, action) => {

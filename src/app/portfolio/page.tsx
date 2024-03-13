@@ -217,7 +217,7 @@ export default function Portfolio() {
           deleteModal
             ? " max-w-7 h-60 p-3  "
             : " w-11/12 md:w-4/5  p-3 lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[25rem] py-10 "
-        }  bg-dark-background backdrop:backdrop-blur-lg rounded-3xl backdrop:delay-1000`}
+        }   bg-white dark:bg-dark-background backdrop:backdrop-blur-lg rounded-3xl backdrop:delay-1000`}
         ref={modalRef}
       >
         {deleteModal ? (
@@ -357,7 +357,7 @@ export default function Portfolio() {
                         className="h-12 rounded-xl leading-10 w-full"
                       >
                         <input
-                          className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                          className="bg-light-button-color bg-opacity-40 dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                           placeholder="Purchased Amount..."
                           name="amountRef"
                           onFocus={() => setErrors({ ...errors, amount: "" })}
@@ -379,7 +379,7 @@ export default function Portfolio() {
                         className="h-12 rounded-xl leading-10 w-full"
                       >
                         <input
-                          className="dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+                          className="bg-light-button-color bg-opacity-40 dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
                           placeholder="Purchase date..."
                           name="dateRef"
                           type="date"
@@ -400,7 +400,7 @@ export default function Portfolio() {
                   <div className="w-1/2 flex justify-center items-center">
                     <button
                       onClick={() => toggleModal(false, "", "", "")}
-                      className=" dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
+                      className=" bg-slate-100 dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
                     >
                       Cancel
                     </button>
@@ -408,7 +408,7 @@ export default function Portfolio() {
                   <div className="w-1/2 flex justify-center items-center">
                     <button
                       onClick={saveAsset}
-                      className=" bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
+                      className=" bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
                     >
                       Save
                     </button>

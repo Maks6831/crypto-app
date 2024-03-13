@@ -115,7 +115,7 @@ export const AssetCard = ({
                       current Price
                     </div>
                     <div
-                      className=" text-positive text-base"
+                      className="  text-base"
                       style={{
                         color: `${
                           coin && colorChange(current_price[currency], theme)

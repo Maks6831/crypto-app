@@ -157,7 +157,7 @@ export const Searchbar = (props: SearchBarProps) => {
             isSearch
               ? " h-12 pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
               : isPortfolio
-              ? " dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+              ? " bg-light-button-color bg-opacity-40 dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
               : " w-full dark:bg-inherit text-base md:text-2xl h-12 "
           } ouline-none  `}
           placeholder={
