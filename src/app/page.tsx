@@ -26,7 +26,7 @@ export default function Home() {
     prices && labels && labelsTwo && market_caps && !loading;
 
   const setCoin = (value: boolean) => {
-    value ? setisCoin(true) : setisCoin(false);
+    setisCoin(value);
   };
 
   useEffect(() => {

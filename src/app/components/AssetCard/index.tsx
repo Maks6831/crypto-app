@@ -50,7 +50,7 @@ export const AssetCard = ({
   }, [portfolioData]);
 
   useEffect(() => {
-    coin !== coinPage ? setIsLoading(true) : null;
+    coin !== coinPage && setIsLoading(true);
   }, [coin]);
 
   return (

@@ -61,7 +61,7 @@ export const Searchbar = (props: SearchBarProps) => {
     const coin = data[focusedIndex];
     if (!isSearch && !isPortfolio) {
       const index = coins.findIndex((obj) => obj.name === defaultValue);
-      let coinArray = [...coins];
+      const coinArray = [...coins];
       coinArray[index] = coin;
       dispatch(changeArray(coinArray));
     }
