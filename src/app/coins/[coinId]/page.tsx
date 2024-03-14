@@ -4,7 +4,7 @@ import { Wrapper } from "@/app/components/Wrapper";
 import { UrlContainer } from "../../components/UrlContainer";
 import { DataCard } from "@/app/components/DataCard";
 import { useAppDispatch, useAppSelector } from "@/app/GlobalRedux/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { coinPageData } from "@/app/GlobalRedux/Features/CoinPage/coinPageSlice";
 import { coinPage, dummyData, isProgressData } from "@/app/types/CoinPageTypes";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
@@ -21,6 +21,8 @@ export default function Page({ params }: { params: { coinId: string } }) {
   const { data } = useAppSelector((state) => state.coinPageReducer);
   const { currency, symbol } = useAppSelector((state) => state.currencyReducer);
   const [currentPrice, setCurrentPrice] = useState(0);
+  const amountRef = useRef<HTMLInputElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
   const { days, prices, labels, labelsTwo, market_caps } = useAppSelector(
     (state) => state.priceChart
   );

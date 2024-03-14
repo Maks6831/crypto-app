@@ -19,6 +19,9 @@ export interface Coin {
     market_cap_rank: number;
     thumb:           string;
     large:           string;
+    date?:           string;
+    uid?:            string;
+    amount?:         string;
 }
 
 export interface Exchange {
@@ -39,3 +42,14 @@ export interface Nft {
     symbol: string;
     thumb:  string;
 }
+
+
+export const exampleAsset: Coin = {
+    id: "",
+    name: "Example Asset",
+    api_symbol: "EXM",
+    symbol: "$EXM",
+    market_cap_rank: 1,
+    thumb: "url/to/thumb/image.jpg",
+    large: "url/to/large/image.jpg"
+};

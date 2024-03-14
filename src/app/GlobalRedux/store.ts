@@ -10,6 +10,7 @@ import globalReducer from './Features/GlobalData/globalSlice';
 import searchReducer from './Features/SearchData/searchSlice';
 import converterReducer from './Features/ConverterCoins/ConvertSlice';
 import coinPageReducer from './Features/CoinPage/coinPageSlice';
+import coinDatePriceReducer from './Features/CoinDatePrice/coinDateSlice';
 
 
 export const store= configureStore({
@@ -23,7 +24,8 @@ export const store= configureStore({
         globalReducer,
         searchReducer,
         converterReducer,
-        coinPageReducer
+        coinPageReducer,
+        coinDatePriceReducer
     }
 })
 

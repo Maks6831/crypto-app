@@ -5,7 +5,7 @@ import Image from "next/image";
 import { timeFormatter } from "@/app/Utils/timeFormatter";
 import { colorChange } from "@/app/Utils/colorChange";
 import { useTheme } from "next-themes";
-import { percentFormatter } from "@/app/Utils/percentFormatter";
+import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 
 export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
@@ -57,7 +57,7 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
               style={{ color: `${colorChange(parseInt(percentage), theme)}` }}
               className="font-medium xl:text-xl lg:text-lg md:text-base sm:text-sm text-xs p-1"
             >
-              {percentFormatter(parseInt(percentage))}
+              {numberFormatter(parseInt(percentage), true, "")}
             </div>
           </div>
           <div className="flex justify-start items-center">

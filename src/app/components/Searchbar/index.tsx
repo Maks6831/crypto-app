@@ -7,14 +7,13 @@ import { SearchItem } from "../SearchItem";
 import { useDebounce } from "@/app/Utils/Hooks/useDebounce";
 import { useRouter } from "next/navigation";
 import { changeArray } from "@/app/GlobalRedux/Features/ConverterCoins/ConvertSlice";
+import { SearchBarProps } from "@/app/types/SearchBarType";
 
-export const Searchbar = ({
-  isSearch,
-  defaultValue,
-}: {
-  isSearch: boolean;
-  defaultValue: string;
-}) => {
+export const Searchbar = (props: SearchBarProps) => {
+  const defaultValue = props.isPortfolio ? "" : props.defaultValue;
+  const isSearch = props.isSearch;
+  const isPortfolio = props.isPortfolio;
+  const modalCloseCheck = props.isPortfolio ? props.modalCloseChecker : false;
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(
     (state) => state.searchReducer
@@ -28,6 +27,12 @@ export const Searchbar = ({
   const [keyPress, setKeyPress] = useState(false);
   const router = useRouter();
   const [focus, setFocus] = useState(false);
+  const debouncedSearch = useDebounce(searchInput, 1000);
+  const rightData =
+    !loading && !error && data.length > 0 && searchInput !== "" && focus;
+  const dropDownCheck = dropDown;
+  const displayLoading = loading && focus && !error && searchInput !== "";
+  const throwError = error && searchInput !== "";
 
   const handleDropDown = (value: boolean) => {
     value ? setFocus(true) : setFocus(false);
@@ -44,30 +49,42 @@ export const Searchbar = ({
   };
 
   const searchCoin = () => {
-    console.log(`${data[focusedIndex].id}`);
-    router.push(`/coins/${data[focusedIndex].id}`);
-    handleDropDown(false);
-    setSearchInput("");
+    if (data[focusedIndex]) {
+      setSearchInput("");
+      handleDropDown(false);
+      router.push(`/coins/${data[focusedIndex].id}`);
+      setFocusedIndex(-1);
+    }
   };
 
   const setValue = () => {
     const coin = data[focusedIndex];
-    const index = coins.findIndex((obj) => obj.name === defaultValue);
-    let coinArray = [...coins];
-    coinArray[index] = coin;
-    dispatch(changeArray(coinArray));
-    setSearchInput(coin.name);
+    if (!isSearch && !isPortfolio) {
+      const index = coins.findIndex((obj) => obj.name === defaultValue);
+      const coinArray = [...coins];
+      coinArray[index] = coin;
+      dispatch(changeArray(coinArray));
+    }
+    if (isPortfolio) {
+      if (data.length > 0) {
+        !coin ? props.liftStateUp(data[0]) : props.liftStateUp(coin);
+      } else {
+        props.saveAsset();
+      }
+    }
+    setSearchInput(coin ? coin.name : data[0].name);
     setDropDown(false);
+    handleDropDown(false);
   };
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     const { key } = e;
     setKeyPress(true);
-    if (key === "ArrowDown") {
+    if (key === "ArrowDown" && rightData) {
       const nextIndexCount = (focusedIndex + 1) % data.length;
       setFocusedIndex(nextIndexCount);
     }
-    if (key === "ArrowUp") {
+    if (key === "ArrowUp" && rightData) {
       const nextIndexCount = (focusedIndex + data.length - 1) % data.length;
       setFocusedIndex(nextIndexCount);
     }
@@ -83,13 +100,6 @@ export const Searchbar = ({
     value !== "" && data.length > 0 ? setDropDown(true) : setDropDown(false);
   };
 
-  const debouncedSearch = useDebounce(searchInput, 1000);
-  const rightData =
-    !loading && !error && data.length > 0 && searchInput !== "" && focus;
-  const dropDownCheck = dropDown;
-  const displayLoading = loading && focus && !error && searchInput !== "";
-  const throwError = error && searchInput !== "";
-
   useEffect(() => {
     if (searchInput) {
       dispatch(searchData(debouncedSearch));
@@ -102,12 +112,23 @@ export const Searchbar = ({
     }
   }, [focusedIndex]);
 
+  useEffect(() => {
+    setSearchInput("");
+  }, [modalCloseCheck]);
+
+  useEffect(() => {
+    if (props.isPortfolio) {
+      props.setSearchState(searchInput);
+    }
+  }, [searchInput, props]);
   return (
     <div
       key={defaultValue}
       tabIndex={1}
       onKeyDown={handleKeyDown}
-      className={`relative ${isSearch ? "m-2" : "md:m-2"}  flex`}
+      className={`relative ${
+        isSearch ? "m-2 h-full" : isPortfolio ? "m-1 py-1" : "md:m-2"
+      } flex`}
       onFocus={() => handleDropDown(true)}
       onBlur={() => handleDropDown(false)}
     >
@@ -130,15 +151,21 @@ export const Searchbar = ({
         <></>
       )}
       <label
-        className={`h-12 rounded-xl leading-10 ${isSearch ? "w-89" : "w-full"}`}
+        className={`rounded-xl leading-10 ${
+          isSearch ? "w-89 h-full " : " h-12 w-full"
+        }`}
       >
         <input
-          className={
+          className={`${
             isSearch
-              ? " h-12 pl-8 w-89 bg-light-button-color bg-opacity-40  rounded-xl dark:bg-dark-button-color dark:bg-opacity-100 outline-none"
-              : "h-12 outline-none w-full dark:bg-inherit text-base md:text-2xl"
+              ? " h-12 pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
+              : isPortfolio
+              ? " bg-light-button-color bg-opacity-40 dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
+              : " w-full dark:bg-inherit text-base md:text-2xl h-12 "
+          } ouline-none  `}
+          placeholder={
+            isSearch ? "Search..." : isPortfolio ? "Select Coin..." : ""
           }
-          placeholder={isSearch ? "Search..." : ""}
           type="text"
           value={searchInput}
           onChange={useHandleChange}
@@ -151,7 +178,7 @@ export const Searchbar = ({
       )}
       {displayLoading && (
         <div
-          className={`p-2 left-0 top-14 bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${
+          className={`p-2 left-0 top-14 z-50  bg-light-button-color w-full rounded-xl bg-opacity-60  absolute ${
             isSearch ? "top-14" : "top-16"
           }`}
         >

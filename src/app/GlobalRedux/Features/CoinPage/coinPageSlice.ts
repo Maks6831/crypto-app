@@ -1,5 +1,4 @@
 'use client';
-
 import { CoinPageTypes , coinPage } from "@/app/types/CoinPageTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -14,8 +13,9 @@ export const coinPageData = createAsyncThunk(
       }
     );
 
-    const initialState : {data: CoinPageTypes, loading: boolean, error: string } = {
+    const initialState : {data: CoinPageTypes, portfolioData:CoinPageTypes[] ,loading: boolean, error: string } = {
         data: coinPage ,
+        portfolioData:[],
         loading: false,
         error: '',
     }
@@ -34,7 +34,9 @@ export const coinPageData = createAsyncThunk(
           })
           .addCase(coinPageData.fulfilled, (state, action) => {
             state.data = action.payload as CoinPageTypes;
-          })
+            state.portfolioData.push(action.payload);
+            state.loading = false;
+             })
           .addCase(coinPageData.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message ?? "An unkown error occurrfetchData"

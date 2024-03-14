@@ -26,7 +26,7 @@ export const NavLinks = ({ isDropDown }: { isDropDown: boolean }) => {
       <div
         onClick={() => goTo("/")}
         className={`${
-          pathname === "/" ? " " : "text-opactiy-50 dark:text-opacity-50"
+          pathname === "/" ? " " : " text-opacity-50 dark:text-opacity-50 "
         } text-purpleb dark:text-white sm:p-3 sm:m-3 md:p-0 md:m-0 lg:p-3 flex flex-column lg:m-3 cursor-pointer`}
       >
         <div className=" m-1">
