@@ -44,18 +44,20 @@ export default function Home() {
           <Wrapper>
             <div className="w-full flex flex-col justify-center items-center">
               <TitleHeader isNavbar={false} />
-              <div className=" w-full md:w-10/12 h-full m-2 flex justify-center items-center md:items-start flex-col">
-                <Buttonswitcher
-                  handleClick={setCoin}
-                  isClicked={isCoin}
-                  nameArray={["Coins", "Converter"]}
-                />
-              </div>
+              {displayGraphData && (
+                <div className=" w-full md:w-11/12 h-full my-2 flex justify-center items-center md:items-start flex-col">
+                  <Buttonswitcher
+                    handleClick={setCoin}
+                    isClicked={isCoin}
+                    nameArray={["Coins", "Converter"]}
+                  />
+                </div>
+              )}
             </div>
           </Wrapper>
           {isCoin ? (
             <>
-              <div className="sm:px-4 flex justify-center items-center  overflow-hiddem w-10/12">
+              <div className="sm:px-4 flex justify-center items-center  overflow-hiddem w-11/12">
                 <Carousel isCoinPage={false} />
               </div>
               <Wrapper>
@@ -63,7 +65,7 @@ export default function Home() {
                   <div className=" overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
                     {loading && (
                       <div className="w-full h-full flex justify-center items-center">
-                        <div className="h-10 w-10">
+                        <div className="h-14 w-14">
                           <LoadingSpinner />
                         </div>
                       </div>
@@ -91,7 +93,7 @@ export default function Home() {
                   <div className=" overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background">
                     {loading && (
                       <div className="w-full h-full flex justify-center items-center">
-                        <div className="h-10 w-10">
+                        <div className="h-14 w-14">
                           <LoadingSpinner />
                         </div>
                       </div>
