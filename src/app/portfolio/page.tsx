@@ -146,7 +146,6 @@ export default function Portfolio() {
       }
     } catch (error: any) {
       const newErrors: any = {};
-      console.log(error.inner);
       error.inner.forEach((err: { path: string | number; message: any }) => {
         newErrors[err.path] = err.message;
         setErrors(newErrors);
