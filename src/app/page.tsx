@@ -23,7 +23,11 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const [currentPrice, setCurrentPrice] = useState(0);
   const displayGraphData =
-    prices && labels && labelsTwo && market_caps && !loading;
+    prices.length > 0 &&
+    labels.length > 0 &&
+    labelsTwo.length > 0 &&
+    market_caps.length > 0 &&
+    !loading;
 
   const setCoin = (value: boolean) => {
     setisCoin(value);
@@ -59,7 +63,7 @@ export default function Home() {
                   <div className=" overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
                     {loading && (
                       <div className="w-full h-full flex justify-center items-center">
-                        <div className="h-20 w-20">
+                        <div className="h-10 w-10">
                           <LoadingSpinner />
                         </div>
                       </div>
@@ -87,7 +91,7 @@ export default function Home() {
                   <div className=" overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background">
                     {loading && (
                       <div className="w-full h-full flex justify-center items-center">
-                        <div className="h-20 w-20">
+                        <div className="h-10 w-10">
                           <LoadingSpinner />
                         </div>
                       </div>
