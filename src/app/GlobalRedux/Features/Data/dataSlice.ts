@@ -1,6 +1,7 @@
 'use client';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { MarketData } from "../../../types/MarketData";
+import { TableData } from "@/app/types/TableData";
 
 
 export const fetchData = createAsyncThunk(
@@ -13,7 +14,7 @@ export const fetchData = createAsyncThunk(
     }
 )
 
-const initialState = {
+const initialState :{coins: TableData[], loading: boolean, error: string} = {
     coins: [],
     loading: false,
     error: ''
