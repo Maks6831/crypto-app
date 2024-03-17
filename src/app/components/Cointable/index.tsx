@@ -36,7 +36,7 @@ export const Cointable = () => {
   return (
     <>
       {loading && coins.length === 0 && (
-        <div className="w-full h-20">
+        <div className="w-full flex justify-center items-center h-20">
           <div className="w-14 h-14">
             <LoadingSpinner />
           </div>
