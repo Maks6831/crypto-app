@@ -28,7 +28,7 @@ export const Carousel = ({ isCoinPage }: { isCoinPage: boolean }) => {
   return (
     <>
       {loading && (
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full h-20 flex justify-center items-center">
           <div className="w-14 h-14">
             <LoadingSpinner />
           </div>

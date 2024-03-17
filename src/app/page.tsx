@@ -40,19 +40,18 @@ export default function Home() {
   return (
     <div className="flex justify-center items-center w-full  ">
       <Wrapper>
-        <div className="  w-full  min-h-screen flex flex-col justify-center items-center">
+        <div className="  w-full  min-h-screen flex flex-col items-center">
           <Wrapper>
-            <div className="w-full flex flex-col justify-center items-center">
+            <div className="w-full flex flex-col items-center">
               <TitleHeader isNavbar={false} />
-              {displayGraphData && (
-                <div className=" w-full md:w-11/12 h-full my-2 flex justify-center items-center md:items-start flex-col">
-                  <Buttonswitcher
-                    handleClick={setCoin}
-                    isClicked={isCoin}
-                    nameArray={["Coins", "Converter"]}
-                  />
-                </div>
-              )}
+
+              <div className=" w-full md:w-11/12 h-full my-2 flex justify-center items-center md:items-start flex-col">
+                <Buttonswitcher
+                  handleClick={setCoin}
+                  isClicked={isCoin}
+                  nameArray={["Coins", "Converter"]}
+                />
+              </div>
             </div>
           </Wrapper>
           {isCoin ? (
