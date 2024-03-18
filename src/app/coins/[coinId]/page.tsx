@@ -81,7 +81,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
       {dataChecker && (
         <div className="min-h-screen w-full ">
           <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch   w-full p-3 h-1/2 md:max-h-[30rem]  ">
-            <div className=" w-full min-[400px]:w-10/12  md:w-5/12  md:min-h-full  flex justify-center  items-center">
+            <div className=" w-full min-[400px]:w-10/12  md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
               <CoinCard isPortfolio={false} />
             </div>
             <div className="w-10/12  md:w-7/12 m-2 min-h-full flex flex-col justify-start">
