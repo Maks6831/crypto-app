@@ -6,7 +6,7 @@ export const PortfolioHeader = () => {
       <div className=" text-xl md:text-3xl font-semibold m-2 p-3 ">
         Welcome to My Portfolio
       </div>
-      <p className=" m-2 p-2 w-5/6 text-justify md:text-base text-sm">
+      <p className=" m-2 p-2 w-5/6 text-justify md:text-base text-sm dark:text-card-text-gray">
         Manage your crypto assets with ease! Whether you&lsquo;re a seasoned
         trader or just getting started in the exciting world of
         cryptocurrencies, this portfolio tool is designed to help you keep track
