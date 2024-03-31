@@ -42,10 +42,10 @@ export default function Home() {
       <Wrapper>
         <div className="  w-full  min-h-screen flex flex-col items-center">
           <Wrapper>
-            <div className="w-full flex flex-col items-center">
+            <div className="w-11/12 flex flex-col items-center">
               <TitleHeader isNavbar={false} />
 
-              <div className=" w-full md:w-11/12 h-full my-2 flex justify-center items-center md:items-start flex-col">
+              <div className=" w-full h-full px-1 my-2 flex justify-center items-center md:items-start flex-col">
                 <Buttonswitcher
                   handleClick={setCoin}
                   isClicked={isCoin}
@@ -56,7 +56,7 @@ export default function Home() {
           </Wrapper>
           {isCoin ? (
             <>
-              <div className="sm:px-4 flex justify-center items-center  overflow-hiddem w-11/12">
+              <div className=" px-[2rem] flex justify-center items-center  overflow-hiddem w-full">
                 <Carousel isCoinPage={false} />
               </div>
               <Wrapper>
@@ -119,10 +119,8 @@ export default function Home() {
                 </div>
               </Wrapper>
               <Wrapper>
-                <div className=" flex  w-full  justify-start mb-10 ">
-                  <div className=" w-full  lg:w-1/2 flex justify-center  ">
-                    <Timebar days={days} />
-                  </div>
+                <div className=" w-11/12 py-5 flex justify-start  ">
+                  <Timebar days={days} />
                 </div>
               </Wrapper>
             </>

@@ -11,7 +11,7 @@ export const Buttonswitcher = ({
   nameArray: string[];
 }) => {
   return (
-    <div className="mt-5 ml-3 w-9/12 sm:w-5/12 md:w-[31.6rem] h-14 rounded-md flex items-center bg-white dark:bg-dark-card cursor-pointer ">
+    <div className="mt-5  w-9/12 sm:w-5/12 md:w-[31.6rem] h-14 rounded-md flex items-center bg-white dark:bg-dark-card cursor-pointer ">
       <div
         onClick={() => handleClick(true)}
         className={
