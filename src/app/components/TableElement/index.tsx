@@ -60,7 +60,7 @@ export const TableElement = ({
       </td>
       <td className=" bg-white dark:bg-dark-card  h-full     rounded-l-xl">
         <div className="   w-36 md:w-full h-full flex justify-around sm:justify-start items-center ">
-          <div className="  m-2  ">
+          <div className="  h-6 w-6 m-2  ">
             <Image
               src={image}
               alt={name}
