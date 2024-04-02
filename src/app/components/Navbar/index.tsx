@@ -10,9 +10,9 @@ import { Wrapper } from "../Wrapper";
 export const Navbar = () => {
   return (
     <Wrapper>
-      <nav className="w-full flex justify-center items-center h-16 ">
+      <nav className="w-full flex justify-center items-center h-12 ">
         <div className=" lg:w-11/12 w-full flex min-h-full items-center justify-between flex-column mr-3">
-          <div className="flex just w-1/2 justify-around ">
+          <div className="flex w-1/2 justify-around ">
             <TitleHeader isNavbar={true} />
             <NavLinks isDropDown={false} />
           </div>

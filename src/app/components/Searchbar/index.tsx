@@ -138,7 +138,7 @@ export const Searchbar = (props: SearchBarProps) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-6 h-6"
+            className="w-4 h-4"
           >
             <path
               fillRule="evenodd"
@@ -158,7 +158,7 @@ export const Searchbar = (props: SearchBarProps) => {
         <input
           className={`${
             isSearch
-              ? " h-12 pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
+              ? " h-8 pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
               : isPortfolio
               ? " bg-light-button-color bg-opacity-40 dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
               : " w-full dark:bg-inherit text-base md:text-2xl h-12 "

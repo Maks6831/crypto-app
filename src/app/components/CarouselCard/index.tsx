@@ -39,7 +39,7 @@ export const CarouselCard = ({
   );
   const { coin } = useAppSelector((state) => state.coinReducer);
   const router = useRouter();
-  const displayElement = index >= carIndex - 1 && index < carIndex + 3;
+  const displayElement = index >= carIndex - 1 && index < carIndex + 4;
   const displayColor = percentageChange > 0 ? "#01F1E3" : "#FE2264";
   const { theme } = useTheme();
 
@@ -63,7 +63,7 @@ export const CarouselCard = ({
       onClick={isCoinPage ? goToPage : selectCoin}
       className={
         displayElement
-          ? `m-1 h-10 md:h-20 overflow-hidden w-full  rounded-md rd cursor-pointer ${
+          ? `m-1 h-10 md:h-20 overflow-hidden w-full  rounded-3xl rd cursor-pointer ${
               isCoinPage ? "bg-white dark:bg-dark-card" : selectClass()
             }`
           : "hidden"
@@ -74,7 +74,7 @@ export const CarouselCard = ({
           <Image src={source} alt={name} width={32} height={32} />
         </div>
         <div className="flex flex-col p-0 pl-1 lg:p-1 md:pl-3 lg:pl-5 ">
-          <div className="justify-center items-center font-medium xl:text-base text-sm hidden md:flex ">
+          <div className="pl-2 justify-start items-center font-medium  text-sm hidden md:flex overflow-ellipsis whitespace-nowrap">
             {name}&nbsp;({symbol.toUpperCase()})
           </div>
           <div className="text-xs sm:text-base md:hidden">

@@ -11,13 +11,13 @@ export const Buttonswitcher = ({
   nameArray: string[];
 }) => {
   return (
-    <div className="mt-5  w-9/12 sm:w-5/12 md:w-[31.6rem] h-14 rounded-md flex items-center bg-white dark:bg-dark-card cursor-pointer ">
+    <div className="mt-5  w-9/12 sm:w-5/12 md:w-[14.6rem] h-10 rounded-2xl flex items-center bg-white dark:bg-dark-card cursor-pointer ">
       <div
         onClick={() => handleClick(true)}
         className={
           isClicked
-            ? "w-full h-14  flex items-center justify-center bg-carousel-button-color-two bg-opacity-50 rounded-md"
-            : "w-full h-14  flex items-center justify-center rounded-md"
+            ? "w-full h-10  flex items-center justify-center bg-carousel-button-color-two bg-opacity-50 rounded-2xl"
+            : "w-full h-10  flex items-center justify-center rounded-2xl"
         }
       >
         <div className="text-center">{nameArray[0]}</div>
@@ -26,8 +26,8 @@ export const Buttonswitcher = ({
         onClick={() => handleClick(false)}
         className={
           isClicked
-            ? "w-full h-14  flex items-center justify-center rounded-md"
-            : "w-full h-14  flex items-center justify-center bg-carousel-button-color-two bg-opacity-50 rounded-md"
+            ? "w-full h-10  flex items-center justify-center rounded-2xl"
+            : "w-full h-10  flex items-center justify-center bg-carousel-button-color-two bg-opacity-50 rounded-2xl"
         }
       >
         <div className="text-center">{nameArray[1]}</div>

@@ -22,7 +22,7 @@ export const CoinInfoContainer = ({
   return (
     <div
       className={` h-1/6  absolute p-2  ${
-        isCoinPage ? "md:left-28 md:top-4" : "md:left-6 md:top-6"
+        isCoinPage ? "md:left-28 md:top-4" : "md:left-6 md:top-4"
       } left-2 top-2  flex md:block justify-between  w-11/12`}
     >
       <div className="font-normal pb-2 lg:mb-3 text-xs sm:text-base md:text-lg lg:text-xl leading-6 text-light-text-color-two dark:text-card-text-gray ">

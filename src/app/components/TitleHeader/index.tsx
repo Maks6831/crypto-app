@@ -20,7 +20,7 @@ export const TitleHeader = ({ isNavbar }: { isNavbar: boolean }) => {
         </svg>
       </div>
       <h1 className={`font-semibold ${isNavbar ? "text-2xl" : "text-4xl"}`}>
-        Coin Infinito
+        CoinFlow
       </h1>
     </div>
   );
