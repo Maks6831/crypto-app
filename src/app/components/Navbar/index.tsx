@@ -12,9 +12,11 @@ export const Navbar = () => {
     <Wrapper>
       <nav className="w-full flex justify-center items-center h-12 ">
         <div className=" lg:w-11/12 w-full flex min-h-full items-center justify-between flex-column mr-3">
-          <div className="flex w-1/2 justify-around ">
+          <div className="flex w-1/2 justify-start pr-4 ">
             <TitleHeader isNavbar={true} />
-            <NavLinks isDropDown={false} />
+            <div className="">
+              <NavLinks isDropDown={false} />
+            </div>
           </div>
           <div className="  flex flex-column items-center h-full justify-end sm:w-full  md:w-1/3 ">
             <div className="flex items-center justify-center h-full text-light-text-color  dark:text-white">
