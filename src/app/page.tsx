@@ -42,10 +42,10 @@ export default function Home() {
       <Wrapper>
         <div className="  w-full  min-h-screen flex flex-col items-center">
           <Wrapper>
-            <div className="w-full flex flex-col items-center">
+            <div className="w-11/12 flex flex-col items-center">
               <TitleHeader isNavbar={false} />
 
-              <div className=" w-full md:w-11/12 h-full my-2 flex justify-center items-center md:items-start flex-col">
+              <div className=" w-full h-full px-1 my-2 flex justify-center items-center md:items-start flex-col">
                 <Buttonswitcher
                   handleClick={setCoin}
                   isClicked={isCoin}
@@ -56,12 +56,12 @@ export default function Home() {
           </Wrapper>
           {isCoin ? (
             <>
-              <div className="sm:px-4 flex justify-center items-center  overflow-hiddem w-11/12">
+              <div className=" px-[2rem] flex justify-center items-center  overflow-hiddem w-full">
                 <Carousel isCoinPage={false} />
               </div>
               <Wrapper>
                 <div className="flex flex-col sm:flex-row h-[28rem] sm:h-60 md:h-80 lg:h-[25rem] w-11/12 justify-center items-center m-2 ">
-                  <div className=" overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
+                  <div className=" overflow-hidden sm:min-w-80  m-2 px-3 pb-1 md:p-6 bg-white-color rounded-3xl h-60   md:h-80 w-full md:w-1/2 lg:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
                     {loading && (
                       <div className="w-full h-full flex justify-center items-center">
                         <div className="h-14 w-14">
@@ -89,7 +89,7 @@ export default function Home() {
                       </>
                     )}
                   </div>
-                  <div className=" overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background">
+                  <div className=" overflow-hidden min-w-80   m-2 px-3 pb-1 md:p-6 bg-white-color rounded-3xl h-60  md:h-80   lg:h-[25rem] w-full md:w-1/2 flex justify-center items-end relative dark:bg-volume-background">
                     {loading && (
                       <div className="w-full h-full flex justify-center items-center">
                         <div className="h-14 w-14">
@@ -99,12 +99,15 @@ export default function Home() {
                     )}
                     {displayGraphData && (
                       <>
+                        <div className="absolute right-3 top-2 z-50">
+                          <Timebar days={days} />
+                        </div>
                         <CoinInfoContainer
                           isPrice={false}
                           isCoinPage={false}
                           currentPrice={currentPrice}
                         />
-                        <div className="h-1/2 md:h-max w-full flex items-end">
+                        <div className="h-1/2 md:h-max w-full flex items-end ">
                           <Pricegraph
                             isLine={false}
                             market_caps={market_caps}
@@ -115,13 +118,6 @@ export default function Home() {
                         </div>
                       </>
                     )}
-                  </div>
-                </div>
-              </Wrapper>
-              <Wrapper>
-                <div className=" flex  w-full  justify-start mb-10 ">
-                  <div className=" w-full  lg:w-1/2 flex justify-center  ">
-                    <Timebar days={days} />
                   </div>
                 </div>
               </Wrapper>

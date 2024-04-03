@@ -51,9 +51,9 @@ export const TableElement = ({
   return (
     <tr
       onClick={goToPage}
-      className=" h-20 mb-3  gap-4 cursor-pointer  w-full  first:rounded-l-xl "
+      className=" h-20 mb-3  gap-4 cursor-pointer  w-full  first:rounded-l-3xl "
     >
-      <td className=" bg-white dark:bg-dark-card  p-5 rounded-l-xl hidden xl:table-cell ">
+      <td className=" bg-white dark:bg-dark-card  p-5 rounded-l-3xl hidden xl:table-cell ">
         <span className="flex flex-row items-center justify-center">
           {number}
         </span>
@@ -87,7 +87,7 @@ export const TableElement = ({
         </span>
         <span
           style={{ color: `${colorChange(change7d, theme)}` }}
-          className="flex md:hidden flex-row justify-center items-center text-xs whitespace-nowrap"
+          className="flex md:hidden flex-row justify-center items-center text-xs whitespace-nowrap "
         >
           {numberFormatter(change7d, true, "")}
         </span>

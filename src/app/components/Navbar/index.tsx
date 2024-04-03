@@ -10,10 +10,14 @@ import { Wrapper } from "../Wrapper";
 export const Navbar = () => {
   return (
     <Wrapper>
-      <nav className="w-full flex justify-center items-center h-20 ">
+      <nav className="w-full flex justify-center items-center h-12 ">
         <div className=" lg:w-11/12 w-full flex min-h-full items-center justify-between flex-column mr-3">
-          <TitleHeader isNavbar={true} />
-          <NavLinks isDropDown={false} />
+          <div className="flex w-1/2 justify-start pr-4 ">
+            <TitleHeader isNavbar={true} />
+            <div className="">
+              <NavLinks isDropDown={false} />
+            </div>
+          </div>
           <div className="  flex flex-column items-center h-full justify-end sm:w-full  md:w-1/3 ">
             <div className="flex items-center justify-center h-full text-light-text-color  dark:text-white">
               <Searchbar isSearch={true} defaultValue="" isPortfolio={false} />

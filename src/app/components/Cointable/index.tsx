@@ -43,7 +43,7 @@ export const Cointable = () => {
         </div>
       )}
       {coins.length > 0 && (
-        <div className="flex justify-center items-center w-full ">
+        <div className="flex justify-center items-center w-full mt-6 ">
           <InfiniteScroll
             dataLength={dataLength}
             next={onScroll}
