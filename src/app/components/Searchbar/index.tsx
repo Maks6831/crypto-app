@@ -154,13 +154,13 @@ export const Searchbar = (props: SearchBarProps) => {
       )}
       <label
         className={`rounded-xl leading-10 ${
-          isSearch ? "w-89 h-full " : " h-12 w-full"
+          isSearch ? " w-44 md:w-60 h-full " : " h-12 w-full"
         }`}
       >
         <input
           className={`${
             isSearch
-              ? " h-8 pl-8 w-89 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
+              ? " h-8 pl-8  w-44 md:w-60 bg-light-button-color bg-opacity-40 rounded-xl dark:bg-dark-button-color dark:bg-opacity-100  "
               : isPortfolio
               ? " bg-light-button-color bg-opacity-40 dark:bg-dark-button-color w-full rounded-md h-11  pl-2"
               : " w-full dark:bg-inherit text-base md:text-2xl h-12 "
