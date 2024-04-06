@@ -185,7 +185,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
             <div className="flex md:hidden ">
               <Timebar days={days} />
             </div>
-            <div className="sm:px-10 mt-3 flex justify-center items-center  overflow-hiddem w-full">
+            <div className="  flex justify-center items-center  overflow-hiddem w-full">
               <Carousel isCoinPage={true} />
             </div>
           </div>
