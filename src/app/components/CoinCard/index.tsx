@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 import { LoadingSpinner } from "../LoadingSpinner";
+import { extractUrl } from "@/app/Utils/addressFormatter";
 
 export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
   const { theme } = useTheme();
@@ -54,7 +55,7 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
                   href={homepage}
                   className="cursor-pointer font-medium xl:text-base lg:text-lg md:text-md sm:text-sm text-xs text-light-text-color dark:text-card-text-gray"
                 >
-                  {homepage.replace("http://", "")}
+                  {extractUrl(homepage)}
                 </a>
               </div>
             </div>
