@@ -141,7 +141,7 @@ export default function Portfolio() {
       };
       await dispatch(coinDatePrice(values));
       await dispatch(coinPageData(chosenCoin.id));
-      if (!error) {
+      if (!errors) {
         toggleModal(false, "", "", "");
       }
     } catch (error: any) {

@@ -19,7 +19,7 @@ export const Timebar = ({ days }: { days: string }) => {
   };
 
   return (
-    <div className=" flex items-center justify-center md:ml-2 mt-2 w-80 h-10 bg-light-button-color bg-opacity-40 dark:bg-timebar-background-color dark:text-white  rounded-2xl">
+    <div className=" flex items-center justify-center md:ml-2 mt-2 w-72 h-10 bg-light-button-color bg-opacity-40 dark:bg-timebar-background-color dark:text-white  rounded-2xl">
       <div
         onClick={() => {
           changeTime("1");
@@ -79,16 +79,6 @@ export const Timebar = ({ days }: { days: string }) => {
         )}`}
       >
         <div className="min-w-28">1Y</div>
-      </div>
-      <div
-        onClick={() => {
-          changeTime("1826");
-        }}
-        className={` w-full cursor-pointer h-full rounded-2xl flex justify-center items-center text-light-text-color dark:text-timebar-text-color text-center font-weight-normal text-sm ${getClassName(
-          "1826"
-        )}`}
-      >
-        <div className="min-w-28">5Y</div>
       </div>
     </div>
   );

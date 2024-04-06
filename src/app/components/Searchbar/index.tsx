@@ -113,7 +113,9 @@ export const Searchbar = (props: SearchBarProps) => {
   }, [focusedIndex]);
 
   useEffect(() => {
-    setSearchInput("");
+    if (isPortfolio) {
+      setSearchInput("");
+    }
   }, [modalCloseCheck]);
 
   useEffect(() => {

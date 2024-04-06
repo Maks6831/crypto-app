@@ -99,7 +99,7 @@ export default function Home() {
                     )}
                     {displayGraphData && (
                       <>
-                        <div className="absolute right-3 top-2 z-50">
+                        <div className="hidden lg:flex absolute  lg:right-4 top-2 z-50">
                           <Timebar days={days} />
                         </div>
                         <CoinInfoContainer
@@ -121,6 +121,9 @@ export default function Home() {
                   </div>
                 </div>
               </Wrapper>
+              <div className="flex lg:hidden">
+                <Timebar days={days} />
+              </div>
             </>
           ) : (
             <>
