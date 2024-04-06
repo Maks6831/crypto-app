@@ -19,7 +19,7 @@ export const Timebar = ({ days }: { days: string }) => {
   };
 
   return (
-    <div className=" flex items-center justify-center md:ml-2 mt-2 w-72 h-10 bg-light-button-color bg-opacity-40 dark:bg-timebar-background-color dark:text-white  rounded-2xl">
+    <div className=" flex items-center justify-center md:ml-2 mt-2 w-72 h-10 dark:text-white  rounded-2xl">
       <div
         onClick={() => {
           changeTime("1");
