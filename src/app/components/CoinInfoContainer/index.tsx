@@ -31,7 +31,7 @@ export const CoinInfoContainer = ({
       <div>
         <div
           className={`${
-            isCoinPage ? "md:pr-20 md:absolute md:-right-4 md:top-6 " : ""
+            isCoinPage ? "md:pr-20 md:absolute md:-right-4 md:top-4 " : ""
           } flex items-center justify-end font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 leading-7 text-light-text-color-three dark:text-white`}
         >
           {symbol}

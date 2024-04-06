@@ -146,6 +146,9 @@ export default function Page({ params }: { params: { coinId: string } }) {
                 )}
                 {displayGraphData && (
                   <>
+                    <div className="hidden md:flex absolute  lg:right-92 top-4 z-50">
+                      <Timebar days={days} />
+                    </div>
                     <CoinInfoContainer
                       isPrice={isPrice}
                       isCoinPage={true}
@@ -179,7 +182,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
                 )}
               </div>
             </div>
-            <div>
+            <div className="flex md:hidden ">
               <Timebar days={days} />
             </div>
             <div className="sm:px-10 mt-3 flex justify-center items-center  overflow-hiddem w-full">
