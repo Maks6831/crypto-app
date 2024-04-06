@@ -56,7 +56,7 @@ export default function Home() {
           </Wrapper>
           {isCoin ? (
             <>
-              <div className=" px-[2rem] flex justify-center items-center  overflow-hiddem w-full">
+              <div className="px-4 md:px-[2rem] flex justify-center items-center  overflow-hiddem w-full">
                 <Carousel isCoinPage={false} />
               </div>
               <Wrapper>

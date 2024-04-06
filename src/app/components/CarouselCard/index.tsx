@@ -74,10 +74,10 @@ export const CarouselCard = ({
           <Image src={source} alt={name} layout="fill" objectFit="contain" />
         </div>
         <div className="w-2/3 md:w-3/4 flex  flex-col p-1 md:p-0 justify-start  lg:p-1 md:pl-3 lg:pl-5 ">
-          <div className="border-2  justify-start items-center font-medium  text-sm hidden md:block overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <div className=" justify-start items-center font-medium text-xs md:text-sm hidden md:block overflow-hidden overflow-ellipsis whitespace-nowrap">
             {name}&nbsp;({symbol.toUpperCase()})
           </div>
-          <div className="text-xs sm:text-base md:hidden">
+          <div className="text-xs md:text-base md:hidden block overflow-hidden overflow-ellipsis">
             {symbol.toUpperCase()}
           </div>
           <div className="flex justify-between items-center lg:flex-row-reverse text-xs">
