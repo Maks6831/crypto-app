@@ -45,7 +45,7 @@ export default function Home() {
             <div className="w-11/12 flex flex-col items-center">
               <TitleHeader isNavbar={false} />
 
-              <div className=" w-full h-full px-1 my-2 flex justify-center items-center md:items-start flex-col">
+              <div className=" w-full h-full px-1  flex justify-center items-center md:items-start flex-col">
                 <Buttonswitcher
                   handleClick={setCoin}
                   isClicked={isCoin}
