@@ -1,10 +1,16 @@
+"use client";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 export const TitleHeader = ({ isNavbar }: { isNavbar: boolean }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <div
+      onClick={() => isNavbar && pathname !== "/" && router.push("/")}
       className={` ${
-        isNavbar ? " hidden md:flex " : " flex md:hidden p-3"
+        isNavbar ? " hidden md:flex cursor-pointer " : " flex md:hidden p-3"
       } justify-center items-center md:ml-3 `}
     >
       <div className="p-2 dark:text-white">
@@ -20,7 +26,7 @@ export const TitleHeader = ({ isNavbar }: { isNavbar: boolean }) => {
         </svg>
       </div>
       <h1 className={`font-semibold ${isNavbar ? "text-2xl" : "text-4xl"}`}>
-        CoinFlow
+        Coin Flow
       </h1>
     </div>
   );
