@@ -31,7 +31,7 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
   const loadedData = data && !loading;
 
   return (
-    <div className=" w-11/12 min-h-[20rem]   bg-white dark:bg-opacity-30 dark:bg-purplea rounded-xl flex flex-col p-2">
+    <div className=" w-11/12 min-h-[20rem]   bg-white dark:bg-opacity-30 dark:bg-purplea rounded-3xl flex flex-col p-2">
       {loading && (
         <div className="w-full min-h-[20rem] flex justify-center items-center">
           <div className="h-14 w-14">
