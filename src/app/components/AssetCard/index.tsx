@@ -77,9 +77,9 @@ export const AssetCard = ({
                   height={32}
                 />
               </div>
-              <div className="font-semibold text-2xl flex  justify-center items-center flex-wrap">
-                <div className="w-max">{coin.name}</div>
-                <div>({coin.symbol.toLocaleUpperCase()})</div>
+              <div className="font-semibold text-2xl flex  justify-center items-center flex-wrap overflow-hidden overflow-ellipsis ">
+                <div className="w-max p-1">{coin.name}</div>
+                <div>&nbsp;({coin.symbol.toLocaleUpperCase()})</div>
               </div>
             </div>
           </div>
