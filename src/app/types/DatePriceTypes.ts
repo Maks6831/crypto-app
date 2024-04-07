@@ -8,7 +8,16 @@ export interface DatePriceType {
     community_data:        CommunityData;
     developer_data:        DeveloperData;
     public_interest_stats: PublicInterestStats;
+    error?:                ErrorInterface
 }
+
+export interface ErrorInterface {
+    status: {
+      timestamp: string;
+      error_code: number;
+      error_message: string;
+    };
+  }
 
 export interface DatePriceObj extends DatePriceType {
     date: string;

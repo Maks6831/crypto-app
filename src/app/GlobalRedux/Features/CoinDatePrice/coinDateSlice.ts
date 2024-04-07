@@ -2,6 +2,8 @@ import { DatePriceObj, DatePriceType } from "@/app/types/DatePriceTypes";
 import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit";
 import { reject } from "lodash";
 
+
+
 export interface DatePriceAttributes {
   id:string;
   date:string;
@@ -24,17 +26,18 @@ DatePriceAttributes,
     async ({id, date, amount, uid} ,thunkApi) => {
         const url = `https://api.coingecko.com/api/v3/coins/${id}/history?date=${date}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
         const response = await fetch(url);
-        const json: DatePriceType = await response.json();
-        if(json.hasOwnProperty('market_data')){
+        const json: DatePriceType  = await response.json();
+        if(json.hasOwnProperty('error')){
+          return thunkApi.rejectWithValue({errorMessage: 'The beta version of Coin Flow restricts querying historical data to within the past 365 days. Please adjust the date accordingly.' } as MyKnownError) 
+        } else {
           const refactoredObj :DatePriceObj = Object.assign({}, json, {
             id: id,
             amount:amount,
             date: date,
             uid: uid
-          });
+          }); 
           return refactoredObj;
-        } else {
-          return thunkApi.rejectWithValue({errorMessage :'Requested date is too early for currency data' } as MyKnownError) 
+          
         }
       }
     );

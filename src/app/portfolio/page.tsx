@@ -27,18 +27,26 @@ interface Error {
   amount?: string;
   date?: string;
 }
+const initialisedError: Error = {
+  id: "",
+  amount: "",
+  date: "",
+};
 
 export default function Portfolio() {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const { data, error } = useAppSelector((state) => state.coinDatePriceReducer);
+  const apiLoading = useAppSelector(
+    (state) => state.coinDatePriceReducer.loading
+  );
   const { portfolioData, loading } = useAppSelector(
     (state) => state.coinPageReducer
   );
   const [chosenCoin, setChosenCoin] = useState<Coin | DatePriceObj>(
     exampleAsset
   );
-  const [errors, setErrors] = useState<Error>({});
+  const [errors, setErrors] = useState<Error>(initialisedError);
   const [animation, setAnimation] = useState<boolean>(true);
   const [searchValue, setSearchValue] = useState<string>("");
   const [isAddAsset, setIsAddAsset] = useState<boolean>(true);
@@ -85,7 +93,7 @@ export default function Portfolio() {
     date: string,
     uid: string
   ) => {
-    setErrors({});
+    setErrors(initialisedError);
     const coinFromLocalData = data.find((el) => el.uid === uid) || exampleAsset;
     if (isEdit) {
       setIsAddAsset(false);
@@ -139,17 +147,27 @@ export default function Portfolio() {
         amount: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
         uid: uid,
       };
-      await dispatch(coinDatePrice(values));
-      await dispatch(coinPageData(chosenCoin.id));
-      if (!errors) {
+      await dispatch(coinDatePrice(values)).unwrap();
+      await dispatch(coinPageData(chosenCoin.id)).unwrap();
+      console.log("before if", errors);
+      if (Object.values(errors).every((value) => value === "")) {
+        console.log("after", errors);
         toggleModal(false, "", "", "");
       }
     } catch (error: any) {
+      console.log(error);
       const newErrors: any = {};
-      error.inner.forEach((err: { path: string | number; message: any }) => {
-        newErrors[err.path] = err.message;
-        setErrors(newErrors);
-      });
+      if (error.inner) {
+        error.inner.forEach((err: { path: string | number; message: any }) => {
+          newErrors[err.path] = err.message;
+          setErrors(newErrors);
+        });
+      } else if (error.errorMessage) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          date: error.errorMessage,
+        }));
+      }
     }
   };
 
@@ -165,14 +183,12 @@ export default function Portfolio() {
   }, [data]);
 
   useEffect(() => {
-    if (error) {
-      setErrors((prevErrors) => ({ ...prevErrors, date: error }));
-    }
-  }, [error]);
-
-  useEffect(() => {
     setErrors((prevErrors) => ({ ...prevErrors, id: "" }));
   }, [searchValue]);
+
+  useEffect(() => {
+    console.log(apiLoading);
+  }, [apiLoading]);
 
   return (
     <Wrapper>
@@ -279,7 +295,7 @@ export default function Portfolio() {
             </div>
             <div className="flex flex-col h-full   min-[580px]:flex-row w-10/12 justify-between items-center">
               {chosenCoin && chosenCoin === exampleAsset ? (
-                <div className="w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
+                <div className="m-2 w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
                   <div className="h-14 pt-1 m-2">Select a cryptocurrency</div>
                   {errors && errors.id && (
                     <div className=" w-full text-xs text-red-700 h-1 pb-1 opacity-0 ">
@@ -302,28 +318,34 @@ export default function Portfolio() {
               ) : (
                 <div className="m-2  w-full h-full  min-[580px]:w-5/12">
                   <div className=" flex w-full  h-full rounded-xl   justify-center items-center bg-portfolio-button-color bg-opacity-10  dark:bg-volume-background">
-                    <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
-                      <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
-                        <Image
-                          src={
-                            "image" in chosenCoin
-                              ? chosenCoin.image.thumb
-                              : chosenCoin.large
-                          }
-                          alt="coin symbol"
-                          width={32}
-                          height={32}
-                        />
+                    {apiLoading ? (
+                      <div className="w-12 h-12">
+                        <LoadingSpinner />
                       </div>
-                      <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex flex-wrap justify-center items-center xl:text-2xl lg:text-sm text-base ">
-                        <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
-                          {chosenCoin.name}
+                    ) : (
+                      <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
+                        <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
+                          <Image
+                            src={
+                              "image" in chosenCoin
+                                ? chosenCoin.image.thumb
+                                : chosenCoin.large
+                            }
+                            alt="coin symbol"
+                            width={32}
+                            height={32}
+                          />
                         </div>
-                        <div className="hidden md:flex xl:text-xl lg:text-lg text-base">
-                          ({chosenCoin.symbol.toLocaleUpperCase()})
+                        <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex flex-wrap justify-center items-center xl:text-2xl lg:text-sm text-base ">
+                          <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
+                            {chosenCoin.name}
+                          </div>
+                          <div className="hidden md:flex xl:text-xl lg:text-lg text-base">
+                            ({chosenCoin.symbol.toLocaleUpperCase()})
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               )}
