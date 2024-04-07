@@ -42,7 +42,7 @@ export const Currencyconverter = () => {
   return (
     <div
       onClick={(e) => openDropdown(e)}
-      className="relative h-8 w-[4.8rem]  cursor-pointer bg-opacity-40 flex flex-column items-center justify-between m-1 md:p-2 bg-light-button-color rounded-xl dark:bg-dark-button-color dark:bg-opacity-100"
+      className="relative h-8 w-[4.8rem]  cursor-pointer bg-opacity-40 flex flex-column items-center justify-between m-1 p-2 bg-light-button-color rounded-xl dark:bg-dark-button-color dark:bg-opacity-100"
     >
       <div className="text-sm whitespace-nowrap ">{displayCurr}</div>
       <div>

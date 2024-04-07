@@ -60,21 +60,13 @@ export const TableElement = ({
       </td>
       <td className=" bg-white dark:bg-dark-card  h-full     rounded-l-xl">
         <div className="   w-36 md:w-full h-full flex justify-around sm:justify-start items-center ">
-          <div className="  h-6 w-6 m-2  ">
-            <Image
-              src={image}
-              alt={name}
-              width={24}
-              height={24}
-              style={{
-                width: "24px",
-                height: "24px",
-              }}
-            />
+          <div className="  h-7 w-7 m-2 relative ">
+            <Image src={image} alt={name} layout="fill" objectFit="contain" />
           </div>
-          <div className="md:flex md:flex-row-reverse md:justify-end bg-white dark:bg-dark-card  h-full w-1/2 md:w-full ">
-            <div className=" text-sm md:text-base">
-              &nbsp;({symbol.toUpperCase()})
+          <div className="flex flex-col items-start md:flex-row-reverse  md:justify-end md:items-center  bg-white dark:bg-dark-card  h-full w-1/2 md:w-full ">
+            <div className=" md:flex text-sm md:text-base">
+              <div className="hidden md:flex">&nbsp;</div>(
+              {symbol.toUpperCase()})
             </div>
             <div className=" text-xs md:text-base">{name}</div>
           </div>

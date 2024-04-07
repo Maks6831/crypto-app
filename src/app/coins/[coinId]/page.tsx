@@ -87,8 +87,8 @@ export default function Page({ params }: { params: { coinId: string } }) {
   return (
     <Wrapper>
       {dataChecker && (
-        <div className="min-h-screen w-full ">
-          <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch   w-full p-3 h-1/2 md:max-h-[30rem]  ">
+        <div className="min-h-screen w-full py-2 ">
+          <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch   w-full  h-1/2 md:max-h-[30rem]  ">
             <div className=" w-full min-[400px]:w-10/12  md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
               <CoinCard isPortfolio={false} />
             </div>
@@ -128,15 +128,15 @@ export default function Page({ params }: { params: { coinId: string } }) {
             </div>
           </div>
           <div className="w-full flex flex-col justify-center items-center h-full ">
-            <div className=" w-full  px-6 h-full m-2 flex justify-center items-center md:items-start flex-col">
+            <div className=" w-full  px-6 h-full my-2 ml-4  flex justify-center items-center md:items-start flex-col">
               <Buttonswitcher
                 handleClick={setIsPrice}
                 isClicked={isPrice}
-                nameArray={["Price", "Market Caps"]}
+                nameArray={["Price", "Volume"]}
               />
             </div>
             <div className="flex w-full h-full px-5">
-              <div className=" overflow-hidden sm:min-w-80 m-3 px-3 pb-1  md:p-6   bg-white-color rounded-xl  h-[20rem]  w-full md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
+              <div className=" overflow-hidden sm:min-w-80 m-3 px-3 pb-1  md:p-6   bg-white-color rounded-3xl  h-[20rem]  w-full md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
                 {loadingGraph && (
                   <div className="w-full h-full flex justify-center items-center">
                     <div className="h-14 w-14">
@@ -146,6 +146,9 @@ export default function Page({ params }: { params: { coinId: string } }) {
                 )}
                 {displayGraphData && (
                   <>
+                    <div className="hidden md:flex absolute  lg:right-92 top-4 z-50">
+                      <Timebar days={days} />
+                    </div>
                     <CoinInfoContainer
                       isPrice={isPrice}
                       isCoinPage={true}
@@ -179,10 +182,10 @@ export default function Page({ params }: { params: { coinId: string } }) {
                 )}
               </div>
             </div>
-            <div>
+            <div className="flex md:hidden ">
               <Timebar days={days} />
             </div>
-            <div className="sm:px-10 mt-3 flex justify-center items-center  overflow-hiddem w-full">
+            <div className="  flex justify-center items-center  overflow-hiddem w-full">
               <Carousel isCoinPage={true} />
             </div>
           </div>

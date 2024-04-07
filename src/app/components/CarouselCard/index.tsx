@@ -63,31 +63,31 @@ export const CarouselCard = ({
       onClick={isCoinPage ? goToPage : selectCoin}
       className={
         displayElement
-          ? `m-1 h-10 md:h-20 overflow-hidden w-full  rounded-3xl rd cursor-pointer ${
+          ? `m-1 h-10 md:h-20 overflow-hidden w-full rounded-2xl  md:rounded-3xl rd cursor-pointer ${
               isCoinPage ? "bg-white dark:bg-dark-card" : selectClass()
             }`
           : "hidden"
       }
     >
       <div className="flex  h-full w-full p-0 md:p-2 justify-center items-center ">
-        <div className="flex h-6 w-6 md:h-8 md:w-8 items-center justify-center">
-          <Image src={source} alt={name} width={32} height={32} />
+        <div className="flex w-1/3 md:w-1/4 h-10 ml-1 items-center justify-center relative">
+          <Image src={source} alt={name} layout="fill" objectFit="contain" />
         </div>
-        <div className="flex flex-col p-0 pl-1 lg:p-1 md:pl-3 lg:pl-5 ">
-          <div className="pl-2 justify-start items-center font-medium  text-sm hidden md:flex overflow-ellipsis whitespace-nowrap">
+        <div className="w-2/3 md:w-3/4 flex  flex-col p-1 md:p-0 justify-start  lg:p-1 md:pl-3 lg:pl-5 ">
+          <div className=" justify-start items-center font-medium text-xs md:text-sm hidden md:block overflow-hidden overflow-ellipsis whitespace-nowrap">
             {name}&nbsp;({symbol.toUpperCase()})
           </div>
-          <div className="text-xs sm:text-base md:hidden">
+          <div className="text-xs md:text-base md:hidden block overflow-hidden overflow-ellipsis">
             {symbol.toUpperCase()}
           </div>
-          <div className="flex justify-center items-center lg:flex-row-reverse xl:text-sm text-xs">
+          <div className="flex justify-between items-center lg:flex-row-reverse text-xs">
             <div
-              className="md:px-0 lg:px-1 xl:px-2 py-2 whitespace-nowrap hidden lg:flex  font-normal"
+              className="md:px-0 lg:px-1 xl:px-2 py-2 whitespace-nowrap hidden lg:flex  font-light"
               style={{ color: `${colorChange(percentageChange, theme)}` }}
             >
               {numberFormatter(percentageChange, true, "")}
             </div>
-            <div className="md:px-0 lg:px-1 xl:px-2 py-2 font-normal text-light-text-color dark:text-card-text-gray hidden md:flex ">
+            <div className="md:px-0  py-2 font-light text-light-text-color dark:text-card-text-gray hidden md:flex text-xs ">
               {currentPrice.toFixed(2)}&nbsp;{currency}
             </div>
           </div>

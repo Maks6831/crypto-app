@@ -16,7 +16,7 @@ export const DataCard = ({
   const { loading } = useAppSelector((state) => state.coinPageReducer);
 
   return (
-    <div className=" dark:shadow-lg bg-white dark:bg-opacity-30 dark:bg-purplea rounded-xl max-h-5/6 w-full">
+    <div className=" dark:shadow-lg bg-white dark:bg-opacity-30 dark:bg-purplea rounded-3xl max-h-5/6 w-full">
       {loading ? (
         <div className="w-full h-full flex min-h-[10rem] justify-center items-center">
           <div className="h-14 w-14">

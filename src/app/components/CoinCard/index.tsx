@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { numberFormatter } from "@/app/Utils/numberFormatter";
 import { moneyConverter } from "@/app/Utils/moneyConverter";
 import { LoadingSpinner } from "../LoadingSpinner";
+import { extractUrl } from "@/app/Utils/addressFormatter";
 
 export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
   const { theme } = useTheme();
@@ -31,7 +32,7 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
   const loadedData = data && !loading;
 
   return (
-    <div className=" w-11/12 min-h-[20rem]   bg-white dark:bg-opacity-30 dark:bg-purplea rounded-xl flex flex-col p-2">
+    <div className=" w-11/12 min-h-[20rem]   bg-white dark:bg-opacity-30 dark:bg-purplea rounded-3xl flex flex-col p-2">
       {loading && (
         <div className="w-full min-h-[20rem] flex justify-center items-center">
           <div className="h-14 w-14">
@@ -54,7 +55,7 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
                   href={homepage}
                   className="cursor-pointer font-medium xl:text-base lg:text-lg md:text-md sm:text-sm text-xs text-light-text-color dark:text-card-text-gray"
                 >
-                  {homepage.replace("http://", "")}
+                  {extractUrl(homepage)}
                 </a>
               </div>
             </div>
@@ -91,9 +92,9 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
             <div className=" h-1/2 w-full flex justify-center items-center ">
               <div
                 style={{ color: `${colorChange(1, theme)}` }}
-                className="lg:text-5xl md:text-4xl text-3xl  p-3"
+                className="text-base pr-3"
               >
-                {"▴"}
+                &#9650;
               </div>
               <div className="w-full flex-col justify-center h-1/2 ">
                 <div className="flex justify-between w-full ">
@@ -113,9 +114,9 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
             <div className=" h-1/2 w-full flex justify-center items-center ">
               <div
                 style={{ color: `${colorChange(-1, theme)}` }}
-                className="lg:text-5xl md:text-4xl text-3xl p-3 "
+                className="text-base pr-3 "
               >
-                {"▾"}
+                &#9660;
               </div>
               <div className="w-full flex-col justify-center h-1/2 ">
                 <div className="flex justify-between w-full ">

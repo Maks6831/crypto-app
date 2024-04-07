@@ -45,7 +45,7 @@ export default function Home() {
             <div className="w-11/12 flex flex-col items-center">
               <TitleHeader isNavbar={false} />
 
-              <div className=" w-full h-full px-1 my-2 flex justify-center items-center md:items-start flex-col">
+              <div className=" w-full h-full px-1  flex justify-center items-center md:items-start flex-col">
                 <Buttonswitcher
                   handleClick={setCoin}
                   isClicked={isCoin}
@@ -56,7 +56,7 @@ export default function Home() {
           </Wrapper>
           {isCoin ? (
             <>
-              <div className=" px-[2rem] flex justify-center items-center  overflow-hiddem w-full">
+              <div className="px-4 md:px-[2rem] flex justify-center items-center  overflow-hiddem w-full">
                 <Carousel isCoinPage={false} />
               </div>
               <Wrapper>
@@ -99,7 +99,7 @@ export default function Home() {
                     )}
                     {displayGraphData && (
                       <>
-                        <div className="absolute right-3 top-2 z-50">
+                        <div className="hidden lg:flex absolute  lg:right-4 top-2 z-50">
                           <Timebar days={days} />
                         </div>
                         <CoinInfoContainer
@@ -121,6 +121,9 @@ export default function Home() {
                   </div>
                 </div>
               </Wrapper>
+              <div className="flex lg:hidden">
+                <Timebar days={days} />
+              </div>
             </>
           ) : (
             <>
