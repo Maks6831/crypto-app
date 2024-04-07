@@ -55,7 +55,7 @@ export const AssetCard = ({
 
   return (
     <div
-      className={`w-11/12 dark:bg-light-text-color-two relative  overflow-hidden bg-white min-h-[18rem]  my-3 p-3 flex flex-col   md:flex-row  rounded-lg `}
+      className={`w-11/12 dark:bg-light-text-color-two relative  overflow-hidden bg-white min-h-[18rem]  my-3 p-3 flex flex-col   md:flex-row  rounded-3xl `}
     >
       {isLoaded && coin !== coinPage && (
         <>
@@ -67,9 +67,9 @@ export const AssetCard = ({
               height={400}
             />
           </div>
-          <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-10 dark:bg-volume-background rounded-lg">
+          <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-10 dark:bg-volume-background rounded-3xl">
             <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
-              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
+              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-3xl">
                 <Image
                   src={coin.image.small}
                   alt="coin symbol"
@@ -89,7 +89,7 @@ export const AssetCard = ({
                 <div className="font-medium text-xl">Market Price</div>
                 <div
                   onClick={() => toggleModal(false, "delete!", "", uid)}
-                  className="w-10 h-10 rounded-md flex justify-center items-center bg-portfolio-button-color bg-opacity-50 shadow-md shadow-carousel-button-color dark:bg-edit-button-color cursor-pointer"
+                  className="w-10 h-10 rounded-xl flex justify-center items-center bg-portfolio-button-color bg-opacity-50 shadow-md shadow-carousel-button-color dark:bg-edit-button-color cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@ export const AssetCard = ({
                 <div className="font-medium text-xl">Your Coin</div>
                 <div
                   onClick={() => toggleModal(true, coin.id, date, uid)}
-                  className="w-10 h-10 rounded-md flex justify-center items-center bg-portfolio-button-color bg-opacity-50 shadow-md shadow-carousel-button-color dark:bg-edit-button-color cursor-pointer"
+                  className="w-10 h-10 rounded-xl flex justify-center items-center bg-portfolio-button-color bg-opacity-50 shadow-md shadow-carousel-button-color dark:bg-edit-button-color cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
