@@ -92,9 +92,9 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
             <div className=" h-1/2 w-full flex justify-center items-center ">
               <div
                 style={{ color: `${colorChange(1, theme)}` }}
-                className="lg:text-5xl md:text-4xl text-3xl  p-3"
+                className="text-base pr-3"
               >
-                {"▴"}
+                &#9650;
               </div>
               <div className="w-full flex-col justify-center h-1/2 ">
                 <div className="flex justify-between w-full ">
@@ -114,9 +114,9 @@ export const CoinCard = ({ isPortfolio }: { isPortfolio: boolean }) => {
             <div className=" h-1/2 w-full flex justify-center items-center ">
               <div
                 style={{ color: `${colorChange(-1, theme)}` }}
-                className="lg:text-5xl md:text-4xl text-3xl p-3 "
+                className="text-base pr-3 "
               >
-                {"▾"}
+                &#9660;
               </div>
               <div className="w-full flex-col justify-center h-1/2 ">
                 <div className="flex justify-between w-full ">
