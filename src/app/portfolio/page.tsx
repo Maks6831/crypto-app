@@ -21,6 +21,7 @@ import { dateConverter } from "../Utils/dateConverter";
 import { v4 as uuidv4 } from "uuid";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { PortfolioHeader } from "../components/PortFolioHeader";
+import { referenceData } from "../Utils/localData";
 
 interface Error {
   id?: string;
@@ -54,7 +55,10 @@ export default function Portfolio() {
   const [modalCloseCheck, setModalCloseCheck] = useState<boolean>(false);
   const [amountValue, setAmountValue] = useState<string>("");
   const [dateValue, setDateValue] = useState<string>("");
-  const [localData, setLocalData] = useLocalState("dataCoinPrices", []);
+  const [localData, setLocalData] = useLocalState(
+    "dataCoinPrices",
+    referenceData
+  );
   const searchData = useAppSelector((state) => state.searchReducer.data);
   const loadingTwo = useAppSelector((state) => state.searchReducer.loading);
   const modalRef = useRef<HTMLDialogElement>(null);
