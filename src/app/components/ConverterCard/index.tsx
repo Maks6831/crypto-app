@@ -59,7 +59,7 @@ export const ConvertCard = ({
             {convertedValue}
           </div>
         </div>
-        <hr className=" border-t-2 w-12/12 border-purpleb dark:border-white" />
+        <hr className=" border-t w-full border-purpleb dark:border-white" />
         <div className="font-normal text-sm text-purpleb p-2 dark:text-white ">
           1 {cryptoSymbol} = {currentPrice && symbol + currentPrice.toFixed(2)}
         </div>
