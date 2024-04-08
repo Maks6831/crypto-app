@@ -63,8 +63,8 @@ export const AssetCard = ({
             <Image
               src={coin.image.large}
               alt="coin symbol"
-              width={400}
-              height={400}
+              width={320}
+              height={320}
             />
           </div>
           <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-10 dark:bg-volume-background rounded-3xl">
@@ -186,7 +186,7 @@ export const AssetCard = ({
                 </div>
               </div>
             </div>
-            <hr className=" border dark:border-2 border-black dark:border-card-text-gray dark:border-opacity-40 my-4 w-full rounded-xl"></hr>
+            <hr className="  border-0.5 dark:border-2 border-black dark:border-card-text-gray dark:border-opacity-40 my-4 w-9/12 rounded-xl"></hr>
             <div className="flex w-full h-1/2 flex-col">
               <div className="flex justify-between">
                 <div className="font-medium text-xl">Your Coin</div>
