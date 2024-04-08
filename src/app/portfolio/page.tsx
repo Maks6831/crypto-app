@@ -235,7 +235,7 @@ export default function Portfolio() {
         className={` ${
           deleteModal
             ? " max-w-7 h-60 p-3  "
-            : " w-11/12 md:w-4/5   lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[25rem] py-10 "
+            : " w-11/12 md:w-4/5   lg:w-7/12 2xl:w-2/5  h-max min-[580px]:h-[25rem] py-10 relative "
         }   bg-white dark:bg-dark-background backdrop:backdrop-blur-lg rounded-3xl backdrop:delay-1000`}
         ref={modalRef}
       >
@@ -261,7 +261,7 @@ export default function Portfolio() {
               <div className="w-1/2 flex justify-center items-center">
                 <button
                   onClick={() => toggleModal(false, "", "", "")}
-                  className=" bg-slate-100 dark:bg-timebar-background-color rounded-md h-11 w-11/12 "
+                  className=" bg-slate-100 dark:bg-timebar-background-color rounded-2xl h-11 w-11/12 "
                 >
                   Cancel
                 </button>
@@ -269,7 +269,7 @@ export default function Portfolio() {
               <div className="w-1/2 flex justify-center items-center">
                 <button
                   onClick={() => deleteAssetCard(chosenCoin.uid)}
-                  className=" bg-negative bg-opacity-80 w-11/12 h-11 rounded-md text-sm lg:text-base  "
+                  className=" bg-negative bg-opacity-80 w-11/12 h-11 rounded-2xl text-sm lg:text-base  "
                 >
                   Delete
                 </button>
@@ -277,8 +277,8 @@ export default function Portfolio() {
             </div>
           </div>
         ) : (
-          <div className="w-full h-full justify-center  items-center flex flex-col">
-            <div className=" flex m-3 w-11/12 justify-between">
+          <div className="w-full h-full justify-center items-center flex flex-col">
+            <div className=" absolute top-1 right-1  flex m-3 w-11/12 justify-between">
               <div>Select coin</div>
               <button onClick={() => toggleModal(false, "", "", "")}>
                 <svg
@@ -297,9 +297,9 @@ export default function Portfolio() {
                 </svg>
               </button>
             </div>
-            <div className="flex flex-col h-full   min-[580px]:flex-row w-10/12 justify-between items-center">
+            <div className="flex flex-col h-full    min-[580px]:flex-row w-10/12 justify-center items-center">
               {chosenCoin && chosenCoin === exampleAsset ? (
-                <div className="m-2 w-5/12 min-[580px]:flex  flex-col justify-start  h-full hidden  ">
+                <div className="m-2 pt-5 w-5/12 min-[580px]:flex  flex-col justify-center  h-full hidden  ">
                   <div className="h-14 pt-1 m-2">Select a cryptocurrency</div>
                   {errors && errors.id && (
                     <div className=" w-full text-xs text-red-700 h-1 pb-1 opacity-0 ">
@@ -321,39 +321,33 @@ export default function Portfolio() {
                 </div>
               ) : (
                 <div className="m-2  w-full h-full  min-[580px]:w-5/12">
-                  <div className=" flex w-full  h-full rounded-xl   justify-center items-center bg-portfolio-button-color bg-opacity-10  dark:bg-volume-background">
-                    {apiLoading ? (
-                      <div className="w-12 h-12">
-                        <LoadingSpinner />
+                  <div className=" flex w-full  h-full rounded-3xl   justify-center items-center bg-portfolio-button-color bg-opacity-10  dark:bg-volume-background">
+                    <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
+                      <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-2xl">
+                        <Image
+                          src={
+                            "image" in chosenCoin
+                              ? chosenCoin.image.thumb
+                              : chosenCoin.large
+                          }
+                          alt="coin symbol"
+                          width={32}
+                          height={32}
+                        />
                       </div>
-                    ) : (
-                      <div className="flex flex-row-reverse  min-[580px]:flex-col justify-between w-full  min-[580px]:justify-center items-center ">
-                        <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-md">
-                          <Image
-                            src={
-                              "image" in chosenCoin
-                                ? chosenCoin.image.thumb
-                                : chosenCoin.large
-                            }
-                            alt="coin symbol"
-                            width={32}
-                            height={32}
-                          />
+                      <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex flex-wrap justify-center items-center xl:text-2xl lg:text-sm text-base ">
+                        <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
+                          {chosenCoin.name}
                         </div>
-                        <div className=" text-center pl-3 min-[580px]:pl-0 font-bold flex flex-wrap justify-center items-center xl:text-2xl lg:text-sm text-base ">
-                          <div className=" whitespace-nowrap xl:text-xl lg:text-lg text-base">
-                            {chosenCoin.name}
-                          </div>
-                          <div className="hidden md:flex xl:text-xl lg:text-lg text-base">
-                            ({chosenCoin.symbol.toLocaleUpperCase()})
-                          </div>
+                        <div className="hidden md:flex xl:text-xl lg:text-lg text-base">
+                          ({chosenCoin.symbol.toLocaleUpperCase()})
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               )}
-              <div className=" min-w-full w-full h-full flex flex-col justify-between min-[580px]:min-w-0  min-[580px]:w-7/12 ">
+              <div className=" min-w-full w-full h-full flex flex-col justify-center min-[580px]:min-w-0  min-[580px]:w-7/12 ">
                 <div className=" w-full flex flex-col justify-between">
                   {isAddAsset ? (
                     <div className=" w-full">
@@ -421,23 +415,31 @@ export default function Portfolio() {
                     )}
                   </div>
                 </div>
-                <div className="w-full flex ">
-                  <div className="w-1/2 flex justify-center items-center">
-                    <button
-                      onClick={() => toggleModal(false, "", "", "")}
-                      className=" bg-slate-100 dark:bg-timebar-background-color rounded-md h-11 w-11/12 cursor-pointer"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                  <div className="w-1/2 flex justify-center items-center">
-                    <button
-                      onClick={saveAsset}
-                      className=" bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one dark:bg-opacity-40  w-11/12 h-11 rounded-md text-sm lg:text-base "
-                    >
-                      Save
-                    </button>
-                  </div>
+              </div>
+            </div>
+            <div className=" w-10/12  flex justify-end items-end ">
+              <div className=" w-full  md:w-7/12  flex justify-end items-end">
+                <div className="w-1/2 flex justify-center items-center">
+                  <button
+                    onClick={() => toggleModal(false, "", "", "")}
+                    className=" bg-slate-100 dark:bg-timebar-background-color mr-2 rounded-2xl h-11 w-full cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div className="w-1/2 flex justify-center items-center">
+                  <button
+                    onClick={saveAsset}
+                    className=" bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one dark:bg-opacity-40 ml-2 w-full h-11 rounded-2xl text-sm lg:text-base "
+                  >
+                    {apiLoading ? (
+                      <div className="w-12 h-12">
+                        <LoadingSpinner />
+                      </div>
+                    ) : (
+                      "save"
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
