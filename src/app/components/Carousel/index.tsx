@@ -38,7 +38,7 @@ export const Carousel = ({ isCoinPage }: { isCoinPage: boolean }) => {
         <div className="md:m-2 flex items-center w-full justify-center relative ">
           <div className="ml-4 mr-4 flex items-center w-full justify-center  m-3 relative">
             <button
-              className="flex justify-center items-center w-8 h-8 md:w-12 md:h-12 rounded-2xl border bg-carousel-button-color-one bg-opacity-20 border-carousel-button-color-two border-opacity-25 shadow-sm shadow-carousel-button-color-two absolute -left-6 md:-left-10 dark:shadow-black"
+              className="flex justify-center items-center w-8 h-8 md:w-12 md:h-12 rounded-2xl  bg-carousel-button-color-one bg-opacity-30  absolute -left-6 md:-left-10 "
               onClick={decreaseIndex}
             >
               <svg
@@ -74,7 +74,7 @@ export const Carousel = ({ isCoinPage }: { isCoinPage: boolean }) => {
                 ))}
             </div>
             <button
-              className=" flex justify-center items-center w-8 h-8 md:w-12 md:h-12 rounded-2xl border bg-carousel-button-color-one bg-opacity-20 border-carousel-button-color-two border-opacity-25 shadow-sm shadow-carousel-button-color-two absolute -right-6 md:-right-10 dark:shadow-black"
+              className=" flex justify-center items-center w-8 h-8 md:w-12 md:h-12 rounded-2xl  bg-carousel-button-color-one bg-opacity-30 absolute -right-6 md:-right-10 "
               onClick={increaseIndex}
             >
               <svg
