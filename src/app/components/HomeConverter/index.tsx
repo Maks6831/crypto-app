@@ -32,7 +32,7 @@ export const HomeConverter = () => {
   }, [coins, currency, days]);
 
   return (
-    <div className="m-3 w-full flex justify-center items-center flex-col  h-full relative ">
+    <div className="m-3 w-11/12 flex justify-center items-center flex-col  h-full relative ">
       <div className=" w-full h-14 flex item-start ">
         <div className="md:w-1/2 flex items-center justify-center flex-col m-5 ">
           <div className=" text-light-text-color font-medium text-xl dark:text-white text-left   w-80 ">
@@ -63,7 +63,7 @@ export const HomeConverter = () => {
             />
           </svg>
         </div>
-        <div className="w-full flex h-full flex-col md:flex-row justify-center items-center">
+        <div className="w-full flex h-full flex-col md:flex-row justify-center my-5 items-center">
           {coins.map((element, index) => (
             <ConvertCard
               defaultValue={element.name}
@@ -74,7 +74,7 @@ export const HomeConverter = () => {
           ))}
         </div>
       </div>
-      <div className=" relative md:p-2 pr-4 flex flex-col justify-end items-end  bg-white w-10/12 h-52 md:h-60 lg:h-80  rounded-xl dark:bg-light-text-color-two">
+      <div className=" w-10/12 md:w-full relative md:p-2 pr-4 flex flex-col justify-end items-end  bg-white  h-52 md:h-60 lg:h-80  rounded-3xl dark:bg-light-text-color-two">
         <div className="flex absolute top-1 left-5 justify-center items-center ">
           <div className="m-1 p-1 font-normal dark:text-white text-sm md:text-xl">
             {coins && coins[0].name} ({coins[0].symbol})
@@ -84,20 +84,25 @@ export const HomeConverter = () => {
             {coins && coins[1].name} ({coins[1].symbol})
           </div>
         </div>
-        <div className="w-full h-40 md:h-48 lg:h-64  ">
+        <div className=" w-full h-40 md:h-48 lg:h-64  ">
           {prices && (
-            <Pricegraph
-              isLine={true}
-              labels={labels}
-              prices={prices}
-              days={days}
-              isCoinPage={false}
-              handleHover={setCurrentPrice}
-            />
+            <>
+              <div className="hidden md:flex absolute  right-4 top-2 z-50">
+                <Timebar days={days} />
+              </div>
+              <Pricegraph
+                isLine={true}
+                labels={labels}
+                prices={prices}
+                days={days}
+                isCoinPage={false}
+                handleHover={setCurrentPrice}
+              />
+            </>
           )}
         </div>
       </div>
-      <div className="m-5">
+      <div className="flex md:hidden m-2">
         <Timebar days={days} />
       </div>
     </div>
