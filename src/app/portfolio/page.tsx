@@ -430,7 +430,7 @@ export default function Portfolio() {
                 <div className="w-1/2 flex justify-center items-center">
                   <button
                     onClick={saveAsset}
-                    className=" bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one dark:bg-opacity-40 ml-2 w-full h-11 rounded-2xl text-sm lg:text-base "
+                    className=" flex justify-center items-center bg-portfolio-button-color bg-opacity-50 dark:bg-carousel-button-color-one dark:bg-opacity-40 ml-2 w-full h-11 rounded-2xl text-sm lg:text-base "
                   >
                     {apiLoading ? (
                       <div className="w-12 h-12">
