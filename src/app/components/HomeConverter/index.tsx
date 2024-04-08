@@ -33,14 +33,17 @@ export const HomeConverter = () => {
 
   return (
     <div className="m-3 w-11/12 flex justify-center items-center flex-col  h-full relative ">
-      <div className=" w-full h-14 flex item-start ">
-        <div className="md:w-1/2 flex items-center justify-center flex-col m-5 ">
+      <div className=" w-full h-16  flex justify-start item-start ">
+        <div className="p-4 w-full flex items-start justify-center flex-col  ">
           <div className=" text-light-text-color font-medium text-xl dark:text-white text-left   w-80 ">
             Online Currency Converter
           </div>
           <div className=" text-light-text-color text-opacity-80 font-normal text-base text-left w-80   dark:text-dark-date-color">
             {timeFormatter(date)} {date.getHours()}:{date.getMinutes()}:
             {date.getSeconds()}
+          </div>
+          <div className="text-xs font-semibold">
+            Search for coin and choose from Dropdown
           </div>
         </div>
       </div>
