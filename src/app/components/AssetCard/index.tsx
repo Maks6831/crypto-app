@@ -55,7 +55,7 @@ export const AssetCard = ({
 
   return (
     <div
-      className={`w-11/12 dark:bg-light-text-color-two relative  overflow-hidden bg-white min-h-[18rem]  my-3 p-3 flex flex-col   md:flex-row  rounded-3xl `}
+      className={`w-full dark:bg-light-text-color-two relative  overflow-hidden bg-white min-h-[18rem]  my-3 p-3 flex flex-col   md:flex-row  rounded-3xl `}
     >
       {isLoaded && coin !== coinPage && (
         <>
@@ -67,14 +67,14 @@ export const AssetCard = ({
               height={320}
             />
           </div>
-          <div className=" w-full md:w-3/12 flex  justify-center items-center bg-portfolio-button-color bg-opacity-10 dark:bg-volume-background rounded-3xl">
+          <div className=" w-full md:w-3/12 flex px-2 md:m-3 justify-center items-center border-gray border border-opacity-20 border-black dark:border-card-text-gray dark:border-opacity-40 bg-opacity-10 dark:bg-opacity-50 rounded-3xl">
             <div className="flex flex-row-reverse md:flex-col  justify-between w-full md:justify-center items-center ">
-              <div className="m-3 h-16 w-16 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-3xl">
+              <div className="m-3 h-20 w-20 flex justify-center items-center bg-light-button-color bg-opacity-30 dark:bg-symbol-background rounded-3xl">
                 <Image
                   src={coin.image.small}
                   alt="coin symbol"
-                  width={32}
-                  height={32}
+                  width={45}
+                  height={45}
                 />
               </div>
               <div className="font-semibold text-2xl flex  justify-center items-center flex-wrap overflow-hidden overflow-ellipsis ">

@@ -197,7 +197,7 @@ export default function Portfolio() {
   return (
     <Wrapper>
       <div className="w-full min-h-screen justify-start items-center flex flex-col">
-        <div className="w-11/12  h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
+        <div className="w-full h-24 md:h-12 flex flex-col md:flex-row items-center justify-between my-3  font-medium text-xl ">
           <div>Your Statistics</div>
           <button
             onClick={() => toggleModal(false, "", "", "")}

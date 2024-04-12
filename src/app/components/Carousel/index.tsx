@@ -35,8 +35,8 @@ export const Carousel = ({ isCoinPage }: { isCoinPage: boolean }) => {
         </div>
       )}
       {coins.length > 0 && !loading && (
-        <div className="md:m-2 flex items-center w-full justify-center relative ">
-          <div className="ml-4 mr-4 flex items-center w-full justify-center  m-3 relative">
+        <div className=" my-2 flex items-center w-full justify-center relative ">
+          <div className=" flex items-center w-full justify-center my-2   relative">
             <button
               className="flex justify-center items-center w-8 h-8 md:w-12 md:h-12 rounded-2xl  bg-carousel-button-color-one bg-opacity-30  absolute -left-6 md:-left-10 "
               onClick={decreaseIndex}

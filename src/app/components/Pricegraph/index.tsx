@@ -53,7 +53,7 @@ export const Pricegraph = (props: GraphProps) => {
       : labelFormatter(props.labelsTwo, props.days),
     datasets: [
       {
-        label: props.isLine ? "price" : "market_caps",
+        label: props.isLine ? "price" : "Total volume",
         borderColor: "rgb(120, 120, 250)",
         fill: true,
         lineTension: 0.4,

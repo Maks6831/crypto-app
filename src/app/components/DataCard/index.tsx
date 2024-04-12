@@ -27,22 +27,6 @@ export const DataCard = ({
         <>
           <div className="flex flex-col min-[430px]:flex-row justify-between w-full h-1/3  items-center p-3 min-[430px]:p-5">
             <div className="flex justify-center items-center">
-              <div className=" rounded-full bg-opacity-30  dark:bg-opacity-70  bg-carousel-button-color-two p-1 border-light-text-color border-opacity-20 dark:border-carousel-button-color-two border-2 text-blue-700 dark:text-white  shadow-sm dark:shadow-md shadow-coin-card-color dark:shadow-black    ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2.5"
-                  stroke="currentColor"
-                  className=" rounded-full bg-opacity-40  w-3 h-3 "
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
-                </svg>
-              </div>
               <div className="p-2  md:text-base sm:text-sm text-xs font-normal text-light-text-color dark:text-card-text-gray">
                 {data[0][0]}
               </div>
@@ -53,22 +37,6 @@ export const DataCard = ({
           </div>
           <div className="flex flex-col min-[430px]:flex-row justify-between w-full h-1/3   items-center p-3 min-[430px]:p-5">
             <div className="flex justify-center items-center">
-              <div className=" rounded-full bg-opacity-30  dark:bg-opacity-70  bg-carousel-button-color-two p-1 border-light-text-color border-opacity-20 dark:border-carousel-button-color-two border-2 text-blue-700 dark:text-white  shadow-sm dark:shadow-md shadow-coin-card-color dark:shadow-black    ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2.5"
-                  stroke="currentColor"
-                  className=" rounded-full bg-opacity-40  w-3 h-3 "
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
-                </svg>
-              </div>
               <div className="p-2  md:text-base sm:text-sm text-xs font-normal text-light-text-color dark:text-card-text-gray">
                 {data[1][0]}
               </div>
@@ -79,9 +47,9 @@ export const DataCard = ({
           </div>
           {isProgress && typeof data[2][1] === "number" ? (
             <div>
-              <div className=" flex flex-col justify-between w-full items-center md:items-start max-h-1/3 start p-3  ">
-                <div className="flex items-center justify-between w-full ">
-                  <div className="p-1   md:text-base sm:text-sm text-xs font-normal text-opacity-90 text-light-text-color dark:text-coin-page-progress">
+              <div className=" flex flex-col justify-between w-full items-center md:items-start max-h-1/3 start p-4   ">
+                <div className="flex px-2.5 items-center justify-between w-full ">
+                  <div className="   md:text-base sm:text-sm text-xs font-normal text-opacity-90 text-light-text-color dark:text-coin-page-progress">
                     Circulating/Max{" "}
                   </div>
                   <div className=" md:text-base sm:text-sm text-xs font-normal text-light-blue dark:text-coin-page-progress-two">
@@ -108,22 +76,6 @@ export const DataCard = ({
             data[2].length > 0 && (
               <div className="flex flex-col min-[430px]:flex-row justify-between w-full h-1/3 items-center p-3 min-[430px]:p-5 ">
                 <div className="flex justify-center items-center">
-                  <div className=" rounded-full  bg-opacity-30  dark:bg-opacity-70  bg-carousel-button-color-two p-1 border-light-text-color border-opacity-20 dark:border-carousel-button-color-two border-2 text-blue-700 dark:text-white shadow-sm dark:shadow-md shadow-coin-card-color dark:shadow-black    ">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="2.5"
-                      stroke="currentColor"
-                      className=" rounded-full bg-opacity-40  w-3 h-3 "
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                      />
-                    </svg>
-                  </div>
                   <div className="p-2  md:text-base sm:text-sm text-xs font-normal text-light-text-color dark:text-card-text-gray">
                     {data[2][0]}
                   </div>

@@ -39,7 +39,7 @@ export const ConvertCard = ({
 
   return (
     <div
-      className={`w-10/12 md:w-1/2 h-36  md:h-52  bg-white  p-3 md:p-6 rounded-3xl flex flex-col justify-between ${
+      className={`w-full md:w-1/2 h-36  md:h-52  bg-white  p-3 md:p-6 rounded-3xl flex flex-col justify-between ${
         index
           ? `dark:bg-light-text-color-two md:ml-2 mt-2 md:mt-0 `
           : `dark:bg-purplea mb-2 md:mr-2 md:mb-0`

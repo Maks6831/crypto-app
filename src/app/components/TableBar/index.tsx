@@ -25,10 +25,15 @@ export const TableBar = ({
     <td
       className={`p-5 hidden ${
         isFirst ? " sm:table-cell " : "lg:table-cell "
-      } bg-white dark:bg-dark-card h-full `}
+      } bg-white dark:bg-dark-card h-full ${getColor(
+        number,
+        "text",
+        theme,
+        change1h
+      )} `}
     >
       <div className="flex ml-1 justify-between w-full ">
-        <div className={`text-xs ${getColor(number, "text", theme, change1h)}`}>
+        <div className={`text-xs `}>
           &#8226;{reduxSymbol}
           {moneyConverter(numerator, 2, false)}
         </div>
@@ -40,7 +45,7 @@ export const TableBar = ({
       <ProgressBar
         percentage={(numerator / denominator) * 100}
         color={getColor(number, "color", theme, change1h)}
-        size={"w-[10rem] h-2 "}
+        size={"w-[8rem] h-1 "}
         backgroundColor={getColor(number, "none", theme, change1h)}
       />
     </td>

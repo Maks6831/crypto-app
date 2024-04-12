@@ -32,9 +32,9 @@ export const HomeConverter = () => {
   }, [coins, currency, days]);
 
   return (
-    <div className="m-3 w-11/12 flex justify-center items-center flex-col  h-full relative ">
-      <div className=" w-full h-16  flex justify-start item-start ">
-        <div className="p-4 w-full flex items-start justify-center flex-col  ">
+    <div className="w-full my-2 flex justify-center items-center flex-col  h-full relative ">
+      <div className=" w-full  flex justify-start item-start ">
+        <div className="mt-1 w-full flex items-start justify-center flex-col  ">
           <div className=" text-light-text-color font-medium text-xl dark:text-white text-left   w-80 ">
             Online Currency Converter
           </div>
@@ -47,7 +47,7 @@ export const HomeConverter = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full h-full justify-center relative ">
+      <div className="flex w-full  h-full justify-center relative ">
         <div
           onClick={switchPair}
           className="w-12 inset-0 mx-auto my-auto  h-12 absolute rounded-3xl  bg-purpleb dark:bg-white flex justify-center items-center cursor-pointer"
@@ -77,7 +77,7 @@ export const HomeConverter = () => {
           ))}
         </div>
       </div>
-      <div className=" w-10/12 md:w-full relative md:p-2 pr-4 flex flex-col justify-end items-end  bg-white  h-52 md:h-60 lg:h-80  rounded-3xl dark:bg-light-text-color-two">
+      <div className=" w-full relative md:p-2 pr-4 flex flex-col justify-end items-end  bg-white  h-52 md:h-60 lg:h-80  rounded-3xl dark:bg-light-text-color-two">
         <div className="flex absolute top-1 left-5 justify-center items-center ">
           <div className="m-1 p-1 font-normal dark:text-white text-sm md:text-xl">
             {coins && coins[0].name} ({coins[0].symbol})

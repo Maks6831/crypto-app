@@ -40,6 +40,8 @@ export const CarouselCard = ({
   const { coin } = useAppSelector((state) => state.coinReducer);
   const router = useRouter();
   const displayElement = index >= carIndex - 1 && index < carIndex + 4;
+  const firstCard = index === carIndex - 1;
+  const lastCard = index === carIndex + 3;
   const displayColor = percentageChange > 0 ? "#01F1E3" : "#FE2264";
   const { theme } = useTheme();
 
@@ -63,8 +65,10 @@ export const CarouselCard = ({
       onClick={isCoinPage ? goToPage : selectCoin}
       className={
         displayElement
-          ? `m-1 h-10 md:h-20 overflow-hidden w-full rounded-2xl  md:rounded-3xl rd cursor-pointer ${
-              isCoinPage ? "bg-white dark:bg-dark-card" : selectClass()
+          ? `${
+              firstCard ? "mr-1" : lastCard ? "ml-1" : "mx-1"
+            } my-1 h-10 md:h-20 overflow-hidden w-full rounded-2xl  md:rounded-3xl  cursor-pointer ${
+              isCoinPage ? "bg-white dark:bg-dark-card " : selectClass()
             }`
           : "hidden"
       }

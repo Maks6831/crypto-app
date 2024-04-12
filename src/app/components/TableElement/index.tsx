@@ -53,13 +53,13 @@ export const TableElement = ({
       onClick={goToPage}
       className=" h-20 mb-3  gap-4 cursor-pointer  w-full  first:rounded-l-3xl "
     >
-      <td className=" bg-white dark:bg-dark-card  p-5 rounded-l-3xl hidden xl:table-cell ">
+      <td className=" bg-white dark:bg-dark-card  p-3 rounded-l-3xl hidden xl:table-cell ">
         <span className="flex flex-row items-center justify-center">
           {number}
         </span>
       </td>
-      <td className=" bg-white dark:bg-dark-card  h-full     rounded-l-xl">
-        <div className="   w-36 md:w-full h-full flex justify-around sm:justify-start items-center ">
+      <td className=" bg-white p-1  dark:bg-dark-card  h-full rounded-l-3xl xl:rounded-none">
+        <div className="   w-full h-full flex justify-around sm:justify-start items-center  whitespac">
           <div className="  h-7 w-7 m-2 relative ">
             <Image src={image} alt={name} layout="fill" objectFit="contain" />
           </div>
@@ -68,7 +68,7 @@ export const TableElement = ({
               <div className="hidden md:flex">&nbsp;</div>(
               {symbol.toUpperCase()})
             </div>
-            <div className=" text-xs md:text-base">{name}</div>
+            <div className=" text-xs md:text-base ">{name}</div>
           </div>
         </div>
       </td>
@@ -85,7 +85,7 @@ export const TableElement = ({
         </span>
       </td>
       <td
-        className=" bg-white dark:bg-dark-card   hidden xl:table-cell "
+        className=" bg-white dark:bg-dark-card   hidden xl:table-cell  px-2 "
         style={{ color: `${colorChange(change1h, theme)}` }}
       >
         <span className="flex flex-row justify-center items-center whitespace-nowrap">
@@ -93,7 +93,7 @@ export const TableElement = ({
         </span>
       </td>
       <td
-        className=" bg-white dark:bg-dark-card  hidden xl:table-cell"
+        className=" bg-white dark:bg-dark-card  hidden xl:table-cell  px-2"
         style={{ color: `${colorChange(change24h, theme)}` }}
       >
         <span className="flex flex-row justify-center items-center whitespace-nowrap">
@@ -101,13 +101,14 @@ export const TableElement = ({
         </span>
       </td>
       <td
-        className=" bg-white dark:bg-dark-card hidden md:table-cell  h-full  "
+        className=" bg-white dark:bg-dark-card hidden md:table-cell  h-full px-2  "
         style={{ color: `${colorChange(change7d, theme)}` }}
       >
         <span className="flex flex-row justify-center items-center whitespace-nowrap">
           {numberFormatter(change7d, true, "")}
         </span>
       </td>
+
       <TableBar
         number={number}
         numerator={volume24h}

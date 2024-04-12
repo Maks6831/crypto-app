@@ -87,9 +87,9 @@ export default function Page({ params }: { params: { coinId: string } }) {
   return (
     <Wrapper>
       {dataChecker && (
-        <div className="min-h-screen w-full py-2 ">
-          <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch   w-full  h-1/2 md:max-h-[30rem]  ">
-            <div className=" w-full min-[400px]:w-10/12  md:w-5/12 m-2 md:min-h-full  flex justify-center  items-center">
+        <div className="min-h-screen w-full py-2  my-2">
+          <div className="flex flex-col md:flex-row justify-center items-center md:justify-start md:items-stretch bg-white dark:bg-opacity-30 dark:bg-purplea w-full  h-1/2 md:max-h-[30rem] rounded-3xl  ">
+            <div className=" px-3 pt-2 w-full min-[400px]:w-10/12  md:w-5/12  md:min-h-full  flex justify-center  items-start">
               <CoinCard isPortfolio={false} />
             </div>
             <div className="w-10/12  md:w-7/12 m-2 min-h-full flex flex-col justify-start">
@@ -102,7 +102,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
               )}
               {rightCoinData && (
                 <>
-                  <div className=" p-2 m-3 min-h-3/5 max-h-[20rem] text-sm  hover:scrollbar  scrollbar-track-transparent   scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-hidden  hover:overflow-y-auto">
+                  <div className=" p-5 pl-3 min-h-3/5 max-h-[15rem] w-full overflow-ellipsis overflow-hidden text-sm  hover:scrollbar  scrollbar-track-transparent   scrollbar-thumb-light-button-color  dark:scrollbar-thumb-purplea scrollbar-h-24 overflow-y-hidden  hover:overflow-y-auto">
                     <p
                       dangerouslySetInnerHTML={{ __html: description }}
                       className="[&_a]:text-carousel-button-color-two text-justify "
@@ -117,7 +117,7 @@ export default function Page({ params }: { params: { coinId: string } }) {
                       </p>
                     )}
                   </div>
-                  <div className="  w-full flex flex-wrap content-end items-center justify-center md:justify-start m-1">
+                  <div className="  w-full flex flex-wrap content-end  items-center justify-center md:justify-start pt-16 m-1">
                     {websiteNames &&
                       websiteNames.map((el: string) => (
                         <UrlContainer key={el} url={el} />
@@ -128,15 +128,15 @@ export default function Page({ params }: { params: { coinId: string } }) {
             </div>
           </div>
           <div className="w-full flex flex-col justify-center items-center h-full ">
-            <div className=" w-full  px-6 h-full my-2 ml-4  flex justify-center items-center md:items-start flex-col">
+            <div className=" w-full   h-full my-2   flex justify-center items-center md:items-start flex-col">
               <Buttonswitcher
                 handleClick={setIsPrice}
                 isClicked={isPrice}
                 nameArray={["Price", "Volume"]}
               />
             </div>
-            <div className="flex w-full h-full px-5">
-              <div className=" overflow-hidden sm:min-w-80 m-3 px-3 pb-1  md:p-6   bg-white-color rounded-3xl  h-[20rem]  w-full md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
+            <div className="flex w-full h-full ">
+              <div className=" overflow-hidden sm:min-w-80 my-3  pb-1  p-6   bg-white-color rounded-3xl  h-[20rem]  w-full md:h-[25rem] flex justify-center items-end relative dark:bg-light-text-color-two ">
                 {loadingGraph && (
                   <div className="w-full h-full flex justify-center items-center">
                     <div className="h-14 w-14">
@@ -185,18 +185,18 @@ export default function Page({ params }: { params: { coinId: string } }) {
             <div className="flex md:hidden ">
               <Timebar days={days} />
             </div>
-            <div className="  flex justify-center items-center  overflow-hiddem w-full">
+            <div className=" w-full">
               <Carousel isCoinPage={true} />
             </div>
           </div>
-          <div className=" m-3   section flex flex-col justify-start items-center  min-h-[28rem]">
-            <div className=" w-11/12 md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
-              <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
+          <div className=" my-3 w-full  section flex flex-col justify-start items-center  min-h-[28rem]">
+            <div className=" w-full md:w-full h-max  flex flex-col justify-center items-center md:flex-row ">
+              <div className="h-full w-full md:w-1/2 md:pr-2 py-2 flex justify-center items-center ">
                 {firstCard && dataChecker && (
                   <DataCard data={firstCard} isProgress={false} />
                 )}
               </div>
-              <div className="h-full w-full md:w-1/2 m-2 flex  justify-center items-center  ">
+              <div className="h-full w-full md:w-1/2 flex   pl-2  py-2 justify-center items-center  ">
                 {secondCard && (
                   <DataCard
                     data={secondCard as isProgressData}
@@ -205,11 +205,11 @@ export default function Page({ params }: { params: { coinId: string } }) {
                 )}
               </div>
             </div>
-            <div className=" w-11/12 md:w-full h-1/2 md:m-3   flex flex-col md:flex-row justify-center items-center">
-              <div className="h-full w-full md:w-1/2 m-2 flex justify-center items-center ">
+            <div className=" w-full h-1/2   flex flex-col md:flex-row justify-center items-center">
+              <div className="h-full w-full md:w-1/2 md:pr-2 py-2 flex justify-center items-center ">
                 {thirdCard && <DataCard data={thirdCard} isProgress={false} />}
               </div>
-              <div className="h-full w-full md:w-1/2 m-2  bflex justify-center items-center "></div>
+              <div className="h-full w-full md:w-1/2   bflex justify-center items-center "></div>
             </div>
             <div className="w-full"></div>
           </div>
