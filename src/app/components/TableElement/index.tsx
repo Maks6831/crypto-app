@@ -113,14 +113,14 @@ export const TableElement = ({
         number={number}
         numerator={volume24h}
         denominator={marketCap}
-        change1h={change1h}
+        change1h={change7d}
         isFirst={true}
       />
       <TableBar
         number={number}
         numerator={circulating}
         denominator={totalSupply}
-        change1h={change1h}
+        change1h={change7d}
         isFirst={false}
       />
       <Sparkline

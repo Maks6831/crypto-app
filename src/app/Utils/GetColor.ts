@@ -1,7 +1,7 @@
 import { colorArray } from '@/app/Utils/constants';
 export const getColor = (index: number, type: string, theme : string | undefined, change1h: number)=> {
     const arrayLength = colorArray.length;
-    const colorIndex = theme === 'light' ? (change1h > 0 ? 9 : 10) : index % arrayLength;
+    const colorIndex = theme === 'light' ? (change1h > 0 ? 9 : 10) : (change1h > 0 ? 6 : 10);
     const colorArrayItem = colorArray[colorIndex];
 
     if (!colorArrayItem) {
